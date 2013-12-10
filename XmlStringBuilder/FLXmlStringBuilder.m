@@ -8,7 +8,7 @@
 //
 
 #import "FLXmlStringBuilder.h"
-#import "FLStringUtils.h"
+#import "NSString+FishLamp.h"
 #import "FLStringToObjectConversionManager.h"
 #import "FLXmlElement.h"
 #import "FLObjectDescriber.h"
