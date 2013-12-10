@@ -1,5 +1,5 @@
 //
-//	NSNotification+FLExtras.h
+//	NSNotification+FishLamp.h
 //	FishLamp
 //
 //	Created by Mike Fullerton on 1/23/11.
@@ -7,11 +7,11 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 extern NSString* const NSNotificationCancellableOperationKey;
 
-@interface NSNotification (FLExtras)
+@interface NSNotification (FishLamp)
 
 + (id)notificationWithName:(NSString *)aName object:(id)anObject cancellableOperation:(id) operation;
 

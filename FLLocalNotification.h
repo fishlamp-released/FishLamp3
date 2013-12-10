@@ -7,7 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 #if __MAC_10_8
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 @interface FLLocalNotification : NSObject {
 @private
