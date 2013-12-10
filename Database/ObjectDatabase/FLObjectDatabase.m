@@ -8,9 +8,9 @@
 //
 
 #import "FLObjectDatabase.h"
-#import "NSFileManager+FLExtras.h"
+#import "NSFileManager+FishLamp.h"
 #import "FLDatabaseTable.h"
-#import "NSArray+FLExtras.h"
+#import "NSArray+FishLamp.h"
 #import "NSString+Lists.h"
 #import "FLSqlBuilder.h"
 #import "FLDatabase_Internal.h"

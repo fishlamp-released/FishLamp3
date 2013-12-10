@@ -10,7 +10,7 @@
 #import "FLSqlBuilder.h"
 #import "NSString+Lists.h"
 #import "FLSqlStatement.h"
-#import "FLStringUtils.h"
+#import "NSString+FishLamp.h"
 
 #define SQL_PLACEHOLDER @"?"
 

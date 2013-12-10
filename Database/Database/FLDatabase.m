@@ -10,7 +10,7 @@
 #import "FLDatabase.h"
 #import "FLDatabase_Internal.h"
 
-#import "NSFileManager+FLExtras.h"
+#import "NSFileManager+FishLamp.h"
 
 #import "FLDatabaseColumnDecoder.h"
 #import "FLDatabase.h"

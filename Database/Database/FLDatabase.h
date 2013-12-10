@@ -11,7 +11,7 @@
 	Abstraction for SqlDatabase that doesn't take a dependency on the rest of FishLamp.
 */
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 #import <sqlite3.h>
 
 #import "FLDatabaseDefines.h"
