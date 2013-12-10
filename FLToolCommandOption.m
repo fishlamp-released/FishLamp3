@@ -8,9 +8,9 @@
 //
 
 #import "FLToolCommandOption.h"
-#import "FLStringUtils.h"
+#import "NSString+FishLamp.h"
 #import "NSString+Lists.h"
-#import "FLStringUtils.h"
+#import "NSString+FishLamp.h"
 
 @implementation FLToolCommandOption
 

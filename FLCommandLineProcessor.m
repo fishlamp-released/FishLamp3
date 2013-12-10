@@ -8,7 +8,7 @@
 //
 
 #import "FLCommandLineProcessor.h"
-#import "FLStringUtils.h"
+#import "NSString+FishLamp.h"
 #import "FLErrorDomainInfo.h"
 #import "NSString+Lists.h"
 #import "FLUsageToolTask.h"
