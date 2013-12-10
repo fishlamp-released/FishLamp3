@@ -9,7 +9,7 @@
 
 #import "FLJsonDataEncoder.h"
 #import "FLGeometry.h"
-#import "FLStringUtils.h"
+#import "NSString+FishLamp.h"
 #import "FLBase64Encoding.h"
 #import "FLDateMgr.h"
 //#import "SDKColor+FLUtils.h"

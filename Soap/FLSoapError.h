@@ -6,11 +6,11 @@
 //	Copyright (c) 2013 GreenTongue Software LLC, Mike Fullerton. 
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 #import "FLErrorCodes.h"
 #import "FLSoapFault11.h"
 #import "FLErrorDomainInfo.h"
-#import "NSError+FLExtras.h"
+#import "NSError+FishLamp.h"
 #import "FLNetworkErrors.h"
 
 #define FLUnderlyingSoapFaultKey @"FLUnderlyingSoapFaultKey"

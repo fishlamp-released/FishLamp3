@@ -6,9 +6,9 @@
 */
 
 #if 0
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
 

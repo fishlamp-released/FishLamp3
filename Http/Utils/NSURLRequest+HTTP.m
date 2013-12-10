@@ -8,7 +8,7 @@
 //
 
 #import "NSURLRequest+HTTP.h"
-#import "NSFileManager+FLExtras.h"
+#import "NSFileManager+FishLamp.h"
 #import "NSString+URL.h"
 #import "FLPrettyString.h"
 #import "NSBundle+FLVersion.h"

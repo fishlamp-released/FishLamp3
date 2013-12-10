@@ -12,7 +12,7 @@
 #import <CommonCrypto/CommonHMAC.h>
 #import "Base64Transcoder.h"
 #import "NSString+GUID.h"
-#import "FLStringUtils.h"
+#import "NSString+FishLamp.h"
 #import "FLHttpRequestHeaders.h"
 
 @interface FLOAuthAuthorizationHeader ()

@@ -8,7 +8,7 @@
 //
 #if REFACTOR
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 @interface NSObject (FLJsonParser)
 
