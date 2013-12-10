@@ -7,7 +7,13 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampMinimum.h"
+// dependencies
+#import "FishLampCore.h"
+#import "FishLampAssertions.h"
+#import "FishLampErrors.h"
+#import "FishLampProxies.h"
+
+// includes
 #import "FLAsyncBlockTypes.h"
 #import "FLFinisher.h"
 #import "FLAsyncQueue.h"

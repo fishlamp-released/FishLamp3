@@ -7,7 +7,7 @@
 //
 #if REFACTOR
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 #import "FLOperation.h"
 #import "FLOperationQueue.h"
 

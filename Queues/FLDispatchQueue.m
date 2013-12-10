@@ -15,6 +15,7 @@
 #import "FLQueueableAsyncOperation.h"
 #import "FLOperationStarter.h"
 #import "FLExceptionHandler.h"
+#import "FishLampProxies.h"
 
 @interface FLExecuteInQueueProxy : FLRetainedObject {
 @private

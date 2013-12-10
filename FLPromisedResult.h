@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 /**
  *  Abstract type for a unfufilled promise. This will either be an error or a valid value.
