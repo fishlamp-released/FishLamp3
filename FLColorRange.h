@@ -8,7 +8,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 // [/Generated]
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 #import "FLColorRangeColorValues.h"
 
 @interface FLColorRange : NSObject { 
