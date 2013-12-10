@@ -7,7 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 @interface FLBatchDictionary : NSObject<NSFastEnumeration, NSCopying, NSMutableCopying, NSCoding> {
 @private

@@ -7,7 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 /// @brief this class is about quick access. uses a lot more memory. inserts/deletes a bit slower. 
 @interface FLOrderedCollection : NSObject<NSCopying, NSMutableCopying, NSFastEnumeration> {

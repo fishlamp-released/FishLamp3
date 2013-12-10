@@ -8,7 +8,7 @@
 //
 
 #import "FLObjectCache.h"
-#import "NSArray+FLExtras.h"
+#import "NSArray+FishLamp.h"
 
 @implementation FLObjectCache
 
