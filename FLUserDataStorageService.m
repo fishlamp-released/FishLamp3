@@ -16,7 +16,7 @@
 #import "FLApplicationDataVersion.h"
 #import "FLApplicationDataModel.h"
 #import "FLCacheManager.h"
-#import "NSFileManager+FLExtras.h"
+#import "NSFileManager+FishLamp.h"
 #import "NSString+Guid.h"
 #import "FLAction.h"
 #import "FLBackgroundTaskMgr.h"
