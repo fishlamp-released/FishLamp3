@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 #import "FLTestableRunOrder.h"
 #import "FLOrderedRunList.h"
 

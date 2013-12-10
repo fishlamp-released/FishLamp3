@@ -7,6 +7,6 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 extern int FLTestToolMain(int argc, const char *argv[], NSString* bundleIdentifier, NSString* appName, NSString* version);

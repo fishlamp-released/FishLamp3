@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FLCoreRequired.h"
+#import "FishLampObjc.h"
 
 /**
  *  FLTestableRunOrder specifies run order for FLTestable objects. This is passed into FLTestable 

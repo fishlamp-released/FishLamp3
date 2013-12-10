@@ -8,7 +8,7 @@
 
 #import "NSError+FLTestable.h"
 #import "FLErrorException.h"
-#import "FLAssertions.h"
+#import "FishLampAssertions.h"
 
 NSString* const FLTAssertFailedErrorDomain = @"FLTAssertFailedErrorDomain";
 

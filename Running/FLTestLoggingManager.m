@@ -7,7 +7,7 @@
 //
 
 #import "FLTestLoggingManager.h"
-#import "FLAssertions.h"
+#import "FishLampAssertions.h"
 #import "FLTestCase.h"
 #import "FLTestResult.h"
 #import "FLTestResultLogEntry.h"

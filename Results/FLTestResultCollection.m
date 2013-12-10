@@ -9,7 +9,7 @@
 
 #import "FLTestResultCollection.h"
 #import "FLTestable.h"
-#import "FLAssertions.h"
+#import "FishLampAssertions.h"
 
 @implementation FLTestResultCollection
 

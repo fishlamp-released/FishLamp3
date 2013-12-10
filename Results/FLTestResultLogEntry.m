@@ -7,7 +7,7 @@
 //
 
 #import "FLTestResultLogEntry.h"
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 #import "FLStackTrace.h"
 
 @implementation FLTestResultLogEntry

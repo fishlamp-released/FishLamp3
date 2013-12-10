@@ -10,7 +10,7 @@
 #import "FLTestResult.h"
 #import "FLStringFormatter.h"
 #import "FLPrettyString.h"
-#import "FLAssertions.h"
+#import "FishLampAssertions.h"
 #import "FLTestResultLogEntry.h"
 
 @interface FLTestResult ()

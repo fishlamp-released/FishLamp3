@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FLCoreRequired.h"
+#import "FishLampObjc.h"
 #import "FLErrorException.h"
 #import "FLStackTrace.h"
 

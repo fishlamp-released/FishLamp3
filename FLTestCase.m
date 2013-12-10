@@ -9,7 +9,7 @@
 #import "FLTestCase.h"
 #import "FLTestCaseList.h"
 #import "FLTestResult.h"
-#import "FLStringUtils.h"
+#import "NSString+FishLamp.h"
 #import "FLTestable.h"
 #import "FLSelectorPerforming.h"
 #import "FLTimer.h"

@@ -7,7 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FLCoreRequired.h"
+#import "FishLampObjc.h"
 #import "FLTestResult.h"
 
 @interface FLTestResultCollection : NSObject {

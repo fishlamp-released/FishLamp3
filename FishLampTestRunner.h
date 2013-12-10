@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 #import "FishLampAsync.h"
 
 #import "FLRunAllTestsOperation.h"

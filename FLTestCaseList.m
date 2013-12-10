@@ -8,7 +8,7 @@
 
 #import "FLTestCaseList.h"
 #import "FLTestCase.h"
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 @interface FLTestCaseList ()
 @property (readwrite, strong) NSString* disabledReason;
