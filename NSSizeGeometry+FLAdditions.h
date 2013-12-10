@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 #if __MAC_OS_X_VERSION_MIN_REQUIRED
 

@@ -7,7 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 #if IOS
 #define FLEdgeInsets10                         UIEdgeInsetsMake(10,10,10,10)

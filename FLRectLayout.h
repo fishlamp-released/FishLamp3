@@ -6,7 +6,7 @@
 //	Copyright (c) 2013 GreenTongue Software LLC, Mike Fullerton. 
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
-#import "FLCoreRequired.h"
+#import "FishLampObjc.h"
 #import "FLEdgeInsets.h"
 
 typedef enum {
