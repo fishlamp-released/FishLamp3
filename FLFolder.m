@@ -8,7 +8,7 @@
 //
 
 #import "FLFolder.h"
-#import "NSFileManager+FLExtras.h"
+#import "NSFileManager+FishLamp.h"
 
 #if OSX
 #import <CoreServices/CoreServices.h>
