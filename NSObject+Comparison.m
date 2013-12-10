@@ -8,7 +8,7 @@
 //
 
 #import "NSObject+Comparison.h"
-#import "FLStringUtils.h"
+#import "NSString+FishLamp.h"
 
 @implementation NSObject (FLComparison)
 + (BOOL) objectIsEqualToObject:(id) object toObject:(id) anotherObject {

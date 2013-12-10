@@ -8,7 +8,7 @@
 //
 
 #import "FLBitFlags.h"
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 // using bit flags so you can build it quick inline, e.g. a | b | c
 

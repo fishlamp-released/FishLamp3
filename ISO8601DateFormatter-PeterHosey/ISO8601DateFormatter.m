@@ -5,7 +5,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
  */
 
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 #import "ISO8601DateFormatter.h"
 
 #pragma GCC diagnostic ignored "-Wsign-conversion"
