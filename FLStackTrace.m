@@ -8,7 +8,7 @@
 //
 
 #import "FLStackTrace.h"
-#import "NSObject+FLPrettyDescribe.h"
+#import "FLPrettyDescription.h"
 
 const FLStackTrace_t FLStaceTraceEmpty = { { 0, 0, 0, 0 }, {0, 0}};
 
