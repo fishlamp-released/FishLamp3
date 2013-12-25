@@ -6,8 +6,14 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FishLampCore.h"
-#import "FL_ASSERT.h"
+#import "FishLampRequired.h"
+#import "FishLampExceptions.h"
+#import "NSString+FishLampCore.h"
+#import "NSError+FLStackTrace.h"
+#import "FLAssertionFailedError.h"
+#import "FLAssertionFailureErrorDomain.h"
+
+#import "FLAssert_Implementation.h"
 
 #if !defined(ASSERTIONS) && (defined(DEBUG) || defined(TEST))
 #define ASSERTIONS 1
@@ -25,7 +31,7 @@
                 FL_ASSERT_FAILED__WITH_COMMENT(FL_ASSERT_THROWER, __FORMAT__, ##__VA_ARGS__)
 
     #define FLAssert(__CONDITION__) \
-                FL_ASSERT(FL_ASSERT_THROWER, __CONDITION__)
+                FLAssert_Implementation(FL_ASSERT_THROWER, __CONDITION__)
 
     #define FLAssertWithComment(__CONDITION__, __FORMAT__, ...) \
                 FL_ASSERT_WITH_COMMENT(FL_ASSERT_THROWER, __CONDITION__, __FORMAT__, ##__VA_ARGS__)

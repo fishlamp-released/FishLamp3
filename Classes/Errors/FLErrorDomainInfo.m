@@ -10,7 +10,7 @@
 
 #import "FLErrorDomainInfo.h"
 
-#import "FLErrorCodes.h"
+#import "FishLampCoreErrorDomain.h"
 #import "FLAssertionFailureErrorDomain.h"
 
 @implementation FLErrorDomainInfo

@@ -10,9 +10,12 @@
 // Prerequisites
 
 #import "FishLampRequired.h"
-#import "FishLampStrings.h"
 #import "FishLampErrors.h"
 #import "FishLampAssertions.h"
 
+#import "NSString+FishLampCore.h"
 
-#import "FishLampSimpleLogger.h"
+
+//#import "FishLampStrings.h"
+//#import "FishLampSimpleLogger.h"
+

@@ -7,8 +7,10 @@
 //
 
 #import "FLAssert.h"
-#import "FLExceptions.h"
-#import "FishLampAssertions.h"
+#import "FishLampExceptions.h"
+#import "FLStackTrace.h"
+#import "NSError+FLStackTrace.h"
+#import "FLAssert.h"
 
 id _FLAssertIsClass(id object, Class aClass) {
     if(object) {

@@ -8,8 +8,10 @@
 //
 
 #import "FLAssertionFailedError.h"
-#import "FLErrorException.h"
-#import "FishLampAssertions.h"
+#import "FishLampExceptions.h"
+#import "NSError+FLStackTrace.h"
+#import "NSString+FishLampCore.h"
+#import "FLAssertionFailureErrorDomain.h"
 
 @implementation NSError (FLAssertions)
 

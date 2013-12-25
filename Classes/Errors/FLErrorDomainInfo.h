@@ -8,7 +8,7 @@
 //
 #if REFACTOR
 
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
 #import "FLProperties.h"
 
 @protocol FLErrorDomainInfo <NSObject>

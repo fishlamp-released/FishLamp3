@@ -6,12 +6,14 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FishLampCore.h"
-#import "FishLampStrings.h"
+#import "FishLampRequired.h"
 
+#import "FLStackTrace.h"
+
+#import "NSString+FishLampCore.h"
 #import "NSError+FishLamp.h"
-#import "FLExceptions.h"
-#import "FLErrorCodes.h"
-#import "FLErrorException.h"
-#import "FLCancelError.h"
+#import "FishLampExceptions.h"
+#import "FishLampCoreErrorDomain.h"
+#import "FishLampExceptions.h"
+#import "NSError+FLCancel.h"
 #import "FLErrorDomainInfo.h"

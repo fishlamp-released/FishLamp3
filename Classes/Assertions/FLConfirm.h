@@ -7,7 +7,12 @@
 //
 // this is meant to be included by FishLampAssertions.h
 
-#import "FL_ASSERT.h"
+#import "FishLampRequired.h"
+#import "NSString+FishLampCore.h"
+#import "NSError+FLStackTrace.h"
+#import "FLAssertionFailedError.h"
+
+#import "FLAssert_Implementation.h"
 
 #define FL_CONFIRM_THROWER(__CODE__, __REASON__, __COMMENT__) \
             FLThrowError([NSError assertionFailedError:__CODE__ reason:__REASON__ comment:__COMMENT__ stackTrace:FLCreateStackTrace(YES)])
@@ -19,7 +24,7 @@
             FL_ASSERT_FAILED__WITH_COMMENT(FL_CONFIRM_THROWER, __FORMAT__, ##__VA_ARGS__)
 
 #define FLConfirm(__CONDITION__) \
-            FL_ASSERT(FL_CONFIRM_THROWER, __CONDITION__)
+            FLAssert_Implementation(FL_CONFIRM_THROWER, __CONDITION__)
 
 #define FLConfirmWithComment(__CONDITION__, __FORMAT__, ...) \
             FL_ASSERT_WITH_COMMENT(FL_CONFIRM_THROWER, __CONDITION__, __FORMAT__, ##__VA_ARGS__)
