@@ -8,7 +8,7 @@ Pod::Spec.new do |fishlamp|
    
     fishlamp.name         = "FishLampCore"
     fishlamp.version      = "3.0.0"
-    fishlamp.summary      = "This is the core functionality of the FishLamp Framework."
+    fishlamp.summary      = "This is the core pod for the rest of the FishLamp pods"
     fishlamp.homepage     = "http://fishlamp.com"
     fishlamp.license      = 'MIT'
     fishlamp.author       = { "Mike Fullerton" => "hello@fishlamp.com" }
@@ -23,34 +23,37 @@ Pod::Spec.new do |fishlamp|
 
 # these are the core pods
 
-	core.source_files = 'FishLampCocoa/Classes/FishLampCore.h'
+	fishlamp.source_files = 'Classes/FishLampCore.h'
 
-	core.subspec 'Required' do |ss|
-		ss.source_files = 'FishLampCocoa/Classes/Required/**/*.{h,m}'
+	fishlamp.subspec 'Required' do |ss|
+		ss.source_files = 'Classes/Required/**/*.{h,m}'
 	end
 
-	core.subspec 'Strings' do |ss|
-		ss.source_files = 'FishLampCocoa/Classes/Strings/**/*.{h,m}'
+# 	fishlamp.subspec 'Strings' do |ss|
+# 		ss.source_files = 'Classes/Strings/**/*.{h,m}'
+# 	end
+
+	fishlamp.subspec 'Errors' do |ss|
+		ss.dependency 'FishLampCore/Required'
+		ss.source_files = 'Classes/Errors/**/*.{h,m}'
+
+
+# 		ss.dependency 'FishLamp/Cocoa/Core/Strings'
 	end
 
-	core.subspec 'Errors' do |ss|
-		ss.dependency 'FishLamp/Cocoa/Core/Required'
-		ss.dependency 'FishLamp/Cocoa/Core/Strings'
-		ss.source_files = 'FishLampCocoa/Classes/Errors/**/*.{h,m}'
+	fishlamp.subspec 'Assertions' do |ss|
+		ss.source_files = 'Classes/Assertions/**/*.{h,m}'
+		ss.dependency 'FishLampCore/Errors'
+
+# 		ss.dependency 'FishLamp/Cocoa/Core/Strings'
 	end
 
-	core.subspec 'Assertions' do |ss|
-		ss.source_files = 'FishLampCocoa/Classes/Assertions/**/*.{h,m}'
-		ss.dependency 'FishLamp/Cocoa/Core/Strings'
-		ss.dependency 'FishLamp/Cocoa/Core/Errors'
-	end
-
-# 	core.subspec 'SimpleLogger' do |ss|
+# 	fishlamp.subspec 'SimpleLogger' do |ss|
 # 		ss.dependency 'FishLamp/Cocoa/Core/Required'
 # 		ss.dependency 'FishLamp/Cocoa/Core/Strings'
 # 		ss.dependency 'FishLamp/Cocoa/Core/Errors'
 # 		ss.dependency 'FishLamp/Cocoa/Core/Assertions'
-# 		ss.source_files = 'FishLampCocoa/Classes/SimpleLogger/**/*.{h,m}'
+# 		ss.source_files = 'Classes/SimpleLogger/**/*.{h,m}'
 # 	end
   
 end
