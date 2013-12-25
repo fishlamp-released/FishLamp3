@@ -20,9 +20,10 @@
 + (FLStackTrace*) stackTraceWithException:(NSException*) ex;
 
 // where the stack trace was made
-@property (readonly, assign, nonatomic) const char* fileName;
-@property (readonly, assign, nonatomic) const char* filePath;
-@property (readonly, assign, nonatomic) const char* function;
+@property (readonly, strong, nonatomic) NSString* fileName;
+@property (readonly, strong, nonatomic) NSString* filePath;
+@property (readonly, strong, nonatomic) NSString* function;
+
 @property (readonly, assign, nonatomic) int lineNumber;
 
 @property (readonly, assign, nonatomic) FLCallStack_t callStack;
@@ -32,8 +33,6 @@
 @end
 
 
-#define FLStackTraceToHere(__WITH_STACK_TRACE__) \
-            FLStackTraceMake(FLSourceFileLocation(), __WITH_STACK_TRACE__)
 
 #define FLCreateStackTrace(__WITH_STACK_TRACE__) \
             [FLStackTrace stackTrace:FLStackTraceToHere(__WITH_STACK_TRACE__)]

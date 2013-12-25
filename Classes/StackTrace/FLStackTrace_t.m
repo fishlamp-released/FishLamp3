@@ -13,32 +13,13 @@
 
 const FLStackTrace_t FLStaceTraceEmpty = { { 0, 0, 0, 0 }, {0, 0}};
 
-const char* FLFileNameFromPathNoCopy(const char* filePath) {
-    if(filePath) {
-        const char* lastComponent = nil;
-
-        while(*filePath) {
-            if(*filePath++ == '/') {
-                lastComponent = filePath;
-            }
-        }
-        
-        return lastComponent;
-    }
-    return nil;
-}
-
-const char* FLFileNameFromLocation(FLLocationInSourceFile_t* loc) {
-    if(!loc->fileName) {
-        loc->fileName = FLFileNameFromPathNoCopy(loc->filePath);
-    }
-    return loc->fileName;
-}
-
 
 void FLStackTraceFree(FLStackTrace_t* trace) {
     if(trace) {
-        if(trace->stack.lines) free((void*)trace->stack.lines);
+        if(trace->stack.lines) {
+            free((void*)trace->stack.lines);
+            trace->stack.lines = nil;
+        }
 //        if(trace->location.filePath) free((void*)trace->location.filePath);
 //        if(trace->location.function) free((void*)trace->location.function);
         
@@ -67,7 +48,7 @@ const char* __copy_str(const char* str, int* len) {
 
 
 
-FLStackTrace_t FLStackTraceMake(FLLocationInSourceFile_t loc, BOOL withCallStack) {
+FLStackTrace_t FLStackTraceMake(FLFileLocation_t loc, BOOL withCallStack) {
     void* callstack[128];
     
     FLStackTrace_t trace = { loc, { nil, 0 } };

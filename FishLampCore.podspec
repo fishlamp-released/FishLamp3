@@ -23,30 +23,33 @@ Pod::Spec.new do |fishlamp|
 
 # these are the core pods
 
-	fishlamp.source_files = 'Classes/FishLampCore.h'
+    fishlamp.source_files = 'Classes/**/*.{h,m}'
 
-	fishlamp.subspec 'Required' do |ss|
-		ss.source_files = 'Classes/Required/**/*.{h,m}'
-	end
+
+#	fishlamp.source_files = 'Classes/FishLampCore.h'
+
+#	fishlamp.subspec 'Required' do |ss|
+#		ss.source_files = 'Classes/Required/**/*.{h,m}'
+#	end
 
 # 	fishlamp.subspec 'Strings' do |ss|
 # 		ss.source_files = 'Classes/Strings/**/*.{h,m}'
 # 	end
 
-	fishlamp.subspec 'Errors' do |ss|
-		ss.dependency 'FishLampCore/Required'
-		ss.source_files = 'Classes/Errors/**/*.{h,m}'
+#	fishlamp.subspec 'Errors' do |ss|
+#		ss.dependency 'FishLampCore/Required'
+#		ss.source_files = 'Classes/Errors/**/*.{h,m}'
 
 
 # 		ss.dependency 'FishLamp/Cocoa/Core/Strings'
-	end
+#	end
 
-	fishlamp.subspec 'Assertions' do |ss|
-		ss.source_files = 'Classes/Assertions/**/*.{h,m}'
-		ss.dependency 'FishLampCore/Errors'
+#	fishlamp.subspec 'Assertions' do |ss|
+#		ss.source_files = 'Classes/Assertions/**/*.{h,m}'
+#		ss.dependency 'FishLampCore/Errors'
 
 # 		ss.dependency 'FishLamp/Cocoa/Core/Strings'
-	end
+#	end
 
 # 	fishlamp.subspec 'SimpleLogger' do |ss|
 # 		ss.dependency 'FishLamp/Cocoa/Core/Required'

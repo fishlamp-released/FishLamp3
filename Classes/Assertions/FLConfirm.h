@@ -24,7 +24,7 @@
             FL_ASSERT_FAILED__WITH_COMMENT(FL_CONFIRM_THROWER, __FORMAT__, ##__VA_ARGS__)
 
 #define FLConfirm(__CONDITION__) \
-            FLAssert_Implementation(FL_CONFIRM_THROWER, __CONDITION__)
+            FL_ASSERT(FL_CONFIRM_THROWER, __CONDITION__)
 
 #define FLConfirmWithComment(__CONDITION__, __FORMAT__, ...) \
             FL_ASSERT_WITH_COMMENT(FL_CONFIRM_THROWER, __CONDITION__, __FORMAT__, ##__VA_ARGS__)

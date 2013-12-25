@@ -14,16 +14,17 @@
 
 @implementation FLStackTrace
 
-- (const char*) fileName {
-    return FLFileNameFromLocation(&(_stackTrace.location));
+- (NSString*) fileName {
+    FLFileLocationSetFileName(&(_stackTrace.location));
+    return [NSString stringWithCString:_stackTrace.location.fileName encoding:NSASCIIStringEncoding];
 }
 
-- (const char*) filePath {
-    return _stackTrace.location.filePath;
+- (NSString*) filePath {
+    return [NSString stringWithCString:_stackTrace.location.filePath encoding:NSASCIIStringEncoding];
 }
 
-- (const char*) function {
-    return _stackTrace.location.function;
+- (NSString*) function {
+    return [NSString stringWithCString:_stackTrace.location.function encoding:NSASCIIStringEncoding];
 }
 
 - (int) lineNumber {
@@ -68,7 +69,7 @@
 #if MOVE_TO_CATEGORY
 - (void) appendToStringFormatter:(id<FLStringFormatter>) string {
     [string appendLineWithFormat:@"%s:%d, %s",
-                            FLFileNameFromLocation(&_stackTrace.location),
+                            FLFileLocationFileName(&_stackTrace.location),
                             _stackTrace.location.line, 
                             _stackTrace.location.function];
 

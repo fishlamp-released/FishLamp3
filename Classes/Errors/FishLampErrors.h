@@ -11,7 +11,7 @@
 #import "FLStackTrace.h"
 
 #import "NSString+FishLampCore.h"
-#import "NSError+FishLamp.h"
+#import "NSError+FLException.h"
 #import "FishLampExceptions.h"
 #import "FishLampCoreErrorDomain.h"
 #import "FishLampExceptions.h"

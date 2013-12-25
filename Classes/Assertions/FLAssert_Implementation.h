@@ -17,7 +17,7 @@
             __THROWER__( FLAssertionFailureCondition, @"Condition failed", \
                             FLStringWithFormatOrNil(__COMMENT__, ##__VA_ARGS__))
 
-#define FLAssert_Implementation(__THROWER__, __CONDITION__) \
+#define FL_ASSERT(__THROWER__, __CONDITION__) \
             if(!(__CONDITION__)) \
                 __THROWER__(    FLAssertionFailureCondition, \
                                 FLStringWithFormatOrNil(@"\"%s\"", #__CONDITION__), \

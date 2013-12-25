@@ -7,13 +7,7 @@
 //
 
 #import "FishLampRequired.h"
-
-typedef struct {
-    const char* filePath;
-    const char* fileName;
-    const char* function;
-    int line;
-} FLLocationInSourceFile_t;
+#import "FLFileLocation_t.h"
 
 typedef struct {
     const char** lines;
@@ -21,28 +15,21 @@ typedef struct {
 } FLCallStack_t;
 
 typedef struct {
-    FLLocationInSourceFile_t location;
+    FLFileLocation_t location;
     FLCallStack_t stack;
 } FLStackTrace_t;
 
-NS_INLINE
-FLLocationInSourceFile_t FLLocationInSourceFileMake(const char* filePath, const char* function, int line) {
-    FLLocationInSourceFile_t loc = { filePath, nil, function, line };
-    return loc;
-}
-
-extern const char* FLFileNameFromLocation(FLLocationInSourceFile_t* loc);
 
 extern void FLStackTraceInit(FLStackTrace_t* stackTrace, void* callstack);
 
 extern void FLStackTraceFree(FLStackTrace_t* trace);
 
-extern FLStackTrace_t FLStackTraceMake( FLLocationInSourceFile_t loc, BOOL withCallStack);
+extern FLStackTrace_t FLStackTraceMake( FLFileLocation_t loc, BOOL withCallStack);
 
 NS_INLINE
 const char* FLStackEntryAtIndex(FLCallStack_t stack, NSUInteger index) {
     return (index < stack.depth) ? stack.lines[index] : nil;
 }
 
-#define FLSourceFileLocation() \
-            FLLocationInSourceFileMake(__FILE__, __PRETTY_FUNCTION__, __LINE__)
+#define FLStackTraceToHere(__WITH_STACK_TRACE__) \
+            FLStackTraceMake(FLCurrentFileLocation(), __WITH_STACK_TRACE__)
