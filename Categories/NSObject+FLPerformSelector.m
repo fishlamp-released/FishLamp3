@@ -8,7 +8,7 @@
 //
 
 #import "NSObject+FLPerformSelector.h"
-#import "FLObjcRuntime.h"
+//#import "FLObjcRuntime.h"
 #import "FLSelectorPerforming.h"
 #import "FishLampAssertions.h"
 
@@ -34,7 +34,9 @@ void FLConfirmNoReturnObject(id obj) {
                  withObject:(id) object2
                  withObject:(id) object3 {
 
-    FLAssertWithComment(FLArgumentCountForClassSelector([self class], selector) == argCount, @"@selector(%@) arg count is %d, should be: %d", NSStringFromSelector(selector), argCount, FLArgumentCountForClassSelector([self class], selector));
+// TODO: this was a nice assert. Add it back without taking dependency on Runtime
+
+//    FLAssertWithComment(FLArgumentCountForClassSelector([self class], selector) == argCount, @"@selector(%@) arg count is %d, should be: %d", NSStringFromSelector(selector), argCount, FLArgumentCountForClassSelector([self class], selector));
 
     switch(argCount) {
         case 0: 

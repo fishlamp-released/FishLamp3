@@ -8,7 +8,7 @@
 //
 
 #import "FLSelectorPerforming.h"
-#import "FLObjcRuntime.h"
+//#import "FLObjcRuntime.h"
 #import "FishLampAssertions.h"
 
 #pragma GCC diagnostic push
@@ -17,7 +17,9 @@
 
 BOOL FLPerformSelector(id target, SEL selector, id __strong * arguments, int argCount) {
 
-    FLAssertWithComment(FLArgumentCountForClassSelector([target class], selector) == argCount, @"@selector(%@) arg count is %d, should be: %d", NSStringFromSelector(selector), argCount, FLArgumentCountForClassSelector([target class], selector));
+// TODO: this was a nice assert. Add it back without taking dependency on Runtime
+
+//    FLAssertWithComment(FLArgumentCountForClassSelector([target class], selector) == argCount, @"@selector(%@) arg count is %d, should be: %d", NSStringFromSelector(selector), argCount, FLArgumentCountForClassSelector([target class], selector));
 
     if([target respondsToSelector:selector]) {
         [target performSelector_fl:selector withArguments:arguments argumumentCount:argCount];
