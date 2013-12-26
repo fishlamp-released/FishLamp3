@@ -12,7 +12,7 @@
 #import "FishLampExceptions.h"
 
 #import "NSError+FLStackTrace.h"
-
+#import "FLDeclareDictionaryProperty.h"
 
 @implementation NSError (FishLamp)
 

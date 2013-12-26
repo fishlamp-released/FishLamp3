@@ -16,13 +16,8 @@
 //#import <UIKit/UIKit.h>
 //#endif
 
-#if DEBUG
-    #define FL_SHIP_ONLY_INLINE 
-#else
-    #define FL_SHIP_ONLY_INLINE NS_INLINE
-#endif
-
 // flags, etc.
-#import "FLObjcCompiling.h"
-#import "FLPropertyDeclaring.h"
+#import "FLCoreFlags.h"
+#import "FLCompilerWarnings.h"
+#import "FLObjc.h"
 

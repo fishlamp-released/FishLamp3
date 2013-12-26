@@ -8,8 +8,10 @@
 
 #import "FishLampRequired.h"
 
+// dependencies
 #import "FLStackTrace.h"
 
+// includes
 #import "NSString+FishLampCore.h"
 #import "NSError+FLException.h"
 #import "FishLampExceptions.h"

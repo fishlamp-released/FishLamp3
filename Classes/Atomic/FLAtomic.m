@@ -10,25 +10,52 @@
 #import "FishLampRequired.h"
 #import "FishLampAssertions.h"
 
-// this code is based on: http://www.opensource.apple.com/source/objc4/objc4-371.2/runtime/Accessors.subproj/objc-accessors.m
+#import <libkern/OSAtomic.h>
 
-#define GOODPOWER 7
-#define GOODMASK ((1<<GOODPOWER)-1) // 1<<y == 128. 
-#define GOODHASH(x) (((long)x >> 5) & GOODMASK)
-static OSSpinLock s_spinlocks[1 << GOODPOWER] = { 0 };
 
-void FLCriticalSection(void* addr, dispatch_block_t block) {
-    FLAssertNotNil(addr);
-    FLAssertNotNil(block);
-
-    if(block && addr) {
-        OSSpinLock *slotlock = &s_spinlocks[GOODHASH(addr)]; \
-        @try { \
-            OSSpinLockLock(slotlock);
-            block();
-        }
-        @finally {
-            OSSpinLockUnlock(slotlock); \
+NS_INLINE
+void _FLAtomicSet64(int64_t *target, int64_t new_value) {
+    while (true) {
+        int64_t old_value = *target;
+        if (OSAtomicCompareAndSwap64Barrier(old_value, new_value, target)) {
+            return;
         }
     }
+}
+
+
+NS_INLINE
+int64_t _FLAtomicGet64(int64_t *target) {
+    while (true) {
+        int64_t value = *target;
+        if (OSAtomicCompareAndSwap64Barrier(value, value, target)) {
+            return value;
+        }
+    }
+    
+    return 0;
+}
+
+
+NS_INLINE
+void _FLAtomicSet32(int32_t *target, int32_t new_value) {
+    while (true) {
+        int32_t old_value = *target;
+        if (OSAtomicCompareAndSwap32Barrier(old_value, new_value, target)) {
+            return;
+        }
+    }
+}
+
+
+NS_INLINE
+int32_t _FLAtomicGet32(int32_t *target) {
+    while (true) {
+        int32_t value = *target;
+        if (OSAtomicCompareAndSwap32Barrier(value, value, target)) {
+            return value;
+        }
+    }
+    
+    return 0;
 }

@@ -13,11 +13,38 @@
 #import "NSError+FLStackTrace.h"
 #import "NSException+FLError.h"
 
-NSException* FLDefaultCreateAssertionException(NSString* domain,
-                                        NSInteger code,
-                                        FLStackTrace_t stackTrace,
-                                        NSString* name,
-                                        NSString* description) {
+static id<FLAssertionHandler> s_sharedHandler = nil;
+
+@implementation FLAssertionHandler
+
++ (void) setSharedHandler:(id<FLAssertionHandler>) sharedHandler {
+    FLSetObjectWithRetain(s_sharedHandler, sharedHandler);
+}
+
++ (id) sharedHandler {
+    return s_sharedHandler;
+}
+
++ (id) assertionHandler {
+   return FLAutorelease([[[self class] alloc] init]);
+}
+
++ (id<FLAssertionHandler>) defaultHandler {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if(!s_sharedHandler) {
+            [self setSharedHandler:[FLAssertionHandler assertionHandler]];
+        }
+    });
+
+    return s_sharedHandler;
+}
+
+- (NSException*) assertionFailed:(NSString*) domain
+                            code:(NSInteger) code
+                      stackTrace:(FLStackTrace_t) stackTrace
+                            name:(NSString*) name
+                     description:(NSString*) description {
 
     NSError* theError =
         [NSError errorWithDomain:domain
@@ -27,33 +54,6 @@ NSException* FLDefaultCreateAssertionException(NSString* domain,
                       stackTrace:[FLStackTrace stackTrace:stackTrace]];
 
     return [NSException exceptionWithName:name reason:description userInfo:nil error:theError];
-}
-
-static FLCreateAssertionExceptionFunction* s_exceptionFactory = nil;
-
-@implementation FLAssertionHandler
-
-+ (void) initialize {
-    if(!s_exceptionFactory) {
-        s_exceptionFactory = &FLDefaultCreateAssertionException;
-    }
-}
-
-+ (void) setExceptionFactory:(FLCreateAssertionExceptionFunction*) function {
-    s_exceptionFactory = s_exceptionFactory;
-}
-
-+ (FLCreateAssertionExceptionFunction*) exceptionFactory {
-    return s_exceptionFactory;
-}
-
-+ (NSException*) createException:(NSString*) domain
-                            code:(NSInteger) code
-                      stackTrace:(FLStackTrace_t) stackTrace
-                            name:(NSString*) name
-                     description:(NSString*) description {
-
-    return (*s_exceptionFactory)(domain, code, stackTrace, name, description);
 }
 
 @end

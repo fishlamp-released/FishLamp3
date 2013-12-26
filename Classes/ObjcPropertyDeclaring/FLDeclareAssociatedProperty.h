@@ -1,5 +1,5 @@
 //
-//  FLAssociatedProperty.h
+//  FLDeclareAssociatedProperty.h
 //  FishLampFrameworks
 //
 //  Created by Mike Fullerton on 9/2/12.

@@ -8,31 +8,23 @@
 
 #import "FLStackTrace.h"
 
-typedef NSException* FLCreateAssertionExceptionFunction(NSString* domain,
-                                                        NSInteger code,
-                                                        FLStackTrace_t stackTrace,
-                                                        NSString* name,
-                                                        NSString* description);
+@protocol FLAssertionHandler <NSObject>
 
-
-extern NSException* FLDefaultCreateAssertionException(  NSString* domain,
-                                                        NSInteger code,
-                                                        FLStackTrace_t stackTrace,
-                                                        NSString* name,
-                                                        NSString* description);
-
-@interface FLAssertionHandler : NSObject {
-}
-
-+ (void) setExceptionFactory:(FLCreateAssertionExceptionFunction*) function;
-
-+ (FLCreateAssertionExceptionFunction*) exceptionFactory;
-
-+ (NSException*) createException:(NSString*) domain
+- (NSException*) assertionFailed:(NSString*) domain
                             code:(NSInteger) code
                       stackTrace:(FLStackTrace_t) stackTrace
                             name:(NSString*) name
                      description:(NSString*) description;
 
 @end
+
+@interface FLAssertionHandler : NSObject<FLAssertionHandler>
+
++ (void) setSharedHandler:(id<FLAssertionHandler>) defaultHandler;
++ (id) sharedHandler;
+
++ (id<FLAssertionHandler>) defaultHandler;
+
+@end
+
 

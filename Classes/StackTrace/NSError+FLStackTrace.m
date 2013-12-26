@@ -9,6 +9,8 @@
 #import "NSError+FLStackTrace.h"
 #import "NSString+FishLampCore.h"
 
+#import "FLDeclareDictionaryProperty.h"
+
 NSString* const FLStackTraceKey = @"com.fishlamp.stacktrace";
 
 @implementation NSError (FLStackTrace)

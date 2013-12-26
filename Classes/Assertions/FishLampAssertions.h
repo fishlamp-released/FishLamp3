@@ -8,11 +8,9 @@
 //
 
 #import "FishLampRequired.h"
-#import "FishLampExceptions.h"
 
 // depedencies
-//#import "FishLampStrings.h"
-//#import "FishLampErrors.h"
+#import "FishLampExceptions.h"
 
 // includes
 #import "FLAssertionFailureErrorDomain.h"

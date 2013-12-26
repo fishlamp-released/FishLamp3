@@ -9,6 +9,8 @@
 #import "FLExceptionHandler.h"
 //#import "FishLampRequired.h"
 
+#import "FLDeclareDefaultProperty.h"
+
 @implementation FLExceptionHandler
 
 FLSynthesizeDefaultProperty(id, defaultExceptionHandler);

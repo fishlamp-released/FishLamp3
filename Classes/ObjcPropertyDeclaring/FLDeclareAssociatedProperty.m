@@ -1,5 +1,5 @@
 //
-//  FLAssociatedProperty.m
+//  FLDeclareAssociatedProperty.m
 //  FishLampCore
 //
 //  Created by Mike Fullerton on 3/19/13.
@@ -7,9 +7,9 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FLAssociatedProperty.h"
+#import "FLDeclareAssociatedProperty.h"
 
-//@implementation NSObject (FLAssociatedProperty)
+//@implementation NSObject (FLDeclareAssociatedProperty)
 //
 //- (id) associatedObjectForKey:(id) key createBlock:(dispatch_block_t) createBlock {
 //

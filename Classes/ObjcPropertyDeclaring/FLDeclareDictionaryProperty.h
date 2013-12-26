@@ -1,22 +1,12 @@
 //
-//	FLProperties.h
-//	FishLamp
+//  FLDictionaryProperties.h
+//  FishLamp
 //
-//	Created by Mike Fullerton on 5/28/09.
-//	Copyright (c) 2013 GreenTongue Software LLC, Mike Fullerton. 
-//  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
+//  Created by Mike Fullerton on 12/26/13.
 //
-#import "FLCoreFlags.h"
-#import "FLCompilerWarnings.h"
-#import "FLObjc.h"
+//
 
-#import "FLSingletonProperty.h"
-#import "FLAssociatedProperty.h"
-#import "FLAtomicProperties.h"
-#import "FLStructFlagsProperty.h"
-#import "FLStaticMemberProperty.h"
-#import "FLDefaultProperty.h"
-#import "FLBitFlagsProperty.h"
+#import <Foundation/Foundation.h>
 
 #define FLSynthesizeDictionaryGetterProperty(__GETTER__, __TYPE__, __KEY__, __DICTIONARY__) \
     - (__TYPE__) __GETTER__ { \
@@ -31,7 +21,5 @@
         if(object) [__DICTIONARY__ setObject:object forKey:__KEY__]; \
         else [__DICTIONARY__ removeObjectForKey:__KEY__]; \
     }
-
-
 
 

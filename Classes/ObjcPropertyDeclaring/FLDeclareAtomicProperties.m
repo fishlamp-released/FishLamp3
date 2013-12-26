@@ -7,9 +7,12 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FLAtomicProperties.h"
-#import "FLAtomic.h"
+#import "FLDeclareAtomicProperties.h"
+#import "FishLampAtomic.h"
 
+#import <libkern/OSAtomic.h>
+
+// TODO: USE FLCriticalSection!
 
 // this code is based on: http://www.opensource.apple.com/source/objc4/objc4-371.2/runtime/Accessors.subproj/objc-accessors.m
 
