@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fishlamp>
+
+    <info>
+        <projectName>FishLamp</projectName>
+        <organization name="GreenTongue Software LLC, Mike Fullerton"/>
+        <license>The FishLamp Framework is released under the MIT License: http://fishlamp.com/license</license>
+    </info>
+
+    <options>
+        <typePrefix>FL</typePrefix>
+    </options>
+
+ 	 <enumType name="FLXmlParserErrorCode">
+
+<!-- NSXmlParser errors -->
+<enum name="Internal" value="1"/>
+<enum name="OutOfMemory" value="2"/>
+<enum name="DocumentStart" value="3"/>
+<enum name="EmptyDocument" value="4"/>
+<enum name="PrematureDocumentEnd" value="5"/>
+<enum name="InvalidHexCharacterRef" value="6"/>
+<enum name="InvalidDecimalCharacterRef" value="7"/>
+<enum name="InvalidCharacterRef" value="8"/>
+<enum name="InvalidCharacter" value="9"/>
+<enum name="CharacterRefAtEOF" value="10"/>
+<enum name="CharacterRefInProlog" value="11"/>
+<enum name="CharacterRefInEpilog" value="12"/>
+<enum name="CharacterRefInDTD" value="13"/>
+<enum name="EntityRefAtEOF" value="14"/>
+<enum name="EntityRefInProlog" value="15"/>
+<enum name="EntityRefInEpilog" value="16"/>
+<enum name="EntityRefInDTD" value="17"/>
+<enum name="ParsedEntityRefAtEOF" value="18"/>
+<enum name="ParsedEntityRefInProlog" value="19"/>
+<enum name="ParsedEntityRefInEpilog" value="20"/>
+<enum name="ParsedEntityRefInInternalSubset" value="21"/>
+<enum name="EntityReferenceWithoutName" value="22"/>
+<enum name="EntityReferenceMissingSemi" value="23"/>
+<enum name="ParsedEntityRefNoName" value="24"/>
+<enum name="ParsedEntityRefMissingSemi" value="25"/>
+<enum name="UndeclaredEntity" value="26"/>
+<enum name="UnparsedEntity" value="28"/>
+<enum name="EntityIsExternal" value="29"/>
+<enum name="EntityIsParameter" value="30"/>
+<enum name="UnknownEncoding" value="31"/>
+<enum name="EncodingNotSupported" value="32"/>
+<enum name="StringNotStarted" value="33"/>
+<enum name="StringNotClosed" value="34"/>
+<enum name="NamespaceDeclaration" value="35"/>
+<enum name="EntityNotStarted" value="36"/>
+<enum name="EntityNotFinished" value="37"/>
+<enum name="LessThanSymbolInAttribute" value="38"/>
+<enum name="AttributeNotStarted" value="39"/>
+<enum name="AttributeNotFinished" value="40"/>
+<enum name="AttributeHasNoValue" value="41"/>
+<enum name="AttributeRedefined" value="42"/>
+<enum name="LiteralNotStarted" value="43"/>
+<enum name="LiteralNotFinished" value="44"/>
+<enum name="CommentNotFinished" value="45"/>
+<enum name="ProcessingInstructionNotStarted" value="46"/>
+<enum name="ProcessingInstructionNotFinished" value="47"/>
+<enum name="NotationNotStarted" value="48"/>
+<enum name="NotationNotFinished" value="49"/>
+<enum name="AttributeListNotStarted" value="50"/>
+<enum name="AttributeListNotFinished" value="51"/>
+<enum name="MixedContentDeclNotStarted" value="52"/>
+<enum name="MixedContentDeclNotFinished" value="53"/>
+<enum name="ElementContentDeclNotStarted" value="54"/>
+<enum name="ElementContentDeclNotFinished" value="55"/>
+<enum name="XMLDeclNotStarted" value="56"/>
+<enum name="XMLDeclNotFinished" value="57"/>
+<enum name="ConditionalSectionNotStarted" value="58"/>
+<enum name="ConditionalSectionNotFinished" value="59"/>
+<enum name="ExternalSubsetNotFinished" value="60"/>
+<enum name="DOCTYPEDeclNotFinished" value="61"/>
+<enum name="MisplacedCDATAEndString" value="62"/>
+<enum name="CDATANotFinished" value="63"/>
+<enum name="MisplacedXMLDeclaration" value="64"/>
+<enum name="SpaceRequired" value="65"/>
+<enum name="SeparatorRequired" value="66"/>
+<enum name="NMTOKENRequired" value="67"/>
+<enum name="NAMERequired" value="68"/>
+<enum name="PCDATARequired" value="69"/>
+<enum name="URIRequired" value="70"/>
+<enum name="PublicIdentifierRequired" value="71"/>
+<enum name="LTRequired" value="72"/>
+<enum name="GTRequired" value="73"/>
+<enum name="LTSlashRequired" value="74"/>
+<enum name="EqualExpected" value="75"/>
+<enum name="TagNameMismatch" value="76"/>
+<enum name="UnfinishedTag" value="77"/>
+<enum name="StandaloneValue" value="78"/>
+<enum name="InvalidEncodingName" value="79"/>
+<enum name="CommentContainsDoubleHyphen" value="80"/>
+<enum name="InvalidEncoding" value="81"/>
+<enum name="ExternalStandaloneEntity" value="82"/>
+<enum name="InvalidConditionalSection" value="83"/>
+<enum name="EntityValueRequired" value="84"/>
+<enum name="NotWellBalanced" value="85"/>
+<enum name="ExtraContent" value="86"/>
+<enum name="InvalidCharacterInEntity" value="87"/>
+<enum name="ParsedEntityRefInInternal" value="88"/>
+<enum name="EntityRefLoop" value="89"/>
+<enum name="EntityBoundary" value="90"/>
+<enum name="InvalidURI" value="91"/>
+<enum name="URIFragment" value="92"/>
+<enum name="NoDTD" value="94"/>
+<enum name="DelegateAbortedParse" value="512"/>
+
+<!-- fishlamp errors -->
+<enum name="UnknownElement" value="1024"/>
+<enum name="ObjectNotFound" value="1025"/>
+    </enumType>
+
+</fishlamp>
+
+
+
+
+
+
+   

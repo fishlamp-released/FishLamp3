@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project projectName="FishLamp">
+<organization name="GreenTongue Software, LLC"/>    
+	<generatorOptions>
+     	<typePrefix>FL</typePrefix>
+    </generatorOptions>
+    <objects>
+        <object typeName="FLSoapFault11" protocols="NSCopying, NSCoding">
+            <properties>
+                <property type="NSString" name="faultcode"/>
+                <property type="NSString" name="faultstring"/>
+                <property type="NSString" name="faultactor"/>
+                <property type="NSString" name="detail"/>
+            </properties>
+        </class>
+    </objects>
+</project>
