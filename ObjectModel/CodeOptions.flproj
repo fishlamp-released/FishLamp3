@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fishlamp>
+    <info>
+        <projectName>FishLamp Code Generator</projectName>
+        <organization name="GreenTongue Software LLC, Mike Fullerton"/>
+        <license>The FishLamp Framework is released under the MIT License: http://fishlamp.com/license</license>
+    </info>
+    <options>
+        <canLazyCreate>YES</canLazyCreate>
+        <allIncludesFileName>FishLampCodeGeneratorObjects</allIncludesFileName>
+        <objectsFolderName>NewGenerated</objectsFolderName>
+        <typePrefix>FL</typePrefix>
+        <generateUserObjects>YES</generateUserObjects>
+        <userObjectsFolderName>NewObjects</userObjectsFolderName>
+    </options>
+</fishlamp>

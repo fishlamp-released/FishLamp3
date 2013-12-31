@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fishlamp>
+    <import path="CodeOptions.flproj"/>
+    <import path="CodeElements.flproj"/>
+    <import path="CodeEnum.flproj"/>
+
+    <enumType name="FLCodeStorageMask">
+        <enum name="None"/>
+        <enum name="Stored"/>
+        <enum name="Required"/>
+        <enum name="PrimaryKey"/>
+        <enum name="Indexed"/>
+    </enumType>
+
+    <class name="FLCodeStorageOptions">
+        <property name="isStorable" type="bool" comment="this defaults to NO. Note that storage options are ignored if the superclass class is not storable."/>
+        <property name="isPrimaryKey" type="bool" comment="set this property to be a primary key in the data store"/>
+        <property name="isIndexed" type="bool" comment="set this property to be indexed for fast searches on it"/>
+        <property name="isUnique" type="bool" comment="make sure this value is unique is the data store for this type"/>
+        <property name="isRequired" type="bool" comment="make sure this value isn't empty in the data store"/>
+    </class>
+
+    <class name="FLCodeArrayType">
+        <property name="name" type="string"/>
+        <property name="type" type="string"/>
+    </class>
+
+    <class name="FLCodeArray">
+        <property name="name" type="string" useForEquality="YES"/>
+        <property name="types" type="array">
+            <arrayType name="arrayType" type="FLCodeArrayType"/>
+        </property>
+    </class>
+    
+    <class name="FLCodeObjectCategory">
+        <property name="objectName" type="string" comment="name of the type, e.g. bagelCount"/>
+        <property name="categoryName" type="string" comment="name of the type, e.g. bagelCount"/>
+        <property name="properties" type="array" comment="list of properties (FLCodeProperty or FLCodeObjectArray) for this class">
+            <arrayType name="property" type="FLCodeProperty"/>
+        </property>
+        <property name="methods" type="array" comment="list of methods (FLCodeMethod) for this class">
+            <arrayType name="method" type="FLCodeMethod"/>
+        </property>
+    </class>
+    
+    <class name="FLCodeObject">
+        <property name="protocols" type="string" comment="comma delimeted string"/>
+        <property name="name" type="string" comment="name of the type, e.g. bagelCount"/>
+        <property name="storageOptions" type="FLCodeStorageOptions"/>
+        <property name="comment" type="string" comment="comment for this class"/>
+        <property name="superclass" type="string" comment="superclass for the class. by default this is set to NSObject"/>
+        <property name="canLazyCreate" type="bool"/>
+        <property name="isSingleton" type="bool" comment="if set to YES the standard FishLamp singleton objects will be generated for this class"/>
+        <property name="properties" type="array" comment="list of properties (FLCodeProperty or FLCodeObjectArray) for this class">
+            <arrayType name="property" type="FLCodeProperty"/>
+        </property>
+        <property name="dependencies" type="array" comment="list of includes (string) only for this class">
+            <arrayType name="dependency" type="FLCodeTypeDefinition"/>
+        </property>
+        <property name="members" type="array" comment="list of member data (FLCodeVariable) for this class">
+            <arrayType name="member" type="FLCodeVariable"/>
+        </property>
+        <property name="methods" type="array" comment="list of methods (FLCodeMethod) for this class">
+            <arrayType name="method" type="FLCodeMethod"/>
+        </property>
+        <property name="categories" type="array">
+            <arrayType name="category" type="FLCodeObjectCategory"/>
+        </property>
+        <property name="constructors" type="array">
+            <arrayType name="constructor" type="FLCodeConstructor"/>
+        </property>
+    </class>
+
+    <class name="FLCodeProperty">
+        <!-- required -->
+        <property name="name" type="string" useForEquality="YES"/>
+        <property name="type" type="string"/>
+        <property name="storageOptions" type="FLCodeStorageOptions" comment=""/>
+        <property name="memberName" type="string" comment="set member name. this is the same as the property name by default, but can be anything"/>
+        <property name="defaultValue" type="object"/>
+        <property name="comment" type="string" comment="comment about this property"/>
+        <property name="getter" type="FLCodeMethod" comment=""/>
+        <property name="setter" type="FLCodeMethod" comment=""/>
+        <!-- Arrays have one of more of these types set, otherwise it's a normal property -->
+        <property name="arrayTypes" type="array" comment="list of types and keys this array accepts. This list is igored for types other than array.">
+            <arrayType name="arrayType" type="FLCodeArrayType"/>
+        </property>
+        <property name="canLazyCreate" type="bool" comment="automatically create the data (if it's an object) when the property getter is called and the value is nil"/>
+        <property name="isPrivate" type="bool" comment="don't declare the property in the file header (good for overriding superclass methods)"/>
+        <property name="isReadOnly" type="bool" comment="make this property readonly"/>
+        <property name="isImmutable" type="bool" comment="immutable means readonly, and directly return the default value without storing it in a member variable"/>
+        <property name="isStatic" type="bool" comment="is this property a class method e.g. + (void) foo"/>
+        <property name="useForEquality" type="bool"/>
+        <property name="isWildcardArray" type="bool" comment=""/>
+        <property name="isWeak" type="bool" comment="NO by default"/>
+        <property name="storage" type="FLCodeStorageMask"/>
+    </class>
+    
+    <class name="FLCodeMethod">
+        <property name="isStatic" type="bool" comment="is this a class method, e.g. + (void) foo"/>
+        <property name="isPrivate" type="bool" comment="don't show the header in the header for this method"/>
+        <property name="returnType" type="string" comment="return type of the method, by default this is void"/>
+        <property name="name" type="string" comment="name of the method" useForEquality="YES"/>
+        <property name="comment" type="string" comment="comment about this method"/>
+        <property name="code" type="FLCodeCodeSnippet" comment=""/>
+        <property name="codeLines" type="array">
+            <arrayType name="codeLine" type="FLCodeElement"/>
+        </property>
+        <property name="parameters" type="array" comment="list of parameters (FLCodeVariable) for this method">
+            <arrayType name="parameter" type="FLCodeVariable"/>
+        </property>
+    </class>
+
+</fishlamp>
