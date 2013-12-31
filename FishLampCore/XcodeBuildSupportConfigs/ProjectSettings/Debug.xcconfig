@@ -1,0 +1,7 @@
+
+
+#include "XcodeBuildSupportConfigs/ProjectSettings/Release.xcconfig"
+
+// this twiddles a few things for DEBUG builds
+#include "XcodeBuildSupportConfigs/Includes/DefaultSettings-Debug.xcconfig"
+

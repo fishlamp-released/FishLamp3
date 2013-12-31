@@ -1,0 +1,4 @@
+
+#include "XcodeBuildSupportConfigs/Includes/DefaultCompilerWarnings.xcconfig"
+#include "XcodeBuildSupportConfigs/Includes/DefaultClangSettings.xcconfig"
+#include "XcodeBuildSupportConfigs/Includes/DefaultSettings-Release.xcconfig"

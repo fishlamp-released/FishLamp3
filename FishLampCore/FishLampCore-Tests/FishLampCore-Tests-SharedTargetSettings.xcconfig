@@ -1,0 +1,17 @@
+//
+//  SharedTargetSettings.xcconfig
+//  FishLampCore
+//
+//  Created by Fullerton, Mike on 9/9/13.
+//  Copyright (c) 2013 Mike Fullerton. All rights reserved.
+//
+
+
+GCC_PRECOMPILE_PREFIX_HEADER = YES
+GCC_PREFIX_HEADER = FishLampCore-Tests/FishLampCore-Tests-Prefix.pch
+
+INFOPLIST_FILE = FishLampCore-Tests/FishLampCore-Tests-Info.plist
+
+WRAPPER_EXTENSION = xctest
+MACH_O_TYPE = mh_bundle
+OTHER_LDFLAGS = $(inherited) -framework XCTest

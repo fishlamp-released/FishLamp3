@@ -1,0 +1,93 @@
+
+
+// master switch
+GCC_WARN_INHIBIT_ALL_WARNINGS = NO
+
+
+// turn on as many as we can stand.
+CLANG_WARN_CONSTANT_CONVERSION = YES
+CLANG_WARN_CXX0X_EXTENSIONS = YES
+CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES
+CLANG_WARN_EMPTY_BODY = YES
+CLANG_WARN_ENUM_CONVERSION = YES
+CLANG_WARN_INT_CONVERSION = YES
+CLANG_WARN_OBJCPP_ARC_ABI = YES
+CLANG_WARN_OBJC_RECEIVER_WEAK = YES
+CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES
+CLANG_WARN__DUPLICATE_METHOD_MATCH = YES
+CLANG_WARN_OBJC_ROOT_CLASS = YES
+CLANG_WARN_BOOL_CONVERSION = YES
+CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR
+CLANG_WARN_EMPTY_BODY = YES
+GCC_WARN_64_TO_32_BIT_CONVERSION = YES
+GCC_WARN_64_TO_32_BIT_CONVERSION = YES
+GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES
+GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES
+GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES
+GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES
+GCC_WARN_ABOUT_RETURN_TYPE = YES
+GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES
+GCC_WARN_CHECK_SWITCH_STATEMENTS = YES
+GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES
+GCC_WARN_MISSING_PARENTHESES = YES
+GCC_WARN_SHADOW = YES
+GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES
+GCC_WARN_UNDECLARED_SELECTOR = YES
+GCC_WARN_UNINITIALIZED_AUTOS = YES
+GCC_WARN_UNUSED_LABEL = YES
+GCC_WARN_UNUSED_VALUE = YES
+GCC_WARN_UNUSED_VARIABLE = YES
+
+// turning these on enables a world of hurt
+CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO
+GCC_WARN_PEDANTIC = NO
+CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO
+
+// c++ only?
+CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO
+GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO
+GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO
+
+// THIS doesn't play well with iOS and CG
+CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO
+
+// calm down gcc, it's okay
+GCC_WARN_UNUSED_FUNCTION = NO
+GCC_WARN_UNUSED_PARAMETER = NO
+GCC_WARN_STRICT_SELECTOR_MATCH = NO
+GCC_WARN_ABOUT_MISSING_NEWLINE = NO
+GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO
+
+// might want these on someday?
+GCC_WARN_SIGN_COMPARE = NO
+GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO
+GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO
+
+// do not taunt happy fun pragmas
+GCC_WARN_UNKNOWN_PRAGMAS = NO
+
+CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES
+
+// see http://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
+
+SOME = -Wmaybe-uninitialized
+
+ALMOST_ALL = -Waddress -Warray-bounds -Wc++11-compat -Wchar-subscripts -Wenum-compare -Wimplicit-int -Wimplicit-function-declaration -Wcomment -Wformat -Wmain  -Wmissing-braces -Wnonnull -Wparentheses -Wpointer-sign -Wreorder -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-aliasing -Wstrict-overflow=1 -Wswitch -Wtrigraphs -Wuninitialized -Wunknown-pragmas -Wvolatile-register-var
+
+// NOTE: -Wall also includes these
+//          -Wunused-function  
+//          -Wunused-label     
+//          -Wunused-value     
+//          -Wunused-variable  
+
+EXTRAS_OTHER = -Wclobbered -Wmissing-parameter-type  -Wold-style-declaration -Woverride-init
+
+EXTRAS =  -Wempty-body -Wignored-qualifiers -Wmissing-field-initializers -Wsign-compare -Wtype-limits
+
+// NOTE: -Wextra also includes these
+//          -Wunused-parameter (only with -Wunused or -Wall)
+//          -Wunused-but-set-parameter (only with -Wunused or -Wall)
+
+WARNING_CFLAGS = $(inherited) $(ALMOST_ALL) $(EXTRAS)
+
+
