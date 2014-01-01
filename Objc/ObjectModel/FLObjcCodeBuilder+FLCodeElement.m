@@ -38,7 +38,7 @@
 
 @implementation FLCodeElement (FLObjcCodeWriter)
 - (NSString*) stringForObjcProject:(FLObjcProject*) project {
-    FLAssertFailedWithComment(@"this is supposed to be overridden to do something");
+    FLAssertFailed(@"this is supposed to be overridden to do something");
     return nil;
 }
 @end

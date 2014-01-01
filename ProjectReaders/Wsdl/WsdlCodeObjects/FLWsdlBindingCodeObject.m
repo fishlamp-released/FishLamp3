@@ -19,6 +19,8 @@
 #import "FishLampCodeGeneratorObjects.h"
 #import "FLKeyValuePair.h"
 
+#import "FishLampStrings.h"
+
 @implementation FLWsdlBindingCodeObject
 
 - (void) addOperationProperty:(FLWsdlOperationCodeObject*) operationCodeObject {

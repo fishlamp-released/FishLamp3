@@ -27,8 +27,8 @@
 
 - (FLCodeVariable*) createVariableForProperty {
 	
-    FLConfirmStringIsNotEmptyWithComment(self.name, @"name missing");
-    FLConfirmStringIsNotEmptyWithComment(self.type, @"type missing");
+    FLConfirmStringIsNotEmpty(self.name, @"name missing");
+    FLConfirmStringIsNotEmpty(self.type, @"type missing");
 
     if(FLStringIsEmpty(self.memberName)) {
         self.memberName = [NSString stringWithFormat:@"%@%@", kMemberDataPrefix, self.name];
@@ -406,7 +406,7 @@
 //                        break;	
 //                        
 //                    case FLDataTypeUnknown:
-//                        FLAssertFailedWithComment(@"unknown type");
+//                        FLAssertFailed(@"unknown type");
 //                        break;
 //                }
             
@@ -497,8 +497,8 @@
 //- (void) configureValueProperty:(FLCodeProperty*) prop forObject:(FLCodeObject*) object {
 //	FLConfirmStringIsNotEmpty(prop.typeUnmodified);
 //		
-//	FLConfirmStringIsNotEmptyWithComment(prop.name, @"property needs a name");
-//	FLConfirmStringIsNotEmptyWithComment(prop.type, @"property needs a type");
+//	FLConfirmStringIsNotEmpty(prop.name, @"property needs a name");
+//	FLConfirmStringIsNotEmpty(prop.type, @"property needs a type");
 //
 //	FLCodeDataType* type = [FLCodeDataType typeFromObjcString:prop.typeUnmodified];
 //	prop.type = [type objcTypeString]; // FLObjCTypeStringFromDataType(typeId);
@@ -516,7 +516,7 @@
 ////		case FLDataTypeString:
 ////		case FLDataTypeDate:
 ////		case FLDataTypeData:
-////			FLConfirmationFailureWithComment(@"trying to generate object as value property");
+////			FLConfirmationFailure(@"trying to generate object as value property");
 ////			break;
 ////	
 ////		case FLDataTypeBool:
@@ -610,11 +610,11 @@
 ////			break;
 ////
 ////        case FLDataTypeValue:
-////			FLConfirmationFailureWithComment(@"not sure how to generate a NSValue for value property");
+////			FLConfirmationFailure(@"not sure how to generate a NSValue for value property");
 ////			break;			  
 ////	
 ////		case FLDataTypeUnknown:
-////			FLConfirmationFailureWithComment(@"unknown type");
+////			FLConfirmationFailure(@"unknown type");
 ////			break;
 ////
 ////	}
@@ -810,7 +810,7 @@
 //	}
 //	
 //    if(FLStringIsEmpty(prop.type)) { 
-//        FLThrowErrorCodeWithComment(FLErrorDomain, FLErrorCodeUnknownTypeErrorCode, @"Property %@ type can't be empty ", prop.name);
+//        FLThrowErrorCode(FLErrorDomain, FLErrorCodeUnknownTypeErrorCode, @"Property %@ type can't be empty ", prop.name);
 //    }
 //    
 //    prop.type = [self prefixedTypeNameForKnownType:prop.type];
@@ -1079,7 +1079,7 @@ NSInteger FLSortCodeProperties(FLCodeProperty* lhs, FLCodeProperty* rhs, void* s
 
 - (void) prepareToGenerateObject:(FLCodeObject*) object {
 
-	FLConfirmStringIsNotEmptyWithComment(object.typeName, @"Object type is required");
+	FLConfirmStringIsNotEmpty(object.typeName, @"Object type is required");
 
 	if(FLStringIsEmpty(object.name)) {
 		object.name = object.typeName;
@@ -1106,8 +1106,8 @@ NSInteger FLSortCodeProperties(FLCodeProperty* lhs, FLCodeProperty* rhs, void* s
 		FLConfirmStringIsNotEmpty(prop.type);
 	   
 //		if(!prop.isStatic && !prop.isImmutable ) {
-//			FLConfirmStringIsNotEmptyWithComment(prop.name, @"name missing");
-//			FLConfirmStringIsNotEmptyWithComment(prop.type, @"type missing");	
+//			FLConfirmStringIsNotEmpty(prop.name, @"name missing");
+//			FLConfirmStringIsNotEmpty(prop.type, @"type missing");	
 //			
 //			// add the static key property
 //			FLCodeProperty* newProp = [FLCodeProperty property];
@@ -1183,7 +1183,7 @@ typedef struct {
         type.importIsPrivate = NO;
     }
     
-    FLConfirmStringIsNotEmptyWithComment(type.typeName, @"type is empty");
+    FLConfirmStringIsNotEmpty(type.typeName, @"type is empty");
 
     [self addTypeDefinition:type];
 
@@ -1321,8 +1321,8 @@ typedef struct {
 
 - (void) willGenerateProperty:(FLCodeProperty*) property {
 	
-    FLConfirmStringIsNotEmptyWithComment(property.name, @"property has no name");
-	FLConfirmStringIsNotEmptyWithComment(property.type, @"property has no type");
+    FLConfirmStringIsNotEmpty(property.name, @"property has no name");
+	FLConfirmStringIsNotEmpty(property.type, @"property has no type");
 	
 	NSString* typeString = property.type; 
    
@@ -1336,7 +1336,7 @@ typedef struct {
 		BOOL setSetter = property.setter.hasLines;
 	   
 		if(!setGetter && !setSetter && !property.isReadOnly) {
-			FLConfirmStringIsNotEmptyWithComment(property.memberName, @"property has no member name");
+			FLConfirmStringIsNotEmpty(property.memberName, @"property has no member name");
 
 			property.getter.code.lines = [NSString stringWithFormat:@"return %@;", property.memberName];
 			
@@ -1347,12 +1347,12 @@ typedef struct {
 		}
 		
 		if(!setGetter) {
-			FLConfirmStringIsNotEmptyWithComment(property.memberName, @"property has no member name");
+			FLConfirmStringIsNotEmpty(property.memberName, @"property has no member name");
 			property.getter.code.lines = [NSString stringWithFormat:@"return %@;", property.memberName];
 		}
 		
 		if(!setSetter && !property.isReadOnly) {
-			FLConfirmStringIsNotEmptyWithComment(property.memberName, @"property has no member name");
+			FLConfirmStringIsNotEmpty(property.memberName, @"property has no member name");
 			[self configureObjcSetterForProperty:property]; 
 		}
 	}

@@ -7,6 +7,7 @@
 //
 
 #import "FLCodeIdentifier.h"
+#import "FishLampStrings.h"
 
 @interface FLCodeIdentifier ()
 @property (readwrite, strong, nonatomic) NSString* original;

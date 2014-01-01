@@ -84,7 +84,7 @@
 }
 
 - (void) addCodeObject:(FLWsdlCodeObject*) object {
-    FLConfirmStringIsNotEmptyWithComment(object.name, @"object has no className");
+    FLConfirmStringIsNotEmpty(object.name, @"object has no className");
 
     [self setCodeObject:object forKey:FLStringToKey(object.name)];
 }
@@ -225,7 +225,7 @@
 //		}
 //	}
 //	
-//	FLConfirmationFailureWithComment(@"Didn't find expected message object %@ (object referenced but not defined)", name);
+//	FLConfirmationFailure(@"Didn't find expected message object %@ (object referenced but not defined)", name);
 //	
 //	return nil;
 //}  
@@ -405,7 +405,7 @@
     messageName = [FLXmlParser removePrefix:messageName];
 
     NSString* mappedName = [_messageObjects objectForKey:messageName];
-    FLConfirmStringIsNotEmptyWithComment(mappedName, @"message object for %@ not found", messageName);
+    FLConfirmStringIsNotEmpty(mappedName, @"message object for %@ not found", messageName);
 
     return mappedName;
 }

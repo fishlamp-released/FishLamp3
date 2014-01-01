@@ -7,6 +7,7 @@
 //
 
 #import "FLObjcIvarName.h"
+#import "NSString+FishLamp.h"
 
 @implementation FLObjcIvarName 
 + (id) objcIvarName:(NSString*) ivarName {

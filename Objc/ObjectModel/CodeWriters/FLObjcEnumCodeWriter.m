@@ -13,6 +13,7 @@
 #import "FLCodeEnum.h"
 
 #import "FLTypeSpecificEnumSet.h"
+#import "FishLampStrings.h"
 
 @implementation FLObjcEnumCodeWriter
 

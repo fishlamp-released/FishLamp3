@@ -8,6 +8,7 @@
 
 #import "FLObjcSourceFile.h"
 #import "FLObjcCodeGeneratorHeaders.h"
+#import "NSString+FishLamp.h"
 
 @implementation FLObjcSourceFile
 

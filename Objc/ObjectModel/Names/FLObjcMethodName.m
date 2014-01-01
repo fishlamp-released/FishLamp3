@@ -7,6 +7,7 @@
 //
 
 #import "FLObjcMethodName.h"
+#import "NSString+FishLamp.h"
 
 
 @implementation FLObjcMethodName : FLObjcName

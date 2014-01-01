@@ -77,7 +77,7 @@
 - (void) setIsReadOnly:(BOOL) readonly {
     _isReadOnly = readonly;
     if(_isReadOnly) {
-        FLAssertWithComment(_isImmutable == NO, @"can't have readwrite immutable property");
+        FLAssert(_isImmutable == NO, @"can't have readwrite immutable property");
     }
 }
 #endif    
@@ -113,7 +113,7 @@
     
     self.parentObject = object;
     
-    FLConfirmStringIsNotEmptyWithComment(codeProperty.type, @"code property '%@' type is nil", codeProperty.name);
+    FLConfirmStringIsNotEmpty(codeProperty.type, @"code property '%@' type is nil", codeProperty.name);
 
     self.useForEquality = codeProperty.useForEquality;
     self.lazyCreate = codeProperty.canLazyCreate;
@@ -142,8 +142,8 @@
         
         for(FLCodeArrayType* codeArrayType in codeProperty.arrayTypes) {
         
-            FLConfirmStringIsNotEmptyWithComment(codeArrayType.type, @"expecting type for arrayType");
-            FLConfirmStringIsNotEmptyWithComment(codeArrayType.name, @"expecting name for arrayType");
+            FLConfirmStringIsNotEmpty(codeArrayType.type, @"expecting type for arrayType");
+            FLConfirmStringIsNotEmpty(codeArrayType.name, @"expecting name for arrayType");
         
             FLObjcType* typeForSubType = [self.project.typeRegistry typeForKey:[codeArrayType type]];
             [containerTypes addObject:[FLObjcContainerSubType objcContainerSubType:codeArrayType.name objcType:typeForSubType]];
@@ -218,7 +218,7 @@
             [_getter writeCodeToSourceFile:file withCodeBuilder:codeBuilder];
         }
         else if(self.lazyCreate && self.propertyType.isMutableObject) {
-            FLConfirmNotNilWithComment(self.ivar, @"lazy properties must have an ivar");
+            FLConfirmNotNil(self.ivar, @"lazy properties must have an ivar");
         
             [codeBuilder appendLineWithFormat:@"FLSynthesizeLazyGetter(%@, %@*, %@, %@);",
                 self.propertyName.generatedName, 

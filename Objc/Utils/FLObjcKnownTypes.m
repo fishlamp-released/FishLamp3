@@ -143,7 +143,7 @@
 
         FLObjcType* type = nil;
         Class class = NSClassFromString(s_knownTypes[i].objcType);
-        FLAssertNotNilWithComment(class, @"unable to load class %@", s_knownTypes[i].objcType);
+        FLAssertNotNil(class, @"unable to load class %@", s_knownTypes[i].objcType);
         
         if(s_knownTypes[i].name) {
             FLObjcName* name = [FLObjcImportedName objcImportedName:s_knownTypes[i].name];
@@ -154,7 +154,7 @@
             type = FLAutorelease([[class alloc] init]);
         }
         
-        FLAssertNotNilWithComment(class, @"unable to load class %@", s_knownTypes[i].objcType);
+        FLAssertNotNil(class, @"unable to load class %@", s_knownTypes[i].objcType);
         
         
         [array addObject:type];

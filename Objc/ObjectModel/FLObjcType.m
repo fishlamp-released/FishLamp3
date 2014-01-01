@@ -9,7 +9,7 @@
 #import "FLObjcType.h"
 #import "FLObjcCodeGeneratorHeaders.h"
 #import "FishLampCodeGeneratorObjects.h"
-
+#import "FishLampStrings.h"
 
 @interface FLObjcType ()
 @property (readwrite, strong, nonatomic) FLObjcName* typeName;

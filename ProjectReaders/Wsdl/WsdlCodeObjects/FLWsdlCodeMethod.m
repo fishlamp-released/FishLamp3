@@ -26,7 +26,7 @@
 
 - (void) setName:(NSString*) name {
     [super setName:FLDeleteNamespacePrefix(name)];
-    FLConfirmStringIsNotEmptyWithComment(self.name, @"method name cannot be empty");
+    FLConfirmStringIsNotEmpty(self.name, @"method name cannot be empty");
 }
 
 - (void) setReturnType:(NSString*) returnType {

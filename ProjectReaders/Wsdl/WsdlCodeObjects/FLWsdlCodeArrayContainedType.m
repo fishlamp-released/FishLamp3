@@ -23,12 +23,12 @@
 
 - (void) setName:(NSString*) name {
     [super setName:FLDeleteNamespacePrefix(name)];
-    FLConfirmStringIsNotEmptyWithComment(self.name, @"array type needs a identifier");
+    FLConfirmStringIsNotEmpty(self.name, @"array type needs a identifier");
 }
 
 - (void) setType:(NSString*) typeName {
     [super setType:FLDeleteNamespacePrefix(typeName)];
-    FLConfirmStringIsNotEmptyWithComment(self.type, @"array type needs a typeName");
+    FLConfirmStringIsNotEmpty(self.type, @"array type needs a typeName");
 }
 
 + (id) wsdlCodeArrayContainedType:(NSString*) typeName identifier:(NSString*) identifier {

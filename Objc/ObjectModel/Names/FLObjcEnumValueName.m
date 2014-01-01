@@ -7,8 +7,7 @@
 //
 
 #import "FLObjcEnumValueName.h"
-
-
+#import "NSString+FishLamp.h"
 
 @implementation FLObjcEnumValueName : FLObjcName 
 + (id) objcEnumValueName:(NSString*) name prefix:(NSString*) prefix {

@@ -7,6 +7,7 @@
 //
 
 #import "FLObjcClassName.h"
+#import "NSString+FishLamp.h"
 
 @implementation FLObjcClassName 
 + (id) objcClassName:(NSString*) className prefix:(NSString*) prefix {

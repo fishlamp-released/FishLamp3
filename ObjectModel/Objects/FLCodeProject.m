@@ -122,7 +122,7 @@
 	}
 
     self.info.projectName = [self.info.projectName stringByReplacingOccurrencesOfString:@"." withString:@"_"];
-	FLConfirmStringIsNotEmptyWithComment(self.info.projectName, @"project needs to be named - <description name='foo'/>");
+	FLConfirmStringIsNotEmpty(self.info.projectName, @"project needs to be named - <description name='foo'/>");
 
 //    if(FLStringIsEmpty(project.schemaName)) {
 //        project.schemaName = [[project.projectPath lastPathComponent] stringByDeletingPathExtension];

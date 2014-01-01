@@ -32,7 +32,7 @@
 
 - (void) setName:(NSString*) className {
     [super setName:FLDeleteNamespacePrefix(className)];
-    FLConfirmStringIsNotEmptyWithComment(self.name, @"object needs a className");
+    FLConfirmStringIsNotEmpty(self.name, @"object needs a className");
 }
 
 - (void) setSuperclass:(NSString*) className {
@@ -105,7 +105,7 @@
                        propertyType:(NSString*) propertyType {
     
     FLWsdlCodeProperty* property = [FLWsdlCodeProperty wsdlCodeProperty:propertyName propertyType:propertyType];
-    FLConfirmNilWithComment([self propertyForName:propertyName], @"property %@ already added", propertyName);
+    FLConfirmNil([self propertyForName:propertyName], @"property %@ already added", propertyName);
 
     [self.properties addObject:property];
     FLAssertStringIsNotEmpty(property.name);
@@ -120,7 +120,7 @@
 
 
     FLWsdlCodeMethod* method = [FLWsdlCodeMethod wsdlCodeMethod:methodName methodReturnType:methodReturnType];
-    FLConfirmNilWithComment([self methodForName:methodName], @"method %@ already added", methodName);
+    FLConfirmNil([self methodForName:methodName], @"method %@ already added", methodName);
 
     [self.methods addObject:method];
     

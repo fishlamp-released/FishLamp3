@@ -7,6 +7,7 @@
 //
 
 #import "FLObjectPropertyName.h"
+#import "FishLampStrings.h"
 
 @implementation FLObjcPropertyName : FLObjcName
 + (id) objcPropertyName:(NSString*) propertyName {

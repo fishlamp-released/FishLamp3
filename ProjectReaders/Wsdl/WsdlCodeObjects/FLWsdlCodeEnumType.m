@@ -24,7 +24,7 @@
 
 - (void) setName:(NSString*) typeName {
     [super setName:FLDeleteNamespacePrefix(typeName)];
-    FLConfirmStringIsNotEmptyWithComment(self.name, @"enumType needs a typeName");
+    FLConfirmStringIsNotEmpty(self.name, @"enumType needs a typeName");
 }
 
 @end

@@ -26,7 +26,7 @@
 
 - (void) setName:(NSString*) name {
     [super setName:FLDeleteNamespacePrefix(name)];
-    FLConfirmStringIsNotEmptyWithComment(self.name, @"array cannot be empty");
+    FLConfirmStringIsNotEmpty(self.name, @"array cannot be empty");
 }
 
 - (void) addContainedType:(FLWsdlCodeArrayContainedType*) type {

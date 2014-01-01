@@ -16,6 +16,8 @@
 
 #import "FishLampCodeGeneratorObjects.h"
 
+#import "FishLampStrings.h"
+
 @implementation FLWsdlServiceCodeObject
 
 + (id) wsdlServiceCodeObject:(FLWsdlService*) service codeReader:(FLWsdlCodeProjectReader*) reader {

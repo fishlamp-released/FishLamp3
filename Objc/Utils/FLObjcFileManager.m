@@ -145,7 +145,7 @@
 
 - (void) addFile:(FLObjcFile*) file {
     FLAssertNotNil(file);
-    FLAssertStringIsNotEmptyWithComment(file.fileName, @"file has no name");
+    FLAssertStringIsNotEmpty(file.fileName, @"file has no name");
 
     [_files addObject:file];
 }

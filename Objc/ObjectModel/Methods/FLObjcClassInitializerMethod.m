@@ -9,6 +9,7 @@
 #import "FLObjcClassInitializerMethod.h"
 #import "FLObjcCodeGeneratorHeaders.h"
 #import "FLCodeObject.h"
+#import "NSString+FishLamp.h"
 
 @implementation FLObjcClassInitializerMethod
 

@@ -15,7 +15,7 @@
 	self = [super init];
 	if(self) {
         _objects = [FLCarefulDictionary carefulDictionary:^id(id key) {
-            FLAssertWithComment([key isKindOfClass:[NSString class]], @"expecting the key to be a string");
+            FLAssert([key isKindOfClass:[NSString class]], @"expecting the key to be a string");
             return [key lowercaseString]; 
         }];
 	}

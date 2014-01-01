@@ -51,7 +51,7 @@
 }
 
 - (void) addParameter:(FLObjcParameter*) parameter {
-    FLConfirmWithComment([self parameterForName:parameter.variableName.identifier] == nil, @"parameter for %@ already exists", parameter.variableName.identifier);
+    FLConfirm([self parameterForName:parameter.variableName.identifier] == nil, @"parameter for %@ already exists", parameter.variableName.identifier);
     
     [_parameters addObject:parameter];
 }

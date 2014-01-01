@@ -21,12 +21,12 @@
 
 - (void) setName:(NSString*) name {
     [super setName:FLDeleteNamespacePrefix(name)];
-    FLConfirmStringIsNotEmptyWithComment(self.name, @"property needs a name");
+    FLConfirmStringIsNotEmpty(self.name, @"property needs a name");
 }
 
 - (void) setType:(NSString*) typeName {
     [super setType:FLDeleteNamespacePrefix(typeName)];
-    FLConfirmStringIsNotEmptyWithComment(self.type, @"property needs a propertyType");
+    FLConfirmStringIsNotEmpty(self.type, @"property needs a propertyType");
 }
 
 - (void) addContainedType:(FLWsdlCodeArrayContainedType*) type {

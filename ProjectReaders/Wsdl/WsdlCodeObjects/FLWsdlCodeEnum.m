@@ -19,7 +19,7 @@
 
 - (void) setName:(NSString*) name {
     [super setName:FLDeleteNamespacePrefix(name)];
-    FLConfirmStringIsNotEmptyWithComment(self.name, @"enum name cannot be empty");
+    FLConfirmStringIsNotEmpty(self.name, @"enum name cannot be empty");
 }
 
 
