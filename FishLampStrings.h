@@ -28,3 +28,5 @@
 #import "FLPrettyDescription.h"
 
 #import "NSString+FLPathUtilities.h"
+
+#import "FLStackTrace+FLPrettyDescription.h"
