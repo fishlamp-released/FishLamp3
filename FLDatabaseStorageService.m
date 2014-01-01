@@ -49,7 +49,7 @@
     }
     completion:^(FLPromisedResult result) {
         if([result isError]) {
-            FLLog(@"database error: %@", result)
+            FLLog(@"database error: %@", result);
         }
     }];
  }
@@ -63,7 +63,7 @@
     }
     completion:^(FLPromisedResult result) {
         if([result isError]) {
-            FLLog(@"database error: %@", result)
+            FLLog(@"database error: %@", result);
         }
     }];
 

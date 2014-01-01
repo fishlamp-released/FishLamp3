@@ -10,7 +10,7 @@
 #import "FLObjectDatabase.h"
 #import "NSFileManager+FishLamp.h"
 #import "FLDatabaseTable.h"
-#import "NSArray+FishLamp.h"
+#import "NSArray+FishLampCore.h"
 #import "NSString+Lists.h"
 #import "FLSqlBuilder.h"
 #import "FLDatabase_Internal.h"
@@ -21,7 +21,7 @@
 @implementation FLObjectDatabase
 
 - (void) deleteObject:(id) inputObject {
-    FLAssertIsNotNilWithComment(inputObject, nil);
+    FLAssertIsNotNilWithComment(inputObject);
         
     FLDatabaseTable* table = [[inputObject class] sharedDatabaseTable];
     
@@ -30,7 +30,7 @@
     [statement appendString:SQL_FROM andString:table.tableName];
 
     if(![statement appendWhereClauseForSelectingObject:inputObject]) {
-        FLThrowErrorCodeWithComment(FLObjectDatabaseErrorDomain, FLDatabaseErrorNoParametersSpecified, @"No parameters specified");
+        FLThrowErrorCode(FLObjectDatabaseErrorDomain, FLDatabaseErrorNoParametersSpecified, @"No parameters specified");
     }
 
     [self executeStatement:statement];
@@ -136,8 +136,8 @@
 			return FLRetainWithAutorelease(([array objectAtIndex:0]));
 		}
 		else if(array.count > 1) {
-			FLThrowErrorCodeWithComment(FLObjectDatabaseErrorDomain, FLDatabaseErrorTooManyObjectsReturned,
-                             ([NSString stringWithFormat:@"Too many objects returned for input object of type: %@", NSStringFromClass([inputObject class])]));
+			FLThrowErrorCode(FLObjectDatabaseErrorDomain, FLDatabaseErrorTooManyObjectsReturned,
+                            @"Too many objects returned for input object of type: %@", NSStringFromClass([inputObject class]));
 		}
 	}
 
@@ -151,7 +151,7 @@
 - (BOOL) containsObject:(id) inputObject
 {
 	if(!inputObject) {
-		FLThrowErrorCodeWithComment(FLObjectDatabaseErrorDomain, FLDatabaseErrorInvalidInputObject, @"null input object");
+		FLThrowErrorCode(FLObjectDatabaseErrorDomain, FLDatabaseErrorInvalidInputObject, @"null input object");
 	}
 
     __block BOOL foundIt = NO;
