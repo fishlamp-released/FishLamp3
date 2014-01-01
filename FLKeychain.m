@@ -8,7 +8,6 @@
 //
 
 #import "FLKeychain.h"
-#import "FLCoreFoundation.h"
 
 #import <Security/Security.h>
 
