@@ -24,9 +24,8 @@ Pod::Spec.new do |s|
 	s.dependency 'FishLampCore'
 	s.dependency 'FishLampStrings'
 	s.dependency 'FishLampSimpleLogger'
-
-	s.dependency 'FishLampPrerelease/Events'
-	s.dependency 'FishLampPrerelease/Timer'
+	s.dependency 'FishLampEvents'
+	s.dependency 'FishLampTimer'
 
 	s.source_files = 'Classes/**/*.{h,m}'
 
