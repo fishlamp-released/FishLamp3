@@ -90,7 +90,7 @@
 - (void) _appWillBecomeActive:(id) sender {
 	if(!self.isOpen && _willOpen) {
 // REFACTOR
-FLAssertFailedWithComment(@"refactor this");    
+FLAssertFailed(@"refactor this");    
 //        [self _beginOpeningService];
     }
 }
@@ -199,8 +199,8 @@ FLAssertFailedWithComment(@"refactor this");
 	@finally {
 		[self deleteServiceData];
 
-		FLAssertIsNilWithComment(_cacheDatabase, nil);
-		FLAssertIsNilWithComment(_documentsDatabase, nil);
+		FLAssertIsNil(_cacheDatabase, nil);
+		FLAssertIsNil(_documentsDatabase, nil);
 		
 		_open = NO;
 		_willOpen = NO;
@@ -362,14 +362,14 @@ FLAssertFailedWithComment(@"refactor this");
 }
 
 - (id) operationContext {
-FLAssertFailedWithComment(@"TODO refactor this");
+FLAssertFailed(@"TODO refactor this");
     return nil;
 }
 
 - (void) openSelf {
 
     [super openSelf];
-    FLAssertWithComment(FLStringIsNotEmpty([self userLogin].userName), @"invalid userLogin");
+    FLAssert(FLStringIsNotEmpty([self userLogin].userName), @"invalid userLogin");
     _willOpen = YES;
     _isOpening = NO;
     _open = NO;
@@ -379,8 +379,8 @@ FLAssertFailedWithComment(@"TODO refactor this");
 
 - (void) finishUpgradeTasks {	
 	if(_upgrading) {
-		FLAssertIsNotNilWithComment([self userLogin], nil);
-		FLAssertWithComment(_upgradeTaskList != nil, @"not upgrading");
+		FLAssertIsNotNil([self userLogin], nil);
+		FLAssert(_upgradeTaskList != nil, @"not upgrading");
 		
 		FLApplicationDataVersion* version = [FLApplicationDataVersion applicationDataVersion];
 		version.userGuid = [self userLogin].userGuid;

@@ -29,12 +29,12 @@
 }
 
 - (void) openService {
-    FLConfirmWithComment(!self.isServiceOpen, @"%@ service is already open", [self description]);
+    FLConfirm(!self.isServiceOpen, @"%@ service is already open", [self description]);
     self.isServiceOpen = YES;
 }
 
 - (void) closeService {
-    FLConfirmWithComment(self.isServiceOpen, @"%@ service is already open", [self description]);
+    FLConfirm(self.isServiceOpen, @"%@ service is already open", [self description]);
     self.isServiceOpen = NO;
 }
 
