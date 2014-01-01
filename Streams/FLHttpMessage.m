@@ -8,7 +8,6 @@
 //
 
 #import "FLHttpMessage.h"
-#import "FLCoreFoundation.h"
 
 @implementation FLHttpMessage
 
@@ -68,8 +67,13 @@
 }
 
 - (void) dealloc {
-    FLReleaseCRef_(_message);
-    FLSuperDealloc();
+    if(_message) {
+        CFRelease(_message);
+    }
+
+#if FL_MRC
+    [super dealloc];
+#endif
 }
 
 - (id) initWithHttpMessageRef:(CFHTTPMessageRef) ref {

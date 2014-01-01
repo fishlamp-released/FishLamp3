@@ -101,14 +101,14 @@ static void HostResolutionCallback(CFHostRef theHost, CFHostInfoType typeInfo, c
 
     self.finisher = [FLFinisher finisherWithBlock:completion];
     
-    FLAssertWithComment(!self.isOpen, @"already running");
+    FLAssert(!self.isOpen, @"already running");
     
     self.networkHost = host;
     
     CFHostClientContext context = { 0, FLBridge(void*, self), NULL, NULL, NULL };
   
     CFHostRef cfhost = self.networkHost.hostRef;
-    FLAssertIsNotNilWithComment(cfhost, nil);
+    FLAssertIsNotNil(cfhost);
 
     if (!CFHostSetClient(cfhost, HostResolutionCallback, &context)) {
         [self closeWithResult:[NSError errorWithDomain:NSPOSIXErrorDomain code:EINVAL userInfo:nil]];

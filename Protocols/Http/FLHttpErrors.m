@@ -240,8 +240,8 @@ NSString* const FLHttpServerErrorDomain = @"FLHttpServerErrorDomain";
 //                statusLine == nil ? @"" : statusLine];
 
 #if DEBUG
-    FLLog(statusLine);
-#endif    
+//    FLLog(statusLine);
+#endif
     
 	return [NSError errorWithDomain:FLHttpServerErrorDomain
                                code:statusCode

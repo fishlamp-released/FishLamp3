@@ -8,7 +8,6 @@
 //
 
 #import "FLReadStream.h"
-#import "FLCoreFoundation.h"
 #import "FLNetworkStream_Internal.h"
 
 @interface FLReadStream ()
@@ -145,7 +144,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef streamRef, CFStreamEventTyp
                 [self.inputSink closeSinkWithCommit:NO];
                 result = FLRetainWithAutorelease(self.error);
 
-                FLLog(@"closed stream with error: %@", self.error)
+                FLLog(@"closed stream with error: %@", self.error);
             }
             else {
                 result = [self createSuccessfulResult:self.inputSink];
@@ -229,7 +228,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef streamRef, CFStreamEventTyp
     while(bufferSize > 0 && [self hasBytesAvailable]) {
 
 #if DEBUG
-        FLAssertWithComment(readPtr + bufferSize <= lastBytePtr, @"buffer overrun!!!! Warning warning warning!!!!");
+        FLAssert(readPtr + bufferSize <= lastBytePtr, @"buffer overrun!!!! Warning warning warning!!!!");
 #endif
         NSInteger bytesRead = CFReadStreamRead(_streamRef, readPtr, bufferSize);
         if([self readResultIsError:bytesRead]) {

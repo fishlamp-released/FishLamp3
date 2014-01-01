@@ -54,14 +54,14 @@
 #endif
 
 -(void) setUtf8Content:(NSString*) content {
-    FLAssertIsNotNilWithComment(content, nil);
+    FLAssertIsNotNil(content);
 
 	[self setContentWithData:[content dataUsingEncoding:NSUTF8StringEncoding]
            typeContentHeader:@"text/xml; charset=utf-8" ];
 }
 
 - (void) setFormUrlEncodedContent:(NSString*) content {
-    FLAssertIsNotNilWithComment(content, nil);
+    FLAssertIsNotNil(content);
     
 	[self setContentWithData:[content dataUsingEncoding:NSUTF8StringEncoding]
            typeContentHeader:@"application/x-www-form-urlencoded" ]; 
@@ -69,8 +69,8 @@
 
 - (void) setContentWithData:(NSData*) content
           typeContentHeader:(NSString*) typeContentHeader {
-    FLAssertIsNotNilWithComment(content, nil);
-	FLAssertStringIsNotEmptyWithComment(typeContentHeader, nil);
+    FLAssertIsNotNil(content);
+	FLAssertStringIsNotEmpty(typeContentHeader);
 
     self.bodyData = content;
 	[self.requestHeaders setContentTypeHeader:typeContentHeader];
@@ -79,8 +79,8 @@
 
 - (void) setContentWithFilePath:(NSString*) path 
               typeContentHeader:(NSString*) typeContentHeader {
-	FLAssertStringIsNotEmptyWithComment(typeContentHeader, nil);
-    FLAssertWithComment([[NSFileManager defaultManager] fileExistsAtPath:path], @"File at %@ doesn't exist", path);
+	FLAssertStringIsNotEmpty(typeContentHeader);
+    FLAssert([[NSFileManager defaultManager] fileExistsAtPath:path], @"File at %@ doesn't exist", path);
 
 	[self.requestHeaders setContentTypeHeader:typeContentHeader];
     self.postBodyFilePath = path;
@@ -91,8 +91,8 @@
 }
 
 - (void) setJpegContentWithData:(NSData*) imageData {
-	FLAssertIsNotNilWithComment(imageData, nil);
-	FLAssertWithComment(imageData.length > 0, @"Empty data");
+	FLAssertIsNotNil(imageData);
+	FLAssert(imageData.length > 0, @"Empty data");
 	[self setContentWithData:imageData typeContentHeader:@"image/jpeg"];
 }
 

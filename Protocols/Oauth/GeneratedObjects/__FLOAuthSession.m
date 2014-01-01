@@ -13,8 +13,6 @@
 #import "FLOAuthSession.h"
 #import "FLObjectDescriber.h"
 
-#import "FLDatabaseTable.h"
-
 @implementation FLOAuthSession
 
 
@@ -128,24 +126,6 @@
 }
 + (BOOL) isModelObject {
     return YES;
-}
-+ (FLDatabaseTable*) sharedDatabaseTable
-
-{
-    static FLDatabaseTable* s_table = nil;
-    static dispatch_once_t pred = 0;
-    dispatch_once(&pred, ^{
-        s_table = [[FLDatabaseTable alloc] initWithClass:[self class]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"userGuid" columnType:FLDatabaseTypeText columnConstraints:[NSArray arrayWithObject:[FLPrimaryKeyConstraint primaryKeyConstraint]]]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"appName" columnType:FLDatabaseTypeText columnConstraints:[NSArray arrayWithObjects:[FLNotNullConstraint notNullConstraint], nil]]];
-        [s_table addIndex:[FLDatabaseIndex databaseIndex:@"appName" indexProperties:FLDatabaseColumnIndexPropertyNone]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"oauth_token" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"oauth_token_secret" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"user_id" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addIndex:[FLDatabaseIndex databaseIndex:@"user_id" indexProperties:FLDatabaseColumnIndexPropertyNone]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"screen_name" columnType:FLDatabaseTypeText columnConstraints:nil]];
-    });
-    return s_table;
 }
 
 @end

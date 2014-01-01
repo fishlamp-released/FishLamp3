@@ -10,6 +10,8 @@
 #import "FLFifoQueueNetworkStreamEventHandler.h"
 #import "FLNetworkStream_Internal.h"
 
+#import "FLLog.h"
+
 @interface FLFifoQueueNetworkStreamEventHandler ()
 @property (readwrite, strong, nonatomic) FLFifoAsyncQueue* asyncQueue;
 @end

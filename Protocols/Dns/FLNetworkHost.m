@@ -15,7 +15,6 @@
     #import <CoreServices/CoreServices.h>
 #endif
 
-#import "FLCoreFoundation.h"
 #include <netdb.h>
 
 @interface FLNetworkHost ()
@@ -112,7 +111,7 @@
 }
 
 - (NSArray *) resolvedAddresses {
-    FLAssertIsNotNilWithComment(_hostRef, nil);
+    FLAssertIsNotNil(_hostRef);
     
     if(!_resolvedAddresses && _hostRef) {
         NSArray* result = FLBridge(id, CFHostGetAddressing(_hostRef, (Boolean*) &_resolved));
@@ -124,7 +123,7 @@
 }
 
 - (NSArray *) resolvedAddressStrings {
-    FLAssertIsNotNilWithComment(_hostRef, nil);
+    FLAssertIsNotNil(_hostRef);
     
     if(!_resolvedAddressStrings && _hostRef) {
     
@@ -157,7 +156,7 @@
 }
 
 - (NSArray *)resolvedHostNames {
-    FLAssertIsNotNilWithComment(_hostRef, nil);
+    FLAssertIsNotNil(_hostRef);
     
     if(!_resolvedHostNames && _hostRef) {
         NSArray* result = FLBridge(id, CFHostGetNames(_hostRef, (Boolean*) &_resolved));

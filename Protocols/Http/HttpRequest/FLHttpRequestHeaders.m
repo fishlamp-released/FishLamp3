@@ -61,7 +61,7 @@
 }
 
 -(void) setContentTypeHeader:(NSString*) contentType {
-	FLAssertStringIsNotEmptyWithComment(contentType, nil);
+	FLAssertStringIsNotEmpty(contentType);
     
 	[self setValue:contentType forHTTPHeaderField:@"Content-Type"];
 }
@@ -101,8 +101,8 @@
 }
 
 - (void) setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
-	FLAssertStringIsNotEmptyWithComment(field, nil);
-    FLAssertIsNotNilWithComment(value, nil);
+	FLAssertStringIsNotEmpty(field);
+    FLAssertIsNotNil(value);
     [_headers setObject:value forKey:field];
 }
 

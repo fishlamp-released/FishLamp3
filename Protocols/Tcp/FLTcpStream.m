@@ -63,7 +63,7 @@
 //        CFHostRef host = nil;
 //        
 //        @try {
-//            FLAssertWithComment(self.remotePort != 0, @"remote port can't be zero");
+//            FLAssert(self.remotePort != 0, @"remote port can't be zero");
 //            FLAssertStringIsNotEmpty(self.remoteHost);
 //           
 //            host = CFHostCreateWithName(NULL, FLBridge(void*,self.remoteHost));

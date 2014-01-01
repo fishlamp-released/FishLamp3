@@ -14,6 +14,8 @@
 #import "FLAuthenticatedEntity.h"
 #import "FLAuthenticationToken.h"
 
+#import "FLLog.h"
+
 @interface FLAuthenticateHttpRequestOperation ()
 // instance ctors
 //- (id) initWithAuthenticationCredentials:(id<FLAuthenticationCredentials>) credentials;

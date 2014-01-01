@@ -13,8 +13,6 @@
 #import "FLOAuthAuthencationData.h"
 #import "FLObjectDescriber.h"
 
-#import "FLDatabaseTable.h"
-
 @implementation FLOAuthAuthencationData
 
 
@@ -71,20 +69,6 @@
 }
 + (BOOL) isModelObject {
     return YES;
-}
-+ (FLDatabaseTable*) sharedDatabaseTable
-
-{
-    static FLDatabaseTable* s_table = nil;
-    static dispatch_once_t pred = 0;
-    dispatch_once(&pred, ^{
-        s_table = [[FLDatabaseTable alloc] initWithClass:[self class]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"oauth_token_secret" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"oauth_callback_confirmed" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"oauth_token" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"oauth_verifier" columnType:FLDatabaseTypeText columnConstraints:nil]];
-    });
-    return s_table;
 }
 
 @end

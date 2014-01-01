@@ -111,7 +111,7 @@ static void WriteStreamClientCallBack(CFWriteStreamRef writeStream,
     while(length > 0) {
         CFIndex amt = CFWriteStreamWrite(_streamRef, buffer, length);
         if(amt <= 0) {   
-            FLThrowErrorCodeWithComment((NSString*) kCFErrorDomainCFNetwork, kCFURLErrorBadServerResponse, NSLocalizedString(@"writing networkbytes failed: %d", result));
+            FLThrowErrorCode((NSString*) kCFErrorDomainCFNetwork, kCFURLErrorBadServerResponse, @"writing networkbytes failed: %ld", (long) amt);
         }
         
         length -= amt;

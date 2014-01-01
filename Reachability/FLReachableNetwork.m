@@ -145,7 +145,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 - (SCNetworkReachabilityFlags) currentReachabilityFlags
 {
-	FLAssertWithComment(_reachabilityRef != NULL, @"currentReachabilityFlags called with NULL _reachabilityRef");
+	FLAssert(_reachabilityRef != NULL, @"currentReachabilityFlags called with NULL _reachabilityRef");
 	SCNetworkReachabilityFlags flags = 0;
 	if (SCNetworkReachabilityGetFlags(_reachabilityRef, &flags)) {
 #if DEBUG

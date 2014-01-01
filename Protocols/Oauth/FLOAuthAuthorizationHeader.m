@@ -113,7 +113,7 @@ extern void FLDebugCompareHeaders(NSString* lhs, NSString* rhs);
 
 - (NSString *) buildHMAC_SHA1SignatureWithBaseURL:(NSString*) baseURL withSecret:(NSString*) secret {
 
-    FLConfirmStringIsNotEmptyWithComment(secret, @"secret is empty");
+    FLConfirmStringIsNotEmpty(secret, @"secret is empty");
 
 	NSData *secretData = [secret dataUsingEncoding:NSUTF8StringEncoding];
 	NSData *textData = [baseURL dataUsingEncoding:NSUTF8StringEncoding];

@@ -34,7 +34,7 @@ FLSynthesizeSingleton(FLOauthEnumLookup);
 
 - (NSInteger) lookupString:(NSString*) inString {
     NSNumber* num = [_strings objectForKey:inString];
-    if(!num) { FLThrowErrorCodeWithComment(FLErrorDomain, FLErrorUnknownEnumValue, [NSString stringWithFormat:(NSLocalizedString(@"Unknown enum value (case sensitive): %@", nil)), inString]); } 
+    if(!num) { FLThrowErrorCode(FLErrorDomain, FLErrorUnknownEnumValue, @"Unknown enum value (case sensitive): %@", inString); }
     return [num intValue];
 }
 

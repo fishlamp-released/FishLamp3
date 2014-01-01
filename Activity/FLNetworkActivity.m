@@ -8,6 +8,7 @@
 //
 
 #import "FLNetworkActivity.h"
+#import "FLLog.h"
 
 @interface FLNetworkActivityState : NSObject<FLNetworkActivityState> {
 @private

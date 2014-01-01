@@ -13,8 +13,6 @@
 #import "FLOAuthApp.h"
 #import "FLObjectDescriber.h"
 
-#import "FLDatabaseTable.h"
-
 @implementation FLOAuthApp
 
 
@@ -100,24 +98,6 @@
 }
 + (BOOL) isModelObject {
     return YES;
-}
-+ (FLDatabaseTable*) sharedDatabaseTable
-
-{
-    static FLDatabaseTable* s_table = nil;
-    static dispatch_once_t pred = 0;
-    dispatch_once(&pred, ^{
-        s_table = [[FLDatabaseTable alloc] initWithClass:[self class]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"appId" columnType:FLDatabaseTypeText columnConstraints:[NSArray arrayWithObject:[FLPrimaryKeyConstraint primaryKeyConstraint]]]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"apiKey" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"consumerKey" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"consumerSecret" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"requestTokenUrl" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"accessTokenUrl" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"authorizeUrl" columnType:FLDatabaseTypeText columnConstraints:nil]];
-        [s_table addColumn:[FLDatabaseColumn databaseColumnWithName:@"callback" columnType:FLDatabaseTypeText columnConstraints:nil]];
-    });
-    return s_table;
 }
 
 @end

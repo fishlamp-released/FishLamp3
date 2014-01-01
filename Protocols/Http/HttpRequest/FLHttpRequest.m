@@ -10,7 +10,6 @@
 #import "FLHttpRequest.h"
 
 #import "NSBundle+FLVersion.h"
-#import "FLCoreFoundation.h"
 #import "FLDataSink.h"
 #import "FLNetworkActivity.h"
 #import "FLHttpMessage.h"
@@ -24,6 +23,7 @@
 #import "FLTimer.h"
 #import "FishLampAsync.h"
 #import "FLHttpRequestHeaders.h"
+#import "FLLog.h"
 
 #if 0
 #define FORCE_NO_SSL DEBUG
