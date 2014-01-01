@@ -11,6 +11,8 @@
 #import "FLTestCase.h"
 #import "FLTestResult.h"
 #import "FLTestResultLogEntry.h"
+#import "FishLampStrings.h"
+
 
 @implementation FLTestLoggingManager
 

@@ -237,7 +237,7 @@
         }
     }
     
-    FLAssertIsTrueWithComment(passed, @"Didn't catch expected exception");
+    FLAssertIsTrue(passed, @"Didn't catch expected exception");
 }
 
 + (void) runTestWithExpectedFailure:(void (^)()) test {
@@ -264,6 +264,6 @@
 //        gotReasonString = [failure.info loca]
     }
     
-//    FLAssertAreEqualWithComment(failed, failureType, nil);
+//    FLAssertAreEqual(failed, failureType, nil);
 }
 #endif

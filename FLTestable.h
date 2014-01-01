@@ -123,7 +123,7 @@ extern id<FLStringFormatter> FLTestLogger();
             do { \
                 NSString* __name = @#NAME; \
                 FLTestCase* testCase = [self testCaseForName:__name]; \
-                FLConfirmNotNilWithComment(testCase, @"prerequisite test case not found: %@", __name); \
-                FLConfirmWithComment([[testCase result] passed], @"prerequisite test case \"%@\" failed", testCase.testCaseName); \
+                FLConfirmNotNil(testCase, @"prerequisite test case not found: %@", __name); \
+                FLConfirm([[testCase result] passed], @"prerequisite test case \"%@\" failed", testCase.testCaseName); \
             } while(0);
             

@@ -103,7 +103,7 @@
         if(testGroupName) {
             testGroupClass = [discoveredGroups objectForKey:testGroupName];
 
-            FLConfirmNotNilWithComment(testGroupClass, @"Unknown test group: %@", testGroupName);
+            FLConfirmNotNil(testGroupClass, @"Unknown test group: %@", testGroupName);
         }
 
         if(!testGroupClass) {

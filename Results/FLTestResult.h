@@ -8,6 +8,7 @@
 //
 
 #import "FishLampCore.h"
+#import "FishLampStrings.h"
 
 @interface FLTestResult : NSObject {
 @private 

@@ -13,6 +13,8 @@
 #import "FLTestCase.h"
 #import "FLTestable.h"
 #import "FLTestLoggingManager.h"
+#import "NSString+FishLamp.h"
+
 
 @interface FLTestableOperation ()
 @property (readonly, strong, nonatomic) id<FLTestable> testableObject;

@@ -129,7 +129,7 @@
     id<FLTestable> testable = FLAutorelease([[self.testableClass alloc] initWithTestCaseCreation]);
 
     FLConfirmNotNil(testable);
-    FLConfirmWithComment([testable isKindOfClass:[FLTestable class]],
+    FLConfirm([testable isKindOfClass:[FLTestable class]],
                             @"%@ is not a testable object",
                             NSStringFromClass([testable class]));
 

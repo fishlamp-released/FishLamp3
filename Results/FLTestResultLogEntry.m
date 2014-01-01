@@ -9,6 +9,7 @@
 #import "FLTestResultLogEntry.h"
 #import "FishLampCore.h"
 #import "FLStackTrace.h"
+#import "FishLampStrings.h"
 
 @implementation FLTestResultLogEntry
 

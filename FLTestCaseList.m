@@ -78,7 +78,7 @@
         }
     }
 
-    FLConfirmNotNilWithComment(outTestCase, @"unable to find test case for \"%@\"", name);
+    FLConfirmNotNil(outTestCase, @"unable to find test case for \"%@\"", name);
     
     return outTestCase;
 }
@@ -93,7 +93,7 @@
         }
     }
 
-    FLConfirmNotNilWithComment(outTestCase, @"unable to find test case for \"%@\"", NSStringFromSelector(selector));
+    FLConfirmNotNil(outTestCase, @"unable to find test case for \"%@\"", NSStringFromSelector(selector));
 
     return outTestCase;
 }
@@ -176,14 +176,14 @@
 - (FLTestCase*) order:(SEL) testCase
                    after:(SEL) anotherTestCase {
     NSInteger idx = [_testCaseArray indexOfObject:[self testCaseForSelector:anotherTestCase]];
-    FLConfirmWithComment(idx != NSNotFound, @"run order for %@ not found", NSStringFromSelector(testCase));
+    FLConfirm(idx != NSNotFound, @"run order for %@ not found", NSStringFromSelector(testCase));
     return [self setRunOrder:idx + 1 forTestCase:[self testCaseForSelector:testCase]];
 }
 
 - (FLTestCase*) order:(SEL) testCase
                   before:(SEL) anotherTestCase {
     NSInteger idx = [_testCaseArray indexOfObject:[self testCaseForSelector:anotherTestCase]];
-    FLConfirmWithComment(idx != NSNotFound, @"run order for %@ not found", NSStringFromSelector(testCase));
+    FLConfirm(idx != NSNotFound, @"run order for %@ not found", NSStringFromSelector(testCase));
     return [self setRunOrder:idx - 1 forTestCase:[self testCaseForSelector:testCase]];
 }
 

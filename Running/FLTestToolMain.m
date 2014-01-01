@@ -18,6 +18,8 @@
 
 #import "FishLampAsync.h"
 
+#import "FLConsoleLogSink.h"
+
 int FLTestToolMain(int argc, const char *argv[], NSString* bundleIdentifier, NSString* appName, NSString* version) {
     @autoreleasepool {
         @try {
