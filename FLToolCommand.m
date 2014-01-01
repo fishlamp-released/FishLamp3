@@ -54,7 +54,7 @@
     for(NSString* key in option.optionKeys) {
         if(FLStringIsNotEmpty(key)) {
             id existing = [_options objectForKey:[key lowercaseString]];
-            FLConfirmIsNilWithComment(existing, @"option already installed for key: %@", key);
+            FLConfirmIsNil(existing, @"option already installed for key: %@", key);
             [_options setObject:option forKey:key];
         }
     }
@@ -67,7 +67,7 @@
     NSString* key = [input lastToken];
     while(key) {
         FLToolCommandOption* option = [_options objectForKey:[key lowercaseString]];
-        FLConfirmNotNilWithComment(option, @"Unknown option: %@", key);
+        FLConfirmNotNil(option, @"Unknown option: %@", key);
         
         id data = [option parseOptionData:input siblings:self.options];
         if(!data) {
@@ -111,7 +111,7 @@
         options = [self parseOptions:input];
     }
 
-//    FLConfirmWithComment(input.last == nil, @"input still remains: %@", input.unparsed);
+//    FLConfirm(input.last == nil, @"input still remains: %@", input.unparsed);
 
     [self addOperationToTask:commandLineTask withOptions:options];
 }

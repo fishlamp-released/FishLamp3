@@ -76,7 +76,7 @@
                 NSString* key = [parser parseNextToken];
                 if(key) {
                     FLToolCommand* command = [_commands objectForKey:[key lowercaseString]];
-                    FLConfirmNotNilWithComment(command, @"Unknown command: %@", key);
+                    FLConfirmNotNil(command, @"Unknown command: %@", key);
                     [command parseInput:parser commandLineTask:task];
                 }
             }
@@ -229,19 +229,19 @@
 //        FLArgumentHandler* handler = [self argumentHandlerForParameter:parm];
 //
 //        if(!handler) {
-//            FLThrowErrorCodeWithComment([FLToolApplicationErrorDomain instance], FLToolApplicationErrorCodeUnknownParameter, @"Unknown parameter: %@. Try -? for help. Or -u for usage.", parm);
+//            FLThrowErrorCode([FLToolApplicationErrorDomain instance], FLToolApplicationErrorCodeUnknownParameter, @"Unknown parameter: %@. Try -? for help. Or -u for usage.", parm);
 //        }
 //        
 //        id data = nil;
 //
 //        if(handler.flags.isExpectingData) {
 //            if(i + 1 >= input.count) {
-//                FLThrowErrorCodeWithComment([FLToolApplicationErrorDomain instance], FLToolApplicationErrorCodeMissingDataForParameter, @"Expecting data following %@ parameter. Try -? for help. Or -u for usage.", parm);
+//                FLThrowErrorCode([FLToolApplicationErrorDomain instance], FLToolApplicationErrorCodeMissingDataForParameter, @"Expecting data following %@ parameter. Try -? for help. Or -u for usage.", parm);
 //            }
 //        
 //            NSString* nextParm = [input objectAtIndex:++i];
 //            if([self argumentHandlerForParameter:nextParm] != nil) {
-//                FLThrowErrorCodeWithComment([FLToolApplicationErrorDomain instance], FLToolApplicationErrorCodeMissingDataForParameter, @"Expecting data following %@ parameter, got parameter %@ instead. Try -? for help. Or -u for usage.", parm, nextParm);
+//                FLThrowErrorCode([FLToolApplicationErrorDomain instance], FLToolApplicationErrorCodeMissingDataForParameter, @"Expecting data following %@ parameter, got parameter %@ instead. Try -? for help. Or -u for usage.", parm, nextParm);
 //            }
 //            
 //            data = nextParm;
@@ -251,7 +251,7 @@
 //        for(NSString* aParm in handler.inputKeys) {
 //            FLArgumentHandler* unwantedHandler = [handlers objectForKey:aParm];
 //            if(unwantedHandler != nil) {
-//                FLThrowErrorCodeWithComment( [FLToolApplicationErrorDomain instance],
+//                FLThrowErrorCode( [FLToolApplicationErrorDomain instance],
 //                        FLToolApplicationErrorCodeDuplicateParameter, 
 //                        @"Duplicate parameter %@ (already got %@). Try -? for help. Or -u for usage.", 
 //                        aParm, 
@@ -276,7 +276,7 @@
 //    for(FLArgumentHandler* handler in handlers.objectEnumerator) {
 //        if(handler && last) {
 //            if(![handler isCompatibleWithInputHandler:last]) {
-//                FLThrowErrorCodeWithComment([FLToolApplicationErrorDomain instance], FLToolApplicationErrorIncompatibleParameters,
+//                FLThrowErrorCode([FLToolApplicationErrorDomain instance], FLToolApplicationErrorIncompatibleParameters,
 //                @"Parameters %@ and %@ can't be used together. Try -? for help. Or -u for usage.", last.inputParametersAsString, handler.inputParametersAsString);
 //            }
 //        }
@@ -285,7 +285,7 @@
 //
 //    for(FLArgumentHandler* handler in _argumentHandlers) {
 //        if(handler.flags.isRequired && !handler.didFire) {
-//            FLThrowErrorCodeWithComment(
+//            FLThrowErrorCode(
 //                [FLToolApplicationErrorDomain instance],
 //                FLToolApplicationErrorCodeMissingRequiredParameter,
 //                @"Missing required parameter: %@. Try -? for help. Or -u for usage.", handler.inputParametersAsString);

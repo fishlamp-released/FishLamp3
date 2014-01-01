@@ -12,6 +12,8 @@
 #import "FLToolCommandOption.h"
 #import "FLCommandLineTask.h"
 
+#import "FLLogger.h"
+
 @interface FLToolCommand : FLOperation {
 @private
     NSString* _commandName;

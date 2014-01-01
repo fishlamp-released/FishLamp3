@@ -179,7 +179,7 @@
 //    for(NSString* key in task.argumentKeys) {
 //        if(FLStringIsNotEmpty(key)) {
 //            id existing = [_tasks objectForKey:[key lowercaseString]];
-//            FLConfirmIsNilWithComment(existing, @"task already installed for key: %@", key);
+//            FLConfirmIsNil(existing, @"task already installed for key: %@", key);
 //            [_tasks setObject:task forKey:key];
 //        }
 //    }
