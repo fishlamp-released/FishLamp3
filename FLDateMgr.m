@@ -59,7 +59,7 @@ FLSynthesizeSingleton(FLDateMgr);
 
 - (NSString*) ISO3339DateToString:(NSDate*) date
 {
-	FLAssertFailedWithComment(@"not implemented");
+	FLAssertFailed(@"not implemented");
 
 	return nil;
 }

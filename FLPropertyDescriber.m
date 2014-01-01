@@ -149,7 +149,7 @@ LazySelectorGetter(selector, _selector, FLPropertyAttributesGetSelector)
             objectClass = [FLAbstractObjectType class];
         }
 
-        FLAssertNotNilWithComment(objectClass,
+        FLAssertNotNil(objectClass,
                                   @"Can't find class for: \"%@\"",
                                   className );
 
@@ -167,7 +167,7 @@ LazySelectorGetter(selector, _selector, FLPropertyAttributesGetSelector)
         }
     }
 
-    FLAssertFailedWithComment(@"No property describer created for property: \"%@\"", propertyName );
+    FLAssertFailed(@"No property describer created for property: \"%@\"", propertyName );
 
     return nil;
 }

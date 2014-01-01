@@ -8,6 +8,8 @@
 
 #import "FLTypeSpecificEnumSet.h"
 
+#import "NSString+FishLamp.h"
+
 @implementation FLTypeSpecificEnumSet 
 
 - (id) initWithValueLookup:(FLEnumSetEnumValueLookup*) valueLookup 
@@ -39,7 +41,7 @@
         if(value != NSNotFound) {
             NSString* prettyString = _stringLookup(value);
             
-            FLAssertNotNilWithComment(prettyString, @"value is valid but not string??");
+            FLAssertNotNil(prettyString, @"value is valid but not string??");
             
             [self addEnum:value withName:prettyString];
         }

@@ -196,7 +196,7 @@ void FLMergeObjectArrays(NSMutableArray* dest,
 
 void FLMergeObjects(id dest, id src, FLMergeMode mergeMode) {
 	if(dest && src) {
-		FLAssertWithComment([dest isKindOfClass:[src class]], @"objects are different classes");
+		FLAssert([dest isKindOfClass:[src class]], @"objects are different classes");
 
         if(![dest isModelObject] || ![src isModelObject]) {
             return;

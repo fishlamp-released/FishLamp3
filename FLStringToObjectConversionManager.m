@@ -45,7 +45,7 @@
                    forTypeName:(NSString*) typeName {
 
     id<FLStringToObjectConverting> converter = [_converters objectForKey:Key(typeName)];
-    FLAssertNotNilWithComment(converter, @"converter for %@ not found", typeName);
+    FLAssertNotNil(converter, @"converter for %@ not found", typeName);
 
     if(converter) {
         return [converter stringFromObject:object];
@@ -58,7 +58,7 @@
             forTypeName:(NSString*) typeName {
 
     id<FLStringToObjectConverting> converter = [_converters objectForKey:Key(typeName)];
-    FLAssertNotNilWithComment(converter, @"decoder for %@ not found", typeName);
+    FLAssertNotNil(converter, @"decoder for %@ not found", typeName);
 
     if(converter) {
         return [converter objectFromString:string];

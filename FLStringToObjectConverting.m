@@ -154,14 +154,14 @@
 
     if([string rangeOfString:@"."].length == 0) {
         NSString* test = [_formatter stringFromNumber:number];
-        FLAssertWithComment(FLStringsAreEqual(test, string), @"round trip failed for number formatter: %@ should be %@", test, string);
+        FLAssert(FLStringsAreEqual(test, string), @"round trip failed for number formatter: %@ should be %@", test, string);
     }
 }
 
 - (void) testRoundTripToString:(NSString*) string number:(NSNumber*) number {
     NSNumber* test = [_formatter numberFromString:string];
 
-    FLAssertWithComment([test isEqual:number], @"round trip failed for number formatter: %@ should be %@", test, number);
+    FLAssert([test isEqual:number], @"round trip failed for number formatter: %@ should be %@", test, number);
 }
 
 #endif
