@@ -10,6 +10,8 @@
 #import "FLFolder.h"
 #import "NSFileManager+FishLamp.h"
 
+#import "FLLog.h"
+
 #if OSX
 #import <CoreServices/CoreServices.h>
 #else
@@ -252,7 +254,7 @@
 }
 
 - (NSString*) pathForFile:(NSString*) fileName {
-	FLAssertStringIsNotEmptyWithComment(fileName, nil);
+	FLAssertStringIsNotEmpty(fileName);
 	return [self.folderPath stringByAppendingPathComponent:fileName];
 }
 
@@ -262,7 +264,7 @@
 }
 
 - (void) deleteFile:(NSString*) fileName {
-	FLAssertStringIsNotEmptyWithComment(fileName, nil);
+	FLAssertStringIsNotEmpty(fileName);
 
 	NSError* error = nil;
 	[[NSFileManager defaultManager] removeItemAtPath:[self pathForFile:fileName] error:&error];
@@ -272,15 +274,15 @@
 }
 
 - (void) writeObjectToFile:(NSString*) fileName object:(id) object {
-	FLAssertStringIsNotEmptyWithComment(fileName, nil);
-	FLAssertIsNotNilWithComment(object, nil);
+	FLAssertStringIsNotEmpty(fileName);
+	FLAssertIsNotNil(object);
 
 	NSData* data = [NSKeyedArchiver archivedDataWithRootObject:object];
 	[self writeDataToFile:fileName data:data]; 
 }
 
 - (id) readObjectFromFile:(NSString*) fileName {
-	FLAssertStringIsNotEmptyWithComment(fileName, nil);
+	FLAssertStringIsNotEmpty(fileName);
     NSData* data = [self readDataFromFile:fileName];
 	if(data) {
         return [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -290,8 +292,8 @@
 }
 
 - (void) writeDataToFile:(NSString*) fileName data:(NSData*) data {
-	FLAssertStringIsNotEmptyWithComment(fileName, nil);
-	FLAssertIsNotNilWithComment(data, nil);
+	FLAssertStringIsNotEmpty(fileName);
+	FLAssertIsNotNil(data);
 	
 	NSError* error = nil;
 	[data writeToFile:[self pathForFile:fileName] options:NSAtomicWrite error:&error];
@@ -299,7 +301,7 @@
 }
 
 - (NSData*) readDataFromFile:(NSString*) fileName {
-	FLAssertStringIsNotEmptyWithComment(fileName, nil);
+	FLAssertStringIsNotEmpty(fileName);
 
 	NSString* path = [self pathForFile:fileName];
 
@@ -321,7 +323,7 @@
 }
 
 - (void) moveFilesToFolder:(FLFolder*) destinationFolder withCopy:(BOOL) copy {
-	FLAssertIsNotNilWithComment(destinationFolder, nil);
+	FLAssertIsNotNil(destinationFolder);
 
 	FLAutoreleasePool(
 
@@ -362,7 +364,7 @@
 }
 
 - (BOOL) fileExistsInFolder:(NSString*) name {
-	FLAssertStringIsNotEmptyWithComment(name, nil);
+	FLAssertStringIsNotEmpty(name);
 
 	return [[NSFileManager defaultManager] fileExistsAtPath:[self pathForFile:name]];
 }
@@ -380,11 +382,11 @@
 - (NSString*) fileUTI:(NSString*) name {
 
     NSString* extension = [[self pathForFile:name] pathExtension];
-    FLConfirmStringIsNotEmptyWithComment(extension, @"failed to get file extension for %@", name);
+    FLConfirmStringIsNotEmpty(extension, @"failed to get file extension for %@", name);
     
     NSString* UTI = FLAutorelease(FLBridgeTransfer(NSString*, UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,  FLBridge(CFStringRef, extension), NULL)));
 
-    FLConfirmNotNilWithComment(UTI, @"failed to get UTI for extension for file %@", name);
+    FLConfirmNotNil(UTI, @"failed to get UTI for extension for file %@", name);
 
     return UTI;
                     
