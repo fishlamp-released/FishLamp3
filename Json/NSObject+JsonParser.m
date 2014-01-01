@@ -31,7 +31,7 @@
 //
 //	if(desc)
 //	{
-//		FLAssertWithComment(desc.objectDescriber.isObject, @"opening object thats a simple type");
+//		FLAssert(desc.objectDescriber.isObject, @"opening object thats a simple type");
 //		if(FLDataTypeIsObject(desc.objectDescriber))
 //		{
 //			id newObject = [self valueForKey:key];
@@ -120,7 +120,7 @@
 				{
 					
 					id obj = [[property.objectDescriber.actualClass alloc] init];
-					FLAssertWithComment(obj != nil, @"Unable to created object of type: %@", NSStringFromClass(property.objectDescriber.actualClass));
+					FLAssert(obj != nil, @"Unable to created object of type: %@", NSStringFromClass(property.objectDescriber.actualClass));
 
 					FLAssertIsNotNil(obj);
 					[self addObject:obj];

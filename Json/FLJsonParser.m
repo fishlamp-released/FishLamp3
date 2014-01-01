@@ -79,7 +79,7 @@
 //#endif
 //#endif
 //    
-//    FLAssertIsImplementedWithComment(@"SBJson requires ARC");
+//    FLAssertIsImplemented(@"SBJson requires ARC");
 //    
 //    return nil;
 //}

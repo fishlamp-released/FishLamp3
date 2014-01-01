@@ -32,7 +32,7 @@
 
 	if(strict)
 	{
-		FLThrowErrorCodeWithComment(FLUrlParamenterParserErrorDomain, FLUrlParameterParserErrorCodeUnexpectedData, ([NSString stringWithFormat:@"FLUrlParameterParser got unexpected data for key: %@", key]));
+		FLThrowErrorCode(FLUrlParamenterParserErrorDomain, FLUrlParameterParserErrorCodeUnexpectedData, @"FLUrlParameterParser got unexpected data for key: %@", key);
 	}
 	else
 	{
@@ -80,7 +80,7 @@
 		}
 		else
 		{
-			FLThrowErrorCodeWithComment(FLUrlParamenterParserErrorDomain, FLUrlParameterParserErrorCodeMissingRequiredKey, ([NSString stringWithFormat:@"FLUrlParameterParser missing data for key: %@", key]));
+			FLThrowErrorCode(FLUrlParamenterParserErrorDomain, FLUrlParameterParserErrorCodeMissingRequiredKey, @"FLUrlParameterParser missing data for key: %@", key);
 		}
 	}
 	for(NSString* key in values)

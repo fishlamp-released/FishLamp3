@@ -59,10 +59,10 @@
 
         if(FLStringIsNotEmpty(element.elementValue)) {
 
-            FLTrace(@"object not inflated for %@.%@", NSStringFromClass([outObject class]), element.fullPath);
+//            FLTrace(@"object not inflated for %@.%@", NSStringFromClass([outObject class]), element.fullPath);
 
             if(builder.strict) {
-                FLThrowErrorCodeWithComment(    FLXmlObjectBuilderErrorDomain,
+                FLThrowErrorCode(    FLXmlObjectBuilderErrorDomain,
                                                 FLXmlObjectBuilderErrorObjectNotInflated,
                                                 @"object not inflated for \"%@\" (%@)", element.fullPath, element.elementValue);
 
@@ -95,12 +95,13 @@
                 [array addObject:objectForArray];
             }
             else {
-                FLTrace(@"array object not inflated for %@.%@",
-                    NSStringFromClass([outObject class]),
-                    walker.fullPath);
+
+//                FLTrace(@"array object not inflated for %@.%@",
+//                    NSStringFromClass([outObject class]),
+//                    walker.fullPath);
 
                 if(builder.strict) {
-                    FLThrowErrorCodeWithComment(    FLXmlObjectBuilderErrorDomain,
+                    FLThrowErrorCode(    FLXmlObjectBuilderErrorDomain,
                                                     FLXmlObjectBuilderErrorObjectNotInflated,
                                                     @"Array object not inflated: %@:%@",
                                                      NSStringFromClass([self class]),
@@ -112,12 +113,12 @@
         }
     }
     else {
-        FLTrace(@"object builder skipped missing propertyDescriber named: %@:%@",
-                NSStringFromClass(self.objectClass),
-                element.fullPath);
+//        FLTrace(@"object builder skipped missing propertyDescriber named: %@:%@",
+//                NSStringFromClass(self.objectClass),
+//                element.fullPath);
 
         if(builder.strict) {
-            FLThrowErrorCodeWithComment(    FLXmlObjectBuilderErrorDomain,
+            FLThrowErrorCode(    FLXmlObjectBuilderErrorDomain,
                                             FLXmlObjectBuilderErrorUnknownProperty,
                                             @"Unknown property: %@", element.fullPath);
         }

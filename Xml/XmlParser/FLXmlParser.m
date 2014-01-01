@@ -9,6 +9,11 @@
 
 #import "FLXmlParser.h"
 #import "FLXmlParserErrorCode.h"
+#import "FLPrettyDescription.h"
+#import "FLPrettyString.h"
+#import "NSString+FishLamp.h"
+
+#import "NSArray+FishLampCore.h"
 
 @interface FLXmlParser ()
 @property (readwrite, strong, nonatomic) NSMutableArray* stack;
@@ -18,16 +23,12 @@
 @property (readwrite, strong, nonatomic) NSString* fileNameForErrors;
 @end
 
-
-
 @implementation FLXmlParser
 @synthesize stack = _stack;
 @synthesize parser = _parser;
 @synthesize error = _error;
 @synthesize rootElement = _rootElement;
 @synthesize fileNameForErrors = _fileNameForErrors;
-
-
 
 + (id) xmlParser {
     return FLAutorelease([[[self class] alloc] init]);

@@ -32,7 +32,7 @@
     
     NSString* pathToFile = [bundle pathForResource:[xmlFileName stringByDeletingPathExtension] ofType:[xmlFileName pathExtension]];
     
-    FLConfirmNotNilWithComment(pathToFile, @"%@ not found in bundle", xmlFileName);
+    FLConfirmNotNil(pathToFile, @"%@ not found in bundle", xmlFileName);
     
     return [self objectWithXmlFilePath:pathToFile];
 }

@@ -10,7 +10,6 @@
 #import "FishLampCoreErrorDomain.h"
 #import "FLSoapFault11.h"
 #import "FLErrorDomainInfo.h"
-#import "NSError+FishLamp.h"
 
 #define FLSoapFaultErrorDomain @"com.fishlamp.soap"
 #define FLUnderlyingSoapFaultKey @"FLUnderlyingSoapFaultKey"

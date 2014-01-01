@@ -42,12 +42,12 @@ FLSynthesizeSingleton(FLJsonDataEncoder);
 		case FLSpecificTypeUnsignedLongLong:
 		case FLSpecificTypeFloat:
 		case FLSpecificTypeDouble:
-			FLAssertWithComment([data isKindOfClass:[NSNumber class]], @"expecting a NSNumber here");
+			FLAssert([data isKindOfClass:[NSNumber class]], @"expecting a NSNumber here");
 			*outString = FLRetain([_numberFormatter stringFromNumber:data]);
 		break;
 		
 		case FLSpecificTypeBool:
-			FLAssertWithComment([data isKindOfClass:[NSNumber class]], @"expecting a NSNumber here");
+			FLAssert([data isKindOfClass:[NSNumber class]], @"expecting a NSNumber here");
 			*outString = [data boolValue] ? @"true" : @"false";
 		break;
 		
@@ -107,11 +107,11 @@ FLSynthesizeSingleton(FLJsonDataEncoder);
         break;
        
         case FLSpecificTypeID:
-            FLAssertFailedWithComment(@"don't know how to encode object");
+            FLAssertFailed(@"don't know how to encode object");
         break;
         
         case FLSpecificTypeUnknown:
-            FLAssertFailedWithComment(@"unknown type!");
+            FLAssertFailed(@"unknown type!");
         break;
 		
 	}

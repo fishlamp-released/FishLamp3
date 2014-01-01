@@ -55,13 +55,13 @@
 //        id subElement = [jsonDictionary jsonObjectForElementName:typeDesc.objectName];
 //
 //        if(!subElement) {
-//            FLThrowErrorCodeWithComment(NSCocoaErrorDomain, NSFileNoSuchFileError, @"XmlObjectBuilder: \"%@\" not found in \"%@\"", typeDesc.typeName, jsonDictionary.jsonObjectName);
+//            FLThrowErrorCode(NSCocoaErrorDomain, NSFileNoSuchFileError, @"XmlObjectBuilder: \"%@\" not found in \"%@\"", typeDesc.typeName, jsonDictionary.jsonObjectName);
 //        }
 //        
 //        jsonDictionary = subElement;
 //    }
 //
-//    FLAssertWithComment(FLStringsAreEqual(jsonDictionary.key, typeDesc.typeName), @"trying to build wrong object jsonDictionary name: \"%@\", object typeDesc name: \"%@\"", jsonDictionary.key, typeDesc.typeName);
+//    FLAssert(FLStringsAreEqual(jsonDictionary.key, typeDesc.typeName), @"trying to build wrong object jsonDictionary name: \"%@\", object typeDesc name: \"%@\"", jsonDictionary.key, typeDesc.typeName);
 
 //    Class objectClass = typeDesc.propertyClass;
 //    if(!objectClass) {
@@ -79,7 +79,7 @@
     FLAssertNotNil(rootObject);
     
 //    FLAutorelease([[objectClass alloc] init]);
-//    FLAssertNotNilWithComment(rootObject, @"unable to create object of type: %@", NSStringFromClass(objectClass));
+//    FLAssertNotNil(rootObject, @"unable to create object of type: %@", NSStringFromClass(objectClass));
     
     for(id key in self) {
         id value = [self objectForKey:key];
@@ -100,7 +100,7 @@
 // I'm not sure this makes any sense at all... ????
 - (NSArray*) objectArrayWithJsonObjectBuilder:(FLJsonObjectBuilder*) builder withTypeDescs:(NSArray*) arrayOfObjectDescribers {
 
-    FLAssertionFailedWithComment(@"array from dictinary for JSON object makes no sense");
+    FLAssertionFailed(@"array from dictinary for JSON object makes no sense");
     
     return nil;
 }

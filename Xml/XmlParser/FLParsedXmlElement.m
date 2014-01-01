@@ -8,6 +8,7 @@
 //
 
 #import "FLParsedXmlElement.h"
+#import "FLPrettyDescription.h"
 
 @interface FLParsedXmlElement ()
 @property (readwrite, assign, nonatomic) FLParsedXmlElement* parentElement;

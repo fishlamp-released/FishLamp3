@@ -21,14 +21,14 @@
 //
 //    FLAssertNotNil(newArray);
 //    FLAssertNotNil(propertyDescriber);
-//  //  FLConfirmNotNilWithComment(propertyDescriber.subtypes, @"expecting an array propertyDescriber");
+//  //  FLConfirmNotNil(propertyDescriber.subtypes, @"expecting an array propertyDescriber");
 //
 //    for(id elementName in element.elements) {
 //        id elementOrArray = [element.elements objectForKey:elementName];
 //
 //        FLPropertyDescriber* arrayType = [propertyDescriber containedTypeForName:elementName];
 //        
-//        FLConfirmNotNilWithComment(arrayType, @"arrayType for element \"%@\" not found", elementName);
+//        FLConfirmNotNil(arrayType, @"arrayType for element \"%@\" not found", elementName);
 //        
 //        if([elementOrArray isArray]) {
 //            for(FLParsedXmlElement* child in elementOrArray) {			
@@ -57,7 +57,7 @@ arrayWithElementContents:(FLPropertyDescriber*) propertyDescriber {
     
     for(FLParsedXmlElement* element in self) {
         FLPropertyDescriber* elementDescriber = [propertyDescriber containedTypeForName:element.elementName];
-        FLConfirmNotNilWithComment(elementDescriber, @"arrayType for element \"%@\" not found", element.elementName);
+        FLConfirmNotNil(elementDescriber, @"arrayType for element \"%@\" not found", element.elementName);
         
         id object = [elementDescriber xmlObjectBuilder:builder inflateObjectWithElement:element];
         FLAssertNotNil(object);
