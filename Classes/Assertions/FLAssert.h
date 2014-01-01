@@ -126,30 +126,6 @@
 #define FLAssertNil \
             FLAssertIsNil
 
-// deprecated
-
-#define FLAssertFailedWithComment FLAssertFailed
-#define FLAssertWithComment FLAssert
-#define FLAssertIsNilWithComment FLAssertIsNil
-#define FLAssertIsNotNilWithComment FLAssertIsNotNil
-
-
-#define FLAssertNotNilWithComment  \
-            FLAssertIsNotNilWithComment
-
-
-#define FLAssertNilWithComment \
-            FLAssertIsNilWithComment
-
-#define FLAssertionFailedWithComment \
-            FLAssertFailed
-
 #define FLAssertionFailed \
             FLAssertFailed
-
-#define FLAssertStringIsNotEmptyWithComment \
-            FLAssertStringIsNotEmpty
-
-#define FLAssertStringIsEmptyWithComment \
-            FLAssertStringIsEmpty
 

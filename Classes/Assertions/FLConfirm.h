@@ -17,37 +17,37 @@
 //#define FLConfirmationFailed(COMMENT...) \
 //            FL_ASSERT_FAILED(FL_CONFIRM_THROWER)
 //
-//#define FLConfirmationFailedWithComment(FORMAT, ...) \
+//#define FLConfirmationFailed(FORMAT, ...) \
 //            FL_ASSERT_FAILEDWITH_COMMENT(FL_CONFIRM_THROWER, FORMAT, ##VA_ARGS)
 //
 //#define FLConfirm(CONDITION) \
 //            FL_ASSERT(FL_CONFIRM_THROWER, CONDITION)
 //
-//#define FLConfirmWithComment(CONDITION, FORMAT, ...) \
+//#define FLConfirm(CONDITION, FORMAT, ...) \
 //            FL_ASSERT_WITH_COMMENT(FL_CONFIRM_THROWER, CONDITION, FORMAT, ##VA_ARGS)
 //
 //#define FLConfirmIsNil(PTR) \
 //            FL_ASSERT_IS_NIL(FL_CONFIRM_THROWER, PTR)
 //
-//#define FLConfirmIsNilWithComment(PTR, FORMAT, ...) \
+//#define FLConfirmIsNil(PTR, FORMAT, ...) \
 //            FL_ASSERT_IS_NIL_WITH_COMMENT(FL_CONFIRM_THROWER, PTR, FORMAT, ##VA_ARGS)
 //
 //#define FLConfirmIsNotNil(PTR) \
 //            FL_ASSERT_IS_NOT_NIL(FL_CONFIRM_THROWER, PTR)
 //
-//#define FLConfirmIsNotNilWithComment(PTR, FORMAT, ...) \
+//#define FLConfirmIsNotNil(PTR, FORMAT, ...) \
 //            FL_ASSERT_IS_NOT_NIL_WITH_COMMENT(FL_CONFIRM_THROWER, PTR, FORMAT, ##VA_ARGS)
 //
 //#define FLConfirmStringIsNotEmpty(STRING) \
 //            FL_ASSERT_STRING_IS_NOT_EMPTY(FL_CONFIRM_THROWER, STRING)
 //
-//#define FLConfirmStringIsNotEmptyWithComment(STRING, FORMAT, ...) \
+//#define FLConfirmStringIsNotEmpty(STRING, FORMAT, ...) \
 //            FL_ASSERT_STRING_IS_NOT_EMPTY_WITH_COMMENT(FL_CONFIRM_THROWER, STRING, FORMAT, ##VA_ARGS)
 //
 //#define FLConfirmStringIsEmpty(STRING) \
 //            FL_ASSERT_STRING_IS_EMPTY(FL_CONFIRM_THROWER, STRING)
 //
-//#define FLConfirmStringIsEmptyWithComment(STRING, FORMAT, ...) \
+//#define FLConfirmStringIsEmpty(STRING, FORMAT, ...) \
 //            FL_ASSERT_STRING_IS_EMPTY_WITH_COMMENT(FL_CONFIRM_THROWER, STRING, FORMAT, ##VA_ARGS)
 //
 

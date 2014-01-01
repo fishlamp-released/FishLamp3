@@ -66,29 +66,6 @@
     return _stackTrace.stack.depth;
 }
 
-#if MOVE_TO_CATEGORY
-- (void) appendToStringFormatter:(id<FLStringFormatter>) string {
-    [string appendLineWithFormat:@"%s:%d, %s",
-                            FLFileLocationFileName(&_stackTrace.location),
-                            _stackTrace.location.line, 
-                            _stackTrace.location.function];
-
-    [string indentLinesInBlock:^{
-        for(int i = 0; i < self.stackDepth; i++) {
-            [string appendLineWithFormat:@"%s", [self stackEntryAtIndex:i]];
-        }
-    }];
-}
-#endif
-
-//- (void) prettyDescription:(id<FLStringFormatter>) string {
-//    [self appendToStringFormatter:string];
-//}
-
-//- (NSString*) description {
-//    return [self prettyDescription];
-//}
-
 //- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state 
 //                                  objects:(id __unsafe_unretained [])buffer 
 //                                    count:(NSUInteger)len {
