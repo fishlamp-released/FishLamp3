@@ -21,7 +21,7 @@
                  stackTrace:(FLStackTrace*) stackTrace{
 
     NSString* localizedDescription = nil;
-    if(FLStringIsNotEmpty(comment)) {
+    if([comment length] > 0) {
         localizedDescription = [NSString stringWithFormat:@"%@ (%@)", comment, reason];
     }
     else {

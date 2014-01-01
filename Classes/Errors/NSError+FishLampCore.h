@@ -14,7 +14,7 @@
 extern NSString* const FLErrorCommentKey;
 extern NSString* const FLStackTraceKey;
 
-@interface NSError (FishLamp) 
+@interface NSError (FishLampCore)
 
 // fishlamp properties
 
@@ -40,13 +40,17 @@ extern NSString* const FLStackTraceKey;
 
 - (BOOL) isErrorDomain:(NSString*) domain;
 
-- (BOOL) isError;
+- (BOOL) isError_fl;
 
 - (BOOL) isEqualToError:(NSError*) error;
 
 - (NSString*) nameForException;
 
 - (NSString*) reasonForException;
+@end
+
+@interface NSObject (FishLampCoreErrors)
+- (BOOL) isError_fl;
 @end
 
 

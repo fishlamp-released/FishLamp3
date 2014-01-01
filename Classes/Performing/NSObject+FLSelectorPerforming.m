@@ -23,11 +23,11 @@
 
 //NS_INLINE
 void FLConfirmNoReturnObject(id obj) {
-    FLConfirmIsNilWithComment(obj, @"selector must return nil (or ARC will leak the object). Selector returned: %@", [obj description]); \
+    FLConfirmIsNil(obj, @"selector must return nil (or ARC will leak the object). Selector returned: %@", [obj description]); \
 }
 
 
-#define FLAssertNotMetaClass(c) FLAssertWithComment(!class_isMetaClass(c), @"attempting to execute selector on a meta class");
+#define FLAssertNotMetaClass(c) FLAssert(!class_isMetaClass(c), @"attempting to execute selector on a meta class");
 
 
 - (void) performSelector_fl:(SEL) selector
@@ -38,7 +38,7 @@ void FLConfirmNoReturnObject(id obj) {
 
 // TODO: this was a nice assert. Add it back without taking dependency on Runtime
 
-//    FLAssertWithComment(FLArgumentCountForClassSelector([self class], selector) == argCount, @"@selector(%@) arg count is %d, should be: %d", NSStringFromSelector(selector), argCount, FLArgumentCountForClassSelector([self class], selector));
+//    FLAssert(FLArgumentCountForClassSelector([self class], selector) == argCount, @"@selector(%@) arg count is %d, should be: %d", NSStringFromSelector(selector), argCount, FLArgumentCountForClassSelector([self class], selector));
 
     switch(argCount) {
         case 0: 
@@ -58,7 +58,7 @@ void FLConfirmNoReturnObject(id obj) {
         break;
         
         default:
-            FLAssertFailedWithComment(@"Unsupported arg count: %d", argCount);
+            FLAssertFailed(@"Unsupported arg count: %d", argCount);
             break;
     }
 }
@@ -84,7 +84,7 @@ void FLConfirmNoReturnObject(id obj) {
             break;
 
             default:
-                FLAssertionFailedWithComment(@"only args 0 - 2 supported");
+                FLAssertionFailed(@"only args 0 - 2 supported");
                 break;
         }
         return;
@@ -103,7 +103,7 @@ void FLConfirmNoReturnObject(id obj) {
     [invocation retainArguments];
     [invocation invoke];
 
-    FLAssertWithComment([[invocation methodSignature] methodReturnLength] == 0, @"returned objects will leak so it's not supported (blame ARC)." );
+    FLAssert([[invocation methodSignature] methodReturnLength] == 0, @"returned objects will leak so it's not supported (blame ARC)." );
 }  
 
 - (void) performSelector_fl:(SEL) selector
@@ -123,7 +123,7 @@ void FLConfirmNoReturnObject(id obj) {
     [invocation retainArguments];
     [invocation invoke];
 
-    FLAssertWithComment([[invocation methodSignature] methodReturnLength] == 0, @"returned objects will leak so it's not supported (blame ARC)." );
+    FLAssert([[invocation methodSignature] methodReturnLength] == 0, @"returned objects will leak so it's not supported (blame ARC)." );
 }              
 
 - (void) performSelector_fl:(SEL) selector
@@ -145,7 +145,7 @@ void FLConfirmNoReturnObject(id obj) {
     [invocation retainArguments];
     [invocation invoke];
 
-    FLAssertWithComment([[invocation methodSignature] methodReturnLength] == 0, @"returned objects will leak so it's not supported (blame ARC)." );
+    FLAssert([[invocation methodSignature] methodReturnLength] == 0, @"returned objects will leak so it's not supported (blame ARC)." );
 }              
 
 

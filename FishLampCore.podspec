@@ -7,12 +7,12 @@
 Pod::Spec.new do |s|
    
     s.name         = "FishLampCore"
-    s.version      = "3.0.0"
+    s.version      = "0.1.0"
     s.summary      = "This is the core pod for the rest of the FishLamp pods"
-    s.homepage     = "http://s.com"
+    s.homepage     = "http://fishlamp.com"
     s.license      = 'MIT'
-    s.author       = { "Mike Fullerton" => "hello@s.com" }
-    s.source       = { :git => "https://github.com/s/s-cocoa.git", :tag => s.version.to_s }
+    s.author       = { "Mike Fullerton" => "hello@fishlamp.com" }
+    s.source       = { :git => "https://github.com/fishlamp/FishLampCore.git", :tag => s.version.to_s }
 
     s.ios.deployment_target = '6.1'
     s.osx.deployment_target = '10.6'
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 #     s.ios.frameworks = 'Security', 'MobileCoreServices', 'SystemConfiguration'
 #     s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'Quartz', 'QuartzCore', 'CoreFoundation',  'Foundation'
 
-	s.source_files = 'Classes/FishLampCore.h'
+	s.source_files = 'Classes/FishLampCore.h', 'Classes/FishLampRequired.h', 'Classes/FishLampCoreRequired.h'
 
 	s.subspec 'ObjcCompiling' do |ss|
 		ss.source_files = 'Classes/ObjcCompiling/**/*.{h,m}'
@@ -57,7 +57,7 @@ Pod::Spec.new do |s|
 
 	s.subspec 'Performing' do |ss|
 		ss.dependency 'FishLampCore/ObjcCompiling'
-		ss.source_files = 'Classes/Exceptions/**/*.{h,m}'
+		ss.source_files = 'Classes/Performing/**/*.{h,m}'
 	end
 
 	s.subspec 'StackTrace' do |ss|
@@ -72,7 +72,7 @@ Pod::Spec.new do |s|
 
 	s.subspec 'Versioning' do |ss|
 		ss.dependency 'FishLampCore/ObjcCompiling'
-		ss.source_files = 'Classes/StackTrace/**/*.{h,m}'
+		ss.source_files = 'Classes/Versioning/**/*.{h,m}'
 	end
 
 

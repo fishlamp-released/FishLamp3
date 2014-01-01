@@ -27,7 +27,7 @@ NSString* const FLCancelExceptionName = @"cancel";
 }
 
 - (BOOL) isCancelError {
-	return	FLStringsAreEqual(FLErrorDomain, self.domain) && self.code == FLErrorCodeCancel; 
+	return	[FLErrorDomain isEqualToString:self.domain] && self.code == FLErrorCodeCancel;
 }
 
 @end

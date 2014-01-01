@@ -18,5 +18,5 @@ extern NSString* const FLCancelExceptionName;
 @end
 
 #define FLThrowCancel() \
-            FLThrowErrorCodeWithComment(FLErrorDomain, FLErrorCodeCancel, @"Cancelled")
+            FLThrowErrorCode(FLErrorDomain, FLErrorCodeCancel, @"Cancelled")
 

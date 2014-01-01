@@ -5,84 +5,156 @@
 //  Copyright (c) 2013 GreenTongue Software LLC, Mike Fullerton.. 
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
-// this is meant to be included by FishLampAssertions.h
 
 #import "FishLampRequired.h"
 #import "NSString+FishLampCore.h"
 #import "NSError+FLStackTrace.h"
-#import "FLAssertionFailedError.h"
+//#import "FLAssertionFailedError.h"
 
-#import "FLAssert_Implementation.h"
+//#define FL_CONFIRM_THROWER(CODE, REASON, COMMENT) \
+//            FLThrowError([NSError assertionFailedError:CODE reason:REASON comment:COMMENT stackTrace:FLCreateStackTrace(YES)])
+//
+//#define FLConfirmationFailed(COMMENT...) \
+//            FL_ASSERT_FAILED(FL_CONFIRM_THROWER)
+//
+//#define FLConfirmationFailedWithComment(FORMAT, ...) \
+//            FL_ASSERT_FAILEDWITH_COMMENT(FL_CONFIRM_THROWER, FORMAT, ##VA_ARGS)
+//
+//#define FLConfirm(CONDITION) \
+//            FL_ASSERT(FL_CONFIRM_THROWER, CONDITION)
+//
+//#define FLConfirmWithComment(CONDITION, FORMAT, ...) \
+//            FL_ASSERT_WITH_COMMENT(FL_CONFIRM_THROWER, CONDITION, FORMAT, ##VA_ARGS)
+//
+//#define FLConfirmIsNil(PTR) \
+//            FL_ASSERT_IS_NIL(FL_CONFIRM_THROWER, PTR)
+//
+//#define FLConfirmIsNilWithComment(PTR, FORMAT, ...) \
+//            FL_ASSERT_IS_NIL_WITH_COMMENT(FL_CONFIRM_THROWER, PTR, FORMAT, ##VA_ARGS)
+//
+//#define FLConfirmIsNotNil(PTR) \
+//            FL_ASSERT_IS_NOT_NIL(FL_CONFIRM_THROWER, PTR)
+//
+//#define FLConfirmIsNotNilWithComment(PTR, FORMAT, ...) \
+//            FL_ASSERT_IS_NOT_NIL_WITH_COMMENT(FL_CONFIRM_THROWER, PTR, FORMAT, ##VA_ARGS)
+//
+//#define FLConfirmStringIsNotEmpty(STRING) \
+//            FL_ASSERT_STRING_IS_NOT_EMPTY(FL_CONFIRM_THROWER, STRING)
+//
+//#define FLConfirmStringIsNotEmptyWithComment(STRING, FORMAT, ...) \
+//            FL_ASSERT_STRING_IS_NOT_EMPTY_WITH_COMMENT(FL_CONFIRM_THROWER, STRING, FORMAT, ##VA_ARGS)
+//
+//#define FLConfirmStringIsEmpty(STRING) \
+//            FL_ASSERT_STRING_IS_EMPTY(FL_CONFIRM_THROWER, STRING)
+//
+//#define FLConfirmStringIsEmptyWithComment(STRING, FORMAT, ...) \
+//            FL_ASSERT_STRING_IS_EMPTY_WITH_COMMENT(FL_CONFIRM_THROWER, STRING, FORMAT, ##VA_ARGS)
+//
 
-#define FL_CONFIRM_THROWER(__CODE__, __REASON__, __COMMENT__) \
-            FLThrowError([NSError assertionFailedError:__CODE__ reason:__REASON__ comment:__COMMENT__ stackTrace:FLCreateStackTrace(YES)])
 
-#define FLConfirmationFailed() \
-            FL_ASSERT_FAILED(FL_CONFIRM_THROWER)
 
-#define FLConfirmationFailedWithComment(__FORMAT__, ...) \
-            FL_ASSERT_FAILED__WITH_COMMENT(FL_CONFIRM_THROWER, __FORMAT__, ##__VA_ARGS__)
+#define FLHandleConfirmationFailure(CODE, NAME, DESCRIPTION) 
 
-#define FLConfirm(__CONDITION__) \
-            FL_ASSERT(FL_CONFIRM_THROWER, __CONDITION__)
+//\
+//            do { \
+//                NSException* __EX = [[FLConfirmationHandler sharedHandler] assertionFailed:FLConfirmationFailureErrorDomain \
+//                                                                                   code:CODE \
+//                                                             stackTrace:FLStackTraceMake(FLCurrentFileLocation(), YES) \
+//                                                                   name:NAME \
+//                                                            description:DESCRIPTION]; \
+//                if(__EX) { \
+//                    FLThrowException(__EX);  \
+//                } \
+//            } \
+//            while (0)
 
-#define FLConfirmWithComment(__CONDITION__, __FORMAT__, ...) \
-            FL_ASSERT_WITH_COMMENT(FL_CONFIRM_THROWER, __CONDITION__, __FORMAT__, ##__VA_ARGS__)
 
-#define FLConfirmIsNil(__PTR__) \
-            FL_ASSERT_IS_NIL(FL_CONFIRM_THROWER, __PTR__)
+#define FLConfirmFailed(DESCRIPTION...) \
+            FLHandleConfirmationFailure(FLConfirmationFailureCondition, \
+                @"Confirmation Failed", \
+                ([NSString stringWithFormat:@"" DESCRIPTION]))
 
-#define FLConfirmIsNilWithComment(__PTR__, __FORMAT__, ...) \
-            FL_ASSERT_IS_NIL_WITH_COMMENT(FL_CONFIRM_THROWER, __PTR__, __FORMAT__, ##__VA_ARGS__)
+#define FLConfirmationFailed FLConfirmFailed
 
-#define FLConfirmIsNotNil(__PTR__) \
-            FL_ASSERT_IS_NOT_NIL(FL_CONFIRM_THROWER, __PTR__)
+#define FLConfirm(CONDITION, DESCRIPTION...) \
+            do { \
+                if(!(CONDITION)) { \
+                    FLHandleConfirmationFailure(FLConfirmationFailureCondition, \
+                        ([NSString stringWithFormat:@"Confirming \"%s\" Failed", #CONDITION]), \
+                        ([NSString stringWithFormat:@"" DESCRIPTION])); \
+                } \
+            } \
+            while(0)
 
-#define FLConfirmIsNotNilWithComment(__PTR__, __FORMAT__, ...) \
-            FL_ASSERT_IS_NOT_NIL_WITH_COMMENT(FL_CONFIRM_THROWER, __PTR__, __FORMAT__, ##__VA_ARGS__)
+#define FLConfirmIsNil(REFERENCE, DESCRIPTION...)  \
+            do { \
+                if((REFERENCE) == nil) { \
+                    FLHandleConfirmationFailure(FLConfirmationFailureCondition, \
+                        ([NSString stringWithFormat:@"Confirming '%s == nil' Failed", #REFERENCE]), \
+                        ([NSString stringWithFormat:@"" DESCRIPTION])); \
+                } \
+            } \
+            while(0)
 
-#define FLConfirmStringIsNotEmpty(__STRING__) \
-            FL_ASSERT_STRING_IS_NOT_EMPTY(FL_CONFIRM_THROWER, __STRING__)
+#define FLConfirmIsNotNil(REFERENCE, DESCRIPTION...) \
+            do { \
+                if((REFERENCE) != nil) { \
+                    FLHandleConfirmationFailure(FLConfirmationFailureCondition, \
+                        ([NSString stringWithFormat:@"Confirming '%s != nil' Failed", #REFERENCE]), \
+                        ([NSString stringWithFormat:@"" DESCRIPTION])); \
+                } \
+            } \
+            while(0)
 
-#define FLConfirmStringIsNotEmptyWithComment(__STRING__, __FORMAT__, ...) \
-            FL_ASSERT_STRING_IS_NOT_EMPTY_WITH_COMMENT(FL_CONFIRM_THROWER, __STRING__, __FORMAT__, ##__VA_ARGS__)
 
-#define FLConfirmStringIsEmpty(__STRING__) \
-            FL_ASSERT_STRING_IS_EMPTY(FL_CONFIRM_THROWER, __STRING__)
 
-#define FLConfirmStringIsEmptyWithComment(__STRING__, __FORMAT__, ...) \
-            FL_ASSERT_STRING_IS_EMPTY_WITH_COMMENT(FL_CONFIRM_THROWER, __STRING__, __FORMAT__, ##__VA_ARGS__)
+#define FLConfirmStringIsNotEmpty(STRING, DESCRIPTION...) \
+            do { \
+                if(FLStringIsEmpty(STRING) == YES) { \
+                    FLHandleConfirmationFailure(FLConfirmationFailureCondition, \
+                        ([NSString stringWithFormat:@"Confirming String is not empty for '%s' Failed", #STRING]), \
+                        ([NSString stringWithFormat:@"" DESCRIPTION])); \
+                } \
+            } \
+            while(0)
 
-#define FLConfirmStringsAreEqual(a,b) \
-            FLConfirm(FLStringsAreEqual(a,b));
 
-#define FLConfirmStringsNotEqual(a,b) \
-            FLConfirm(!FLStringsAreEqual(a,b));
+#define FLConfirmStringIsEmpty(STRING, DESCRIPTION...) \
+            do { \
+                if(FLStringIsEmpty(STRING) == NO) { \
+                    FLHandleConfirmationFailure(FLConfirmationFailureCondition, \
+                        ([NSString stringWithFormat:@"Confirming String is empty for '%s' Failed", #STRING]), \
+                        ([NSString stringWithFormat:@"" DESCRIPTION])); \
+                } \
+            } \
+            while(0)
 
-#define FLConfirmIsKindOfClass(__OBJ__, __CLASS__) \
-            FLConfirm([__OBJ__ isKindOfClass:[__CLASS__ class]])
 
-#define FLConfirmConformsToProcol(__OBJ__, __PROTOCOL__) \
-            FLConfirm([__OBJ__ conformsToProtocol:@protocol(__PROTOCOL__)])
+#define FLConfirmStringsAreEqual(a,b, DESCRIPTION...) \
+            FLConfirm(FLStringsAreEqual(a,b), @"" DESCRIPTION);
+
+#define FLConfirmStringsNotEqual(a,b, DESCRIPTION...) \
+            FLConfirm(!FLStringsAreEqual(a,b), @"" DESCRIPTION);
+
+#define FLConfirmIsKindOfClass(__OBJ__, __CLASS__, DESCRIPTION...) \
+            FLConfirm([__OBJ__ isKindOfClass:[__CLASS__ class]], @"" DESCRIPTION)
+
+#define FLConfirmConformsToProcol(__OBJ__, __PROTOCOL__, DESCRIPTION...) \
+            FLConfirm([__OBJ__ conformsToProtocol:@protocol(__PROTOCOL__)], @"" DESCRIPTION)
 
 #define FLConfirmNotNil \
             FLConfirmIsNotNil
 
-#define FLConfirmNotNilWithComment \
-            FLConfirmIsNotNilWithComment
-
 #define FLConfirmNil \
             FLConfirmIsNil
 
-#define FLConfirmNilWithComment \
-            FLConfirmIsNilWithComment
+#define FLConfirmNotError(OBJ) \
+            FLConfirm(![OBJ isKindOfClass:[NSError class]])
 
-#define FLConfirmNotError(__OBJ__) \
-            FLConfirm(![__OBJ__ isKindOfClass:[NSError class]])
+#define FLConfirmTrue(CONDITION) \
+            FLConfirm((CONDITION) == YES)
 
-#define FLConfirmTrue(__CONDITION__) \
-            FLConfirm((__CONDITION__) == YES)
+#define FLConfirmFalse(CONDITION) \
+            FLConfirm(!(CONDITION))
 
-#define FLConfirmFalse(__CONDITION__) \
-            FLConfirm(!(__CONDITION__))
 

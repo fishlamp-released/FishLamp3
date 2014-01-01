@@ -19,7 +19,7 @@ BOOL FLSelectorPerforming(id target, SEL selector, id __strong * arguments, int 
 
 // TODO: this was a nice assert. Add it back without taking dependency on Runtime
 
-//    FLAssertWithComment(FLArgumentCountForClassSelector([target class], selector) == argCount, @"@selector(%@) arg count is %d, should be: %d", NSStringFromSelector(selector), argCount, FLArgumentCountForClassSelector([target class], selector));
+//    FLAssert(FLArgumentCountForClassSelector([target class], selector) == argCount, @"@selector(%@) arg count is %d, should be: %d", NSStringFromSelector(selector), argCount, FLArgumentCountForClassSelector([target class], selector));
 
     if([target respondsToSelector:selector]) {
         [target performSelector_fl:selector withArguments:arguments argumumentCount:argCount];

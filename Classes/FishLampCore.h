@@ -8,6 +8,7 @@
 //
 
 #import "FishLampRequired.h"
+#import "FishLampPropertyDeclaring.h"
 #import "FishLampAtomic.h"
 #import "FishLampErrors.h"
 #import "FishLampStackTrace.h"
@@ -16,3 +17,7 @@
 #import "FishLampPerforming.h"
 #import "FishLampCoreUtils.h"
 
+#import "FLOSVersion.h"
+
+#define FLLog   NSLog
+#define FLTrace FLLog

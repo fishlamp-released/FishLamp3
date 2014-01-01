@@ -18,6 +18,6 @@
 #import "FLDeclareStaticMemberProperty.h"
 #import "FLDeclareDefaultProperty.h"
 #import "FLDeclareBitFlagsProperty.h"
-#imoprt "FLDeclareDictionaryProperty.h"
+#import "FLDeclareDictionaryProperty.h"
 
 

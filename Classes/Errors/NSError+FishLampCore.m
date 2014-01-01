@@ -14,7 +14,7 @@
 #import "NSError+FLStackTrace.h"
 #import "FLDeclareDictionaryProperty.h"
 
-@implementation NSError (FishLamp)
+@implementation NSError (FishLampCore)
 
 FLSynthesizeDictionaryGetterProperty(underlyingError, NSError*, NSUnderlyingErrorKey, self.userInfo)
 FLSynthesizeDictionaryGetterProperty(stringEncoding, NSArray*, NSStringEncodingErrorKey, self.userInfo)
@@ -34,11 +34,11 @@ FLSynthesizeDictionaryGetterProperty(filePath, NSString*, NSFilePathErrorKey, se
 }
 
 - (BOOL) isErrorCode:(NSInteger) code domain:(NSString*) domain {
-	return code == self.code && FLStringsAreEqual(domain, self.domain);
+	return code == self.code && [domain isEqualToString:self.domain];
 }
 
 - (BOOL) isErrorDomain:(NSString*) domain {
-	return FLStringsAreEqual(domain, self.domain);
+	return [domain isEqualToString:self.domain];
 }
 
 - (id) initWithDomain:(NSString*) domain
@@ -75,7 +75,7 @@ FLSynthesizeDictionaryGetterProperty(filePath, NSString*, NSFilePathErrorKey, se
 #endif    
 */
 
-- (BOOL) isError {
+- (BOOL) isError_fl {
     return YES;
 }
 
@@ -93,4 +93,10 @@ FLSynthesizeDictionaryGetterProperty(filePath, NSString*, NSFilePathErrorKey, se
 
 @end
 
+@implementation NSObject (FishLampCoreErrors)
 
+- (BOOL) isError_fl {
+    return NO;
+}
+
+@end

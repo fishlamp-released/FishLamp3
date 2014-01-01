@@ -28,7 +28,7 @@ FLSynthesizeDictionaryGetterProperty(stackTrace, FLStackTrace*, FLStackTraceKey,
                                             FLMutableCopyWithAutorelease(userInfo) :
                                             [NSMutableDictionary dictionaryWithCapacity:5];
 
-    if(FLStringIsNotEmpty(localizedDescription)) {
+    if([localizedDescription length] > 0) {
         [newUserInfo setObject:localizedDescription forKey:NSLocalizedDescriptionKey];
     }
     if(stackTrace) {
