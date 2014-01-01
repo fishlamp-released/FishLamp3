@@ -73,7 +73,7 @@ static NSDictionary* s_fakeBundle = nil;
         value = [s_fakeBundle objectForKey:key];
     }
 
-    FLAssertNotNilWithComment(value, @"unable to get version info from bundle for key: %@", key);
+    FLAssertNotNil(value, @"unable to get version info from bundle for key: %@", key);
 
     return value;
 }

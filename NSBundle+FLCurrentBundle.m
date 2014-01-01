@@ -31,7 +31,9 @@ static NSMutableArray* s_bundleStack = nil;
 }
 
 + (void) popCurrentBundle {
-    [s_bundleStack removeLastObject_fl];
+    if(s_bundleStack.count > 0) {
+        [s_bundleStack removeObjectAtIndex:s_bundleStack.count - 1];
+    }
 }
 
 @end
