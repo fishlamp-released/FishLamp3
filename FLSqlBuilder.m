@@ -63,7 +63,7 @@
 
 - (void) bindToSqlStatement:(FLSqlStatement*) statement {
 
-    FLAssertWithComment([_sqlString subStringCount_fl:@"?"] == self.objects.count,   
+    FLAssert([_sqlString subStringCount_fl:@"?"] == self.objects.count,   
         @"binding failure. placeholder count:%ld, object count: %ld",
         (unsigned long) [_sqlString subStringCount_fl:@"?"],
         (unsigned long) self.objects.count);
@@ -94,7 +94,7 @@
         [self appendDelimiter:_delimiter insertSpace:_insertPrefixDelimiterSpace];
     }
     
-    FLAssertWithComment(_spaceDisableCount >= 0, @"space disable less than zero");
+    FLAssert(_spaceDisableCount >= 0, @"space disable less than zero");
     
     if(_spaceDisableCount == 0) {
         [_sqlString appendFormat:@" %@", string];

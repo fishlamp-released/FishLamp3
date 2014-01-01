@@ -25,7 +25,7 @@
 //    
 //    switch(column.columnType) {
 //        case FLDatabaseIgnored:
-//            FLAssertFailedWithComment(@"invalid column type");
+//            FLAssertFailed(@"invalid column type");
 //            newObject = nil;
 //            break;
 //            
@@ -38,7 +38,7 @@
 //        case FLDatabaseIgnored:
 //        case FLDatabaseIgnored: 
 //            FLConfirmIsNotNil(newObject);
-//            FLAssertWithComment([newObject isKindOfClass:[NSNumber class]], @"expecting a number here");
+//            FLAssert([newObject isKindOfClass:[NSNumber class]], @"expecting a number here");
 //        break;
 //        
 //        case FLDatabaseIgnored:{
@@ -70,7 +70,7 @@
 //            }
 //            
 //            FLConfirmIsNotNil(newObject);
-//            FLAssertWithComment([newObject isKindOfClass:[NSDate class]], @"date deserialization failed");
+//            FLAssert([newObject isKindOfClass:[NSDate class]], @"date deserialization failed");
 //        break;
 //			
 //        case FLDatabaseIgnored:
