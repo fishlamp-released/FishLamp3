@@ -7,7 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampObjc.h"
+#import "FishLampCore.h"
 
 // NOTE: see NSScanner.h
 
@@ -67,15 +67,6 @@
 
 // this also accepts a nil formatString (which is why it exists)
 extern NSString* FLStringWithFormatOrNil(NSString* formatOrNil, ...) NS_FORMAT_FUNCTION(1,2);
-
-
-//#if DEBUG
-//#else
-//#define __INLINES__
-//#import "NSString+FishLamp_Inlines.h"
-//#undef __INLINES__
-//#endif
-
 
 
 NS_INLINE

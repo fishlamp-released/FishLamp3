@@ -9,8 +9,9 @@
 
 #import "FLStringFormatter.h"
 #import "FishLampAssertions.h"
-#import "NSArray+FishLamp.h"
+//#import "NSArray+FishLamp.h"
 #import "FLStringPreprocessor.h"
+#import "FLPrettyDescription.h"
 
 @interface FLStringFormatter ()
 - (void) closeLineWithString:(id) string;
@@ -247,7 +248,7 @@
 
 - (void) appendLines:(NSString**) lines {
     FLAssertNotNil(lines);
-    [self appendLines:lines count:FLArrayLength(lines, NSString*)];
+    [self appendLines:lines count:(sizeof(lines) / sizeof(NSString*))];
 }
 
 - (void) appendLinesWithArray:(NSArray*) lines {
@@ -313,12 +314,12 @@
     FLAssertNotNil(inLines);
 
 	NSString* string = trimWhitespace ? [self preprocessLines:inLines] : inLines;
-	if(FLStringIsNotEmpty(string)) {
+	if([string length] > 0) {
 		NSArray* lines = [string componentsSeparatedByString:@"\n"];
 		for(NSString* line in lines) {
 			NSString* newline = trimWhitespace ? [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] : line;
 		
-			if(FLStringIsNotEmpty(newline)) {
+			if([newline length] > 0) {
 				[self appendLine:newline];
             }
 		}
@@ -377,7 +378,7 @@
 }
 
 - (void) pop:(NSUInteger) level {
-    FLAssertWithComment(_top >= 0, @"outdenting too far");
+    FLAssert(_top >= 0, @"outdenting too far");
 
     if(self.top != level) {
         FLLog(@"popping incorrect indent level %ld, should be %ld\ntraces: %@", (unsigned long) level, (unsigned long) self.top, nil /*[_stackTraces prettyDescription]*/);

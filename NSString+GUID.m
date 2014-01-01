@@ -8,7 +8,6 @@
 //
 
 #import "NSString+GUID.h"
-//#import "FLCoreFoundation.h"
 
 @implementation NSString (GUID)
 

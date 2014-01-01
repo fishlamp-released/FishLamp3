@@ -128,7 +128,7 @@ tabCharRepeatCount:(NSInteger) tabCharRepeatCount {
 #endif
 
 - (NSString*) tabStringForScope:(NSUInteger) indent {
-    FLAssertWithComment(indent < FLWhitespaceMaxIndent, @"too many indents");
+    FLAssert(indent < FLWhitespaceMaxIndent, @"too many indents");
     
     if( indent > 0) {
         if(indent >= FLWhitespaceMaxIndent) {

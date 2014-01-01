@@ -9,13 +9,12 @@
 
 #import "NSString+FishLamp.h"
 
-#if DEBUG
-#define __INLINES__
-#import "FLStringUtils_Inlines.h"
-#endif 
-
-
 @implementation NSString (FLStringUtilities)
+
+- (BOOL)isEqualToString_fl:(NSString *)aString caseSensitive:(BOOL) caseSensitive {
+	return caseSensitive ?	[self isEqualToString:aString] :		
+							[self caseInsensitiveCompare:aString] == NSOrderedSame; 
+}
 
 - (NSString*) stringWithDeletedSubstring_fl:(NSString*) substring {
 
@@ -28,8 +27,6 @@
 
     return self;
 }
-
-
 
 + (NSString*) stringWithFormatOrNil_fl:(NSString*) format, ... {
     if(format) {
