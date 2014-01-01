@@ -216,7 +216,7 @@ int FLArgumentCountForClassSelector(Class aClass, SEL selector) {
         return method_getNumberOfArguments(method) - 2;
     }
     
-    FLAssertFailedWithComment(@"couldn't get argument count");
+    FLAssertFailed(@"couldn't get argument count");
     
     return -1;
 }

@@ -225,7 +225,7 @@ const char* FLParsePropertyType(FLPropertyAttributes_t* attributes, const char* 
             }
             
             default:
-                FLAssertFailedWithComment(@"unhandled type: %c", theChar);
+                FLAssertFailed(@"unhandled type: %c", theChar);
             break;
         }
     }
@@ -294,7 +294,7 @@ const char* FLParseTrailingAttributes(FLPropertyAttributes_t* attributes, const 
             break;
                 
             default:
-                FLAssertFailedWithComment(@"unhandled char: %c", theChar);
+                FLAssertFailed(@"unhandled char: %c", theChar);
             break;
         }
     }
@@ -314,9 +314,9 @@ FLPropertyAttributes_t FLPropertyAttributesParse(objc_property_t property) {
         const char* propertyName = property_getName(property);
         const char* encoded = property_getAttributes(property);
         
-        FLAssertWithComment(strlen(propertyName) < FLPropertyAttributesBufferSize, @"FLPropertyAttributesBufferSize is too small");
+        FLAssert(strlen(propertyName) < FLPropertyAttributesBufferSize, @"FLPropertyAttributesBufferSize is too small");
     
-        FLAssertWithComment(strlen(encoded) < FLPropertyAttributesBufferSize, @"FLPropertyAttributesBufferSize is too small");
+        FLAssert(strlen(encoded) < FLPropertyAttributesBufferSize, @"FLPropertyAttributesBufferSize is too small");
     
         strncpy(attributes.propertyName, propertyName, FLPropertyAttributesBufferSize);
         strncpy(attributes.encodedAttributes, encoded, FLPropertyAttributesBufferSize);
@@ -329,7 +329,7 @@ FLPropertyAttributes_t FLPropertyAttributesParse(objc_property_t property) {
         
         walker = FLParseTrailingAttributes(&attributes, walker, end);
         
-        FLAssertWithComment(walker >= end, @"didn't parse all of %s", encoded);
+        FLAssert(walker >= end, @"didn't parse all of %s", encoded);
     }
     
     return attributes;
@@ -438,7 +438,7 @@ void FLPropertyAttributesGetAttributesForClass(Class aClass, FLPropertyAttribute
             objectClass = [FLAbstractObjectType class];
         }
 
-        FLAssertNotNilWithComment(objectClass,
+        FLAssertNotNil(objectClass,
                                   @"Can't find class for: \"%@\"",
                                   [NSString stringWithCStringFragment:attributes.className] );
 
