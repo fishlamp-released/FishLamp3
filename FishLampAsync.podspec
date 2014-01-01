@@ -22,11 +22,11 @@ Pod::Spec.new do |s|
 #     s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'Quartz', 'QuartzCore', 'CoreFoundation',  'Foundation'
 
 	s.dependency 'FishLampCore'
+	s.dependency 'FishLampStrings'
+	s.dependency 'FishLampSimpleLogger'
 
-	s.dependency 'FishLampPrerelease/Strings'
-	s.dependency 'FishLampPrerelease/SimpleLogger'
-	s.dependency 'FishLampPrerelease/Timer'
 	s.dependency 'FishLampPrerelease/Events'
+	s.dependency 'FishLampPrerelease/Timer'
 
 	s.source_files = 'Classes/**/*.{h,m}'
 
