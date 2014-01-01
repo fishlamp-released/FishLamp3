@@ -26,10 +26,10 @@ BOOL FLColorValueIsRGB(CGFloat value) {
 
 
 #define FLAssertColorValueIsRGB(__VALUE__) \
-            FLAssertWithComment(FLColorValueIsRGB(__VALUE__), @"%f should be between 1 and 255", __VALUE__)
+            FLAssert(FLColorValueIsRGB(__VALUE__), @"%f should be between 1 and 255", __VALUE__)
 
 #define FLAssertColorValueIsDecimal(__VALUE__) \
-            FLAssertWithComment(FLColorValueIsDecimal(__VALUE__), @"%f should be between 0.0 and 1.0", __VALUE__)
+            FLAssert(FLColorValueIsDecimal(__VALUE__), @"%f should be between 0.0 and 1.0", __VALUE__)
 
 
 
