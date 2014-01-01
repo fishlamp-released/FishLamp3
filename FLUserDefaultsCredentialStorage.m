@@ -56,7 +56,7 @@ FLSynthesizeSingleton(FLUserDefaultsCredentialStorage);
 }
 
 - (NSString*) readPasswordForUserName:(NSString*) userName {
-    FLAssertStringIsNotEmptyWithComment([NSBundle bundleIdentifier], @"bundle identifier must be set to use keychain for password");
+    FLAssertStringIsNotEmpty([NSBundle bundleIdentifier], @"bundle identifier must be set to use keychain for password");
 
     FLAssertStringIsNotEmpty(userName);
 
@@ -68,7 +68,7 @@ FLSynthesizeSingleton(FLUserDefaultsCredentialStorage);
 }
 
 - (void) writePassword:(NSString*) password forUserName:(NSString*) userName {
-    FLAssertStringIsNotEmptyWithComment([NSBundle bundleIdentifier], @"bundle identifier must be set to use keychain for password");
+    FLAssertStringIsNotEmpty([NSBundle bundleIdentifier], @"bundle identifier must be set to use keychain for password");
 
     NSString* existingPassword = [self readPasswordForUserName:userName];
 
@@ -90,7 +90,7 @@ FLSynthesizeSingleton(FLUserDefaultsCredentialStorage);
 
 
 - (void) removePasswordForUser:(NSString*) userName {
-    FLAssertStringIsNotEmptyWithComment([NSBundle bundleIdentifier], @"bundle identifier must be set to use keychain for password");
+    FLAssertStringIsNotEmpty([NSBundle bundleIdentifier], @"bundle identifier must be set to use keychain for password");
 
     if(FLStringIsNotEmpty(userName)) {
         [FLKeychain removeHttpPasswordForUserName:userName withDomain:[NSBundle bundleIdentifier]];
