@@ -6,7 +6,7 @@
 //	Copyright (c) 2013 GreenTongue Software LLC, Mike Fullerton. 
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
-#import "FishLampRequired.h"
+#import "FishLampCore.h"
 #import "FLLogger.h"
 // WARNING: don't import anything here. This file is imported by FishLamp.  This is imported by everything.
 
@@ -21,6 +21,11 @@
 
 
 #if 1
+
+    #ifdef FLLog
+    #undef FLLog
+    #endif
+
     #define FLLog(__FORMAT__, ...)   \
                 FLLogToLogger([FLLogLogger instance], FLLogTypeLog, __FORMAT__, ##__VA_ARGS__)
 
@@ -36,6 +41,10 @@
     #define FLLog(__FORMAT__, ...)
     #define FLLogIf(__CONDITION__, __FORMAT__, ...)
     #define FLLogFileLocation()
+#endif
+
+#ifdef FLTrace
+#undef FLTrace
 #endif
 
 #define FLTrace(__FORMAT__, ...)

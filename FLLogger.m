@@ -11,6 +11,9 @@
 #import "FishLampCore.h"
 #import <objc/runtime.h>
 
+#import "FLLogSink.h"
+#import "FLLogEntry.h"
+
 @interface FLLogger()
 @property (readwrite, strong, nonatomic) NSMutableString* line;
 @end
@@ -222,7 +225,7 @@ appendContentsToStringFormatter:(id<FLStringFormatter>) stringFormatter  {
 
 
 
-//- (void) logException:(NSException*) exception withComment:(NSString*) comment {
+//- (void) logException:(NSException*) exception :(NSString*) comment {
 //
 //    [self dispatchBlock: ^{
 //        for(id<FLLogSink> sink in _sinks) {
@@ -255,7 +258,7 @@ appendContentsToStringFormatter:(id<FLStringFormatter>) stringFormatter  {
 //}
 
 //- (void) logException:(NSException*) exception {
-//    [self logException:exception withComment:nil];
+//    [self logException:exception :nil];
 //}
 
 @end

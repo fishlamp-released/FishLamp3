@@ -13,7 +13,6 @@
 #import "FLLogEntry.h"
 #import "FLStackTrace.h"
 #import "FLWhitespace.h"
-#import "NSError+FishLamp.h"
 
 @implementation FLConsoleLogSink
 
@@ -52,7 +51,7 @@
                 FLPrintf(moreInfo);
             }
             
-            FLPrintf(@"%s:%d:",
+            FLPrintf(@"%@:%d:",
                          entry.stackTrace.fileName,
                          entry.stackTrace.lineNumber);
         }];

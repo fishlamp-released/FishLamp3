@@ -7,7 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampRequired.h"
+#import "FishLampCore.h"
 #import "FLLogSink.h"
 
 @interface FLConsoleLogSink : FLLogSink<FLLogSink> {
