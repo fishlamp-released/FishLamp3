@@ -15,7 +15,7 @@
 
 NS_INLINE
 sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
-    FLConfirmationFailedWithComment(@"sqlite statement is nil");
+    FLConfirmationFailed(@"sqlite statement is nil");
     return stmt;
 }
 
@@ -106,8 +106,8 @@ sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
 
 - (void) prepareWithSql:(FLSqlBuilder*) sql {
 
-    FLAssertNotNilWithComment(sql, @"empty sql");
-    FLAssertIsNilWithComment(_sqlite3_stmt, @"statement already open");
+    FLAssertNotNil(sql, @"empty sql");
+    FLAssertIsNil(_sqlite3_stmt, @"statement already open");
 
     const char* sql_c = [[sql sqlString] UTF8String];
     
@@ -301,7 +301,7 @@ sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
 //    
 ////    switch(column.columnType) {
 ////        case FLDatabaseIgnored:
-////            FLAssertFailedWithComment(@"invalid column type");
+////            FLAssertFailed(@"invalid column type");
 ////            return nil;
 ////            break;
 ////            
@@ -313,7 +313,7 @@ sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
 ////        case FLDatabaseIgnored:
 ////        case FLDatabaseIgnored: 
 ////            FLConfirmIsNotNil(data);
-////            FLAssertWithComment([data isKindOfClass:[NSNumber class]], @"expecting a number here");
+////            FLAssert([data isKindOfClass:[NSNumber class]], @"expecting a number here");
 ////            return [_delegate sqlStatement:self willDecodeNumber:data forTable:table forColumn:column];
 ////        break;
 ////        
@@ -433,7 +433,7 @@ sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
         break;
 
         case SQLITE_OK:
-            FLAssertFailedWithComment(@"not expecting SQLITE_OK here");
+            FLAssertFailed(@"not expecting SQLITE_OK here");
             break;
             
         default:
@@ -457,7 +457,7 @@ sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
 - (NSString*) nameForColumn:(int) column {
     const char* c_colName = sqlite3_column_name(statement_, column);
     NSString* colName = [NSString stringWithCString:c_colName encoding:NSUTF8StringEncoding];
-    FLAssertStringIsNotEmptyWithComment(colName, nil);
+    FLAssertStringIsNotEmpty(colName);
                 
     return colName;
 }

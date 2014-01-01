@@ -339,7 +339,7 @@
 
 - (void) addColumnConstraint:(FLDatabaseColumnConstraint*) constraint forColumnName:(NSString*) columnName {
     FLDatabaseColumn* column = [self columnByName:columnName];
-    FLConfirmNotNilWithComment(column, @"column %@ not found", column);
+    FLConfirmNotNil(column, @"column %@ not found", column);
     [self addColumnConstraint:constraint forColumn:column];
 }
 

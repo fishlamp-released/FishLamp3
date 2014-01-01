@@ -75,7 +75,7 @@ static NSString* s_version = nil;
   	[[NSNotificationCenter defaultCenter] removeObserver:self];
 #endif
 
-	FLAssertIsNilWithComment(_sqlite, nil);
+	FLAssertIsNilWithComment(_sqlite);
     
 #if FL_MRC    
     [_filePath release];
@@ -135,10 +135,10 @@ static NSString* s_version = nil;
     sqlite3* sqlite3 = self.sqlite3;
     
     if(sqlite3 != nil || self.isOpen) {
-        FLThrowErrorCodeWithComment( 
-        FLDatabaseErrorDomain,
-        FLDatabaseErrorDatabaseAlreadyOpen, 
-        @"Database is already open");
+        FLThrowErrorCode(
+            FLDatabaseErrorDomain,
+            FLDatabaseErrorDatabaseAlreadyOpen,
+            @"Database is already open");
     }
     
     @try {
@@ -194,10 +194,10 @@ static NSString* s_version = nil;
 - (BOOL) openDatabase:(FLDatabaseOpenFlags) flags {
     
     if(self.sqlite3 != nil || self.isOpen) {
-        FLThrowErrorCodeWithComment( 
-        FLDatabaseErrorDomain,
-        FLDatabaseErrorDatabaseAlreadyOpen, 
-        @"Database is already open");
+        FLThrowErrorCode(
+            FLDatabaseErrorDomain,
+            FLDatabaseErrorDatabaseAlreadyOpen,
+            @"Database is already open");
     }
     
     NSString* folderPath = [self.filePath stringByDeletingLastPathComponent];
@@ -243,7 +243,7 @@ static NSString* s_version = nil;
     self.sqlite3 = nil;
 
     if(sqlite3 == nil) {
-        FLThrowErrorCodeWithComment( 
+        FLThrowErrorCode( 
             FLDatabaseErrorDomain,
             FLDatabaseErrorDatabaseAlreadyOpen, 
             @"Database is already closed");
