@@ -21,7 +21,7 @@
 @implementation FLObjectDatabase
 
 - (void) deleteObject:(id) inputObject {
-    FLAssertIsNotNilWithComment(inputObject);
+    FLAssertIsNotNil(inputObject);
         
     FLDatabaseTable* table = [[inputObject class] sharedDatabaseTable];
     
@@ -166,7 +166,7 @@
     
     if(![statement appendWhereClauseForSelectingObject:inputObject]) {
 
-        FLAssertFailedWithComment(@"No.");
+        FLAssertFailed(@"No.");
     }
     
     statement.rowResultBlock = ^(NSDictionary* row, BOOL* stop) {
