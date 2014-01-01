@@ -35,7 +35,7 @@
     _target = target;
     _action = action;
     
-	FLAssertWithComment([_target respondsToSelector:_action], @"target doesn't respond to selector");
+	FLAssert([_target respondsToSelector:_action], @"target doesn't respond to selector");
 }
 @end
 

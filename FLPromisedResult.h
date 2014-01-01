@@ -18,8 +18,4 @@
 + (id) fromPromisedResult:(FLPromisedResult) promisedResult;
 @end
 
-@protocol FLPromisedResultContract <NSObject>
-- (BOOL) isError;
-@end
-
 #define FLPromisedResultType(__TYPE__) FLPromisedResult

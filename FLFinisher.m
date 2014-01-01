@@ -12,6 +12,8 @@
 #import "NSError+FLFailedResult.h"
 #import "FLSuccessfulResult.h"
 
+#import "FLLog.h"
+
 @interface FLPromise ()
 - (void) fufillPromiseWithResult:(FLPromisedResult) result;
 @property (readwrite, strong) FLPromise* nextPromise;

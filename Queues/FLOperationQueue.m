@@ -96,7 +96,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 
 - (void) addOperationFactory:(id<FLOperationQueueOperationFactory>)factory {
     FLAssertNotNil(factory);
-    FLAssertWithComment(self.processing == NO, @"can't add a factory while processing");
+    FLAssert(self.processing == NO, @"can't add a factory while processing");
 
     [self.operationFactories addObject:factory];
 }
@@ -273,7 +273,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
         }
     }
 
-    FLAssertNotNilWithComment(operation, @"no operation created for queue for: %@", [object description]);
+    FLAssertNotNil(operation, @"no operation created for queue for: %@", [object description]);
 
     return operation;
 }
@@ -316,11 +316,15 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 
 - (void) respondToProcessQueueEvent {
     if(self.processing) {
-        FLAssertWithComment(self.maxConcurrentOperations > 0, @"zero max concurrent operations");
+        FLAssert(self.maxConcurrentOperations > 0, @"zero max concurrent operations");
         FLTrace(@"max connections: %d", self.maxConcurrentOperations);
 
         while([self shouldStartAnotherOperation]) {
-            [self startOperationForObject:[_objectQueue removeFirstObject_fl]];
+
+            id obj = FLRetainWithAutorelease([_objectQueue objectAtIndex:0]);
+            [_objectQueue removeObjectAtIndex:0];
+
+            [self startOperationForObject:obj];
         }
 
         if([self shouldFinish]) {

@@ -123,29 +123,29 @@ static NSInteger s_max = 0;
         } 
         else {
 
-            FLTrace(@"waiting for semaphore for %X, thread %@", (void*) _semaphore, [NSThread currentThread]);
+            FLTrace(@"waiting for semaphore for %X, thread %@", (unsigned int) _semaphore, [NSThread currentThread]);
 
             if(_semaphore) {
                 // HMM could there be an edge case here?
                 dispatch_semaphore_wait(_semaphore, DISPATCH_TIME_FOREVER);
             }
 
-            FLTrace(@"finished waiting for %X", (void*) _semaphore);
+            FLTrace(@"finished waiting for %X", (unsigned int) _semaphore);
         } 
     }
     @finally {
         FLAutoreleaseObject(self);
     }   
 
-    FLAssertNotNilWithComment(self.result, @"result should not be nil!!");
+    FLAssertNotNil(self.result, @"result should not be nil!!");
 
     return self.result;
 }
 
 - (void) fufillPromiseWithResult:(FLPromisedResult) result {
 
-    FLAssertNotNilWithComment(_semaphore, @"already finished");
-    FLAssertIsNilWithComment(self.result, @"should not already have result");
+    FLAssertNotNil(_semaphore, @"already finished");
+    FLAssertIsNil(self.result, @"should not already have result");
 
     if(result == nil) {
        result = [NSError failedResultError];
@@ -166,7 +166,7 @@ static NSInteger s_max = 0;
     // this shouldn't be nil, but if it is dispatch_semaphore_signal
     // will crash.
         FLTrace(@"releasing semaphore for %X, ont thread %@",
-                    (void*) _semaphore,
+                    (unsigned int) _semaphore,
                     [NSThread currentThread]);
 
         self.isFinished = YES;

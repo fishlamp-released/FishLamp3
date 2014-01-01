@@ -9,6 +9,7 @@
 #import "FLPromisedResult.h"
 
 @implementation NSObject (FLPromisedResult)
+
 - (BOOL) isError {
     return NO;
 }
@@ -17,7 +18,7 @@
     FLAssertNotNil(promisedResult);
     FLThrowIfError(promisedResult);
 
-    FLConfirmWithComment(
+    FLConfirm(
         [promisedResult isKindOfClass:[self class]],
         @"Result expected to be a \"%@\" instead it's a \"%@\"",
             NSStringFromClass([self class]),
@@ -30,12 +31,13 @@
 @end
 
 @implementation NSError (FLPromisedResult)
+
 - (BOOL) isError {
     return YES;
 }
 
 + (id) fromPromisedResult:(FLPromisedResult) promisedResult {
-    FLConfirmWithComment(
+    FLConfirm(
         [promisedResult isKindOfClass:[self class]],
         @"Result expected to be a \"%@\" instead it's a \"%@\"",
             NSStringFromClass([self class]),
