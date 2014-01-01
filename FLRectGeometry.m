@@ -75,8 +75,8 @@
 //#endif
 // 
 //SDKRect FLRectInset(SDKRect rect, CGFloat dx, CGFloat dy) {
-//    FLAssertWithComment(rect.size.width >= (dx * 2), @"trying to inset too narrow of a rect");
-//    FLAssertWithComment(rect.size.height >= (dy * 2), @"trying to inset too short of a rect");
+//    FLAssert(rect.size.width >= (dx * 2), @"trying to inset too narrow of a rect");
+//    FLAssert(rect.size.height >= (dy * 2), @"trying to inset too short of a rect");
 //    
 //#if IOS
 //    return SDKRectInset(rect, dx, dy);
