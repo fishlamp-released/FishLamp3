@@ -8,7 +8,7 @@
 //
 
 #import "FLObjectCache.h"
-#import "NSArray+FishLamp.h"
+#import "NSArray+FishLampCore.h"
 
 @implementation FLObjectCache
 
@@ -40,7 +40,7 @@
 
 - (void) cacheObject:(id) object {
     if(object) {
-        FLAssertWithComment([NSThread isMainThread], @"not main thread");
+        FLAssert([NSThread isMainThread], @"not main thread");
 
         if(!_cache) {
             _cache = [[NSMutableDictionary alloc] init];
@@ -62,7 +62,7 @@
 
 - (id) uncacheObjectForClass:(Class) cacheKey {
 
-    FLAssertWithComment([NSThread isMainThread], @"not main thread");
+    FLAssert([NSThread isMainThread], @"not main thread");
     id object = nil;
     
     NSMutableArray* cache = [_cache objectForKey:cacheKey];

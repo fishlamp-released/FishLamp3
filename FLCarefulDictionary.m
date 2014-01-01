@@ -7,6 +7,7 @@
 //
 
 #import "FLCarefulDictionary.h"
+#import "FLPrettyDescription.h"
 
 @interface FLCarefulDictionary ()
 @property (readwrite, copy, nonatomic) FLCarefulDictionaryKeyMutator keyMutator;
@@ -77,7 +78,7 @@
     FLAssertNotNil(key);
 
     id outKey = [self resolveKey:key];
-    FLConfirmWithComment(outKey != nil, @"object %@ does not exist", key);
+    FLConfirm(outKey != nil, @"object %@ does not exist", key);
 
     return outKey;
 }
@@ -111,7 +112,7 @@
     
     id object = [_objects objectForKey:key];
 
-    FLConfirmNotNilWithComment(object, @"Object not in dictionary %@", key);
+    FLConfirmNotNil(object, @"Object not in dictionary %@", key);
     return object;
 }
 
@@ -121,7 +122,7 @@
 
     id newkey = [self mutateKey:key];
 
-    FLConfirmWithComment([self resolveKey:newkey] == nil, @"key already exists (or is alias): \"%@\"", newkey);
+    FLConfirm([self resolveKey:newkey] == nil, @"key already exists (or is alias): \"%@\"", newkey);
 
     [_objects setObject:object forKey:newkey];
 }
@@ -157,7 +158,7 @@
     }
     alias = [self mutateKey:alias];
 
-    FLConfirmWithComment([_aliases objectForKey:alias] == nil, @"alias already exists %@", key);
+    FLConfirm([_aliases objectForKey:alias] == nil, @"alias already exists %@", key);
 
     [_aliases setObject:[self confirmedKey:key] forKey:alias];
 }

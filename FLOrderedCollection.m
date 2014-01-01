@@ -84,7 +84,7 @@
 - (void) addObject:(id) object forKey:(id) key {
     FLAssertNotNil(object);
     FLAssertNotNil(key);
-	FLAssertIsNilWithComment([_objectDictionary objectForKey:key], nil);
+	FLAssertIsNil([_objectDictionary objectForKey:key]);
     ++_mutationCount;
     [_objectDictionary setObject:object forKey:key];
     [_objectArray addObject:object];
