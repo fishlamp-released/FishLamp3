@@ -8,6 +8,8 @@
 
 #import "FLUserPreferences.h"
 #import "NSBundle+FLVersion.h"
+#import "FishLampSimpleLogger.h"
+
 //#import "NSUserDefaults+FLAdditions.h"
 
 #define kAppVersion @"AppVersion"
