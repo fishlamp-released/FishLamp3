@@ -15,6 +15,8 @@
 #import "FLOperationContext.h"
 #import "FLOperationQueueErrorStrategy.h"
 
+#import "FishLampSimpleLogger.h"
+
 // #import "FLTrace.h"
 
 @interface FLOperationQueue ()
@@ -101,8 +103,8 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
     [self.operationFactories addObject:factory];
 }
 
-- (void) startOperation {
-    [self startProcessing];
+- (void) startOperation:(FLFinisher*) finisher {
+    [self startProcessing:finisher];
 }
 
 - (UInt32) maxConcurrentOperations {
@@ -152,8 +154,8 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 //    }];
 }
 
-- (void) setFinishedWithResult:(FLPromisedResult) result {
-    [super setFinishedWithResult:result];
+- (void) didFinishWithResult:(FLPromisedResult) result {
+    [super didFinishWithResult:result];
     self.processing = NO;
     [self sendMessageToListeners:@selector(operationQueue:didFinishWithResult:) withObject:self withObject:self];
     
@@ -177,7 +179,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
     [self.schedulingQueue queueTarget:self action:@selector(respondToAddObjectEvent:) withObject:operation];
 }
 
-- (void) startProcessing {
+- (void) startProcessing:(FLFinisher*) finisher {
 
     FLAssertNotNil(self.context);
     FLAssert(self.maxConcurrentOperations > 1);
@@ -186,6 +188,8 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
     FLAssertNotNil(self.objectQueue);
     FLAssertNotNil(self.activeQueue);
     FLAssertNotNil(self.context);
+
+    [self.context setFinisher:finisher forOperation:self];
 
     self.processing = YES;
     [self processQueue];
@@ -334,7 +338,10 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
                 result = FLSuccessfulResult;
             }
 
-            [self setFinishedWithResult:result];
+            FLFinisher* finisher = [self.context finisherForOperation:self];
+            FLAssertNotNil(finisher);
+
+            [finisher setFinishedWithResult:result];
         }
     }
 }

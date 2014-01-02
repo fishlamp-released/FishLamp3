@@ -33,6 +33,7 @@
     BOOL _contextOpen;
 
     id<FLOperationStarter> _operationStarter;
+    NSMutableDictionary* _finishers;
 }
 @property (readonly, assign, getter=isContextOpen) BOOL contextOpen; 
 @property (readwrite, strong) id<FLOperationStarter> operationStarter;
@@ -55,9 +56,13 @@
 - (void) removeOperation:(id) operation;
 
 - (id<FLOperationStarter>) starterForOperation:(id) operation;
+
+- (void) setFinisher:(FLFinisher*) finisher
+        forOperation:(id) operation;
+
+- (FLFinisher*) finisherForOperation:(id) operation;
+
 @end
-//#import "FLPromise.h"
-//#import "FLFinisher.h"
 
 @interface FLOperationContext (OptionalOverrides)
 - (void) willStartOperation:(id<FLQueueableAsyncOperation>) operation;

@@ -37,9 +37,9 @@
  *  1. synchronously - override runSynchronously. These operations are best for simple tasks that are themselves not asynchrous. Like sorting a big array. When runSynchronously completes, the FLOperations is done - e.g. finishOperation is called automatically.
  *  2. asynchronously - override startOperation. These operations are for managing tasks that are asynchronous, such as a doing someting on the network. When startOperation completes, the FLOperation is not done. The FLOperation runs until setFinished (see FLFinishable) is called.
  */
-@interface FLOperation : FLBroadcaster<FLFinishable, FLQueueableAsyncOperation> {
+@interface FLOperation : FLBroadcaster<FLQueueableAsyncOperation> {
 @private
-    FLOperationFinisher* _finisher;
+//    FLOperationFinisher* _finisher;
     BOOL _cancelled;
     __unsafe_unretained id _context;
     id<FLOperationStarter> _operationStarter;
@@ -63,7 +63,7 @@
  *  
  *  @return the finisher
  */
-@property (readonly, strong) FLFinisher* finisher;
+//@property (readonly, strong) FLFinisher* finisher;
 
 /*!
  *  someone has cancelled you. stop, and be quick about it.
@@ -77,7 +77,7 @@
 /*!
  *  Override this for a async operation. You are responsible for calling setFinished (See FLFinishable)
  */
-- (void) startOperation;
+- (void) startOperation:(FLFinisher*) finisher;
 
 /*!
  *  Override this for a synchronous operation.

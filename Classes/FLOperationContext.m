@@ -36,6 +36,8 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
     self = [super init];
     if(self) {
         _operations = [[NSMutableSet alloc] init];
+        _finishers = [[NSMutableDictionary alloc] init];
+
         _contextOpen = YES;
         self.operationStarter = [FLDispatchQueue defaultQueue];
     }
@@ -43,13 +45,14 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
     return self;
 }
 
-- (void) dealloc {
 #if FL_MRC
+- (void) dealloc {
+    [_finishers release];
     [_operationStarter release];
     [_operations release];
     [super dealloc];
-#endif
 }
+#endif
 
 + (id) operationContext {
     return FLAutorelease([[[self class] alloc] init]);
@@ -147,8 +150,10 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
         if([operation respondsToSelector:@selector(removeContext:)]) {
             [operation removeContext:self];
         }
+
+        [_finishers removeObjectForKey:operation];
     }
-    
+
     [self didRemoveOperation:operation];
 }
 
@@ -184,6 +189,22 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
 // TODO: provide way to specify queue
     return [[self starterForOperation:operation] startOperation:operation withDelay:delay completion:completion];
 }
+
+- (void) setFinisher:(FLFinisher*) finisher
+        forOperation:(id) operation {
+
+    @synchronized(self) {
+        [_finishers setObject:finisher
+                       forKey:[NSValue valueWithNonretainedObject:operation]];
+    }
+}
+
+- (FLFinisher*) finisherForOperation:(id) operation {
+    @synchronized(self) {
+        return FLRetainWithAutorelease([_finishers objectForKey:operation]);
+    }
+}
+
 
 @end
 

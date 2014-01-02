@@ -129,24 +129,20 @@
 
     __block id<FLQueueableAsyncOperation> theOperation = FLRetain(operation);
     __block FLDispatchQueue* theQueue = FLRetain(self);
-    __block FLPromise* thePromise = nil;
-
-    if(completion) {
-        thePromise = FLRetain([[theOperation finisher] addPromiseWithBlock:completion]);
-    }
+    __block FLFinisher* theFinisher = FLRetain([theOperation createFinisherForBlock:completion]);
 
     fl_block_t block = ^{
         @try {
-            [theOperation startAsyncOperationInQueue:theQueue];
+            [theOperation startAsyncOperationInQueue:theQueue withFinisher:theFinisher];
         }
         @catch(NSException* ex) {
 
-            if(![theOperation finisher].isFinished) {
-                [[theOperation finisher] setFinishedWithResult:ex.error];
+            if(!theFinisher.isFinished) {
+                [theFinisher setFinishedWithResult:ex.error];
             }
         }
 
-        FLReleaseWithNil(thePromise);
+        FLReleaseWithNil(theFinisher);
         FLReleaseWithNil(theOperation);
         FLReleaseWithNil(theQueue);
     };
@@ -158,29 +154,30 @@
         dispatch_async(theQueue.dispatch_queue_t, block);
     }
 
-    return thePromise;
+    return theFinisher;
 }
 
 - (FLPromisedResult) runSynchronously:(id<FLQueueableAsyncOperation>) operation {
 
     FLAssertNotNil(operation);
 
-    __block FLPromisedResult result = nil;
     __block id<FLQueueableAsyncOperation> theOperation = FLRetain(operation);
     __block FLDispatchQueue* theQueue = FLRetain(self);
 
+    FLFinisher* theFinisher = [theOperation createFinisherForBlock:nil];
+
     dispatch_sync(self.dispatch_queue_t, ^{
         @try {
-            result = FLRetain([theOperation runSynchronousOperationInQueue:theQueue]);
+            [theOperation runSynchronousOperationInQueue:theQueue withFinisher:theFinisher];
         }
         @catch(NSException* ex) {
-            [theOperation.finisher setFinishedWithResult:ex.error];
+            [theFinisher setFinishedWithResult:ex.error];
         }
         FLReleaseWithNil(theQueue);
         FLReleaseWithNil(theOperation);
     });
 
-    return FLAutorelease(result);
+    return theFinisher.result;
 }
 
 #if __MAC_10_8

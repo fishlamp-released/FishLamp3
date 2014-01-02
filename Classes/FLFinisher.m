@@ -12,7 +12,7 @@
 #import "NSError+FLFailedResult.h"
 #import "FLSuccessfulResult.h"
 
-#import "FLLog.h"
+#import "FishLampSimpleLogger.h"
 
 @interface FLPromise ()
 - (void) fufillPromiseWithResult:(FLPromisedResult) result;
@@ -96,7 +96,7 @@
         [self didFinishWithResult:result];
     }
     @catch(NSException* ex) {
-        FLLog(@"%@", [ex description])
+        FLLog(@"%@", [ex description]);
     }
 }
 

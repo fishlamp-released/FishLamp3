@@ -73,14 +73,15 @@
 }
 
 - (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) object
-                 withListener:(id) listener {
+                 withListener:(id) listener
+                   completion:(fl_completion_block_t) completionOrNil {
 
     FLAssertNotNil(object);
     FLAssert([object respondsToSelector:@selector(addListener:)]);
 
     [((id)object) addListener:listener];
 
-    return [self queueOperation:object withDelay:0 completion:nil];
+    return [self queueOperation:object withDelay:0 completion:completionOrNil];
 }
 
 
@@ -289,20 +290,23 @@
 }
 #endif
 
-- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue {
+- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher *)finisher {
     if(_block) {
         _block();
     }
     FLReleaseBlockWithNil(_block);
-    [self setFinished];
+    [finisher setFinished];
 }
 
-- (FLPromisedResult) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue {
-    [self startAsyncOperationInQueue:queue];
-    return self.result;
+- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue
+                                           withFinisher:(FLFinisher *)finisher {
+
+    [self startAsyncOperationInQueue:queue withFinisher:finisher];
+    [finisher waitUntilFinished];
 }
 
-- (FLFinisher*) finisher {
+- (FLFinisher*) createFinisherForBlock:(fl_completion_block_t) block {
+    [self addPromiseWithBlock:block];
     return self;
 }
 
@@ -316,7 +320,8 @@
 
 @implementation FLQueuableFinisherBlockOperation
 
-- (FLFinisher*) finisher {
+- (FLFinisher*) createFinisherForBlock:(fl_completion_block_t) block {
+    [self addPromiseWithBlock:block];
     return self;
 }
 
@@ -339,16 +344,15 @@
 }
 #endif
 
-- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue {
+- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher {
     if(_block) {
-        _block(self);
+        _block(finisher);
     }
-    FLReleaseBlockWithNil(_block);
 }
 
-- (FLPromisedResult) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue {
-    [self startAsyncOperationInQueue:queue];
-    return self.result;
+- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher {
+    [self startAsyncOperationInQueue:queue withFinisher:finisher];
+    [finisher waitUntilFinished];
 }
 
 - (void) wasAddedToContext:(id) context {

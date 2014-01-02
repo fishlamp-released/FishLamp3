@@ -16,6 +16,8 @@
 #import "FLOperationContext.h"
 #import "FLDispatchQueue.h"
 
+#import "FishLampSimpleLogger.h"
+
 @interface FLOperation ()
 @property (readwrite, assign, getter=wasCancelled) BOOL cancelled;
 @property (readwrite, strong) FLFinisher* finisher; 
@@ -35,7 +37,7 @@
 }
 @property (readwrite, assign, nonatomic) FLOperation* operation;
 
-- (id) initWithOperation:(FLOperation*) operation;
+- (id) initWithOperation:(FLOperation*) operation completion:(fl_completion_block_t) completion;
 
 @end
 
@@ -49,7 +51,6 @@
     self = [super init];
     if(self) {
 //        self.asyncQueue = [FLDispatchQueue defaultQueue];
-        _finisher = [[FLOperationFinisher alloc] initWithOperation:self];
     }
     return self;
 }
@@ -62,7 +63,6 @@
 //        
 //        FLLog(@"Operation last ditch removal from context: %@", [self description]);
 //    }
-    _finisher.operation = nil;
 
 #if FL_MRC
     [_prerequisites release];
@@ -79,7 +79,7 @@
     return FLSuccessfulResult;
 }
 
-- (void) startOperation {
+- (void) startOperation:(FLFinisher*) finisher {
 
     id result = nil;
 
@@ -100,24 +100,26 @@
         result = [NSError failedResultError];
     }
     
-    [self setFinishedWithResult:result];
+    [finisher setFinishedWithResult:result];
 }
 
-- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) asyncQueue {
+- (FLFinisher*) createFinisherForBlock:(fl_completion_block_t)block {
+    return [[FLOperationFinisher alloc] initWithOperation:self completion:block];
+}
+
+- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) asyncQueue withFinisher:(FLFinisher*) finisher {
     FLAssertNotNil(asyncQueue);
-    FLAssertNotNil(self.finisher);
+    FLAssertNotNil(finisher);
     [self sendMessageToListeners:@selector(operationWillBegin:) withObject:self];
     [self willStartOperation];
-    [self startOperation];
+    [self startOperation:finisher];
 }
 
-- (FLPromisedResult) runSynchronousOperationInQueue:(id<FLAsyncQueue>) asyncQueue {
-    [self startAsyncOperationInQueue:asyncQueue];
+- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) asyncQueue withFinisher:(FLFinisher*) finisher  {
+    [self startAsyncOperationInQueue:asyncQueue withFinisher:finisher];
 
     // if the operation is implemented as synchronous, the finisher will be done already, else it will block on the GCD semaphor in the finisher.
-    FLPromisedResult result = [self.finisher waitUntilFinished];
-    FLAssertNotNil(result);
-    return result;
+    [self.finisher waitUntilFinished];
 }
 
 - (void) abortIfNeeded {
@@ -196,24 +198,6 @@
 - (void) didFinishWithResult:(FLPromisedResult) result {
 }
 
-- (void) setFinishedWithResult:(id) result {
-    FLAssertNotNil(result);
-
-    [self.finisher setFinishedWithResult:result];
-}
-
-- (void) setFinishedWithFailedResult {
-    [self setFinishedWithResult:FLFailedResult];
-}
-
-- (void) setFinished {
-    [self setFinishedWithResult:FLSuccessfulResult];
-}
-
-- (void) setFinishedWithCancel {
-    [self setFinishedWithResult:[NSError cancelError]];
-}
-
 - (void) addPrerequisite:(id<FLPrerequisite>) prerequisite {
     if(!_prerequisites) {
         _prerequisites = [[NSMutableArray alloc] init];
@@ -229,8 +213,10 @@
 
 @synthesize operation = _operation;
 
-- (id) initWithOperation:(FLOperation*) operation {
-	self = [super init];
+- (id) initWithOperation:(FLOperation*) operation completion:(fl_completion_block_t) completion {
+    FLAssertNotNil(operation);
+
+	self = [super initWithCompletion:completion];
 	if(self) {
 		_operation = operation;
 	}
@@ -239,5 +225,6 @@
 
 - (void) didFinishWithResult:(id)result {
     [_operation finisherDidFinish:self withResult:result];
+    _operation = nil;
 }
 @end

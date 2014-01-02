@@ -43,7 +43,7 @@ didFinishFinishWithResult:(FLPromisedResult) result {
     [self setFinishedWithResult:result];
 }
 
-- (void) startOperation {
+- (void) startOperation:(FLFinisher*) finisher {
     [self.operationQueue startProcessing];
 }
 

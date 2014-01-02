@@ -60,7 +60,7 @@
 - (void) queueOperation:(FLOperation*) operation;
 
 ///    start the queue.
-- (void) startProcessing;
+- (void) startProcessing:(FLFinisher*) finisher;
 
 ///    tell the queue to stop.
 ///    Note the currently executing operations will finish before it stops.

@@ -19,10 +19,11 @@
  *  Unless you're creating a new type of object that is queueable, you don't need to know about this.
  */
 @protocol FLQueueableAsyncOperation <NSObject>
-- (FLFinisher*) finisher;
 
-- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue;
+- (FLFinisher*) createFinisherForBlock:(fl_completion_block_t) block;
 
-- (FLPromisedResult) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue;
+- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher;
+
+- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher;
 @end
 

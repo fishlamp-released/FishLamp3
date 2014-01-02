@@ -30,12 +30,13 @@
    return FLAutorelease([[[self class] alloc] initWithFinisherBlock:block]);
 }
 
-- (void) startOperation {
+- (void) startOperation:(FLFinisher*) finisher {
+
     if(_finisherBlock) {
-        _finisherBlock(self.finisher);
+        _finisherBlock(finisher);
     }
     else {
-        [self setFinishedWithResult:FLFailedResult];
+        [finisher setFinishedWithResult:FLFailedResult];
     }
 }
 
