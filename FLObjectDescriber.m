@@ -12,6 +12,8 @@
 #import "FLObjcRuntime.h"
 #import "FLModelObject.h"
 
+#import "FishLampSimpleLogger.h"
+
 typedef void (^FLPropertyVisitor)(NSString* propertyName, id value, BOOL* stop);
 typedef void (^FLPropertyDescriberVisitor)(FLPropertyDescriber* propertyDescriber, BOOL* stop);
 typedef void (^FLPropertyDescriberVisitorRecursive)(FLObjectDescriber* object, FLPropertyDescriber* propertyDescriber, BOOL* stop);
