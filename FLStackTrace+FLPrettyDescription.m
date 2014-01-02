@@ -8,12 +8,13 @@
 
 #import "FLStackTrace+FLPrettyDescription.h"
 #import "FishLampStrings.h"
+#import "FishLampStackTrace.h"
 
 @implementation FLStackTrace (FLPrettyDescription)
 
 - (void) appendToStringFormatter:(id<FLStringFormatter>) string {
     [string appendLineWithFormat:@"%s:%d, %s",
-                            FLFileLocationFileName(&_stackTrace.location),
+                            FLFileLocationGetFileName(&_stackTrace.location),
                             _stackTrace.location.line, 
                             _stackTrace.location.function];
 

@@ -9,9 +9,10 @@
 
 #import "FLStringFormatter.h"
 #import "FishLampAssertions.h"
-//#import "NSArray+FishLamp.h"
 #import "FLStringPreprocessor.h"
 #import "FLPrettyDescription.h"
+
+#import "FishLampSimpleLogger.h"
 
 @interface FLStringFormatter ()
 - (void) closeLineWithString:(id) string;
