@@ -25,9 +25,10 @@ const char* FLFileNameFromPathNoCopy(const char* filePath) {
     return nil;
 }
 
-void FLFileLocationSetFileName(FLFileLocation_t* loc) {
+const char* FLFileLocationGetFileName(FLFileLocation_t* loc) {
     if(!loc->fileName) {
         loc->fileName = FLFileNameFromPathNoCopy(loc->filePath);
     }
+    return loc->fileName;
 }
 

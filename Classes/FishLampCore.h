@@ -19,5 +19,6 @@
 
 #import "FLOSVersion.h"
 
-#define FLLog   NSLog
-#define FLTrace FLLog
+//#define FLLog   NSLog
+//#define FLTrace FLLog
+

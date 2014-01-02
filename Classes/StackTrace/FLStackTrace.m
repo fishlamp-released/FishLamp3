@@ -8,15 +8,12 @@
 //
 
 #import "FLStackTrace.h"
-//#import "FLPrettyDescription.h"
-
-
 
 @implementation FLStackTrace
 
 - (NSString*) fileName {
-    FLFileLocationSetFileName(&(_stackTrace.location));
-    return [NSString stringWithCString:_stackTrace.location.fileName encoding:NSASCIIStringEncoding];
+    ;
+    return [NSString stringWithCString:FLFileLocationGetFileName(&(_stackTrace.location)) encoding:NSASCIIStringEncoding];
 }
 
 - (NSString*) filePath {

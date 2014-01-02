@@ -38,7 +38,7 @@ FLFileLocation_t FLFileLocationMake(const char* filePath, const char* function, 
  *  @param the file location
  *
  */
-extern void FLFileLocationSetFileName(FLFileLocation_t* loc);
+extern const char* FLFileLocationGetFileName(FLFileLocation_t* loc);
 
 #define FLCurrentFileLocation() \
             FLFileLocationMake(__FILE__, __PRETTY_FUNCTION__, __LINE__)
