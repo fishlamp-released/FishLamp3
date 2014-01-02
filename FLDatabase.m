@@ -19,6 +19,8 @@
 #import "FishLampAsync.h"
 #import "FLDatabase+Introspection.h"
 
+#import "FishLampSimpleLogger.h"
+
 static NSString* s_version = nil;
 
 @interface FLDatabase ()

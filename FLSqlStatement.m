@@ -12,6 +12,7 @@
 #import "FLSqlBuilder.h"
 #import "FLDatabase_Internal.h"
 #import "FLDatabaseObjectSerializer.h"
+#import "FishLampSimpleLogger.h"
 
 NS_INLINE
 sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
