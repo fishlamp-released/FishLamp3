@@ -8,6 +8,7 @@
 //
 
 #import "FLDatabaseStorageService.h"
+#import "FishLampSimpleLogger.h"
 
 @interface FLDatabaseStorageService ()
 @property (readwrite, strong, nonatomic) FLObjectDatabaseController* databaseController;
