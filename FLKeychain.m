@@ -10,6 +10,7 @@
 #import "FLKeychain.h"
 
 #import <Security/Security.h>
+#import "FishLampSimpleLogger.h"
 
 #if OSX
 // non atomic wrappers around sec api
