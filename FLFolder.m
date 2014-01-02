@@ -18,6 +18,8 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #endif
 
+#import "FishLampSimpleLogger.h"
+
 @interface FLFolder ()
 @property (readwrite, strong) NSString* folderPath;
 @end
