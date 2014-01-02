@@ -109,6 +109,8 @@
 
 - (void) throwErrorIfResponseIsError:(FLHttpResponse*) httpResponse;
 
+- (void) setFinishedWithResult:(FLPromisedResult) result;
+
 @end
 
 

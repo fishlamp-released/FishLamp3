@@ -9,6 +9,7 @@
 
 #import "FLReadStream.h"
 #import "FLNetworkStream_Internal.h"
+#import "FishLampSimpleLogger.h"
 
 @interface FLReadStream ()
 @property (readwrite, strong, nonatomic) id<FLInputSink> inputSink;

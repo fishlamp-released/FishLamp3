@@ -21,6 +21,7 @@
 #import "FLHttpResponse.h"
 #import "FLHttpRequestBody.h"
 #import "FLHttpRequest.h"
+#import "FishLampSimpleLogger.h"
 
 #define TRACE 0
 

@@ -15,6 +15,8 @@
 #import "NSString+FishLamp.h"
 #import "FLHttpRequestHeaders.h"
 
+#import "FishLampSimpleLogger.h"
+
 @interface FLOAuthAuthorizationHeader ()
 @end
 

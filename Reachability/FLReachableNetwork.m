@@ -15,6 +15,8 @@
 #import <ifaddrs.h>
 #import <netdb.h>
 
+#import "FishLampSimpleLogger.h"
+
 #if DEBUG
 #define FAKE_AIRPLANE_MODE 0
 #endif

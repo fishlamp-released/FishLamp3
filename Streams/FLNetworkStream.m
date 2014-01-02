@@ -11,6 +11,8 @@
 #import "FishLampAsync.h"
 #import "FLFifoQueueNetworkStreamEventHandler.h"
 
+#import "FishLampSimpleLogger.h"
+
 NSString* const FLNetworkStreamErrorDomain = @"FLNetworkStreamErrorDomain";
 NSString* const FLNetworkStreamErrorArrayKey = @"FLNetworkStreamErrorArrayKey";
 

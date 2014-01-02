@@ -23,7 +23,8 @@
 #import "FLTimer.h"
 #import "FishLampAsync.h"
 #import "FLHttpRequestHeaders.h"
-#import "FLLog.h"
+#import "FishLampSimpleLogger.h"
+
 
 #if 0
 #define FORCE_NO_SSL DEBUG
@@ -206,8 +207,10 @@ static int s_counter = 0;
     [self openStreamWithURL:url];
 }
 
+- (void) startOperation:(FLFinisher*) finisher {
 
-- (void) startOperation {
+    [self.context setFinisher:finisher forOperation:self];
+
     self.byteCount = [FLHttpRequestByteCount httpRequestByteCount];
     [self openAuthenticatedStreamWithURL:self.requestHeaders.requestURL];
 }
@@ -230,8 +233,9 @@ static int s_counter = 0;
     [self.byteCount setFinishTime];    
     
     [self releaseResponseData];
-                
+
     [self setFinishedWithResult:result];
+
     [self sendMessageToListeners:@selector(httpRequest:didFinishWithResult:) withObject:self withObject:result];
     
     [self.retryHandler resetRetryCount];
@@ -391,6 +395,14 @@ static int s_counter = 0;
 - (BOOL) shouldRedirectToURL:(NSURL*) url {
     return YES;
 }
+
+- (void) setFinishedWithResult:(FLPromisedResult) result {
+    FLFinisher* finisher = [self.context finisherForOperation:self];
+    FLAssertNotNil(finisher);
+
+    [finisher setFinishedWithResult:result];
+}
+
 @end
 
 

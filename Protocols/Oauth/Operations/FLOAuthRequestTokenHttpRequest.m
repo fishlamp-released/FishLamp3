@@ -13,6 +13,7 @@
 #import "FLUrlParameterParser.h"
 #import "FLOAuthAuthorizationHeader.h"
 #import "FLHttpResponse.h"
+#import "FishLampSimpleLogger.h"
 
 #import "FLOAuth.h"
 #import "FLOAuthApp.h"

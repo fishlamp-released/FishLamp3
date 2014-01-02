@@ -8,7 +8,7 @@
 //
 
 #import "FLNetworkActivity.h"
-#import "FLLog.h"
+#import "FishLampSimpleLogger.h"
 
 @interface FLNetworkActivityState : NSObject<FLNetworkActivityState> {
 @private

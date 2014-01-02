@@ -14,7 +14,7 @@
 #import "FLAuthenticatedEntity.h"
 #import "FLAuthenticationToken.h"
 
-#import "FLLog.h"
+#import "FishLampSimpleLogger.h"
 
 @interface FLAuthenticateHttpRequestOperation ()
 // instance ctors
@@ -97,7 +97,7 @@
     return nil;
 }
 
-- (void) startOperation {
+- (void) startOperation:(FLFinisher*) finisher {
 
     id<FLAuthenticatedEntity> authenticatedEntity = [self authenticate];
 
@@ -105,7 +105,7 @@
         [self authenticateHttpRequest:_httpRequest withAuthenticatedEntity:authenticatedEntity];
     }
 
-    [self setFinishedWithResult:authenticatedEntity];
+    [finisher setFinishedWithResult:authenticatedEntity];
 }
 
 - (void) didFinishWithResult:(id)result {
