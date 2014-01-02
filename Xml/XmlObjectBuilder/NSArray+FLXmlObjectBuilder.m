@@ -12,6 +12,7 @@
 #import "FLParsedXmlElement.h"
 #import "FLModelObject.h"
 #import "FLPropertyDescriber+XmlObjectBuilder.h"
+#import "FishLampSimpleLogger.h"
 
 @implementation NSArray (FLXmlObjectBuilder) 
 

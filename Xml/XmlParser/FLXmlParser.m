@@ -14,6 +14,7 @@
 #import "NSString+FishLamp.h"
 
 #import "NSArray+FishLampCore.h"
+#import "FishLampSimpleLogger.h"
 
 @interface FLXmlParser ()
 @property (readwrite, strong, nonatomic) NSMutableArray* stack;

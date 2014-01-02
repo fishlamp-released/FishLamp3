@@ -14,6 +14,8 @@
 #import "FLPropertyDescriber+XmlObjectBuilder.h"
 #import "FLStringToObjectConversionManager.h"
 
+#import "FishLampSimpleLogger.h"
+
 @implementation FLObjectDescriber (FLXmlObjectBuilder)
 
 - (id) buildObjectWithObjectBuilder:(FLXmlObjectBuilder*) builder

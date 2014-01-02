@@ -9,6 +9,7 @@
 
 #import "FLUrlParameterParser.h"
 #import "NSString+URL.h"
+#import "FishLampSimpleLogger.h"
 
 @implementation FLUrlParameterParser
 

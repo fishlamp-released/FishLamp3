@@ -13,6 +13,7 @@
 #import "FLPropertyDescriber.h"
 #import "FLObjectDescriber.h"
 #import "FLJsonDataEncoder.h"
+#import "FishLampSimpleLogger.h"
 
 @interface FLJsonObjectBuilder ()
 - (id) objectFromJSON:(id) jsonObject withTypeDesc:(FLPropertyDescriber*) type;

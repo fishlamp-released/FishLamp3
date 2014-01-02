@@ -13,6 +13,8 @@
 #import "FLStringToObjectConversionManager.h"
 #import "FLXmlElement.h"
 
+#import "FishLampSimpleLogger.h"
+
 @implementation NSObject (FLXmlSerialization)
 
 - (void) addToXmlElement:(FLXmlElement*) xmlElement
