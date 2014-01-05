@@ -7,10 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 #import "FishLampCore.h"
-#define CGSizeMake               CGSizeMake
-#define CGSizeZero               CGSizeZero
-#define FLSizeEqualToSize        CGSizeEqualToSize
-#define FLEqualSizes             CGSizeEqualToSize
+#import <CoreGraphics/CoreGraphics.h>
 
 //#if OSX
 //    #define CGSizeMake               NSMakeSize
