@@ -9,6 +9,7 @@
 
 #import "FishLampCore.h"
 
+@protocol FLStringFormatter;
 
 @interface NSHTTPURLResponse (Extras)
 - (NSError*) simpleHttpResponseErrorCheck;
