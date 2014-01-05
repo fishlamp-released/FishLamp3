@@ -8,13 +8,13 @@
 //
 
 #import "FLNetworkStream.h"
-#import "FLDispatchQueue.h"
+#import "FLDispatchQueues.h"
 
 @interface FLFifoQueueNetworkStreamEventHandler : NSObject<FLNetworkStreamEventHandler> {
 @private
-    FLFifoAsyncQueue* _asyncQueue;
+    FLFifoDispatchQueue* _asyncQueue;
     __unsafe_unretained FLNetworkStream* _stream;
 }
 
-@property (readonly, strong, nonatomic) FLFifoAsyncQueue* asyncQueue;
+@property (readonly, strong, nonatomic) FLFifoDispatchQueue* asyncQueue;
 @end

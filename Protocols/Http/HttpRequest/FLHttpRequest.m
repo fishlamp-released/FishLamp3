@@ -209,9 +209,20 @@ static int s_counter = 0;
 
 - (void) startOperation:(FLFinisher*) finisher {
 
+    FLAssertNotNil(finisher);
+    FLAssertNotNil(self.context);
+
     [self.context setFinisher:finisher forOperation:self];
 
+    FLAssertNotNil([self.context finisherForOperation:self]);
+
     self.byteCount = [FLHttpRequestByteCount httpRequestByteCount];
+
+    FLAssertNotNil(self.byteCount);
+    FLAssertNotNil(self.requestHeaders);
+    FLAssertNotNil(self.requestHeaders.requestURL);
+    FLAssert([self.requestHeaders.requestURL absoluteString].length > 0);
+
     [self openAuthenticatedStreamWithURL:self.requestHeaders.requestURL];
 }
 

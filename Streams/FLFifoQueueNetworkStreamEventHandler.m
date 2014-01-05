@@ -13,7 +13,7 @@
 #import "FishLampSimpleLogger.h"
 
 @interface FLFifoQueueNetworkStreamEventHandler ()
-@property (readwrite, strong, nonatomic) FLFifoAsyncQueue* asyncQueue;
+@property (readwrite, strong, nonatomic) FLFifoDispatchQueue* asyncQueue;
 @end
 
 @implementation FLFifoQueueNetworkStreamEventHandler
@@ -24,7 +24,7 @@
 - (id) init {
 	self = [super init];
 	if(self) {
-        self.asyncQueue = [FLFifoAsyncQueue fifoAsyncQueue];
+        self.asyncQueue = [FLFifoDispatchQueue fifoDispatchQueue];
     }
 	return self;
 }

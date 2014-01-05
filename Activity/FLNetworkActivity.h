@@ -19,7 +19,7 @@
     NSTimeInterval _lastChange;
 }
 
-@property (readonly, assign, getter=isBusy) BOOL isBusy;
+@property (readonly, assign, getter=isBusy) BOOL busy;
 
 - (id<FLNetworkActivityState>) setBusy;
 

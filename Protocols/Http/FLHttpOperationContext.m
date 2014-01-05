@@ -19,13 +19,13 @@
 #import "FLAuthenticateHttpCredentialsOperation.h"
 
 #import "FLUserDefaultsCredentialStorage.h"
-
+#import "FLFifoDispatchQueue.h"
 
 @interface FLHttpOperationContext ()
 
 @property (readwrite, strong) id<FLStorageService> storageService;
 @property (readwrite, strong) FLServiceList* serviceList;
-@property (readonly, strong) FLFifoAsyncQueue* authenticationQueue;
+@property (readonly, strong) FLFifoDispatchQueue* authenticationQueue;
 @property (readwrite, strong) id<FLAuthenticatedEntity> authenticatedEntity;
 @property (readwrite, strong) id<FLCredentialsStorage> credentialsStorage;
 @property (readwrite, strong) NSError* authenticationError;
@@ -45,7 +45,7 @@
 - (id) init {
     self = [super init];
     if(self) {
-        _authenticationQueue = [[FLFifoAsyncQueue alloc] init];
+        _authenticationQueue = [[FLFifoDispatchQueue alloc] init];
         _serviceList = [[FLServiceList alloc] init];
 
         // create storage service
@@ -134,7 +134,7 @@
         [operation setOperationStarter:self.authenticationQueue];
     }
 
-    [operation addListener:self];
+    [operation addBackgroundListener:self];
 }
 
 - (void) didRemoveOperation:(FLOperation*) operation {

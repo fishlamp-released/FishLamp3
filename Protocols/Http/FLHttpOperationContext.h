@@ -27,7 +27,7 @@
     id<FLAuthenticationCredentials> _authenticationCredentials;
     id<FLCredentialsStorage> _credentialsStorage;
 
-    FLFifoAsyncQueue* _authenticationQueue;
+    FLFifoDispatchQueue* _authenticationQueue;
     FLServiceList* _serviceList;
 
     NSError* _authenticationError;

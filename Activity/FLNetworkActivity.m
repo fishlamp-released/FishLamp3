@@ -18,11 +18,14 @@
 @end
 
 @interface FLNetworkActivity()
+@property (readwrite, assign, getter=isBusy) BOOL busy;
 @end
 
 #define kPostDelay 1.0f
 
 @implementation FLNetworkActivity
+
+@synthesize busy = _busy;
 
 - (void) updateListeners {
     if(_busy && _busyCount <= 0) {
@@ -69,6 +72,7 @@
     [self changeBusyState:YES];
     return [FLNetworkActivityState networkActivityState:self];
 }
+
 
 @end
 

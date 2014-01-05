@@ -16,7 +16,7 @@
 @class FLHttpRequest;
 @class FLHttpStream;
 @class FLHttpRequestBody;
-@class FLFifoAsyncQueue;
+@class FLFifoDispatchQueue;
 @class FLTimer;
 @class FLHttpRequestByteCount;
 @class FLHttpRequestHeaders;
@@ -47,7 +47,7 @@
 @private
     FLHttpRequestHeaders* _requestHeaders;
     FLHttpRequestBody* _requestBody;
-    FLFifoAsyncQueue* _asyncQueueForStream;
+    FLFifoDispatchQueue* _asyncQueueForStream;
     FLHttpResponse* _previousResponse; // if redirected
     FLHttpStream* _httpStream;
 
