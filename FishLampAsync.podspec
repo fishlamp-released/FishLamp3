@@ -1,9 +1,3 @@
-#
-# Be sure to run `pod spec lint NAME.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# To learn more about the attributes see http://docs.cocoapods.org/specification.html
-#
 Pod::Spec.new do |s|
    
     s.name         = "FishLampAsync"
@@ -12,14 +6,11 @@ Pod::Spec.new do |s|
     s.homepage     = "http://fishlamp.com"
     s.license      = 'MIT'
     s.author       = { "Mike Fullerton" => "hello@fishlamp.com" }
-    s.source       = { :git => "https://github.com/fishlamp/FishLampPrerelease.git", :tag => s.version.to_s }
+    s.source       = { :git => "https://github.com/fishlamp/FishLampAsync.git", :tag => s.version.to_s }
 
     s.ios.deployment_target = '6.1'
     s.osx.deployment_target = '10.6'
     s.requires_arc = false
-    
-#     s.ios.frameworks = 'Security', 'MobileCoreServices', 'SystemConfiguration'
-#     s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'Quartz', 'QuartzCore', 'CoreFoundation',  'Foundation'
 
 	s.dependency 'FishLampCore'
 	s.dependency 'FishLampStrings'
@@ -27,7 +18,27 @@ Pod::Spec.new do |s|
 	s.dependency 'FishLampEvents'
 	s.dependency 'FishLampTimer'
 
-	s.source_files = 'Classes/**/*.{h,m}'
+	s.source_files = 'Classes/*.{h,m}'
+
+	s.subspec 'GCD' do |ss|
+		ss.source_files = 'Classes/GCD/*.{h,m}'
+	end
+
+	s.subspec 'OperationQueue' do |ss|
+		ss.source_files = 'Classes/OperationQueue/*.{h,m}'
+	end
+
+	s.subspec 'Operations' do |ss|
+		ss.source_files = 'Classes/Operations/*.{h,m}'
+	end
+
+	s.subspec 'Results' do |ss|
+		ss.source_files = 'Classes/Results/*.{h,m}'
+	end
+
+	s.subspec 'Utils' do |ss|
+		ss.source_files = 'Classes/Utils/*.{h,m}'
+	end
 
 end
 

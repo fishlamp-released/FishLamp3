@@ -18,7 +18,7 @@
 #import "FLFinisher.h"
 #import "FLAsyncQueue.h"
 #import "FLOperationContext.h"
-#import "FLDispatchQueue.h"
+#import "FLDispatchQueues.h"
 #import "NSError+FLFailedResult.h"
 #import "FLSuccessfulResult.h"
 #import "FLPromise.h"

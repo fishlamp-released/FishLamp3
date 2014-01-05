@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FLBatchOperation.h"
-#import "FLOperationQueue.h"
 
 #if REFACTOR
+#import "FLBatchOperation.h"
+#import "FLOperationQueue.h"
 
 @implementation FLBatchOperation
 

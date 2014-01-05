@@ -8,7 +8,7 @@
 //
 
 #import "FLOperationQueue.h"
-#import "FLDispatchQueue.h"
+#import "FLDispatchQueues.h"
 #import "FLLog.h"
 #import "FLSuccessfulResult.h"
 #import "FLOperation.h"
@@ -26,7 +26,7 @@
 @property (readonly, strong) NSMutableArray* operationFactories;
 @property (readonly, strong) NSMutableArray* activeQueue;
 @property (readonly, strong) NSMutableArray* objectQueue;
-@property (readonly, strong) FLFifoAsyncQueue* schedulingQueue;
+@property (readonly, strong) FLFifoDispatchQueue* schedulingQueue;
 @property (readwrite, assign) UInt32 maxOperationsCount;
 
 @property (readonly, strong) id<FLOperationQueueErrorStrategy> errorStrategy;
@@ -69,7 +69,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 - (id) initWithErrorStrategy:(id<FLOperationQueueErrorStrategy>) errorStrategy {
 	self = [super init];
 	if(self) {
-        _schedulingQueue = [[FLFifoAsyncQueue alloc] init];
+        _schedulingQueue = [[FLFifoDispatchQueue alloc] init];
         _activeQueue = [[NSMutableArray alloc] init];
         _objectQueue = [[NSMutableArray alloc] init];
         _maxOperationsCount = INT_MAX;
@@ -284,7 +284,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 
 - (void) startOperationForObject:(id) object {
     FLOperation* operation = [self createOperationForQueuedObject:object];
-    [operation addListener:self];
+    [operation addBackgroundListener:self];
 
     [_activeQueue addObject:operation];
 

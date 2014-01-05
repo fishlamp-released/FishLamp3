@@ -72,19 +72,6 @@
     return [self queueOperation:object withDelay:0 completion:nil];
 }
 
-- (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) object
-                 withListener:(id) listener
-                   completion:(fl_completion_block_t) completionOrNil {
-
-    FLAssertNotNil(object);
-    FLAssert([object respondsToSelector:@selector(addListener:)]);
-
-    [((id)object) addListener:listener];
-
-    return [self queueOperation:object withDelay:0 completion:completionOrNil];
-}
-
-
 - (FLPromisedResult) runBlockSynchronously:(fl_block_t) block {
     return [self runSynchronously:[FLQueueableBlockOperation queueableBlockOperation:block]];
 }

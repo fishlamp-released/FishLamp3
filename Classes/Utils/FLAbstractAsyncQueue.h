@@ -18,4 +18,5 @@
                 completion:(fl_completion_block_t) completionOrNil;
 
 - (FLPromisedResult) runSynchronously:(id<FLQueueableAsyncOperation>) asyncObject;
+
 @end

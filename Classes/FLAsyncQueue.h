@@ -43,10 +43,6 @@
 - (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) operation
                    completion:(fl_completion_block_t) completionOrNil;
 
-- (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) operation
-                 withListener:(id) listener
-                   completion:(fl_completion_block_t) completionOrNil;
-
 - (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) operation;
 
 - (FLPromisedResult) runBlockSynchronously:(fl_block_t) block;

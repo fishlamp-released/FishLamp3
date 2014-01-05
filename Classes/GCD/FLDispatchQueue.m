@@ -13,20 +13,17 @@
 #import "FLPromisedResult.h"
 #import "FLPromise.h"
 #import "FLQueueableAsyncOperation.h"
-#import "FLOperationStarter.h"
-#import "FLExceptionHandler.h"
-#import "FishLampProxies.h"
 
+#if EXPERIMENTAL
+#import "FLExceptionHandler.h"
+#import "FLProxies.h"
 @interface FLExecuteInQueueProxy : FLRetainedObject {
 @private
     FLDispatchQueue* _queue;
 }
 + (id) executeInQueueProxy:(id) object queue:(FLDispatchQueue*) queue;
 @end
-
-@interface FLMainThreadQueue : FLFifoAsyncQueue
-+ (id) mainThreadQueue;
-@end
+#endif
 
 @implementation FLDispatchQueue
 
@@ -66,33 +63,6 @@
     return self;
 }
 
-+ (FLDispatchQueue*) dispatchQueue:(dispatch_queue_t) queue {
-    return FLAutorelease([[[self class] alloc] initWithDispatchQueue:queue]);
-}
-
-+ (FLDispatchQueue*) dispatchQueueWithLabel:(NSString*) label attr:(dispatch_queue_attr_t) attr {
-    return FLAutorelease([[[self class] alloc] initWithLabel:label attr:attr]);
-}
-
-+ (FLDispatchQueue*) fifoDispatchQueue:(NSString*) label {
-
-#if defined(__MAC_10_6) && !defined(__MAC_10_7)
-    return FLAutorelease([[[self class] alloc] initWithLabel:label attr:nil]);
-#else
-    return FLAutorelease([[[self class] alloc] initWithLabel:label attr:DISPATCH_QUEUE_SERIAL]);
-#endif
-
-}
-
-+ (FLDispatchQueue*) concurrentDispatchQueue:(NSString*) label {
-#if defined(__MAC_10_6) && !defined(__MAC_10_7)
-    // TODO
-#else
-    return FLAutorelease([[[self class] alloc] initWithLabel:label attr:DISPATCH_QUEUE_CONCURRENT]);
-#endif
-}
-
-
 - (void) dealloc {
     if(_dispatch_queue) {
         FLDispatchRelease(_dispatch_queue);
@@ -108,6 +78,7 @@
     return [NSString stringWithFormat:@"%@ %@", [super description], self.label];
 }
 
+#if EXPERIMENTAL
 - (void) addExceptionHandler:(id<FLExceptionHandler>) exceptionHandler {
     if(!_exceptionHandlers) {
         _exceptionHandlers = [[NSMutableArray alloc] init];
@@ -120,6 +91,7 @@
 - (void) handleException:(NSException*) exception {
 
 }
+#endif
 
 - (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) operation
                  withDelay:(NSTimeInterval) delay
@@ -127,9 +99,13 @@
 
     FLAssertNotNil(operation);
 
+    FLAssertNotNil(self.dispatch_queue_t);
+
     __block id<FLQueueableAsyncOperation> theOperation = FLRetain(operation);
     __block FLDispatchQueue* theQueue = FLRetain(self);
     __block FLFinisher* theFinisher = FLRetain([theOperation createFinisherForBlock:completion]);
+
+    FLAssertNotNil(theFinisher);
 
     fl_block_t block = ^{
         @try {
@@ -160,6 +136,7 @@
 - (FLPromisedResult) runSynchronously:(id<FLQueueableAsyncOperation>) operation {
 
     FLAssertNotNil(operation);
+    FLAssertNotNil(self.dispatch_queue_t);
 
     __block id<FLQueueableAsyncOperation> theOperation = FLRetain(operation);
     __block FLDispatchQueue* theQueue = FLRetain(self);
@@ -217,6 +194,7 @@
 
     FLAssertNotNil(target);
     FLAssertNotNil(action);
+    FLAssertNotNil(self.dispatch_queue_t);
 
     __block id theTarget = FLRetain(target);
     [self dispatch_async:^{
@@ -228,6 +206,7 @@
 - (void) dispatch_target:(id) target action:(SEL) action withObject:(id) object {
     FLAssertNotNil(target);
     FLAssertNotNil(action);
+    FLAssertNotNil(self.dispatch_queue_t);
 
     __block id theTarget = FLRetain(target);
     __block id theObject = FLRetain(object);
@@ -241,70 +220,15 @@
 
 #pragma GCC diagnostic pop
 
-
-+ (FLDispatchQueue*) lowPriorityQueue {
-    FLReturnStaticObject( [FLDispatchQueue dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)]);
-}
-+ (FLDispatchQueue*) defaultQueue {
-    FLReturnStaticObject( [FLDispatchQueue dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)]);
-}
-+ (FLDispatchQueue*) highPriorityQueue {
-    FLReturnStaticObject([FLDispatchQueue dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)]);
-}
-+ (FLDispatchQueue*) veryLowPriorityQueue {
-    FLReturnStaticObject([FLDispatchQueue dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)]);
-}
-
-+ (FLDispatchQueue*) mainThreadQueue {
-    FLReturnStaticObject([FLMainThreadQueue mainThreadQueue ]);
-}
-
-+ (FLFifoAsyncQueue*) fifoQueue {
-    FLReturnStaticObject([FLFifoAsyncQueue fifoAsyncQueue]);
-}
-
-//+ (id<FLOperationStarter>) defaultOperationStarter {
-//    return [self defaultQueue];
-//}
-
+#if EXPERIMENTAL
 - (id) scheduleListener:(id) listener {
     return [FLExecuteInQueueProxy executeInQueueProxy:listener queue:self];
 }
-
-@end
-
-@implementation FLFifoAsyncQueue  
-
-+ (id) fifoAsyncQueue {
-    return FLAutorelease([[[self class] alloc] init]);
-}
-
-- (id) init {
-    static int s_count = 0;
-#if __MAC_10_8
-    return [super initWithLabel:[NSString stringWithFormat:@"com.fishlamp.queue.fifo%d", s_count++] attr:DISPATCH_QUEUE_SERIAL];
-#else 
-    return [super initWithLabel:[NSString stringWithFormat:@"com.fishlamp.queue.fifo%d", s_count++] attr:nil];
 #endif
-}
 
 @end
 
-@implementation FLMainThreadQueue
-
-- (id) init {	
-	return [super initWithDispatchQueue:dispatch_get_main_queue()];
-}
-
-+ (id) mainThreadQueue {
-    return FLAutorelease([[[self class] alloc] init]);
-}
-
-- (id) scheduleListener:(id) listener {
-    return [FLMainThreadObject mainThreadObject:listener];
-}
-@end
-
+#if EXPERIMENTAL
 @implementation FLExecuteInQueueProxy
 
 - (id) initWithRetainedObject:(id) object queue:(FLDispatchQueue*) queue {
@@ -353,3 +277,4 @@
 }
 
 @end
+#endif

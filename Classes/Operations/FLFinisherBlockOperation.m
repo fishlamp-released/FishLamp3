@@ -8,6 +8,7 @@
 
 #import "FLFinisherBlockOperation.h"
 #import "NSError+FLFailedResult.h"
+#import "FLFinisher.h"
 
 @implementation FLFinisherBlockOperation
 

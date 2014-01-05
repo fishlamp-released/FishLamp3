@@ -14,6 +14,7 @@
 @protocol FLQueueableAsyncOperation;
 
 @protocol FLOperationStarter <NSObject>
+
 - (FLPromisedResult) runOperationSynchronously:(id<FLQueueableAsyncOperation>) asyncObject;
 
 - (FLPromise*) startOperation:(id<FLQueueableAsyncOperation>) operation

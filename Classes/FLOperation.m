@@ -14,13 +14,11 @@
 #import "NSError+FLFailedResult.h"
 #import "FLSuccessfulResult.h"
 #import "FLOperationContext.h"
-#import "FLDispatchQueue.h"
 
 #import "FishLampSimpleLogger.h"
 
 @interface FLOperation ()
 @property (readwrite, assign, getter=wasCancelled) BOOL cancelled;
-@property (readwrite, strong) FLFinisher* finisher; 
 
 - (void) finisherDidFinish:(FLFinisher*) finisher
                 withResult:(FLPromisedResult) resultOrNil;
@@ -44,33 +42,22 @@
 @implementation FLOperation
 @synthesize context = _context;
 @synthesize cancelled = _cancelled;
-@synthesize finisher = _finisher;
 @synthesize operationStarter = _operationStarter;
 
 - (id) init {
     self = [super init];
     if(self) {
-//        self.asyncQueue = [FLDispatchQueue defaultQueue];
     }
     return self;
 }
 
-- (void) dealloc {
-//    if(_context) {
-//        id<FLOperationContext> context = _context;
-//        _context = nil;
-//        [context removeOperation:self];
-//        
-//        FLLog(@"Operation last ditch removal from context: %@", [self description]);
-//    }
-
 #if FL_MRC
+- (void) dealloc {
     [_prerequisites release];
     [_operationStarter release];
-	[_finisher release];
 	[super dealloc];
-#endif
 }
+#endif
 
 - (FLPromisedResult) runSynchronously {
 
@@ -80,6 +67,8 @@
 }
 
 - (void) startOperation:(FLFinisher*) finisher {
+
+    FLAssertNotNil(finisher);
 
     id result = nil;
 
@@ -107,19 +96,30 @@
     return [[FLOperationFinisher alloc] initWithOperation:self completion:block];
 }
 
-- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) asyncQueue withFinisher:(FLFinisher*) finisher {
-    FLAssertNotNil(asyncQueue);
-    FLAssertNotNil(finisher);
-    [self sendMessageToListeners:@selector(operationWillBegin:) withObject:self];
-    [self willStartOperation];
-    [self startOperation:finisher];
+- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) asyncQueue
+                       withFinisher:(FLFinisher*) finisher {
+
+    @try {
+        FLAssertNotNil(asyncQueue);
+        FLAssertNotNil(finisher);
+        [self willStartOperation];
+        [self startOperation:finisher];
+    }
+    @catch(NSException* ex) {
+        [finisher setFinishedWithResult:ex.error];
+    }
 }
 
-- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) asyncQueue withFinisher:(FLFinisher*) finisher  {
+- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) asyncQueue
+                           withFinisher:(FLFinisher*) finisher  {
+
+    FLAssertNotNil(asyncQueue);
+    FLAssertNotNil(finisher);
+
     [self startAsyncOperationInQueue:asyncQueue withFinisher:finisher];
 
     // if the operation is implemented as synchronous, the finisher will be done already, else it will block on the GCD semaphor in the finisher.
-    [self.finisher waitUntilFinished];
+    [finisher waitUntilFinished];
 }
 
 - (void) abortIfNeeded {
@@ -171,12 +171,6 @@
 - (void) wasRemovedFromContext:(id) context {
 }
 
-- (id) objectFromResult:(id) result {
-    FLAssertNotNil(result);
-    FLThrowIfError(result);
-    return result;
-}
-
 - (void) abortIfCancelled {
     if(self.wasCancelled) {
         FLThrowCancel();
@@ -190,7 +184,7 @@
     FLAssertNotNil(result);
 
     [self didFinishWithResult:result];
-    [self sendMessageToListeners:@selector(operationDidFinish:withResult:) withObject:self withObject:result];
+//    [self sendMessageToListeners:@selector(operationDidFinish:withResult:) withObject:self withObject:result];
     self.context = nil;
     self.cancelled = NO;
 }
@@ -198,6 +192,7 @@
 - (void) didFinishWithResult:(FLPromisedResult) result {
 }
 
+#if EXPERIMENTAL
 - (void) addPrerequisite:(id<FLPrerequisite>) prerequisite {
     if(!_prerequisites) {
         _prerequisites = [[NSMutableArray alloc] init];
@@ -205,6 +200,7 @@
 
     [_prerequisites addObject:prerequisite];
 }
+#endif
 
 @end
 

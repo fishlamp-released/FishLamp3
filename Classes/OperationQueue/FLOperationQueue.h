@@ -9,11 +9,11 @@
 
 #import "FishLampCore.h"
 #import "FLOperation.h"
-#import "FLDispatchQueue.h"
+#import "FLDispatchQueues.h"
 #import "FLAsyncQueue.h"
 #import "FLBroadcaster.h"
 
-@class FLFifoAsyncQueue;
+@class FLFifoDispatchQueue;
 @class FLOperation;
 
 @protocol FLOperationQueueOperationFactory;
@@ -21,7 +21,7 @@
 
 @interface FLOperationQueue : FLOperation {
 @private
-    FLFifoAsyncQueue* _schedulingQueue;
+    FLFifoDispatchQueue* _schedulingQueue;
     NSMutableArray* _objectQueue;
     NSMutableArray* _activeQueue;
     NSMutableArray* _operationFactories;

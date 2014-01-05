@@ -32,10 +32,10 @@
 - (BOOL) operationQueueWillHalt:(FLOperationQueue*) operationQueue {
     return self.error != nil;
 }
+
 - (NSError*) errorResult {
     return self.error;
 }
-
 
 @end
 

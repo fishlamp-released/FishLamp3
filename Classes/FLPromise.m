@@ -38,7 +38,7 @@ static NSInteger s_max = 0;
     
     self = [super init];
     if(self) {
-        self.completion = completion;
+        _completion = [completion copy];
         _semaphore = dispatch_semaphore_create(0);
 
 #if CHECK_COUNT

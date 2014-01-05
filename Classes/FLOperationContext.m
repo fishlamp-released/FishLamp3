@@ -10,7 +10,7 @@
 #import "FLOperationContext.h"
 #import "FLAsyncQueue.h"
 #import "FishLampAsync.h"
-#import "FLDispatchQueue.h"
+#import "FLDispatchQueues.h"
 #import "FLAsyncQueue.h"
 #import "FLOperation.h"
 #import "FLOperationStarter.h"
@@ -165,7 +165,13 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
         starter = [operation operationStarter];
     }
 
-    return starter ? starter : self.operationStarter;
+    if(!starter) {
+        starter = self.operationStarter;
+    }
+
+    FLAssertNotNil(starter);
+
+    return starter;
 }
 
 - (FLPromisedResult) runSynchronously:(id<FLQueueableAsyncOperation>) operation {
@@ -187,21 +193,31 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
     [self willStartOperation:operation];
 
 // TODO: provide way to specify queue
-    return [[self starterForOperation:operation] startOperation:operation withDelay:delay completion:completion];
+    id<FLOperationStarter> starter = [self starterForOperation:operation];
+    FLAssertNotNil(starter);
+
+    return [starter startOperation:operation withDelay:delay completion:completion];
 }
 
 - (void) setFinisher:(FLFinisher*) finisher
         forOperation:(id) operation {
 
+    FLAssertNotNil(_finishers);
+
     @synchronized(self) {
         [_finishers setObject:finisher
                        forKey:[NSValue valueWithNonretainedObject:operation]];
+
+        FLAssertNotNil([self finisherForOperation:operation]);
     }
 }
 
 - (FLFinisher*) finisherForOperation:(id) operation {
+
+    FLAssertNotNil(_finishers);
+
     @synchronized(self) {
-        return FLRetainWithAutorelease([_finishers objectForKey:operation]);
+        return FLRetainWithAutorelease([_finishers objectForKey:[NSValue valueWithNonretainedObject:operation]]);
     }
 }
 
