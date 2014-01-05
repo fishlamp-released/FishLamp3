@@ -13,7 +13,7 @@
 #import "FLOperation.h"
 #import "FLTestable.h"
 #import "NSBundle+FLVersion.h"
-#import "FLDispatchQueue.h"
+#import "FLDispatchQueues.h"
 #import "FLTestLoggingManager.h"
 
 #import "FishLampAsync.h"

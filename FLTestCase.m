@@ -162,8 +162,7 @@
 
 }
 
-- (void) setFinishedWithResult:(id)result {
-
+- (void) didFinishWithResult:(id)result {
 
     if([result isError]) {
         [self.result setFailedWithError:result];
@@ -176,13 +175,13 @@
         [self performTestCaseSelector:_didTestSelector optional:self];
     }
 
-    [super setFinishedWithResult:self.result];
+    [super didFinishWithResult:self.result];
 }
 
-- (void) startOperation {
+- (void) startOperation:(FLFinisher*) finisher {
     @try {
         if(self.isDisabled) {
-            [self setFinished];
+            [finisher setFinished];
         }
 
         [self.result setStarted];
@@ -205,16 +204,16 @@
         }
     }
     @catch(NSException* ex) {
-        if(!self.finisher.isFinished) {
-            [self setFinishedWithResult:ex.error];
+        if(!finisher.isFinished) {
+            [finisher setFinishedWithResult:ex.error];
         }
     }
     @finally {
         if(self.asyncTest) {
             [self.asyncTest setTestCaseStarted];
         }
-        else if (!self.finisher.isFinished) {
-            [self setFinished];
+        else if (!finisher.isFinished) {
+            [finisher setFinished];
         }
     }
 }

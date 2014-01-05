@@ -10,6 +10,8 @@
 #import "FLTimer.h"
 #import "FLTestCase.h"
 
+#import "FishLampSimpleLogger.h"
+
 @implementation FLTestCaseAsyncTest
 @synthesize finishedBlock = _finishedBlock;
 @synthesize finishedStarting = _finishedStarting;
@@ -71,6 +73,8 @@
 }
 
 - (void) setFinishedWithBlock:(void (^)()) finishBlock {
+
+#if REFACTOR
     FLPrepareBlockForFutureUse(finishBlock);
 
     __block FLTestCase* testCase = _operation;
@@ -86,6 +90,7 @@
             [testCase setFinishedWithResult:ex.error];
         }
     }];
+#endif
 }
 
 - (void) waitUntilFinished {
@@ -94,19 +99,23 @@
 }
 
 - (void) setFinished {
+#if REFACTOR
     __block FLTestCase* testCase = _operation;
 
     [self setFinishedWithFinishedBlock:^{
         [testCase setFinished];
     }];
+#endif
 }
 
 - (void) setFinishedWithError:(NSError*) error {
+#if REFACTOR
     __block FLTestCase* testCase = _operation;
 
     [self setFinishedWithFinishedBlock:^{
         [testCase setFinishedWithResult:error];
     }];
+#endif
 }
 
 - (void) timerDidTimeout:(FLTimer*) timer {

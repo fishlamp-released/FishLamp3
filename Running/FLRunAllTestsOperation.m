@@ -12,7 +12,7 @@
 #import "FLStaticTestMethodRunner.h"
 #import "FLObjcRuntime.h"
 #import "FLTestable.h"
-#import "FLDispatchQueue.h"
+#import "FLDispatchQueues.h"
 
 #import "FLTestOrganizer.h"
 #import "FLTestFactoryList.h"

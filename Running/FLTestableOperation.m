@@ -8,7 +8,7 @@
 
 #import "FLTestableOperation.h"
 #import "FLTestCaseList.h"
-#import "FLDispatchQueue.h"
+#import "FLDispatchQueues.h"
 #import "FLOperationContext.h"
 #import "FLTestCase.h"
 #import "FLTestable.h"
@@ -106,11 +106,9 @@
     else {
         [[FLTestLoggingManager instance] appendLineWithFormat:@"%@: %@", [NSString stringWithLeadingPadding_fl:@"FAILED" minimumWidth:kPadWidth], testCase.testCaseName ];
     }
-
-    [FLBackgroundQueue queueTarget:self action:@selector(beginNextTest)];
 }
 
-- (void) beginNextTest {
+- (void) beginNextTest:(FLFinisher*) finisher {
 
     if(_queue.count > 0) {
 
@@ -131,10 +129,15 @@
 
         __block FLTestableOperation* SELF = FLRetain(self);
         __block FLTestCase* testCase = FLRetain(currentTestCase);
+
         [self.context queueOperation:testCase
                           completion:^(FLPromisedResult result) {
 
             [SELF finishedTest:testCase withResult:result];
+
+            [FLBackgroundQueue queueBlock:^{
+                [self beginNextTest:finisher];
+            }];
 
             FLReleaseWithNil(SELF);
             FLReleaseWithNil(testCase);
@@ -145,11 +148,11 @@
 
         [self didRunTestCases:self.testableObject.testCaseList];
 
-        [self setFinishedWithResult:[self resultForTest]];
+        [finisher setFinishedWithResult:[self resultForTest]];
     }
 }
 
-- (void) startOperation {
+- (void) startOperation:(FLFinisher*) finisher {
 
     [self willRunTestCases:self.testableObject.testCaseList];
 
@@ -162,7 +165,9 @@
     // the list is now prepared and ordered.
     self.queue = FLMutableCopyWithAutorelease(self.testableObject.testCaseList.testCaseArray);
 
-    [FLBackgroundQueue queueTarget:self action:@selector(beginNextTest)];
+    [FLBackgroundQueue queueBlock:^{
+        [self beginNextTest:finisher];
+    }];
 }
 
 
