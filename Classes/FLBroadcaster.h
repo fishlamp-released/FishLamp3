@@ -33,7 +33,8 @@
 
 //- (BOOL) hasListener:(id) listener;
 
-- (void) addListener:(id) listener;
+- (id) addForegroundListener:(id) listener;
+- (id) addBackgroundListener:(id) listener;
 
 - (void) removeListener:(id) listener;
 @end
@@ -44,6 +45,7 @@
     NSArray* _iteratable;
     BOOL _dirty;
     dispatch_once_t _semaphore;
+    __unsafe_unretained id _representedObject;
 }
 
 - (id) init;

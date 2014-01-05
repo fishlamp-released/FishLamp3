@@ -13,6 +13,9 @@
 #import "FLAsyncQueue.h"
 #import "FishLampAsync.h"
 
+#import "FishLampSimpleLogger.h"
+#import "FLTrace.h"
+
 @implementation NSObject (FLBroadcaster)
 
 - (id) objectAsListener {
@@ -39,6 +42,15 @@
 - (id) init {
 // NSProxy has no init. Put this here for subclasses
 	return self;
+}
+
+- (id) initWithRepresentedObject:(id) object {
+    _representedObject = object;
+    return self;
+}
+
+- (id) representedObject {
+    return _representedObject;
 }
 
 #if FL_MRC
@@ -75,7 +87,7 @@
     return self;
 }
 
-- (void) addListener:(id) listener  {
+- (id) addBackgroundListener:(id)listener {
     FLCriticalSection(&_semaphore, ^{
         if(!_listeners) {
             _listeners = [[NSMutableSet alloc] init];
@@ -85,7 +97,24 @@
 
         self.dirty = YES;
     });
+
+    return self;
 }
+
+- (id) addForegroundListener:(id) listener  {
+    FLCriticalSection(&_semaphore, ^{
+        if(!_listeners) {
+            _listeners = [[NSMutableSet alloc] init];
+        }
+
+        [_listeners addObject:[FLMainThreadObject mainThreadObject:[listener objectAsListener]]];
+
+        self.dirty = YES;
+    });
+
+    return self;
+}
+
 
 - (void) removeListener:(id) listener {
     FLCriticalSection(&_semaphore, ^{
@@ -111,9 +140,32 @@
     });
 }
 
+#define TRACEMSG(OBJ,SELECTOR) \
+do { \
+    id __LISTENER = [OBJ representedObject]; \
+    if([__LISTENER respondsToSelector:SELECTOR]) { \
+        FLTrace(@"%@: %@ receieved %@ FROM %@", \
+            [NSThread isMainThread] ? @"F" : @"B", \
+            NSStringFromClass([__LISTENER class]), \
+            NSStringFromSelector(SELECTOR), \
+            NSStringFromClass([[self representedObject] class])); \
+    } \
+    else { \
+        FLTrace(@"%@: %@ IGNORED %@ FROM %@", \
+            [NSThread isMainThread] ? @"F" : @"B", \
+            NSStringFromClass([__LISTENER class]), \
+            NSStringFromSelector(SELECTOR), \
+            NSStringFromClass([[self representedObject] class])); \
+    } \
+} \
+while(0)
+
+
 - (void) sendMessageToListeners:(SEL) selector {
     for(id listener in [self iteratable]) {
         @try {
+            TRACEMSG(listener, selector);
+
             [listener performOptionalSelector_fl:selector];
         }
         @catch(NSException* ex) {
@@ -126,6 +178,8 @@
 
     for(id listener in [self iteratable]) {
         @try {
+            TRACEMSG(listener, selector);
+
             [listener performOptionalSelector_fl:selector
                                       withObject:object];
         }
@@ -139,7 +193,10 @@
                      withObject:(id) object2 {
 
     for(id listener in [self iteratable]) {
+
         @try {
+            TRACEMSG(listener, selector);
+
             [listener performOptionalSelector_fl:selector
                                       withObject:object1
                                       withObject:object2];
@@ -156,6 +213,8 @@
 
     for(id listener in [self iteratable]) {
         @try {
+            TRACEMSG(listener, selector);
+
             [listener performOptionalSelector_fl:selector
                                       withObject:object1
                                       withObject:object2
@@ -174,6 +233,8 @@
 
     for(id listener in [self iteratable]) {
         @try {
+            TRACEMSG(listener, selector);
+
             [listener performOptionalSelector_fl:selector
                                       withObject:object1
                                       withObject:object2
@@ -242,7 +303,7 @@
 - (id) init {	
 	self = [super init];
 	if(self) {
-		_broadcaster = [[FLBroadcasterProxy alloc] init];
+		_broadcaster = [[FLBroadcasterProxy alloc] initWithRepresentedObject:self];
     }
 	return self;
 }
@@ -264,26 +325,42 @@
 //    return hasListener;
 //}
 
-- (void) addListener:(id) listener  {
-    [self.broadcaster addListener:listener];
+- (id) addBackgroundListener:(id)listener {
+    [self.broadcaster addBackgroundListener:listener];
+    return self;
+}
+
+- (id) addForegroundListener:(id)listener {
+    [self.broadcaster addForegroundListener:listener];
+    return self;
 }
 
 - (void) removeListener:(id) listener {
     [self.broadcaster removeListener:listener];
 }
 
+#define SENDMSG(SELECTOR) \
+        FLTrace(    @"%@ SENDING %@", \
+                    NSStringFromClass([self class]), \
+                    NSStringFromSelector(SELECTOR) \
+                    )
+
+
 - (void) sendMessageToListeners:(SEL) selector {
+    SENDMSG(selector);
     [self.broadcaster sendMessageToListeners:selector];
 }
 
 - (void) sendMessageToListeners:(SEL) selector  
                      withObject:(id) object {
+    SENDMSG(selector);
    [self.broadcaster sendMessageToListeners:selector withObject:object];
 }
 
 - (void) sendMessageToListeners:(SEL) selector 
                      withObject:(id) object1
                      withObject:(id) object2 {
+    SENDMSG(selector);
 
     [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2];
 }
@@ -292,6 +369,7 @@
                      withObject:(id) object1
                      withObject:(id) object2
                      withObject:(id) object3 {
+    SENDMSG(selector);
     [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2 withObject:object3];
 }
 
@@ -300,6 +378,7 @@
                      withObject:(id) object2
                      withObject:(id) object3
                      withObject:(id) object4 {
+    SENDMSG(selector);
     [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2 withObject:object3 withObject:object4];
 }
 
