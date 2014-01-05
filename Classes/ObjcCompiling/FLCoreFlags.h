@@ -64,9 +64,9 @@
     #define FL_SHIP_ONLY_INLINE NS_INLINE
 #endif
 
-#ifndef EXPERIMENTAL
-#define EXPERIMENTAL DEBUG
-#endif
+//#ifndef EXPERIMENTAL
+//#define EXPERIMENTAL DEBUG
+//#endif
 
 #if DEBUG
     #define FL_SHIP_ONLY_INLINE 

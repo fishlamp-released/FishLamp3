@@ -49,7 +49,7 @@
 
     #define FLAssertIsNil(REFERENCE, DESCRIPTION...)  \
                 do { \
-                    if((REFERENCE) == nil) { \
+                    if((REFERENCE) != nil) { \
                         FLHandleAssertionFailure(FLAssertionFailureCondition, \
                             ([NSString stringWithFormat:@"Asserting '%s == nil' Failed", #REFERENCE]), \
                             ([NSString stringWithFormat:@"" DESCRIPTION])); \
@@ -59,7 +59,7 @@
 
     #define FLAssertIsNotNil(REFERENCE, DESCRIPTION...) \
                 do { \
-                    if((REFERENCE) != nil) { \
+                    if((REFERENCE) == nil) { \
                         FLHandleAssertionFailure(FLAssertionFailureCondition, \
                             ([NSString stringWithFormat:@"Asserting '%s != nil' Failed", #REFERENCE]), \
                             ([NSString stringWithFormat:@"" DESCRIPTION])); \

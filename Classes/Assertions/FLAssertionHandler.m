@@ -13,6 +13,8 @@
 #import "NSError+FLStackTrace.h"
 #import "NSException+FLError.h"
 
+#import "FishLampSimpleLogger.h"
+
 static id<FLAssertionHandler> s_sharedHandler = nil;
 
 @implementation FLAssertionHandler
@@ -22,7 +24,18 @@ static id<FLAssertionHandler> s_sharedHandler = nil;
 }
 
 + (id) sharedHandler {
+
+#if DEBUG
+    NSLog(@"Assertion handler sharedHandler is nil");
+#endif
+
     return s_sharedHandler;
+}
+
++ (void) initialize {
+    if(!s_sharedHandler) {
+        [self setSharedHandler:[self defaultHandler]];
+    }
 }
 
 + (id) assertionHandler {
@@ -52,6 +65,8 @@ static id<FLAssertionHandler> s_sharedHandler = nil;
             localizedDescription:description
                         userInfo:nil
                       stackTrace:[FLStackTrace stackTrace:stackTrace]];
+
+    FLLog(@"Assertion Failed: %@", theError.localizedDescription);
 
     return [NSException exceptionWithName:name reason:description userInfo:nil error:theError];
 }

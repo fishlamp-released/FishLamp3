@@ -1,9 +1,3 @@
-#
-# Be sure to run `pod spec lint NAME.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# To learn more about the attributes see http://docs.cocoapods.org/specification.html
-#
 Pod::Spec.new do |s|
    
     s.name         = "FishLampCore"
@@ -21,7 +15,7 @@ Pod::Spec.new do |s|
 #     s.ios.frameworks = 'Security', 'MobileCoreServices', 'SystemConfiguration'
 #     s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'Quartz', 'QuartzCore', 'CoreFoundation',  'Foundation'
 
-	s.source_files = 'Classes/FishLampCore.h', 'Classes/FishLampRequired.h', 'Classes/FishLampCoreRequired.h'
+	s.source_files = 'Classes/*.h'
 
 	s.subspec 'ObjcCompiling' do |ss|
 		ss.source_files = 'Classes/ObjcCompiling/**/*.{h,m}'

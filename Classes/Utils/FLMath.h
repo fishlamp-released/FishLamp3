@@ -9,7 +9,7 @@
 #import "FishLampRequired.h"
 
 NS_INLINE
-BOOL FLIsIntegralValue(CGFloat coord) {
+BOOL FLIsIntegralValue(double coord) {
     return round(coord) == coord;
 }
 

@@ -9,12 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <Availability.h>
 
-//#import <CoreGraphics/CoreGraphics.h>
-//
-//#if __IPHONE_OS_VERSION_MIN_REQUIRED
-//// TODO: move this o
-//#import <UIKit/UIKit.h>
-//#endif
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+#import <CoreGraphics/CoreGraphics.h>
+#import <UIKit/UIKit.h>
+#endif
 
 // flags, etc.
 #import "FLCoreFlags.h"
