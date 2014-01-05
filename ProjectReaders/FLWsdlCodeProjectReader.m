@@ -37,6 +37,8 @@
 #import "FLWsdlOperationCodeObject.h"
 #import "FLWsdlServiceCodeObject.h"
 
+#import "FishLampSimpleLogger.h"
+
 @interface FLWsdlCodeProjectReader ()
 //@property (readwrite, assign, nonatomic) FLCodeProject* project;
 @property (readwrite, strong, nonatomic) FLWsdlDefinitions* wsdlDefinitions;

@@ -24,6 +24,8 @@
 
 #import "FishLampCodeGeneratorObjects.h"
 
+#import "FishLampSimpleLogger.h"
+
 @interface FLWsdlOperationCodeObject ()
 @property (readwrite, strong, nonatomic) FLWsdlInputOutput* wsdlOutput;
 @property (readwrite, strong, nonatomic) FLWsdlInputOutput* wsdlInput;

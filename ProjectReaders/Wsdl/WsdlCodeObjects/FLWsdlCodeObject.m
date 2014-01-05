@@ -14,6 +14,8 @@
 #import "FLWsdlCodeArray.h"
 #import "FLCodeArrayType.h"
 
+#import "FishLampSimpleLogger.h"
+
 @implementation FLWsdlCodeObject
 
 - (id) initWithClassName:(NSString*) name superclassName:(NSString*) superclassName {
