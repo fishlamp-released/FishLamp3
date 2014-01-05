@@ -11,7 +11,7 @@
 
 @interface FLObjectDatabaseController ()
 @property (readwrite, strong) FLObjectDatabase* objectDatabase;
-@property (readwrite, strong) FLFifoAsyncQueue* schedulingQueue;
+@property (readwrite, strong) FLFifoDispatchQueue* schedulingQueue;
 @end
 
 @implementation FLObjectDatabaseController
@@ -30,7 +30,7 @@
         _objectDatabase = [[FLObjectDatabase alloc] initWithFilePath:filePath];
         _objectDatabase.delegate = self;
         
-        self.schedulingQueue = [FLFifoAsyncQueue fifoAsyncQueue];
+        self.schedulingQueue = [FLFifoDispatchQueue fifoDispatchQueue];
 	}
 	return self;
 }

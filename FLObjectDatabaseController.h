@@ -15,7 +15,7 @@ typedef void (^FLObjectDatabaseBlock)(FLObjectDatabase* database);
 
 @interface FLObjectDatabaseController : NSObject<FLObjectStorageExtended, FLDatabaseDelegate> {
 @private
-    FLFifoAsyncQueue* _schedulingQueue;
+    FLFifoDispatchQueue* _schedulingQueue;
     FLObjectDatabase* _objectDatabase;
 }
 
