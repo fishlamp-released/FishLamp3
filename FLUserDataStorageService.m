@@ -199,8 +199,8 @@ FLAssertFailed(@"refactor this");
 	@finally {
 		[self deleteServiceData];
 
-		FLAssertIsNil(_cacheDatabase, nil);
-		FLAssertIsNil(_documentsDatabase, nil);
+		FLAssertNil(_cacheDatabase, nil);
+		FLAssertNil(_documentsDatabase, nil);
 		
 		_open = NO;
 		_willOpen = NO;
@@ -379,7 +379,7 @@ FLAssertFailed(@"TODO refactor this");
 
 - (void) finishUpgradeTasks {	
 	if(_upgrading) {
-		FLAssertIsNotNil([self userLogin], nil);
+		FLAssertNotNil([self userLogin], nil);
 		FLAssert(_upgradeTaskList != nil, @"not upgrading");
 		
 		FLApplicationDataVersion* version = [FLApplicationDataVersion applicationDataVersion];
