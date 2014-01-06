@@ -15,26 +15,33 @@
 #if OSX
 // non atomic wrappers around sec api
 
-extern OSStatus FLKeychainSetHttpPassword(     NSString* inUsername,
-                                        NSString* inDomain,
-                                        NSString* inPassword );
-                                        
-extern OSStatus FLKeychainFindHttpPassword(    NSString* inUserName,
-                                        NSString* inDomain,
-                                        NSString** outPassword,
-                                        SecKeychainItemRef *outItemRef);
+@interface FLKeychain ()
 
-extern OSStatus FLKeychainDeleteHttpPassword(NSString* userName, NSString* domain);                                                                                
++ (OSStatus) deleteHttpPassword:(NSString*) userName
+                         domain:(NSString*) domain;
 
++ (OSStatus) setHttpPassword:(NSString*) inUserName
+                      domain:(NSString*) inDomain
+                    password:(NSString*) inPassword;
+
++ (OSStatus) findHttpPassword:(NSString*) inUserName
+                       domain:(NSString*) inDomain
+                  outPassword:(NSString**) outPassword
+                   outItemRef:(SecKeychainItemRef*) outItemRef;
+
+@end
+
+@implementation FLKeychain
 
 // SecBase.h
 
-OSStatus FLKeychainDeleteHttpPassword(NSString* userName, NSString* domain) {
++ (OSStatus) deleteHttpPassword:(NSString*) userName domain:(NSString*) domain {
+
     FLAssertStringIsNotEmpty(userName);
     FLAssertStringIsNotEmpty(domain);
 
     SecKeychainItemRef itemRef = nil;
-	OSStatus err = FLKeychainFindHttpPassword(userName, domain, nil, &itemRef);
+	OSStatus err = [FLKeychain findHttpPassword:userName domain:domain outPassword:nil outItemRef:&itemRef];
     
     if ( itemRef ) {
 		SecKeychainItemDelete(itemRef);
@@ -48,14 +55,14 @@ OSStatus FLKeychainDeleteHttpPassword(NSString* userName, NSString* domain) {
     return err;
 }
 
-OSStatus FLKeychainSetHttpPassword(     NSString* inUserName,
-                                        NSString* inDomain,
-                                        NSString* inPassword ) {
++ (OSStatus) setHttpPassword:(NSString*) inUserName
+                      domain:(NSString*) inDomain
+                    password:(NSString*) inPassword  {
 
     FLAssertStringIsNotEmpty(inUserName);
     FLAssertStringIsNotEmpty(inDomain);
 
-	OSStatus err = FLKeychainDeleteHttpPassword(inUserName, inDomain);
+	OSStatus err = [FLKeychain deleteHttpPassword:inUserName domain:inDomain];
     if(err != noErr && err != errSecItemNotFound) {
         return err;
     }
@@ -96,10 +103,10 @@ OSStatus FLKeychainSetHttpPassword(     NSString* inUserName,
     return status;
 }
 
-OSStatus FLKeychainFindHttpPassword(    NSString* inUserName,
-                                        NSString* inDomain,
-                                        NSString** outPassword,
-                                        SecKeychainItemRef *outItemRef) {
++ (OSStatus) findHttpPassword:(NSString*) inUserName
+                       domain:(NSString*) inDomain
+                  outPassword:(NSString**) outPassword
+                   outItemRef:(SecKeychainItemRef*) outItemRef {
 
     FLAssertStringIsNotEmpty(inUserName);
     FLAssertStringIsNotEmpty(inDomain);
@@ -160,28 +167,25 @@ OSStatus FLKeychainFindHttpPassword(    NSString* inUserName,
     return err;
 }
 
-
-@implementation FLKeychain
-	
 + (NSString*) httpPasswordForUserName:(NSString*) userName
                            withDomain:(NSString*) domain
 {		
 	NSString *password = nil;	//  return value
 
     @synchronized(self) {
-        FLKeychainFindHttpPassword(userName, domain, &password, nil);
+        [FLKeychain findHttpPassword:userName domain:domain outPassword:&password outItemRef:nil];
     }
 
 	return FLAutorelease(password);
 }
 
 + (OSStatus) setHttpPassword:(NSString*) password 
-         forUserName:(NSString*) userName 
-          withDomain:(NSString*) domain {
+                 forUserName:(NSString*) userName
+                  withDomain:(NSString*) domain {
 
     OSStatus status = 0;
 	@synchronized(self) {
-        status = FLKeychainSetHttpPassword(userName, domain, password);
+        status = [FLKeychain setHttpPassword:userName domain:domain password:password];
     }
     return status;
     
@@ -192,7 +196,7 @@ OSStatus FLKeychainFindHttpPassword(    NSString* inUserName,
                             withDomain:(NSString*) domain {
     OSStatus status = 0;
 	@synchronized(self) {
-        status = FLKeychainDeleteHttpPassword(userName, domain);
+        status = [FLKeychain deleteHttpPassword:userName domain:domain];
     }
     return status;
 }
