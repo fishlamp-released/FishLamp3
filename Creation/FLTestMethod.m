@@ -17,7 +17,7 @@
 	self = [super init];
 	if(self) {
         FLAssertNotNil(aClass);
-        FLAssertNotNil(selector);
+        FLAssertNonNilPointer(selector);
 		_testClass = aClass;
         _testSelector = selector;
 	}

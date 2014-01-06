@@ -117,6 +117,10 @@
 - (FLTestCase*) setRunOrder:(NSUInteger) order forTestCase:(FLTestCase*) testCase {
     FLConfirmNotNil(testCase);
 
+    if(!testCase) {
+        return nil;
+    }
+
     [_testCaseArray removeObject:FLRetainWithAutorelease(testCase)];
 
     if(order == 0) {

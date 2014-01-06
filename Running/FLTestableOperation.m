@@ -116,8 +116,8 @@
         [_queue removeObjectAtIndex:0];
         FLAssertNotNil(currentTestCase);
 
-        id<FLTestable> testable = self.testableObject;
-        FLAssertNotNil(testable);
+//        id<FLTestable> testable = self.testableObject;
+//        FLAssertNotNil(testable);
 
         if(!currentTestCase.isDisabled) {
             [[FLTestLoggingManager instance] appendLineWithFormat:@"%@: %@",

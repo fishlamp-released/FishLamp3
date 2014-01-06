@@ -59,7 +59,9 @@
                         @"test results '%@' already in expected list",
                         key);
 
-        [_results setObject:result forKey:key];
+        if(result && key) {
+            [_results setObject:result forKey:key];
+        }
     }
 }
 

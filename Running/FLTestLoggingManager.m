@@ -41,7 +41,7 @@ FLSynthesizeSingleton(FLTestLoggingManager)
 
 - (void) addLogger:(id<FLStringFormatter>) formatter {
     FLCriticalSection(&s_predicate, ^{
-        FLAssertNotNil(formatter);
+//        FLAssertNotNil(formatter);
         [_loggers addObject:formatter];
     });
 }
