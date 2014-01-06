@@ -34,7 +34,7 @@
 {
 	if((self = [super init]))
 	{
-		FLAssertIsNotNil(folder, nil);
+		FLAssertNotNil(folder, nil);
 		FLAssertStringIsNotEmpty(fileName, nil);
 	
 		self.folder = folder;

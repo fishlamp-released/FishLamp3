@@ -277,7 +277,7 @@
 
 - (void) writeObjectToFile:(NSString*) fileName object:(id) object {
 	FLAssertStringIsNotEmpty(fileName);
-	FLAssertIsNotNil(object);
+	FLAssertNotNil(object);
 
 	NSData* data = [NSKeyedArchiver archivedDataWithRootObject:object];
 	[self writeDataToFile:fileName data:data]; 
@@ -295,7 +295,7 @@
 
 - (void) writeDataToFile:(NSString*) fileName data:(NSData*) data {
 	FLAssertStringIsNotEmpty(fileName);
-	FLAssertIsNotNil(data);
+	FLAssertNotNil(data);
 	
 	NSError* error = nil;
 	[data writeToFile:[self pathForFile:fileName] options:NSAtomicWrite error:&error];
@@ -325,7 +325,7 @@
 }
 
 - (void) moveFilesToFolder:(FLFolder*) destinationFolder withCopy:(BOOL) copy {
-	FLAssertIsNotNil(destinationFolder);
+	FLAssertNotNil(destinationFolder);
 
 	FLAutoreleasePool(
 
