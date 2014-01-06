@@ -70,7 +70,7 @@
 }
 
 - (NSEnumerator*) mutableEnumerator {
-    FLAssertIsNil(_mutableEnumerator);
+    FLAssertNil(_mutableEnumerator);
 
     _mutableEnumerator = [FLLinkedListMutableEnumerator linkedListMutableEnumerator:self];
     return _mutableEnumerator;
@@ -80,16 +80,16 @@
 
 - (void) assertIsInList:(id) object
 {
-//	  FLAssertIsNotNil(object.linkedList);
+//	  FLAssertNotNil(object.linkedList);
 	if(object != self.firstObject && object != self.lastObject) {
-		FLAssertIsNotNil([object nextObjectInLinkedList]);
-		FLAssertIsNotNil([object previousObjectInLinkedList]);
+		FLAssertNotNil([object nextObjectInLinkedList]);
+		FLAssertNotNil([object previousObjectInLinkedList]);
 	}
 	else if(object == self.firstObject) {
-		FLAssertIsNil([object previousObjectInLinkedList]);
+		FLAssertNil([object previousObjectInLinkedList]);
 	}
 	else if(object == self.lastObject) {
-		FLAssertIsNil([object nextObjectInLinkedList]);
+		FLAssertNil([object nextObjectInLinkedList]);
 	}
 }
 
@@ -120,8 +120,8 @@
 
 	FLAssert(_count == count, @"wrong count");
 	if(_count == 0) {
-		FLAssertIsNil(self.firstObject);
-		FLAssertIsNil(self.lastObject);
+		FLAssertNil(self.firstObject);
+		FLAssertNil(self.lastObject);
 	}
 }
 
@@ -131,7 +131,7 @@
 - (void) _insertObject:(id) object 
           beforeObject:(id) beforeObject
 {
-	FLAssertIsNotNil(object);
+	FLAssertNotNil(object);
 	FLAssert(beforeObject != object, @"can't push before self!");
 	
 	FLAssert([object nextObjectInLinkedList] == nil, @"already in a list");
@@ -168,7 +168,7 @@
 
 - (void) _insertObject:(id) object 
            afterObject:(id) afterObject {
-	FLAssertIsNotNil(object);
+	FLAssertNotNil(object);
 	FLAssert(afterObject != object, @"can't append after self!");
 	FLAssert([object nextObjectInLinkedList] == nil, @"already in a list");
 	FLAssert([object previousObjectInLinkedList] == nil, @"already in a list");
@@ -204,7 +204,7 @@
 
 - (void) _removeObject:(id) object {
 
-	FLAssertIsNotNil(object);
+	FLAssertNotNil(object);
     
 	++_mutationCount;
 
@@ -365,8 +365,8 @@
 }
 
 - (void) swapListPositions:(id) firstObject secondObject:(id) secondObject {
-    FLAssertIsNotNil(firstObject);
-    FLAssertIsNotNil(secondObject);
+    FLAssertNotNil(firstObject);
+    FLAssertNotNil(secondObject);
     FLAssert([firstObject linkedList] == self, @"first object is not in linked list");
     FLAssert([secondObject linkedList] == self, @"second object is not in linked list");
     FLAssert(firstObject != secondObject, @"first and second object are the same");
@@ -420,8 +420,8 @@
         --_count;
     }
     
-    FLAssertIsNil(_firstObject);
-    FLAssertIsNil(_lastObject);
+    FLAssertNil(_firstObject);
+    FLAssertNil(_lastObject);
     FLAssert(_count == 0, @"count is not zero");
 	
 #if HARDCORE_CHECKING_ACTION

@@ -124,7 +124,9 @@
 
     FLConfirm([self resolveKey:newkey] == nil, @"key already exists (or is alias): \"%@\"", newkey);
 
-    [_objects setObject:object forKey:newkey];
+    if(object && key) {
+        [_objects setObject:object forKey:newkey];
+    }
 }
 
 - (void) replaceObject:(id) object forKey:(id) key {
