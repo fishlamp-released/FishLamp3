@@ -106,6 +106,12 @@
 
 #pragma GCC diagnostic ignored "-Wfloat-equal"
 
+#if __clang__
+#pragma GCC diagnostic ignored "-Wnonnull"
+#pragma GCC diagnostic ignored "-Wall"
+#pragma GCC diagnostic ignored "-Wformat"
+#endif
+
 #if __MAC_10_8
     // this basically makes default: in case cause an error. I don't understand this one at all.
     #pragma GCC diagnostic ignored "-Wcovered-switch-default"

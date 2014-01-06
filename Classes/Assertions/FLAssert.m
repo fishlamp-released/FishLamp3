@@ -14,8 +14,8 @@
 
 id _FLAssertIsClass(id object, Class aClass) {
     if(object) {
-        FLAssertNotNil(aClass, @"class for %@ is nil", NSStringFromClass(aClass));
-        FLAssert([object isKindOfClass:aClass], 
+        FLCAssertNotNil(aClass, @"class for %@ is nil", NSStringFromClass(aClass));
+        FLCAssert([object isKindOfClass:aClass],
             @"expecting type of %@ but got %@", 
             NSStringFromClass(aClass), 
             NSStringFromClass([object class]));
@@ -25,9 +25,14 @@ id _FLAssertIsClass(id object, Class aClass) {
 
 id _FLAssertConformsToProtocol(id object, Protocol* proto) {
     if(object) {
-        FLAssert([object conformsToProtocol:proto], @"expecting object to implement protocol: %@", NSStringFromProtocol(proto));
+        FLCAssert([object conformsToProtocol:proto], @"expecting object to implement protocol: %@", NSStringFromProtocol(proto));
     }
     return object;
 }
 
-
+#if DEBUG
+// This works around a spurious clang warning caused by comparision to nil in asserts
+id NARG() {
+    return (void*) 0L;
+}
+#endif

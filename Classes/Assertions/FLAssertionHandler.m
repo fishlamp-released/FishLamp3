@@ -26,7 +26,9 @@ static id<FLAssertionHandler> s_sharedHandler = nil;
 + (id) sharedHandler {
 
 #if DEBUG
-    NSLog(@"Assertion handler sharedHandler is nil");
+    if(!s_sharedHandler) {
+        NSLog(@"Assertion handler sharedHandler is nil");
+    }
 #endif
 
     return s_sharedHandler;
@@ -66,9 +68,11 @@ static id<FLAssertionHandler> s_sharedHandler = nil;
                         userInfo:nil
                       stackTrace:[FLStackTrace stackTrace:stackTrace]];
 
-    FLLog(@"Assertion Failed: %@", theError.localizedDescription);
 
-    return [NSException exceptionWithName:name reason:description userInfo:nil error:theError];
+    NSException* ex = [NSException exceptionWithName:name reason:description userInfo:nil error:theError];
+    FLLog(@"Will throw assertion failure: %@: %@", name, description);
+    return ex;
+
 }
 
 @end
