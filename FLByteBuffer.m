@@ -104,7 +104,7 @@
         FLAssert(capacity > 0);
 
         _capacity = capacity + FLByteBufferDeadBeafSize;
-        _buffer = malloc(capacity);
+        _buffer = malloc(_capacity);
     }
     
     return self;
