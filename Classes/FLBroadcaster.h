@@ -31,33 +31,70 @@
               withObject:(id) object3
               withObject:(id) object4;
 
-//- (BOOL) hasListener:(id) listener;
+@end
 
-- (id) addForegroundListener:(id) listener;
-- (id) addBackgroundListener:(id) listener;
+typedef NS_ENUM(NSUInteger, FLScheduleMessages) {
+    FLScheduleMessagesInMainThreadOnly,
+    FLScheduleMessagesInAnyThread
+};
+
+@protocol FLListenerRegistry <NSObject>
+
+- (BOOL) hasListener:(id) listener;
+
+- (id) addListener:(id) listener;
+- (id) addListener:(id) listener withScheduling:(FLScheduleMessages) schedule;
 
 - (void) removeListener:(id) listener;
+
 @end
 
-@interface FLBroadcasterProxy : NSProxy<FLBroadcaster> {
+
+@interface FLListenerRegistry : NSObject<FLListenerRegistry> {
 @private
     NSMutableSet* _listeners;
-    NSArray* _iteratable;
-    BOOL _dirty;
-    dispatch_once_t _semaphore;
-    __unsafe_unretained id _representedObject;
+    NSArray* _iteratableListeners;
 }
 
-- (id) init;
+@property (readonly, strong) NSArray* listeners;
+
 @end
 
-@interface FLBroadcaster : NSObject<FLBroadcaster> {
+
+@interface FLMessageSender : NSObject
+
+- (void) sendMessage:(SEL) messageSelector
+         toListeners:(NSArray*) listeners;
+
+- (void) sendMessage:(SEL) messageSelector
+          withObject:(id) object
+         toListeners:(NSArray*) listeners;
+
+- (void) sendMessage:(SEL) messageSelector
+          withObject:(id) object1
+          withObject:(id) object2
+         toListeners:(NSArray*) listeners;
+
+- (void) sendMessage:(SEL) messageSelector
+          withObject:(id) object1
+          withObject:(id) object2
+          withObject:(id) object3
+         toListeners:(NSArray*) listeners;
+
+- (void) sendMessage:(SEL) messageSelector
+          withObject:(id) object1
+          withObject:(id) object2
+          withObject:(id) object3
+          withObject:(id) object4
+         toListeners:(NSArray*) listeners;
+
+@end
+
+@interface FLBroadcaster : FLMessageSender <FLBroadcaster, FLListenerRegistry> {
 @private
-    FLBroadcasterProxy* _broadcaster;
+    FLListenerRegistry* _listeners;
 }
-@end
 
-@protocol FLListener <NSObject>
-- (id) objectAsListener;
-@end
+@property (readonly, strong) FLListenerRegistry* listeners;
 
+@end

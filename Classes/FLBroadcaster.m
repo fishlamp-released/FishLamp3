@@ -16,108 +16,113 @@
 #import "FishLampSimpleLogger.h"
 #import "FLTrace.h"
 
-@implementation NSObject (FLBroadcaster)
+#import "FLObjectProxy.h"
 
+@protocol FLListener <NSObject>
+- (id) objectAsListener;
+@end
+
+
+@implementation NSObject (FLBroadcaster)
 - (id) objectAsListener {
     return [FLNonretainedObjectProxy nonretainedObjectProxy:self];
 }
 @end
 
 @implementation NSProxy (FLBroadcaster)
-
 - (id) objectAsListener {
     return self;
 }
-
 @end
 
-@interface FLBroadcasterProxy ()
-@property (readwrite, assign) BOOL dirty;
+@interface FLListenerRegistry ()
 @end
 
-@implementation FLBroadcasterProxy
+@implementation FLListenerRegistry
 
-@synthesize dirty =_dirty;
+#define SENDMSG(SELECTOR) \
+        FLTrace(    @"%@ SENDING %@", \
+                    NSStringFromClass([self class]), \
+                    NSStringFromSelector(SELECTOR) \
+                    )
 
-- (id) init {
-// NSProxy has no init. Put this here for subclasses
+- (id) init {	
+	self = [super init];
+	if(self) {
+        _listeners = [[NSMutableSet alloc] init];
+	}
 	return self;
-}
-
-- (id) initWithRepresentedObject:(id) object {
-    _representedObject = object;
-    return self;
-}
-
-- (id) representedObject {
-    return _representedObject;
 }
 
 #if FL_MRC
 - (void)dealloc {
-    [_iteratable release];
+    [_iteratableListeners release];
     [_listeners release];
 	[super dealloc];
 }
 #endif
 
-- (NSArray*) iteratable {
+- (NSArray*) listeners {
 
-    __block NSArray* outArray = nil;
-    FLCriticalSection(&_semaphore, ^{
-        if(_dirty) {
-            FLReleaseWithNil(_iteratable);
-        }
-        if(!_iteratable) {
-            _iteratable = [[_listeners allObjects] copy];
-        }
-        self.dirty = NO;
+    if(!_iteratableListeners) {
+        @synchronized(self) {
+            if(!_iteratableListeners) {
+                _iteratableListeners = [[_listeners allObjects] copy];
+            }
+        };
+    }
 
-        outArray = FLRetainWithAutorelease(_iteratable);
-    });
-
-    return outArray;
+    return _iteratableListeners;
 }
 
 - (BOOL) hasListener:(id) listener {
-    return [_listeners containsObject:listener];
+    @synchronized(self) {
+        return [_listeners containsObject:listener];
+    }
 }
 
-- (id) broadcaster {
-    return self;
-}
+//- (id) addBackgroundListener:(id)listener {
+//    @synchronized(self) {
+//        [_listeners addObject:[listener objectAsListener]];
+//        FLReleaseWithNil(_iteratableListeners);
+//    }
+//
+//    return self;
+//}
+//
+//- (id) addForegroundListener:(id) listener  {
+//    @synchronized(self) {
+//        [_listeners addObject:[FLMainThreadObject mainThreadObject:[listener objectAsListener]]];
+//        FLReleaseWithNil(_iteratableListeners);
+//    }
+//
+//    return self;
+//}
 
-- (id) addBackgroundListener:(id)listener {
-    FLCriticalSection(&_semaphore, ^{
-        if(!_listeners) {
-            _listeners = [[NSMutableSet alloc] init];
+- (id) addListener:(id) listener withScheduling:(FLScheduleMessages) schedule {
+    @synchronized(self) {
+
+        if( schedule == FLScheduleMessagesInMainThreadOnly ) {
+            [_listeners addObject:[FLMainThreadObject mainThreadObject:[listener objectAsListener]]];
+        }
+        else {
+            [_listeners addObject:[listener objectAsListener]];
         }
 
-        [_listeners addObject:[listener objectAsListener]];
-
-        self.dirty = YES;
-    });
+        FLReleaseWithNil(_iteratableListeners);
+    }
 
     return self;
 }
 
-- (id) addForegroundListener:(id) listener  {
-    FLCriticalSection(&_semaphore, ^{
-        if(!_listeners) {
-            _listeners = [[NSMutableSet alloc] init];
-        }
-
-        [_listeners addObject:[FLMainThreadObject mainThreadObject:[listener objectAsListener]]];
-
-        self.dirty = YES;
-    });
-
-    return self;
+- (id) addListener:(id) listener {
+    return [self addListener:listener
+       withScheduling:[NSThread isMainThread] ? FLScheduleMessagesInMainThreadOnly : FLScheduleMessagesInAnyThread];
 }
 
 
 - (void) removeListener:(id) listener {
-    FLCriticalSection(&_semaphore, ^{
+    @synchronized(self) {
 
         id theObject = nil;
         for(id object in _listeners) {
@@ -125,6 +130,7 @@
                 theObject = object;
             }
         }
+
         if(theObject) {
             [_listeners removeObject:theObject];
         }
@@ -136,9 +142,13 @@
 //            }
 //        }
 
-        self.dirty = YES;
-    });
+        FLReleaseWithNil(_iteratableListeners);
+    }
 }
+
+@end
+
+@implementation FLMessageSender
 
 #define TRACEMSG(OBJ,SELECTOR) \
 do { \
@@ -148,238 +158,196 @@ do { \
             [NSThread isMainThread] ? @"F" : @"B", \
             NSStringFromClass([__LISTENER class]), \
             NSStringFromSelector(SELECTOR), \
-            NSStringFromClass([[self representedObject] class])); \
+            NSStringFromClass([self class])); \
     } \
-    else { \
-        FLTrace(@"%@: %@ IGNORED %@ FROM %@", \
-            [NSThread isMainThread] ? @"F" : @"B", \
-            NSStringFromClass([__LISTENER class]), \
-            NSStringFromSelector(SELECTOR), \
-            NSStringFromClass([[self representedObject] class])); \
-    } \
+    } while(0)
+
+//    else { \
+//        FLTrace(@"%@: %@ IGNORED %@ FROM %@", \
+//            [NSThread isMainThread] ? @"F" : @"B", \
+//            NSStringFromClass([__LISTENER class]), \
+//            NSStringFromSelector(SELECTOR), \
+//            NSStringFromClass([self class])); \
+//    } \
 } \
 while(0)
 
+- (void) sendMessage:(SEL) selector
+         toListeners:(NSArray*) listeners {
 
-- (void) sendMessageToListeners:(SEL) selector {
-    for(id listener in [self iteratable]) {
-        @try {
-            TRACEMSG(listener, selector);
+    if(listeners) {
+        for(id listener in listeners) {
+            @try {
+                TRACEMSG(listener, selector);
 
-            [listener performOptionalSelector_fl:selector];
-        }
-        @catch(NSException* ex) {
-        }
-    }
-}
-
-- (void) sendMessageToListeners:(SEL) selector  
-                     withObject:(id) object {
-
-    for(id listener in [self iteratable]) {
-        @try {
-            TRACEMSG(listener, selector);
-
-            [listener performOptionalSelector_fl:selector
-                                      withObject:object];
-        }
-        @catch(NSException* ex) {
+                [listener performOptionalSelector_fl:selector];
+            }
+            @catch(NSException* ex) {
+            }
         }
     }
 }
 
-- (void) sendMessageToListeners:(SEL) selector 
-                     withObject:(id) object1
-                     withObject:(id) object2 {
+- (void) sendMessage:(SEL) selector
+          withObject:(id) object
+         toListeners:(NSArray*) listeners {
 
-    for(id listener in [self iteratable]) {
+    if(listeners) {
+        for(id listener in listeners) {
+            @try {
+                TRACEMSG(listener, selector);
 
-        @try {
-            TRACEMSG(listener, selector);
-
-            [listener performOptionalSelector_fl:selector
-                                      withObject:object1
-                                      withObject:object2];
-        }
-        @catch(NSException* ex) {
-        }
-    }
-}
-
-- (void) sendMessageToListeners:(SEL) selector 
-                     withObject:(id) object1
-                     withObject:(id) object2
-                     withObject:(id) object3 {
-
-    for(id listener in [self iteratable]) {
-        @try {
-            TRACEMSG(listener, selector);
-
-            [listener performOptionalSelector_fl:selector
-                                      withObject:object1
-                                      withObject:object2
-                                      withObject:object3];
-        }
-        @catch(NSException* ex) {
+                [listener performOptionalSelector_fl:selector
+                                          withObject:object];
+            }
+            @catch(NSException* ex) {
+            }
         }
     }
 }
 
-- (void) sendMessageToListeners:(SEL) selector 
-                     withObject:(id) object1
-                     withObject:(id) object2
-                     withObject:(id) object3
-                     withObject:(id) object4 {
+- (void) sendMessage:(SEL) selector
+          withObject:(id) object1
+          withObject:(id) object2
+         toListeners:(NSArray*) listeners {
 
-    for(id listener in [self iteratable]) {
-        @try {
-            TRACEMSG(listener, selector);
+    if(listeners) {
+        for(id listener in listeners) {
 
-            [listener performOptionalSelector_fl:selector
-                                      withObject:object1
-                                      withObject:object2
-                                      withObject:object3
-                                      withObject:object4];
-        }
-        @catch(NSException* ex) {
+            @try {
+                TRACEMSG(listener, selector);
+
+                [listener performOptionalSelector_fl:selector
+                                          withObject:object1
+                                          withObject:object2];
+            }
+            @catch(NSException* ex) {
+            }
         }
     }
 }
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation {
+- (void) sendMessage:(SEL) selector
+          withObject:(id) object1
+          withObject:(id) object2
+          withObject:(id) object3
+         toListeners:(NSArray*) listeners {
 
-    BOOL listenerHandled = NO;
+    if(listeners) {
+        for(id listener in listeners) {
+            @try {
+                TRACEMSG(listener, selector);
 
-    for(id listener in [self iteratable]) {
-        if([listener respondsToSelector:[anInvocation selector]]) {
-            [anInvocation invokeWithTarget:listener];
-            listenerHandled = YES;
+                [listener performOptionalSelector_fl:selector
+                                          withObject:object1
+                                          withObject:object2
+                                          withObject:object3];
+            }
+            @catch(NSException* ex) {
+            }
         }
-    }
-    if(!listenerHandled) {
-        [super forwardInvocation:anInvocation];
     }
 }
 
-- (BOOL) respondsToSelector:(SEL) selector {
+- (void) sendMessage:(SEL) selector
+          withObject:(id) object1
+          withObject:(id) object2
+          withObject:(id) object3
+          withObject:(id) object4
+         toListeners:(NSArray*) listeners {
 
-    for(id listener in [self iteratable]) {
-        if([listener respondsToSelector:selector]) {
-            return YES;
+    if(listeners) {
+        for(id listener in listeners) {
+            @try {
+                TRACEMSG(listener, selector);
+
+                [listener performOptionalSelector_fl:selector
+                                          withObject:object1
+                                          withObject:object2
+                                          withObject:object3
+                                          withObject:object4];
+            }
+            @catch(NSException* ex) {
+            }
         }
     }
-
-    return NO;
 }
 
-- (NSMethodSignature*)methodSignatureForSelector:(SEL)selector {
-
-    NSMethodSignature* signature = nil;
-    for(id listener in [self iteratable]) {
-        signature = [listener methodSignatureForSelector:selector];
-        if(signature) {
-            return signature;
-        }
-    }
-
-    if(!signature) {
-    // saw this on the internet, so it must be true.
-        signature = [NSMethodSignature signatureWithObjCTypes:"@^v^c"];
-    }
-
-    return signature;
-}
-
-@end
-
-@interface FLBroadcaster ()
-@property (readonly, strong) FLBroadcasterProxy* broadcaster;
 @end
 
 @implementation FLBroadcaster
 
-@synthesize broadcaster = _broadcaster;
-
-- (id) init {	
-	self = [super init];
-	if(self) {
-		_broadcaster = [[FLBroadcasterProxy alloc] initWithRepresentedObject:self];
-    }
-	return self;
-}
+@synthesize listeners = _listeners;
 
 #if FL_MRC
 - (void)dealloc {
-	[_broadcaster release];
+	[_listeners release];
 	[super dealloc];
 }
 #endif
 
-//- (BOOL) hasListener:(id) listener {
-//    __block BOOL hasListener = NO;
-//
-//    FLCriticalSection(&_predicate, ^{
-//        hasListener = [self.broadcaster hasListener:listener];
-//    });
-//
-//    return hasListener;
-//}
-
-- (id) addBackgroundListener:(id)listener {
-    [self.broadcaster addBackgroundListener:listener];
-    return self;
+- (void) sendMessageToListeners:(SEL) messageSelector {
+   [self sendMessage:messageSelector toListeners:self.listeners.listeners];
 }
 
-- (id) addForegroundListener:(id)listener {
-    [self.broadcaster addForegroundListener:listener];
+- (void) sendMessageToListeners:(SEL) messageSelector
+              withObject:(id) object {
+
+    [self sendMessage:messageSelector withObject:object toListeners:self.listeners.listeners];
+}
+
+- (void) sendMessageToListeners:(SEL) messageSelector
+              withObject:(id) object1
+              withObject:(id) object2 {
+
+    [self sendMessage:messageSelector withObject:object1 withObject:object2 toListeners:self.listeners.listeners];
+}
+
+- (void) sendMessageToListeners:(SEL) messageSelector
+              withObject:(id) object1
+              withObject:(id) object2
+              withObject:(id) object3 {
+
+    [self sendMessage:messageSelector withObject:object1 withObject:object2 withObject:object3 toListeners:self.listeners.listeners];
+}
+
+
+- (void) sendMessageToListeners:(SEL) messageSelector
+              withObject:(id) object1
+              withObject:(id) object2
+              withObject:(id) object3
+              withObject:(id) object4 {
+
+    [self sendMessage:messageSelector withObject:object1 withObject:object2 withObject:object3 withObject:object4 toListeners:self.listeners.listeners];
+}
+
+- (BOOL) hasListener:(id) listener {
+    return self.listeners && [self.listeners hasListener:listener];
+}
+
+- (FLListenerRegistry*) lazyListeners {
+    if(!_listeners) {
+        @synchronized(self) {
+            if(!_listeners) {
+                _listeners = [[FLListenerRegistry alloc] init];
+            }
+        }
+    }
+    return _listeners;
+}
+
+- (id) addListener:(id) listener withScheduling:(FLScheduleMessages) schedule {
+    [[self lazyListeners] addListener:listener withScheduling:schedule];
     return self;
 }
 
 - (void) removeListener:(id) listener {
-    [self.broadcaster removeListener:listener];
+    [self.listeners removeListener:listener];
 }
 
-#define SENDMSG(SELECTOR) \
-        FLTrace(    @"%@ SENDING %@", \
-                    NSStringFromClass([self class]), \
-                    NSStringFromSelector(SELECTOR) \
-                    )
-
-
-- (void) sendMessageToListeners:(SEL) selector {
-    SENDMSG(selector);
-    [self.broadcaster sendMessageToListeners:selector];
-}
-
-- (void) sendMessageToListeners:(SEL) selector  
-                     withObject:(id) object {
-    SENDMSG(selector);
-   [self.broadcaster sendMessageToListeners:selector withObject:object];
-}
-
-- (void) sendMessageToListeners:(SEL) selector 
-                     withObject:(id) object1
-                     withObject:(id) object2 {
-    SENDMSG(selector);
-
-    [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2];
-}
-
-- (void) sendMessageToListeners:(SEL) selector 
-                     withObject:(id) object1
-                     withObject:(id) object2
-                     withObject:(id) object3 {
-    SENDMSG(selector);
-    [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2 withObject:object3];
-}
-
-- (void) sendMessageToListeners:(SEL) selector 
-                     withObject:(id) object1
-                     withObject:(id) object2
-                     withObject:(id) object3
-                     withObject:(id) object4 {
-    SENDMSG(selector);
-    [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2 withObject:object3 withObject:object4];
+- (id) addListener:(id) listener {
+    [[self lazyListeners] addListener:listener];
+    return self;
 }
 
 @end
