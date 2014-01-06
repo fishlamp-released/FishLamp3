@@ -31,7 +31,6 @@
     return FLAutorelease([[[self class] alloc] initWithOutputFlags:outputFlags]);
 }
 
-
 - (void) indent:(FLIndentIntegrity*) integrity {
     [[FLPrintfStringFormatter instance] indent:integrity];
 }
@@ -51,9 +50,10 @@
                 FLPrintf(moreInfo);
             }
             
-            FLPrintf(@"%@:%d:",
+            FLPrintf(@"%@:%d: %@",
                          entry.stackTrace.fileName,
-                         entry.stackTrace.lineNumber);
+                         entry.stackTrace.lineNumber,
+                         entry.stackTrace.function);
         }];
     }
 
