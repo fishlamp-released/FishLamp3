@@ -241,7 +241,7 @@
 //
 ////- (void) addCompatibleParameter:(NSString*) parameter {
 ////    
-////    FLAssertIsNotNil(parameter);
+////    FLAssertNotNil(parameter);
 ////
 ////    if(!_compatibleParameters) {
 ////        _compatibleParameters = [[NSMutableArray alloc] init];
