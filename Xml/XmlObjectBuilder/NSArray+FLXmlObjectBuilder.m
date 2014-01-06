@@ -62,8 +62,10 @@ arrayWithElementContents:(FLPropertyDescriber*) propertyDescriber {
         
         id object = [elementDescriber xmlObjectBuilder:builder inflateObjectWithElement:element];
         FLAssertNotNil(object);
-        
-        [newArray addObject:object];                    
+
+        if(object) {
+            [newArray addObject:object];
+        }
     }
     
     return newArray;

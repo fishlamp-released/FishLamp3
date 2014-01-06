@@ -80,7 +80,7 @@
         walker = walker.siblingElement;
     }
     FLAssertNotNil(walker);
-    FLAssertIsNil(walker.siblingElement);
+    FLAssertNil(walker.siblingElement);
     walker.siblingElement = siblingElement;
 }
 

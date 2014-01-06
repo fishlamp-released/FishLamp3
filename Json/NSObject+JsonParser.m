@@ -24,10 +24,10 @@
 //	FLAssertStringIsNotEmpty(key);
 //
 //	FLObjectDescriber* describer = [[self class] objectDescriber];
-//	FLAssertIsNotNil(describer);
+//	FLAssertNotNil(describer);
 //
 //	FLObjectDescriber* desc = [describer propertyForName:key];
-////	FLAssertIsNotNil(desc);
+////	FLAssertNotNil(desc);
 //
 //	if(desc)
 //	{
@@ -41,7 +41,7 @@
 //				[self setValue:newObject forKey:key];
 //			}
 //		
-//			FLAssertIsNotNil(newObject);
+//			FLAssertNotNil(newObject);
 //			if(outObject)
 //			{
 //				*outObject = FLRetain(newObject);
@@ -64,10 +64,10 @@
 //	FLAssertStringIsNotEmpty(key);
 //
 //	FLObjectDescriber* describer = [[self class] objectDescriber];
-//	FLAssertIsNotNil(describer);
+//	FLAssertNotNil(describer);
 //
 //	FLObjectDescriber* desc = [describer propertyForName:key];
-////	FLAssertIsNotNil(desc);
+////	FLAssertNotNil(desc);
 //
 //	if(desc) {
 //		switch(desc.objectDescriber.specificType) {
@@ -102,10 +102,10 @@
 
 
 	FLObjectDescriber* describer = [[parentObject class] objectDescriber];
-	FLAssertIsNotNil(describer);
+	FLAssertNotNil(describer);
 
 	FLObjectDescriber* desc = [describer propertyForName:arrayItemKey];
-	FLAssertIsNotNil(desc);
+	FLAssertNotNil(desc);
 	
 	if(desc)
 	{
@@ -113,7 +113,7 @@
 		{
 		//	if(FLStringsAreEqual(property.objectName, arrayItemKey))
 			{
-                FLAssertIsNotNil(property.objectDescriber.actualClass);
+                FLAssertNotNil(property.objectDescriber.actualClass);
                 FLObjectDescriber* propDescriber = [property.objectDescriber.actualClass objectDescriber];
             
 				if(propDescriber)
@@ -122,7 +122,7 @@
 					id obj = [[property.objectDescriber.actualClass alloc] init];
 					FLAssert(obj != nil, @"Unable to created object of type: %@", NSStringFromClass(property.objectDescriber.actualClass));
 
-					FLAssertIsNotNil(obj);
+					FLAssertNotNil(obj);
 					[self addObject:obj];
 					FLRelease(obj);
 					

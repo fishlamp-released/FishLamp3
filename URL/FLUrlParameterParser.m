@@ -16,10 +16,10 @@
 + (BOOL) _setDataInObject:(id) object key:(NSString*) key data:(id) data strict:(BOOL)strict
 {
 //	FLObjectDescriber* describer = [[object class] objectDescriber];
-//	FLAssertIsNotNil(describer);
+//	FLAssertNotNil(describer);
 //
 //	FLObjectDescriber* desc = [describer propertyForName:key];
-//	FLAssertIsNotNil(desc);
+//	FLAssertNotNil(desc);
 
 	@try
 	{
