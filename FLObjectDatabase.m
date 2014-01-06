@@ -21,7 +21,7 @@
 @implementation FLObjectDatabase
 
 - (void) deleteObject:(id) inputObject {
-    FLAssertIsNotNil(inputObject);
+    FLAssertNotNil(inputObject);
         
     FLDatabaseTable* table = [[inputObject class] sharedDatabaseTable];
     
