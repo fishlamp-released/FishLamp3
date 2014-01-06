@@ -245,7 +245,7 @@ static NSMutableDictionary* s_registry = nil;
     if(![property representsClass:[NSMutableArray class]] ) {
         property.representedObjectDescriber  = [FLObjectDescriber objectDescriber:[NSMutableArray class]];
     }
-    FLAssertNil(property.containedTypes);
+    FLAssertNotNil(property.containedTypes);
     FLAssertNotNil(types);
 
     property.containedTypes = types;    

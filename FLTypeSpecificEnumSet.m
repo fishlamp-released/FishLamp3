@@ -29,21 +29,23 @@
 
 - (void) setConcatenatedString:(NSString*) concatenatedString 
             withParseDelimiter:(NSString*) delimeter {
-    FLAssertNotNil(_valueLookup);
-    FLAssertNotNil(_stringLookup);
+    FLAssertNonZeroNumber(_valueLookup);
+    FLAssertNonZeroNumber(_stringLookup);
     
     NSArray* strings = [concatenatedString componentsSeparatedByCharactersInSet_fl:
                         [NSCharacterSet characterSetWithCharactersInString:delimeter] allowEmptyStrings:NO];
-    
-    for(NSString* string in strings) {
-        NSInteger value = _valueLookup(string);
 
-        if(value != NSNotFound) {
-            NSString* prettyString = _stringLookup(value);
-            
-            FLAssertNotNil(prettyString, @"value is valid but not string??");
-            
-            [self addEnum:value withName:prettyString];
+    if(_valueLookup && _stringLookup) {
+        for(NSString* string in strings) {
+            NSInteger value = _valueLookup(string);
+
+            if(value != NSNotFound) {
+                NSString* prettyString = _stringLookup(value);
+                
+                FLAssertNotNil(prettyString, @"value is valid but not string??");
+                
+                [self addEnum:value withName:prettyString];
+            }
         }
     }
 }

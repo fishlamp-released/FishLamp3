@@ -71,7 +71,7 @@ id FLModelObjectCopy(id object, Class classOrNil) {
     Class theClass = classOrNil ? classOrNil : [object class];
 
     FLObjectDescriber* typeDesc = [theClass objectDescriber];
-    FLAssertNotNil(typeDesc);
+    FLCAssertNotNil(typeDesc);
     
     id copy = [[theClass alloc] init];
     for(FLPropertyDescriber* type in [[typeDesc properties] objectEnumerator]) {
@@ -82,7 +82,7 @@ id FLModelObjectCopy(id object, Class classOrNil) {
 
 void FLModelObjectDecode(id object, NSCoder* aCoder) {
     FLObjectDescriber* typeDesc = [[object class] objectDescriber];
-    FLAssertNotNil(typeDesc);
+    FLCAssertNotNil(typeDesc);
     
     for(FLPropertyDescriber* type in [[typeDesc properties] objectEnumerator]) {
         [object setValue:[aCoder decodeObjectForKey:type.propertyName] forKey:type.propertyName];
@@ -91,7 +91,7 @@ void FLModelObjectDecode(id object, NSCoder* aCoder) {
 
 void FLModelObjectEncode(id object, NSCoder* aCoder) {
     FLObjectDescriber* typeDesc = [[object class] objectDescriber];
-    FLAssertNotNil(typeDesc);
+    FLCAssertNotNil(typeDesc);
     
     for(FLPropertyDescriber* type in [[typeDesc properties] objectEnumerator]) {
         id value = [object valueForKey:type.propertyName];
@@ -196,7 +196,7 @@ void FLMergeObjectArrays(NSMutableArray* dest,
 
 void FLMergeObjects(id dest, id src, FLMergeMode mergeMode) {
 	if(dest && src) {
-		FLAssert([dest isKindOfClass:[src class]], @"objects are different classes");
+		FLCAssert([dest isKindOfClass:[src class]], @"objects are different classes");
 
         if(![dest isModelObject] || ![src isModelObject]) {
             return;

@@ -66,8 +66,8 @@
 
 - (NSSet*) enumsFromString:(NSString*) stringList  
 {
-    FLAssertIsNotNil(stringList);
-    FLAssertIsNotNil(self.delimiter);
+    FLAssertNotNil(stringList);
+    FLAssertNotNil(self.delimiter);
 
     NSMutableSet* set = nil;
     
@@ -89,7 +89,7 @@
 
 - (NSString*) stringFromEnumSet:(NSSet*) enums
 {
-    FLAssertIsNotNil(enums);
+    FLAssertNotNil(enums);
     
     NSMutableString* string = [NSMutableString string];
     for(NSNumber* number in enums) {
@@ -106,7 +106,7 @@
 }                  
 
 - (NSString*) stringFromEnumArray:(NSInteger*) enums {
-    FLAssertIsNotNil(enums);
+    FLAssertNonNilPointer(enums);
     
     NSMutableString* string = [NSMutableString string];
     if(enums) {
@@ -130,7 +130,7 @@
                    enums:(NSInteger*) enums 
                 maxCount:(NSUInteger*) maxCount 
 {
-    FLAssertIsNotNil(string);
+    FLAssertNotNil(string);
    
     NSInteger count = 0;
 
