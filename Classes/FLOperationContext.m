@@ -66,13 +66,15 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
 
     FLAssertNotNil(visitor);
 
-    @synchronized(self) {
-        BOOL stop = NO;
-        for(id operation in _operations) {
-            visitor(OperationInQueue(operation), &stop);
-            
-            if(stop) {
-                break;
+    if(visitor) {
+        @synchronized(self) {
+            BOOL stop = NO;
+            for(id operation in _operations) {
+                visitor(OperationInQueue(operation), &stop);
+
+                if(stop) {
+                    break;
+                }
             }
         }
     }
@@ -185,8 +187,8 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
 
 
 - (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) operation
-                 withDelay:(NSTimeInterval) delay
-                completion:(fl_completion_block_t) completion {
+                    withDelay:(NSTimeInterval) delay
+                 withFinisher:(FLFinisher*) finisher {
 
     FLAssertNotNil(operation);
     [self addOperation:operation];
@@ -196,7 +198,7 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
     id<FLOperationStarter> starter = [self starterForOperation:operation];
     FLAssertNotNil(starter);
 
-    return [starter startOperation:operation withDelay:delay completion:completion];
+    return [starter startOperation:operation withDelay:delay withFinisher:finisher];
 }
 
 - (void) setFinisher:(FLFinisher*) finisher

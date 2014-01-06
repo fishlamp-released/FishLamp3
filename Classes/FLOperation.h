@@ -20,6 +20,8 @@
 #import "FLSuccessfulResult.h"
 #import "NSError+FLFailedResult.h"
 
+#import "FLFinisher.h"
+
 @class FLOperationContext;
 @class FLOperationFinisher;
 @protocol FLOperationStarter;
@@ -38,12 +40,14 @@
 @private
     BOOL _cancelled;
     __unsafe_unretained id _context;
-    id<FLOperationStarter> _operationStarter;
+    __unsafe_unretained id<FLOperationStarter> _operationStarter;
+
+#if EXPERIMENTAL
     NSMutableArray* _prerequisites;
+#endif
 }
 
-@property (readwrite, strong) id<FLOperationStarter> operationStarter;
-
+@property (readwrite, assign) id<FLOperationStarter> operationStarter;
 
 /// Operations must run in a context. See FLOpertionContext.
 @property (readonly, assign, nonatomic) id context;

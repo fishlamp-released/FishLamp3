@@ -77,6 +77,8 @@ typedef NS_ENUM(NSInteger, FLPromiseState) {
  */
 - (id) initWithTarget:(id) target action:(SEL) action; // @selector(FLPromisedResult result)
 
+- (id) initWithPromise:(FLPromise*) promise;
+
 /**
  *  init a promise without a callback or target
  *  

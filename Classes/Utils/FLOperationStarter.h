@@ -19,6 +19,6 @@
 
 - (FLPromise*) startOperation:(id<FLQueueableAsyncOperation>) operation
                     withDelay:(NSTimeInterval) delay
-                   completion:(fl_completion_block_t) completionOrNil;
+                 withFinisher:(FLFinisher*) finisher;
 
 @end

@@ -14,11 +14,15 @@
 
 @protocol FLFinisherDelegate;
 
+// finisher callback fire on the main thread IF the finisher was created on the main thread.
+// otherwise they fire in whatever thread setFinished is called on.
+
 @interface FLFinisher : FLPromise {
 @private
 #if DEBUG
     NSTimeInterval _birth;
 #endif
+    BOOL _finishOnMainThread;
 }
 
 + (id) finisher;
@@ -31,11 +35,4 @@
 // convienience methods - these call setFinishedWithResult:error
 - (void) setFinished;
 - (void) setFinishedWithCancel;
-
-// oprtional overrides
-- (void) willFinishWithResult:(FLPromisedResult) result;
-- (void) didFinishWithResult:(FLPromisedResult) result;
-@end
-
-@interface FLForegroundFinisher : FLFinisher
 @end

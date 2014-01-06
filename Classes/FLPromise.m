@@ -7,13 +7,12 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FLPromise.h"
+#import "FLPromise_Internal.h"
 #import "NSError+FLFailedResult.h"
 #import "FishLampSimpleLogger.h"
 
 @interface FLPromise ()
 @property (readwrite, strong) FLPromisedResult result;
-@property (readwrite, strong) FLPromise* nextPromise;
 @property (readwrite, copy) fl_completion_block_t completion;
 @property (readwrite, assign) BOOL isFinished;
 //@property (readwrite, assign) dispatch_semaphore_t semaphore;
@@ -31,14 +30,12 @@ static NSInteger s_max = 0;
 @synthesize nextPromise = _nextPromise;
 @synthesize result = _result;
 @synthesize completion = _completion;
-//@synthesize semaphore = _semaphore;
 @synthesize isFinished = _isFinished;
 
-- (id) initWithCompletion:(fl_completion_block_t) completion {
-    
+
+- (id) init {
     self = [super init];
     if(self) {
-        _completion = [completion copy];
         _semaphore = dispatch_semaphore_create(0);
 
 #if CHECK_COUNT
@@ -54,11 +51,21 @@ static NSInteger s_max = 0;
         }
 #endif
     }
+
+    return self;
+}
+
+- (id) initWithCompletion:(fl_completion_block_t) completion {
+    
+    self = [self init];
+    if(self) {
+        _completion = [completion copy];
+    }
     return self;
 }
 
 - (id) initWithTarget:(id) target action:(SEL) action {
-    self = [self initWithCompletion:nil];
+    self = [self init];
     if(self) {
         _target = target;
         _action = action;
@@ -66,13 +73,18 @@ static NSInteger s_max = 0;
     return self;
 }
 
+- (id) initWithPromise:(FLPromise*) promise {	
+	self = [self init];
+	if(self) {
+        self.nextPromise = promise;
+    }
+	return self;
+}
+
 + (id) promise:(id) target action:(SEL) action {
     return FLAutorelease([[[self class] alloc] initWithTarget:target action:action]);
 }
 
-- (id) init {
-    return [self initWithCompletion:nil];
-}
 
 - (void) dealloc {
 #if CHECK_COUNT
@@ -145,8 +157,8 @@ static NSInteger s_max = 0;
 
 - (void) fufillPromiseWithResult:(FLPromisedResult) result {
 
-    FLAssertNotNil(_semaphore, @"already finished");
-    FLAssertIsNil(self.result, @"should not already have result");
+    FLAssertNonZeroNumber(_semaphore, @"already finished");
+    FLAssertNil(self.result, @"should not already have result");
 
     if(result == nil) {
        result = [NSError failedResultError];

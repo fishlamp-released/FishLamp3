@@ -51,7 +51,7 @@
 }
 
 - (void) queueOperation:(FLOperation*) operation {
-    FLAssertIsNotNil(operation);
+    FLAssertNotNil(operation);
     [_operations setObject:operation forKey:operation.identifier];
     [self operationWasAdded:operation];
 }

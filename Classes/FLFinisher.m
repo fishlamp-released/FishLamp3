@@ -8,41 +8,28 @@
 //
 
 #import "FLFinisher.h"
-#import "FLPromise.h"
+#import "FLPromise_Internal.h"
 #import "NSError+FLFailedResult.h"
 #import "FLSuccessfulResult.h"
 
 #import "FishLampSimpleLogger.h"
 
-@interface FLPromise ()
-- (void) fufillPromiseWithResult:(FLPromisedResult) result;
-@property (readwrite, strong) FLPromise* nextPromise;
-@end
+@implementation FLFinisher
 
-@interface FLFinisher ()
-- (id) initWithPromise:(FLPromise*) promise;
-@end
-
-@implementation FLFinisher 
-
-- (id) init {	
-    return [self initWithPromise:nil];
-}
-
-- (id) initWithPromise:(FLPromise*) promise {	
-	self = [super init];
-	if(self) {
-        self.nextPromise = promise;
-
+- (id) init {
+    self = [super init];
+    if(self) {
 #if DEBUG
         _birth = [NSDate timeIntervalSinceReferenceDate];
 #endif
-	}
-	return self;
+
+        _finishOnMainThread = [NSThread isMainThread];
+    }
+    return self;
 }
 
 + (id) finisher {
-    return FLAutorelease([[[self class] alloc] initWithPromise:nil]);
+    return FLAutorelease([[[self class] alloc] init]);
 }
 
 + (id) finisherWithBlock:(fl_completion_block_t) completion {
@@ -66,20 +53,20 @@
 }
 #endif
 
-- (void) willFinishWithResult:(FLPromisedResult) result {
-}
-
-- (void) didFinishWithResult:(FLPromisedResult) result {
-}
-
 - (void) setFinishedWithResult:(FLPromisedResult) result {
 
     @try {
+
+        if(_finishOnMainThread && ![NSThread isMainThread]) {
+            [self performSelectorOnMainThread:@selector(setFinishedWithResult:)
+                                   withObject:result
+                                waitUntilDone:NO];
+            return;
+        }
+
         if(!result) {
             result = FLFailedResult;
         }
-        
-        [self willFinishWithResult:result];
 
         FLPromise* promise = FLRetainWithAutorelease(self);
         while(promise) {
@@ -91,9 +78,6 @@
 
             promise = nextPromise;
         }
-
-
-        [self didFinishWithResult:result];
     }
     @catch(NSException* ex) {
         FLLog(@"%@", [ex description]);
@@ -110,15 +94,3 @@
 
 @end
 
-@implementation FLForegroundFinisher
-
-- (void) setFinishedWithResult:(FLPromisedResult) result {
-    if([NSThread isMainThread]) {
-        [super setFinishedWithResult:result];
-    }
-    else {
-        [self performSelectorOnMainThread:@selector(setFinishedWithResult:) withObject:result waitUntilDone:NO];
-    }
-}
-
-@end

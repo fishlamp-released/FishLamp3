@@ -19,10 +19,6 @@
 
 @interface FLOperation ()
 @property (readwrite, assign, getter=wasCancelled) BOOL cancelled;
-
-- (void) finisherDidFinish:(FLFinisher*) finisher
-                withResult:(FLPromisedResult) resultOrNil;
-
 @end
 
 @interface FLOperationContext (Protected)
@@ -44,17 +40,11 @@
 @synthesize cancelled = _cancelled;
 @synthesize operationStarter = _operationStarter;
 
-- (id) init {
-    self = [super init];
-    if(self) {
-    }
-    return self;
-}
-
 #if FL_MRC
 - (void) dealloc {
+#if EXPERIMENTAL
     [_prerequisites release];
-    [_operationStarter release];
+#endif
 	[super dealloc];
 }
 #endif
@@ -92,9 +82,16 @@
     [finisher setFinishedWithResult:result];
 }
 
-- (FLFinisher*) createFinisherForBlock:(fl_completion_block_t)block {
-    return [[FLOperationFinisher alloc] initWithOperation:self completion:block];
+
+- (void) finisherDidFinishWithResult:(FLPromisedResult) result {
+
+    FLAssertNotNil(result);
+
+    [self didFinishWithResult:result];
+    self.context = nil;
+    self.cancelled = NO;
 }
+
 
 - (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) asyncQueue
                        withFinisher:(FLFinisher*) finisher {
@@ -102,6 +99,9 @@
     @try {
         FLAssertNotNil(asyncQueue);
         FLAssertNotNil(finisher);
+
+        [finisher addPromiseWithTarget:self action:@selector(finisherDidFinishWithResult:)];
+
         [self willStartOperation];
         [self startOperation:finisher];
     }
@@ -177,18 +177,6 @@
     }
 }
 
-- (void) finisherDidFinish:(FLFinisher*) finisher
-                withResult:(FLPromisedResult) result {
-
-    FLAssertNotNil(finisher);
-    FLAssertNotNil(result);
-
-    [self didFinishWithResult:result];
-//    [self sendMessageToListeners:@selector(operationDidFinish:withResult:) withObject:self withObject:result];
-    self.context = nil;
-    self.cancelled = NO;
-}
-
 - (void) didFinishWithResult:(FLPromisedResult) result {
 }
 
@@ -204,23 +192,3 @@
 
 @end
 
-
-@implementation FLOperationFinisher
-
-@synthesize operation = _operation;
-
-- (id) initWithOperation:(FLOperation*) operation completion:(fl_completion_block_t) completion {
-    FLAssertNotNil(operation);
-
-	self = [super initWithCompletion:completion];
-	if(self) {
-		_operation = operation;
-	}
-	return self;
-}
-
-- (void) didFinishWithResult:(id)result {
-    [_operation finisherDidFinish:self withResult:result];
-    _operation = nil;
-}
-@end

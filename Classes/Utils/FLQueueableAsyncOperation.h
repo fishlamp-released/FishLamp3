@@ -20,10 +20,9 @@
  */
 @protocol FLQueueableAsyncOperation <NSObject>
 
-- (FLFinisher*) createFinisherForBlock:(fl_completion_block_t) block;
-
 - (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher;
 
 - (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher;
+
 @end
 

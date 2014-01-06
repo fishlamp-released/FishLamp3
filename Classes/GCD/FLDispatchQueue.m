@@ -25,6 +25,9 @@
 @end
 #endif
 
+void FLRunSynchronousOperation(id<FLQueueableAsyncOperation> operation, FLDispatchQueue* queue, FLFinisher* finisher);
+void FLQueueOperation(id<FLQueueableAsyncOperation> operation, NSTimeInterval delay, FLDispatchQueue* queue, FLFinisher* finisher);
+
 @implementation FLDispatchQueue
 
 @synthesize dispatch_queue_t = _dispatch_queue;
@@ -94,67 +97,27 @@
 #endif
 
 - (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) operation
-                 withDelay:(NSTimeInterval) delay
-                completion:(fl_completion_block_t) completion {
+                    withDelay:(NSTimeInterval) delay
+                 withFinisher:(FLFinisher*) finisher {
 
     FLAssertNotNil(operation);
+    FLAssertNotNil(finisher);
+    FLAssertNonZeroNumber(self.dispatch_queue_t);
 
-    FLAssertNotNil(self.dispatch_queue_t);
+    FLQueueOperation(operation, delay, self, finisher);
 
-    __block id<FLQueueableAsyncOperation> theOperation = FLRetain(operation);
-    __block FLDispatchQueue* theQueue = FLRetain(self);
-    __block FLFinisher* theFinisher = FLRetain([theOperation createFinisherForBlock:completion]);
-
-    FLAssertNotNil(theFinisher);
-
-    fl_block_t block = ^{
-        @try {
-            [theOperation startAsyncOperationInQueue:theQueue withFinisher:theFinisher];
-        }
-        @catch(NSException* ex) {
-
-            if(!theFinisher.isFinished) {
-                [theFinisher setFinishedWithResult:ex.error];
-            }
-        }
-
-        FLReleaseWithNil(theFinisher);
-        FLReleaseWithNil(theOperation);
-        FLReleaseWithNil(theQueue);
-    };
-
-    if(0.0f != delay) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, FLTimeIntervalToNanoSeconds(delay)), theQueue.dispatch_queue_t, block);
-    }
-    else {
-        dispatch_async(theQueue.dispatch_queue_t, block);
-    }
-
-    return theFinisher;
+    return finisher;
 }
 
 - (FLPromisedResult) runSynchronously:(id<FLQueueableAsyncOperation>) operation {
 
     FLAssertNotNil(operation);
-    FLAssertNotNil(self.dispatch_queue_t);
+    FLAssertNonZeroNumber(self.dispatch_queue_t);
 
-    __block id<FLQueueableAsyncOperation> theOperation = FLRetain(operation);
-    __block FLDispatchQueue* theQueue = FLRetain(self);
+    FLFinisher* finisher = [FLFinisher finisher];
+    FLRunSynchronousOperation(operation, self, finisher);
 
-    FLFinisher* theFinisher = [theOperation createFinisherForBlock:nil];
-
-    dispatch_sync(self.dispatch_queue_t, ^{
-        @try {
-            [theOperation runSynchronousOperationInQueue:theQueue withFinisher:theFinisher];
-        }
-        @catch(NSException* ex) {
-            [theFinisher setFinishedWithResult:ex.error];
-        }
-        FLReleaseWithNil(theQueue);
-        FLReleaseWithNil(theOperation);
-    });
-
-    return theFinisher.result;
+    return finisher.result;
 }
 
 #if __MAC_10_8
@@ -193,8 +156,8 @@
 - (void) dispatch_target:(id) target action:(SEL) action {
 
     FLAssertNotNil(target);
-    FLAssertNotNil(action);
-    FLAssertNotNil(self.dispatch_queue_t);
+    FLAssertNonZeroNumber(action);
+    FLAssertNonZeroNumber(self.dispatch_queue_t);
 
     __block id theTarget = FLRetain(target);
     [self dispatch_async:^{
@@ -205,8 +168,8 @@
 
 - (void) dispatch_target:(id) target action:(SEL) action withObject:(id) object {
     FLAssertNotNil(target);
-    FLAssertNotNil(action);
-    FLAssertNotNil(self.dispatch_queue_t);
+    FLAssertNonZeroNumber(action);
+    FLAssertNonZeroNumber(self.dispatch_queue_t);
 
     __block id theTarget = FLRetain(target);
     __block id theObject = FLRetain(object);
@@ -227,6 +190,72 @@
 #endif
 
 @end
+
+void FLQueueOperation(id<FLQueueableAsyncOperation> operation, NSTimeInterval delay, FLDispatchQueue* queue, FLFinisher* finisher) {
+// using a c function here to be clear about tightly constraining references. We don't want an accidently reference to self.
+
+    FLCAssertNotNil(operation);
+    FLCAssertNotNil(queue);
+    FLCAssertNotNil(queue.dispatch_queue_t);
+    FLCAssertNotNil(finisher);
+
+    __block id<FLQueueableAsyncOperation> blockOperation = FLRetain(operation);
+    __block FLDispatchQueue* blockQueue = FLRetain(queue);
+    __block FLFinisher* blockFinisher = FLRetain(finisher);
+
+    FLCAssertNotNil(blockFinisher);
+
+    fl_block_t block = ^{
+        @try {
+            [blockOperation startAsyncOperationInQueue:blockQueue withFinisher:blockFinisher];
+        }
+        @catch(NSException* ex) {
+
+            if(!blockFinisher.isFinished) {
+                [blockFinisher setFinishedWithResult:ex.error];
+            }
+        }
+
+        FLReleaseWithNil(blockFinisher);
+        FLReleaseWithNil(blockOperation);
+        FLReleaseWithNil(blockQueue);
+    };
+
+    if(0.0f != delay) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, FLTimeIntervalToNanoSeconds(delay)), queue.dispatch_queue_t, block);
+    }
+    else {
+        dispatch_async(queue.dispatch_queue_t, block);
+    }
+}
+
+void FLRunSynchronousOperation(id<FLQueueableAsyncOperation> operation, FLDispatchQueue* queue, FLFinisher* finisher) {
+// using a c function here to be clear about tightly constraining references. We don't want an accidently reference to self.
+
+    FLCAssertNotNil(operation);
+    FLCAssertNotNil(queue);
+    FLCAssertNotNil(queue.dispatch_queue_t);
+    FLCAssertNotNil(finisher);
+
+    __block id<FLQueueableAsyncOperation> blockOperation = FLRetain(operation);
+    __block FLDispatchQueue* blockQueue = FLRetain(queue);
+    __block FLFinisher* blockFinisher = FLRetain(finisher);
+
+    dispatch_queue_t queue_t = queue.dispatch_queue_t;
+    dispatch_sync(queue_t, ^{
+        @try {
+            [blockOperation runSynchronousOperationInQueue:blockQueue withFinisher:blockFinisher];
+        }
+        @catch(NSException* ex) {
+            [blockFinisher setFinishedWithResult:ex.error];
+        }
+        FLReleaseWithNil(blockQueue);
+        FLReleaseWithNil(blockOperation);
+        FLReleaseWithNil(blockFinisher);
+    });
+}
+
+
 
 #if EXPERIMENTAL
 @implementation FLExecuteInQueueProxy

@@ -97,7 +97,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 }
 
 - (void) addOperationFactory:(id<FLOperationQueueOperationFactory>)factory {
-    FLAssertNotNil(factory);
+//    FLAssertNotNil(factory);
     FLAssert(self.processing == NO, @"can't add a factory while processing");
 
     [self.operationFactories addObject:factory];
@@ -284,7 +284,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 
 - (void) startOperationForObject:(id) object {
     FLOperation* operation = [self createOperationForQueuedObject:object];
-    [operation addBackgroundListener:self];
+    [operation addListener:self withScheduling:FLScheduleMessagesInAnyThread];
 
     [_activeQueue addObject:operation];
 
