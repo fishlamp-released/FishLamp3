@@ -151,14 +151,14 @@
 
 - (void) setImageContentWithData:(NSData*) imageData
 {
-	FLAssertIsNotNil(imageData);
+	FLAssertNotNil(imageData);
 	FLAssert(imageData.length > 0, @"Empty data");
 	[self setContentWithData:imageData typeContentHeader:@"image/jpeg"];
 }
 
 - (void) setImageContentWithInputStream:(NSInputStream*) stream   inputSize:(NSUInteger) size
 {
-	FLAssertIsNotNil(stream);
+	FLAssertNotNil(stream);
 	[self setContentWithInputStream:stream typeContentHeader:@"image/jpeg" inputSize:size];
 }
 
