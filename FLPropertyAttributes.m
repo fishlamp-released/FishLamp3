@@ -225,7 +225,7 @@ const char* FLParsePropertyType(FLPropertyAttributes_t* attributes, const char* 
             }
             
             default:
-                FLAssertFailed(@"unhandled type: %c", theChar);
+                FLCAssertFailed(@"unhandled type: %c", theChar);
             break;
         }
     }
@@ -294,7 +294,7 @@ const char* FLParseTrailingAttributes(FLPropertyAttributes_t* attributes, const 
             break;
                 
             default:
-                FLAssertFailed(@"unhandled char: %c", theChar);
+                FLCAssertFailed(@"unhandled char: %c", theChar);
             break;
         }
     }
@@ -304,7 +304,7 @@ const char* FLParseTrailingAttributes(FLPropertyAttributes_t* attributes, const 
 
 FLPropertyAttributes_t FLPropertyAttributesParse(objc_property_t property) {   
     
-    FLAssertNotNil(property);
+    FLCAssertNonNilPointer(property);
     
     FLPropertyAttributes_t attributes;
     memset(&attributes, 0, sizeof(FLPropertyAttributes_t));
@@ -314,9 +314,9 @@ FLPropertyAttributes_t FLPropertyAttributesParse(objc_property_t property) {
         const char* propertyName = property_getName(property);
         const char* encoded = property_getAttributes(property);
         
-        FLAssert(strlen(propertyName) < FLPropertyAttributesBufferSize, @"FLPropertyAttributesBufferSize is too small");
+        FLCAssert(strlen(propertyName) < FLPropertyAttributesBufferSize, @"FLPropertyAttributesBufferSize is too small");
     
-        FLAssert(strlen(encoded) < FLPropertyAttributesBufferSize, @"FLPropertyAttributesBufferSize is too small");
+        FLCAssert(strlen(encoded) < FLPropertyAttributesBufferSize, @"FLPropertyAttributesBufferSize is too small");
     
         strncpy(attributes.propertyName, propertyName, FLPropertyAttributesBufferSize);
         strncpy(attributes.encodedAttributes, encoded, FLPropertyAttributesBufferSize);
@@ -329,7 +329,7 @@ FLPropertyAttributes_t FLPropertyAttributesParse(objc_property_t property) {
         
         walker = FLParseTrailingAttributes(&attributes, walker, end);
         
-        FLAssert(walker >= end, @"didn't parse all of %s", encoded);
+        FLCAssert(walker >= end, @"didn't parse all of %s", encoded);
     }
     
     return attributes;
