@@ -103,7 +103,7 @@
         }
     }
 
-    FLAssertIsNotNil(url);
+    FLAssertNotNil(url);
 
     return [FLCodeProjectLocation codeProjectLocation:url resourceType:type];
 }

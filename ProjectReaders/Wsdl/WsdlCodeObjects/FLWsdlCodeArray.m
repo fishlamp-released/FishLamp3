@@ -31,7 +31,9 @@
 
 - (void) addContainedType:(FLWsdlCodeArrayContainedType*) type {
     FLConfirmNotNil(type);
-    [self.types addObject:type];
+    if(type) {
+        [self.types addObject:type];
+    }
 }
 
 - (void) addContainedType:(NSString*) typeName identifier:(NSString*) identifier {
