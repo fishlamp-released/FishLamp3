@@ -309,7 +309,7 @@
 - (id) objectForRow:(NSDictionary*) row {
 
     id newObject = FLAutorelease([[self.classRepresentedByTable alloc] init]);
-    FLAssertIsNotNil(newObject);
+    FLAssertNotNil(newObject);
     
     for(NSString* columnName in row) {
         id data = [row objectForKey:columnName];
@@ -325,7 +325,9 @@
     NSMutableSet* constraints = [_columnConstraints objectForKey:column.columnName];
     if(!constraints) {
         constraints = [NSMutableSet setWithObject:constraint];
-        [_columnConstraints setObject:constraints forKey:column.columnName];
+        if(column.columnName) {
+            [_columnConstraints setObject:constraints forKey:column.columnName];
+        }
     }
     else {
         [constraints addObject:constraint];

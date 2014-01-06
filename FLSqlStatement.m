@@ -108,7 +108,7 @@ sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
 - (void) prepareWithSql:(FLSqlBuilder*) sql {
 
     FLAssertNotNil(sql, @"empty sql");
-    FLAssertIsNil(_sqlite3_stmt, @"statement already open");
+    FLAssertNilPointer(_sqlite3_stmt, @"statement already open");
 
     const char* sql_c = [[sql sqlString] UTF8String];
     
@@ -360,7 +360,7 @@ sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
             {
                 case SQLITE_INTEGER:
                     data = [self integerForColumn:i];
-                    FLAssertIsNotNil(data);
+                    FLAssertNotNil(data);
                 break;
                 
                 case SQLITE_FLOAT:
@@ -377,14 +377,14 @@ sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
                     else {
                         data = [self doubleForColumn:i];
                     }
-                    FLAssertIsNotNil(data);
+                    FLAssertNotNil(data);
                     
                     
                 break;
                 
                 case SQLITE_BLOB: {
                     data = [self blobForColumn:i];
-                    FLAssertIsNotNil(data);
+                    FLAssertNotNil(data);
                     
                     FLDatabaseObjectSerializer* wrapper = [NSKeyedUnarchiver unarchiveObjectWithData:data];
                     if(wrapper) {
@@ -399,7 +399,7 @@ sqlite3_stmt* FLStatmentFailed(	sqlite3_stmt* stmt) {
                 
                 case SQLITE_TEXT:
                     data = [self textForColumn:i];
-                    FLAssertIsNotNil(data);
+                    FLAssertNotNil(data);
                 break;
             }
         

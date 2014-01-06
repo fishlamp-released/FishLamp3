@@ -77,7 +77,7 @@ static NSString* s_version = nil;
   	[[NSNotificationCenter defaultCenter] removeObserver:self];
 #endif
 
-	FLAssertIsNil(_sqlite);
+	FLAssertNilPointer(_sqlite);
     
 #if FL_MRC    
     [_filePath release];
@@ -404,7 +404,7 @@ static NSString* s_version = nil;
                     statement.rowResultBlock(row, &stop);
                 }
                 if(statement.objectResultBlock) {
-                    FLAssertIsNotNil(statement.table, @"table is required in statement to decode object");
+                    FLAssertNotNil(statement.table, @"table is required in statement to decode object");
                     statement.objectResultBlock([statement.table objectForRow:row], &stop);
                 }
             }
@@ -447,8 +447,8 @@ static NSString* s_version = nil;
 
 - (void) _createTableIfNotInDatabase:(FLDatabaseTable*) table {
 
-	FLAssertIsNotNil(table);
-	FLAssertIsNotNil(table.columns);
+	FLAssertNotNil(table);
+	FLAssertNotNil(table.columns);
 	FLAssert([self isOpen], @"Database isn't open");
 	FLAssert([table.columns count] > 0, @"no columns in the table, bub");
 
@@ -733,7 +733,7 @@ NSString* FLDatabaseTypeToString(FLDatabaseType type)
 			return nil;
             
         case FLDatabaseTypeInvalid:
-            FLAssertFailed(@"invalid sql type");
+            FLCAssertFailed(@"invalid sql type");
             break;
             
 	}
