@@ -89,7 +89,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef streamRef, CFStreamEventTyp
      
     _streamRef = [self allocReadStreamRef];         
          
-    FLAssertIsNotNil(_streamRef);
+    FLAssertNonNilPointer(_streamRef);
 
     [self.inputSink openSink];
 
@@ -216,7 +216,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef streamRef, CFStreamEventTyp
 
     FLAssert([NSThread currentThread] != [NSThread mainThread]);
       
-    FLAssertNotNil(_streamRef);
+    FLAssertNonNilPointer(_streamRef);
     if(!_streamRef) {
         return 0;
     }

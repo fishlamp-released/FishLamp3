@@ -55,8 +55,8 @@
 
 //    return [self.dispatchQueue queueBlock:^{
 //        
-//        FLAssertIsNil(self.readStream);
-//        FLAssertIsNil(self.writeStream);
+//        FLAssertNil(self.readStream);
+//        FLAssertNil(self.writeStream);
 //
 //        CFReadStreamRef readStream = nil;
 //        CFWriteStreamRef writeStream = nil;

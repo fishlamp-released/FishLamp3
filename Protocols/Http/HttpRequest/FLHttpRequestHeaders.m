@@ -102,7 +102,7 @@
 
 - (void) setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
 	FLAssertStringIsNotEmpty(field);
-    FLAssertIsNotNil(value);
+    FLAssertNotNil(value);
     [_headers setObject:value forKey:field];
 }
 

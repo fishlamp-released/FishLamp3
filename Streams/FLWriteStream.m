@@ -56,7 +56,7 @@ static void WriteStreamClientCallBack(CFWriteStreamRef writeStream,
 }
 
 - (void) dealloc {
-    FLAssertNotNil(_streamRef);
+    FLAssertNonNilPointer(_streamRef);
 
     if(_streamRef) {
         CFWriteStreamSetClient(_streamRef, kCFStreamEventNone, NULL, NULL);
@@ -88,13 +88,13 @@ static void WriteStreamClientCallBack(CFWriteStreamRef writeStream,
 }
 
 - (void) openStream {
-    FLAssertIsNotNil(_streamRef);
+    FLAssertNonNilPointer(_streamRef);
     CFWriteStreamScheduleWithRunLoop(_streamRef, [[self.eventHandler runLoop] getCFRunLoop], FLBridge(void*,self.eventHandler.runLoopMode));
     CFWriteStreamOpen(_streamRef);
 }
 
 - (void) closeStream {
-    FLAssertIsNotNil(_streamRef);
+    FLAssertNonNilPointer(_streamRef);
     CFWriteStreamUnscheduleFromRunLoop(_streamRef, [[self.eventHandler runLoop] getCFRunLoop], FLBridge(void*,self.eventHandler.runLoopMode));
     CFWriteStreamClose(_streamRef);
     [self didCloseWithResult:FLSuccessfulResult];
@@ -105,7 +105,7 @@ static void WriteStreamClientCallBack(CFWriteStreamRef writeStream,
 }
 
 - (void) writeBytes:(const uint8_t*) bytes length:(unsigned long) length {
-    FLAssertIsNotNil(_streamRef);
+    FLAssertNonNilPointer(_streamRef);
 
     const uint8_t *buffer = bytes;
     while(length > 0) {

@@ -51,7 +51,7 @@
 
 - (BOOL) sessionNeedsReauthentication:(id<FLAuthenticationSession>) session {
 
-	FLAssertIsNotNil(session);
+	FLAssertNotNil(session);
 
 #if TEST_CACHE_EXPIRE
 	creds.authTokenLastUpdateTimeValue = creds.authTokenLastUpdateTimeValue - (_timeoutInterval*2);

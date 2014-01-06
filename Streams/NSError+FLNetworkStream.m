@@ -45,7 +45,7 @@
     }
 
     NSError* error = [NSError errorWithDomain:domainStr code:code userInfo:userInfo];
-    FLAssertIsNotNil(error);
+    FLAssertNotNil(error);
 
     return error;
 }

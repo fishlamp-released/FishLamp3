@@ -54,14 +54,14 @@
 #endif
 
 -(void) setUtf8Content:(NSString*) content {
-    FLAssertIsNotNil(content);
+    FLAssertNotNil(content);
 
 	[self setContentWithData:[content dataUsingEncoding:NSUTF8StringEncoding]
            typeContentHeader:@"text/xml; charset=utf-8" ];
 }
 
 - (void) setFormUrlEncodedContent:(NSString*) content {
-    FLAssertIsNotNil(content);
+    FLAssertNotNil(content);
     
 	[self setContentWithData:[content dataUsingEncoding:NSUTF8StringEncoding]
            typeContentHeader:@"application/x-www-form-urlencoded" ]; 
@@ -69,7 +69,7 @@
 
 - (void) setContentWithData:(NSData*) content
           typeContentHeader:(NSString*) typeContentHeader {
-    FLAssertIsNotNil(content);
+    FLAssertNotNil(content);
 	FLAssertStringIsNotEmpty(typeContentHeader);
 
     self.bodyData = content;
@@ -91,7 +91,7 @@
 }
 
 - (void) setJpegContentWithData:(NSData*) imageData {
-	FLAssertIsNotNil(imageData);
+	FLAssertNotNil(imageData);
 	FLAssert(imageData.length > 0, @"Empty data");
 	[self setContentWithData:imageData typeContentHeader:@"image/jpeg"];
 }

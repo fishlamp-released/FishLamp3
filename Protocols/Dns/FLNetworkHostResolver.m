@@ -69,7 +69,7 @@
 static void HostResolutionCallback(CFHostRef theHost, CFHostInfoType typeInfo, const CFStreamError *error, void *info) {
     FLNetworkHostResolver* resolver = FLBridge(id, info);
 
-    FLAssertIsKindOfClass(resolver, FLNetworkHostResolver);
+    FLCAssert([resolver isKindOfClass:[FLNetworkHostResolver class]]);
     [resolver resolutionCallback:theHost typeInfo:typeInfo error:error];
 }
 
@@ -108,7 +108,7 @@ static void HostResolutionCallback(CFHostRef theHost, CFHostInfoType typeInfo, c
     CFHostClientContext context = { 0, FLBridge(void*, self), NULL, NULL, NULL };
   
     CFHostRef cfhost = self.networkHost.hostRef;
-    FLAssertIsNotNil(cfhost);
+    FLAssertNonNilPointer(cfhost);
 
     if (!CFHostSetClient(cfhost, HostResolutionCallback, &context)) {
         [self closeWithResult:[NSError errorWithDomain:NSPOSIXErrorDomain code:EINVAL userInfo:nil]];

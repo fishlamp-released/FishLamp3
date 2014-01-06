@@ -134,7 +134,7 @@
         [operation setOperationStarter:self.authenticationQueue];
     }
 
-    [operation addBackgroundListener:self];
+    [operation addListener:self];
 }
 
 - (void) didRemoveOperation:(FLOperation*) operation {
