@@ -30,7 +30,7 @@ typedef struct {
         FLAssertColorValueIsRGB(values.red);
         FLAssertColorValueIsRGB(values.green);
         FLAssertColorValueIsRGB(values.blue);
-        FLAssert(values.valuesAreRGB);
+        FLCAssert(values.valuesAreRGB);
         return values;
     }
 
@@ -39,7 +39,7 @@ typedef struct {
         FLAssertColorValueIsDecimal(values.red);
         FLAssertColorValueIsDecimal(values.green);
         FLAssertColorValueIsDecimal(values.blue);
-        FLAssert(!values.valuesAreRGB);
+        FLCAssert(!values.valuesAreRGB);
         return values;
     }
 #else 
