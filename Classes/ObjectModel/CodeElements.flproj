@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fishlamp>
+    <import path="CodeOptions.flproj"/>
+
+    <class name="FLCodeVariable">
+        <property name="name" type="string" comment="name of the variabl, e.g. bagelCount" useForEquality="YES"/>
+        <property name="type" type="string" comment="name of the type, e.g. bagelCount" useForEquality="YES"/>
+    </class>
+
+    <class name="FLCodeElement" superclass="FLModelObject">
+    </class>
+    <class name="FLCodeReturn" superclass="FLCodeElement">
+	<property name="returns" type="object"/>
+        <constructor>
+            <parameter name="returns" type="object" setProperty="returns"/>
+        </constructor>
+    </class>
+    <class name="FLCodeString" superclass="FLCodeElement">
+	<property name="string" type="object"/>
+        <constructor>
+            <parameter name="string" type="object" setProperty="string"/>
+        </constructor>
+    </class>
+    <class name="FLCodeCreateObject" superclass="FLCodeElement">
+        <property name="objectType" type="object"/>
+        <constructor>
+            <parameter name="objectType" type="object" setProperty="objectType"/>
+        </constructor>
+    </class>
+    <class name="FLCodeClassName" superclass="FLCodeElement">
+       <property name="className" type="object"/>
+         <constructor>
+            <parameter name="className" type="object" setProperty="className"/>
+        </constructor>
+    </class>
+    <class name="FLCodePropertyName">
+        <property name="propertyName" type="object"/>
+        <constructor>
+            <parameter name="propertyName" type="object" setProperty="propertyName"/>
+        </constructor>
+    </class>
+    <class name="FLCodeStatement" superclass="FLCodeElement">
+        <property name="statement" type="object"/>
+        <constructor>
+            <parameter name="statement" type="object" setProperty="statement"/>
+        </constructor>
+    </class>
+    <class name="FLCodeGetPropertyValue" superclass="FLCodeElement" >
+        <property name="property" type="object"/>
+        <property name="object" type="object"/>
+         <constructor>
+            <parameter name="object" type="object" setProperty="object"/>
+            <parameter name="property" type="object" setProperty="property"/>
+        </constructor>
+    </class>
+
+    <class name="FLCodeObjectReference" superclass="FLCodeElement">
+        <property name="object" type="object"/>
+        <constructor>
+            <parameter name="object" type="object" setProperty="object"/>
+        </constructor>
+    </class>
+
+    <class name="FLCodeObjectSelfReference" superclass="FLCodeElement" >
+    </class>
+
+    <class name="FLCodeSequence" superclass="FLCodeElement">
+        <property name="statements" type="array">
+            <arrayType name="statement" type="FLCodeElement"/>
+        </property>
+    </class>
+</fishlamp>

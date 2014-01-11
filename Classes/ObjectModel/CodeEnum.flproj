@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fishlamp>
+    <import path="CodeOptions.flproj"/>
+<!--
+    <defines>
+        <define define="FLDataTypeObject" value="object" isString="YES" comment="used for dataType in dataTypeDefinition"/>
+        <define define="FLDataTypeValue" value="value" isString="YES" comment="used for dataType in dataTypeDefinition"/>
+        <define define="FLDataTypeEnum" value="enum" isString="YES" comment="used for dataType in dataTypeDefinition"/>
+        <define define="FLDataTypeImmutableObject" value="immutuble" isString="YES" comment="used for dataType in dataTypeDefinition"/>
+    </defines>
+-->
+
+    <class name="FLCodeEnum">
+        <property name="name" type="string" comment="This is the name of the enum, e.g. kFoo" useForEquality="YES"/>
+        <property name="value" type="int" comment="This is the optional value of the enum, e.g. 5"/>
+        <property name="stringValue" type="string" comment="This is the string optional value of the define"/>
+    </class>
+    
+    <class name="FLCodeEnumType">
+        <property name="name" type="string" comment="This is the name of the enum, e.g. kFoo" useForEquality="YES"/>
+        <property name="enums" type="array" comment="this is the list of enums">
+            <arrayType name="enum" type="FLCodeEnum"/>
+        </property>
+    </class>
+</fishlamp>

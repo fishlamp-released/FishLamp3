@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fishlamp>
+    <import path="CodeOptions.flproj"/>
+    <import path="CodeElements.flproj"/>
+    <import path="CodeEnum.flproj"/>
+    <import path="CodeObject.flproj"/>
+
+    <enumType name="FLDataType">
+        <enum name="Object"/>
+        <enum name="Value"/>
+        <enum name="Enum"/>
+        <enum name="Immuteable"/>
+    </enumType>
+
+    <enumType name="FLCodeInputType">
+        <enum name="Http"/>
+        <enum name="File"/>
+        <enum name="Wsdl"/>
+    </enumType>
+
+    <class name="FLCodeTypeDefinition">
+        <property name="dataType" type="FLDataType" comment="the dataType of the type, e.g. class, struct, int, array" useForEquality="YES"/>
+        <property name="typeName" type="string" comment="name of the type, e.g. MyObject" useForEquality="YES"/>
+        <property name="import" type="string"/>
+        <property name="importIsPrivate" type="BOOL"/>
+    </class>
+
+    <class name="FLCodeImport">
+        <property name="path" type="string" comment="import a whittle file"/>
+        <property name="type" type="FLCodeInputType" comment="import wsdl url (file or HTTP)"/>
+    </class>
+
+    <class name="FLCodeGeneratorOptions">
+        <property name="typePrefix" type="string"/>
+        <property name="comment" type="string"/>
+        <property name="canLazyCreate" type="bool"/>
+        <property name="generateUserObjects" type="bool"/>
+        <property name="allIncludesFileName" type="string"/>
+        <property name="userObjectsFolderName" type="string"/>
+        <property name="objectsFolderName" type="string"/>
+    </class>
+
+    <class name="FLCodeTypeDefinition">
+        <property name="dataType" type="FLDataType" comment="the dataType of the type, e.g. class, struct, int, array" useForEquality="YES"/>
+        <property name="typeName" type="string" comment="name of the type, e.g. MyObject" useForEquality="YES"/>
+        <property name="import" type="string"/>
+        <property name="importIsPrivate" type="BOOL"/>
+    </class>
+
+    <class name="FLCodeCompany">
+        <property name="name" type="string" comment="name of the company for the file headers"/>
+        <property name="website" type="string" comment="name of the company for the file headers"/>
+        <property name="address1" type="string" comment="company address1"/>
+        <property name="address2" type="string" comment="company address1"/>
+        <property name="address3" type="string" comment="company address1"/>
+        <property name="phone" type="string" comment="company phone"/>
+    </class>
+
+    <class name="FLCodeProjectInfo">
+        <property name="organization" type="FLCodeCompany"/>
+        <property name="license" type="string"/>
+        <property name="projectName" type="string" useForEquality="YES"/>
+        <property name="schemaName" type="string" comment="name of the project for the file headers"/>
+    </class>
+
+    <class name="FLCodeProject">
+        <property name="info" type="FLCodeProjectInfo"/>
+        <property name="comment" type="string"/>
+        <property name="options" type="FLCodeGeneratorOptions" comment="set properties of this class to control code generation"/>
+        <property name="enumTypes" type="array" comment="list of enum types, these are generated into a single file with handy lookup methods">
+            <arrayType name="enumType" type="FLCodeEnumType"/>
+        </property>
+        <property name="classes" type="array" comment="list of objects, these are generated into their own files">
+            <arrayType name="class" type="FLCodeObject"/>
+        </property>
+        <property name="dependencies" type="array" comment="list of includes for all the files">
+            <arrayType name="dependency" type="FLCodeTypeDefinition"/>
+        </property>
+        <property name="defines" type="array" comment="defines for all the files">
+            <arrayType name="define" type="FLCodeDefine"/>
+        </property>
+        <property name="arrays" type="array" comment="list of methods (FLCodeMethod) for this class">
+            <arrayType name="array" type="FLCodeArray"/>
+        </property>
+        <property name="imports" type="array">
+            <arrayType name="import" type="FLCodeImport"/>
+        </property>
+        <property name="typeDefinitions" type="array">
+            <arrayType name="typeDefinition" type="FLCodeTypeDefinition"/>
+        </property>
+    </class>
+</fishlamp>
