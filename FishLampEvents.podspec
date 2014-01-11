@@ -12,9 +12,6 @@ Pod::Spec.new do |s|
     s.osx.deployment_target = '10.6'
     s.requires_arc = false
     
-#     s.ios.frameworks = 'Security', 'MobileCoreServices', 'SystemConfiguration'
-#     s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'Quartz', 'QuartzCore', 'CoreFoundation',  'Foundation'
-
 	s.dependency 'FishLampCore'
 	s.source_files = 'Classes/**/*.{h,m}'
 end
