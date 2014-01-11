@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '6.1'
     s.osx.deployment_target = '10.6'
+
     s.requires_arc = false
 
 	s.dependency 'FishLampCore'
