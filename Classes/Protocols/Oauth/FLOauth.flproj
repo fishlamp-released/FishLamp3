@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project projectName="FishLamp">
+    <generatorOptions>
+        <disabled>NO</disabled>
+        <generateAllIncludesFile>NO</generateAllIncludesFile>
+        <typePrefix>FL</typePrefix>
+<objectsFolderName>GeneratedObjects</objectsFolderName>
+            
+</generatorOptions>
+    <organization name="GreenTongue Software, LLC"/>
+    
+    <typeDefinitions>
+        <typeDefinition typeName="FLNetworkServerContext" dataType="object"/>
+        <typeDefinition typeName="NSURL" dataType="object"/>
+    </typeDefinitions>
+    <defines>
+        <define define="FLOAuthHttpAuthorizationHeader" value="Authorization" isString="YES" comment="for http header"/>
+        <define define="FLOAuthVersion" value="1.0" isString="YES" comment=""/>
+    </defines>
+    <enumTypes>
+        <enumType typeName="FLOAuthHeader">
+            <enums>
+                <enum name="ConsumerKey" stringValue="oauth_consumer_key"/>
+                <enum name="Token" stringValue="oauth_token"/>
+                <enum name="SignatureMethod" stringValue="oauth_signature_method"/>
+                <enum name="Timestamp" stringValue="oauth_timestamp"/>
+                <enum name="Nonce" stringValue="oauth_nonce"/>
+                <enum name="Signature" stringValue="oauth_signature"/>
+                <enum name="Callback" stringValue="oauth_callback"/>
+                <enum name="Version" stringValue="oauth_version"/>
+            </enums>
+        </enumType>
+        <enumType typeName="FLOAuthSignatureMethod">
+            <enums>
+                <enum name="HMAC_SHA1" stringValue="HMAC-SHA1"/>
+                <enum name="RSA_SHA1" stringValue="RSA-SHA1"/>
+                <enum name="Plaintext" stringValue="PLAINTEXT"/>
+            </enums>
+        </enumType>
+    </enumTypes>
+    <objects>
+        <object typeName="FLOAuthSession"  protocols="NSCopying, NSCoding">
+            <properties>
+			  <property type="string" name="userGuid">
+     			<storageOptions isPrimaryKey="YES"/>
+			 </property>
+			  <property type="string" name="appName">
+     			<storageOptions isIndexed="YES" isRequired="YES"/>
+			 </property>
+                <property type="string" name="oauth_token"/>
+                <property type="string" name="oauth_token_secret"/>
+                <property type="string" name="user_id">
+                    <storageOptions isIndexed="YES"/>
+			  </property>
+                <property type="string" name="screen_name"/>
+            </properties>
+        </class>
+        <object typeName="FLOAuthAuthencationData">
+            <properties>
+                <property type="string" name="oauth_token_secret"/>
+                <property type="string" name="oauth_callback_confirmed"/>
+                <property type="string" name="oauth_token"/>
+                <property type="string" name="oauth_verifier"/>
+            </properties>
+        </class>
+        <object typeName="FLOAuthApp" superclass="FLNetworkServerContext">
+            <properties>
+                <property type="string" name="appId">
+                    <storageOptions isPrimaryKey="YES"/>
+                </property>
+                <property type="string" name="apiKey"/>
+                <property type="string" name="consumerKey"/>
+                <property type="string" name="consumerSecret"/>
+                <property type="string" name="requestTokenUrl"/>
+                <property type="string" name="accessTokenUrl"/>
+                <property type="string" name="authorizeUrl"/>
+                <property type="string" name="callback"/>
+            </properties>
+        </class>
+    </objects>
+</project>
