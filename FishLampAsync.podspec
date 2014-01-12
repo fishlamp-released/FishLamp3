@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
    
     s.name         = "FishLampAsync"
-    s.version      = "0.1.0"
+    s.version      = "0.0.1"
     s.summary      = "This is the core functionality of the FishLamp Framework."
     s.homepage     = "http://fishlamp.com"
     s.license      = 'MIT'
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 	s.dependency 'FishLampCore'
 	s.dependency 'FishLampStrings'
 	s.dependency 'FishLampSimpleLogger'
-	s.dependency 'FishLampEvents'
+	s.dependency 'FishLampEventBroadcaster'
 	s.dependency 'FishLampTimer'
 
 	s.source_files = 'Classes/*.{h,m}'
