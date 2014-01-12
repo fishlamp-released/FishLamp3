@@ -7,7 +7,7 @@
 Pod::Spec.new do |s|
    
     s.name         = "FishLampTimer"
-    s.version      = "0.1.0"
+    s.version      = "0.0.1"
     s.summary      = "This is the core functionality of the FishLamp Framework."
     s.homepage     = "http://s.com"
     s.license      = 'MIT'
