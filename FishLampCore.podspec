@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
    
     s.name         = "FishLampCore"
-    s.version      = "0.1.0"
+    s.version      = "0.0.1"
     s.summary      = "This is the core pod for the rest of the FishLamp pods"
     s.homepage     = "http://fishlamp.com"
     s.license      = 'MIT'
@@ -69,23 +69,5 @@ Pod::Spec.new do |s|
 		ss.source_files = 'Classes/Versioning/**/*.{h,m}'
 	end
 
-
-
-
-# 	s.subspec 'Assertions' do |ss|
-# 		ss.source_files = 'Classes/Assertions/**/*.{h,m}'
-# 		ss.dependency 'FishLampCore/Errors'
-# 
-#  		ss.dependency 'FishLamp/Cocoa/Core/Strings'
-# 	end
-
-# 	s.subspec 'SimpleLogger' do |ss|
-# 		ss.dependency 'FishLamp/Cocoa/Core/Required'
-# 		ss.dependency 'FishLamp/Cocoa/Core/Strings'
-# 		ss.dependency 'FishLamp/Cocoa/Core/Errors'
-# 		ss.dependency 'FishLamp/Cocoa/Core/Assertions'
-# 		ss.source_files = 'Classes/SimpleLogger/**/*.{h,m}'
-# 	end
-  
 end
 
