@@ -17,6 +17,8 @@ Pod::Spec.new do |s|
 	s.dependency 'FishLampStrings'
 	s.dependency 'FishLampSimpleLogger'
 	
+	s.dependency 'FishLampFiles'
+
 	s.source_files = 'Classes/**/*.{h,m}'
 
 end
