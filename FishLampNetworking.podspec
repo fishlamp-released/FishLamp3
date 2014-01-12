@@ -11,13 +11,98 @@ Pod::Spec.new do |s|
     s.osx.deployment_target = '10.6'
     s.requires_arc = false
 
-	s.source_files  = 'Classes', 'Classes/**/*.{h,m}'
+# 	s.source_files  = 'Classes', 'Classes/**/*.{h,m}'
 
 	s.dependency 'FishLampCore'
 	s.dependency 'FishLampStrings'
 	s.dependency 'FishLampSimpleLogger'
-	s.dependency 'FishLampEncoding'
 
-#   	s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
+	s.subspec 'Activity' do |ss|
+		ss.dependency 'FishLampEventBroadcaster'
+		ss.source_files = 'Classes/Networking/Activity/**/*.{h,m}'
+	end
+	
+	s.subspec 'Errors' do |ss|
+		ss.source_files = 'Classes/Networking/Errors/**/*.{h,m}'
+	end
+
+	s.subspec 'Reachability' do |ss|
+		ss.ios.frameworks = 'SystemConfiguration'
+		ss.osx.frameworks = 'SystemConfiguration'
+
+		ss.source_files = 'Classes/Networking/Reachability/**/*.{h,m}'
+	end
+
+	s.subspec 'Sinks' do |ss|
+		ss.source_files = 'Classes/Networking/Sinks/**/*.{h,m}'
+	end
+
+	s.subspec 'Streams' do |ss|
+		ss.dependency 'FishLampEventBroadcaster'
+		ss.dependency 'FishLampTimer'
+		ss.dependency 'FishLampAsync'
+		ss.dependency 'FishLampNetworking/Sinks'
+
+		ss.ios.frameworks = 'CFNetwork'
+		ss.osx.frameworks = 'CFNetwork'
+
+		ss.source_files = 'Classes/Networking/Streams/**/*.{h,m}'
+	end
+
+	s.subspec 'ProtocolSupport' do |ss|
+		ss.dependency 'FishLampStrings'
+		ss.dependency 'FishLampEventBroadcaster'
+		ss.dependency 'FishLampAsync'
+		ss.dependency 'FishLampTimer'
+
+		ss.dependency 'FishLampRetryHandler'
+		ss.dependency 'FishLampBundleUtils'
+		ss.dependency 'FishLampCodeBuilder'
+		ss.dependency 'FishLampEncoding'
+		ss.dependency 'FishLampModelObject'
+		ss.dependency 'FishLampAuthentication'
+		ss.dependency 'FishLampServices'
+
+		ss.dependency 'FishLampNetworking/Activity'
+		ss.dependency 'FishLampNetworking/Streams'
+		ss.dependency 'FishLampNetworking/Sinks'
+		ss.dependency 'FishLampNetworking/Reachability'
+		ss.dependency 'FishLampNetworking/Errors'
+	end
+
+	s.subspec 'DNS' do |ss|
+		ss.dependency 'FishLampNetworking/ProtocolSupport'
+		ss.source_files = 'Classes/Networking/Protocols/DNS/**/*.{h,m}'
+	end
+
+	s.subspec 'HTTP' do |ss|
+		ss.dependency 'FishLampNetworking/ProtocolSupport'
+		ss.source_files = 'Classes/Networking/Protocols/HTTP/**/*.{h,m}'
+	end
+
+	s.subspec 'Json' do |ss|
+		ss.dependency 'FishLampNetworking/HTTP'
+		ss.source_files = 'Classes/Networking/Protocols/Json/**/*.{h,m}'
+	end
+
+	s.subspec 'Soap' do |ss|
+		ss.dependency 'FishLampNetworking/HTTP'
+		ss.source_files = 'Classes/Networking/Protocols/Soap/**/*.{h,m}'
+	end
+
+	s.subspec 'Oauth' do |ss|
+		ss.dependency 'FishLampNetworking/HTTP'
+		ss.source_files = 'Classes/Networking/Protocols/Oauth/**/*.{h,m}'
+	end
+
+	s.subspec 'Tcp' do |ss|
+		ss.dependency 'FishLampNetworking/ProtocolSupport'
+		ss.source_files = 'Classes/Networking/Protocols/Tcp/**/*.{h,m}'
+	end
+
+	s.subspec 'XmlRpc' do |ss|
+		ss.dependency 'FishLampNetworking/ProtocolSupport'
+		ss.source_files = 'Classes/Networking/Protocols/XmlRpc/**/*.{h,m}'
+	end
 
 end
