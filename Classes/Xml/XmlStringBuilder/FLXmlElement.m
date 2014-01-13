@@ -114,8 +114,9 @@
     if(!_attributes) {
         _attributes = [[NSMutableDictionary alloc] init];
     }
-    
-    [_attributes setObject:attributeValue forKey:key];
+    if(attributeValue && key) {
+        [_attributes setObject:attributeValue forKey:key];
+    }
 }
 
 - (void) appendAttribute:(NSString*) attributeValue forKey:(NSString*) key {
@@ -131,7 +132,7 @@
         if(value) {
             value = [NSString stringWithFormat:@"%@%@", value, attributeValue];
         }
-        if(value) {
+        if(value && key) {
             [_attributes setObject:value forKey:key];
         }
     }

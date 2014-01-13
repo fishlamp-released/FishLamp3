@@ -11,8 +11,7 @@ Pod::Spec.new do |s|
     s.osx.deployment_target = '10.6'
     s.requires_arc = false
 
-
-	s.source_files  = 'Classes', 'Classes/**/*.{h,m}'
+	s.source_files  = 'Classes/*h'
 
 	s.dependency 'FishLampCore'
 	s.dependency 'FishLampStrings'
@@ -22,27 +21,27 @@ Pod::Spec.new do |s|
 	s.dependency 'FishLampCodeBuilder'
 
 	s.subspec 'Xml' do |ss|
-		ss.source_files = 'Classes/Encoding/Xml/**/*.{h,m}'
+		ss.source_files = 'Classes/Xml/**/*.{h,m}'
 	end
 
 	s.subspec 'Json' do |ss|
-		ss.source_files = 'Classes/Encoding/Json/**/*.{h,m}'
+		ss.source_files = 'Classes/Json/**/*.{h,m}'
 	end
 
 	s.subspec 'Url' do |ss|
-		ss.source_files = 'Classes/Encoding/URL/**/*.{h,m}'
+		ss.source_files = 'Classes/URL/**/*.{h,m}'
 	end
 
 	s.subspec 'Soap' do |ss|
-		ss.source_files = 'Classes/Encoding/Soap/**/*.{h,m}'
+		ss.source_files = 'Classes/Soap/**/*.{h,m}'
 	end
 
 	s.subspec 'Html' do |ss|
-		ss.source_files = 'Classes/Encoding/Html/**/*.{h,m}'
+		ss.source_files = 'Classes/Html/**/*.{h,m}'
 	end
 
 	s.subspec 'Base64' do |ss|
-		ss.source_files = 'Classes/Encoding/Base64/**/*.{h,m,c}'
+		ss.source_files = 'Classes/Base64/**/*.{h,m,c}'
 	end
 
 	s.xcconfig = { 'GCC_TREAT_WARNINGS_AS_ERRORS' => 'YES' }
