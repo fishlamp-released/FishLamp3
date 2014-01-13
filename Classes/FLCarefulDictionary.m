@@ -133,7 +133,9 @@
     FLAssertNotNil(object);
     FLAssertNotNil(key);
 
-    [_objects setObject:object forKey:[self confirmedKey:key]];
+    if(object) {
+        [_objects setObject:object forKey:[self confirmedKey:key]];
+    }
 }
 
 - (void) removeObjectWithKey:(id) key {

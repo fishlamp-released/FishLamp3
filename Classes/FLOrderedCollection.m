@@ -86,24 +86,32 @@
     FLAssertNotNil(key);
 	FLAssertNil([_objectDictionary objectForKey:key]);
     ++_mutationCount;
-    [_objectDictionary setObject:object forKey:key];
-    [_objectArray addObject:object];
-    [_keys addObject:key];
-    [_indexes setObject:[NSNumber numberWithUnsignedInteger:_objectArray.count - 1] forKey:key];
+
+    if(object && key) {
+        [_objectDictionary setObject:object forKey:key];
+
+        [_objectArray addObject:object];
+        [_keys addObject:key];
+        [_indexes setObject:[NSNumber numberWithUnsignedInteger:_objectArray.count - 1] forKey:key];
+    }
 }
 
 - (void) setObject:(id) object forKey:(id) key {
     FLAssertNotNil(object);
     FLAssertNotNil(key);
-    id existingObject = [_objectDictionary objectForKey:key];
-    if(existingObject) {
-        ++_mutationCount;
-        [_objectDictionary setObject:object forKey:key];
-        [_objectArray replaceObjectAtIndex:[[_indexes objectForKey:key] intValue] withObject:object];
+
+    if(object && key) {
+        id existingObject = [_objectDictionary objectForKey:key];
+        if(existingObject) {
+            ++_mutationCount;
+            [_objectDictionary setObject:object forKey:key];
+            [_objectArray replaceObjectAtIndex:[[_indexes objectForKey:key] intValue] withObject:object];
+
+        }
+        else {
+            [self addObject:object forKey:key];
+        }
     }
-    else {
-		[self addObject:object forKey:key];
-	}
 }
 
 - (NSUInteger) indexForKey:(id) key {
