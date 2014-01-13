@@ -214,8 +214,6 @@ static int s_counter = 0;
 
     [self.context setFinisher:finisher forOperation:self];
 
-    FLAssertNotNil([self.context finisherForOperation:self]);
-
     self.byteCount = [FLHttpRequestByteCount httpRequestByteCount];
 
     FLAssertNotNil(self.byteCount);
@@ -410,7 +408,7 @@ static int s_counter = 0;
 }
 
 - (void) setFinishedWithResult:(FLPromisedResult) result {
-    FLFinisher* finisher = [self.context finisherForOperation:self];
+    FLFinisher* finisher = [self.context popFinisherForOperation:self];
     FLAssertNotNil(finisher);
 
     [finisher setFinishedWithResult:result];
