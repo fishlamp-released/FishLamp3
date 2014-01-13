@@ -154,7 +154,9 @@
     FLAssertNotNil(string);
 
     if(_needsLine) {
-        [_lines addObject:FLAutorelease([string mutableCopy])];
+        if(string) {
+            [_lines addObject:FLAutorelease([string mutableCopy])];
+        }
         _needsLine = NO;
     }
     else {
@@ -225,7 +227,10 @@ appendContentsToStringFormatter:(id<FLStringFormatter>) anotherStringFormatter  
     FLAssertNotNil(_lines);
     FLAssertNotNil(section);
 
-    [_lines addObject:section];
+    if(section) {
+        [_lines addObject:section];
+    }
+    
     _needsLine = YES;
     [section setStringDocument:self.stringDocument];
     [section setParentSection:self];
