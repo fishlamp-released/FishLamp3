@@ -155,20 +155,28 @@ static NSMutableDictionary* s_registry = nil;
 
 - (void) addProperty:(FLPropertyDescriber*) property {
     FLAssertNotNil(property);
-    
+    FLAssertNotNil(property.propertyKey);
+
     if(!_properties) {
         _properties = [[NSMutableDictionary alloc] init];
     }
-   
-    FLPropertyDescriber* existing = [_properties objectForKey:property.propertyKey];
-    if(existing) {
-        FLTrace(@"replacing property %@ to %@", property.propertyName, NSStringFromClass(self.objectClass));
-        existing.representedObjectDescriber = property.representedObjectDescriber;
-        existing.containedTypes = property.containedTypes;
-    } 
-    else {
-        FLTrace(@"added property %@ to %@", property.propertyName, NSStringFromClass(self.objectClass));
-        [_properties setObject:property forKey:property.propertyKey];
+
+    if(property && property.propertyKey) {
+
+        FLPropertyDescriber* existing = [_properties objectForKey:property.propertyKey];
+        if(existing) {
+            FLTrace(@"replacing property %@ to %@", property.propertyName, NSStringFromClass(self.objectClass));
+            existing.representedObjectDescriber = property.representedObjectDescriber;
+            existing.containedTypes = property.containedTypes;
+        } 
+        else {
+            FLTrace(@"added property %@ to %@", property.propertyName, NSStringFromClass(self.objectClass));
+
+            if(property) {
+                [_properties setObject:property forKey:property.propertyKey];
+            }
+        }
+
     }
 }
 
