@@ -40,17 +40,23 @@ FLSynthesizeSingleton(FLTestLoggingManager)
 #endif
 
 - (void) addLogger:(id<FLStringFormatter>) formatter {
-    FLCriticalSection(&s_predicate, ^{
-//        FLAssertNotNil(formatter);
-        [_loggers addObject:formatter];
-    });
+    FLAssertNotNil(formatter);
+
+    if(formatter) {
+        FLCriticalSection(&s_predicate, ^{
+            [_loggers addObject:formatter];
+        });
+    }
 }
 
 - (void) pushLogger:(id<FLStringFormatter>) formatter {
-    FLCriticalSection(&s_predicate, ^{
-        FLAssertNotNil(formatter);
-        [_loggers insertObject:formatter atIndex:0];
-    });
+    FLAssertNotNil(formatter);
+
+    if(formatter) {
+        FLCriticalSection(&s_predicate, ^{
+            [_loggers insertObject:formatter atIndex:0];
+        });
+    }
 }
 
 - (void) popLogger {
