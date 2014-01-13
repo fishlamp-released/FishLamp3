@@ -13,6 +13,11 @@ Pod::Spec.new do |s|
     s.requires_arc = false
     
 	s.dependency 'FishLampCore'
-	s.source_files = 'Classes/**/*.{h,m}'
+	s.source_files = 'Classes/*.{h,m}'
+	
+	s.subspec 'Proxies' do |ss|
+		ss.source_files = 'Classes/Proxies/*.{h,m}'
+	end
+
 end
 

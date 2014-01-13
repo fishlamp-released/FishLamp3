@@ -7,7 +7,6 @@
 //
 
 #import "FLBroadcasterProxy.h"
-#import "FLBroadcaster_Internal.h"
 
 @interface FLBroadcasterProxy ()
 @property (readwrite, strong, nonatomic) FLBroadcaster* broadcaster;
@@ -113,16 +112,6 @@
                      withObject:(id) object4 {
 
     [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2 withObject:object3 withObject:object4];
-}
-
-- (id) addBackgroundListener:(id)listener {
-    [self.broadcaster addBackgroundListener:listener];
-    return self;
-}
-
-- (id) addForegroundListener:(id)listener {
-    [self.broadcaster addForegroundListener:listener];
-    return self;
 }
 
 - (void) removeListener:(id) listener {
