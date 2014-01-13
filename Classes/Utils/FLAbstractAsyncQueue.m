@@ -172,12 +172,12 @@
     FLAssertNotNil(target);
     FLAssertNonNilPointer(action);
 
-    __block id theTarget = FLRetain(target);
+    __block id blockTarget = FLRetain(target);
 
     return [self queueBlock:^{
-        [theTarget performSelector:action];
+        [blockTarget performSelector:action];
 
-        FLReleaseWithNil(theTarget);
+        FLReleaseWithNil(blockTarget);
     }];
 }
 
@@ -188,12 +188,14 @@
     FLAssertNotNil(target);
     FLAssertNonNilPointer(action);
 
-    __block id theTarget = FLRetain(target);
+    __block id blockTarget = FLRetain(target);
+    __block id blockObject = FLRetain(object);
 
     return [self queueBlock:^{
-        [target performSelector:action withObject:object];
+        [blockTarget performSelector:action withObject:blockObject];
 
-        FLReleaseWithNil(theTarget);
+        FLReleaseWithNil(blockTarget);
+        FLReleaseWithNil(blockObject);
     }];
 }
 
@@ -205,11 +207,16 @@
     FLAssertNotNil(target);
     FLAssertNonNilPointer(action);
 
-    __block id theTarget = FLRetain(target);
+    __block id blockTarget = FLRetain(target);
+    __block id blockObject1 = FLRetain(object1);
+    __block id blockObject2 = FLRetain(object2);
 
     return [self queueBlock:^{
-        [target performSelector:action withObject:object1 withObject:object2];
-        FLReleaseWithNil(theTarget);
+        [blockTarget performSelector:action withObject:blockObject1 withObject:blockObject2];
+
+        FLReleaseWithNil(blockTarget);
+        FLReleaseWithNil(blockObject1);
+        FLReleaseWithNil(blockObject2);
     }];
 }
 
@@ -221,11 +228,17 @@
 
     FLAssertNotNil(target);
     FLAssertNonNilPointer(action);
-    __block id theTarget = FLRetain(target);
+    __block id blockTarget = FLRetain(target);
+    __block id blockObject1 = FLRetain(object1);
+    __block id blockObject2 = FLRetain(object2);
+    __block id blockObject3 = FLRetain(object3);
 
     return [self queueBlock:^{
-        [target performSelector_fl:action withObject:object1 withObject:object2 withObject:object3];
-        FLReleaseWithNil(theTarget);
+        [blockTarget performSelector_fl:action withObject:blockObject1 withObject:blockObject2 withObject:blockObject3];
+        FLReleaseWithNil(blockTarget);
+        FLReleaseWithNil(blockObject1);
+        FLReleaseWithNil(blockObject2);
+        FLReleaseWithNil(blockObject3);
     }];
 
 }
@@ -239,11 +252,19 @@
 
     FLAssertNotNil(target);
     FLAssertNonNilPointer(action);
-    __block id theTarget = FLRetain(target);
+    __block id blockTarget = FLRetain(target);
+    __block id blockObject1 = FLRetain(object1);
+    __block id blockObject2 = FLRetain(object2);
+    __block id blockObject3 = FLRetain(object3);
+    __block id blockObject4 = FLRetain(object4);
 
     return [self queueBlock:^{
-        [target performSelector_fl:action withObject:object1 withObject:object2 withObject:object3 withObject:object4];
-        FLReleaseWithNil(theTarget);
+        [blockTarget performSelector_fl:action withObject:blockObject1 withObject:blockObject2 withObject:blockObject3 withObject:blockObject4];
+        FLReleaseWithNil(blockTarget);
+        FLReleaseWithNil(blockObject1);
+        FLReleaseWithNil(blockObject2);
+        FLReleaseWithNil(blockObject3);
+        FLReleaseWithNil(blockObject4);
     }];
 }
 
@@ -253,11 +274,11 @@
     FLAssertNotNil(target);
     FLAssertNonNilPointer(action);
 
-    __block id theTarget = FLRetain(target);
+    __block id blockTarget = FLRetain(target);
 
     return [self queueFinishableBlock:^(FLFinisher *finisher) {
-        [theTarget performSelector:action withObject:finisher];
-        FLReleaseWithNil(theTarget);
+        [blockTarget performSelector:action withObject:finisher];
+        FLReleaseWithNil(blockTarget);
     }];
 
 }
@@ -269,12 +290,14 @@
     FLAssertNotNil(target);
     FLAssertNonNilPointer(action);
 
-    __block id theTarget = FLRetain(target);
+    __block id blockTarget = FLRetain(target);
+    __block id blockObject = FLRetain(object);
 
     return [self queueFinishableBlock:^(FLFinisher *finisher) {
-        [target performSelector:action withObject:finisher withObject:object];
+        [blockTarget performSelector:action withObject:finisher withObject:blockObject];
 
-        FLReleaseWithNil(theTarget);
+        FLReleaseWithNil(blockTarget);
+        FLReleaseWithNil(blockObject);
     }];
 }
 
@@ -285,11 +308,15 @@
     FLAssertNotNil(target);
     FLAssertNonNilPointer(action);
 
-    __block id theTarget = FLRetain(target);
+    __block id blockTarget = FLRetain(target);
+    __block id blockObject1 = FLRetain(object1);
+    __block id blockObject2 = FLRetain(object2);
 
     return [self queueFinishableBlock:^(FLFinisher *finisher) {
-        [target performSelector_fl:action withObject:finisher withObject:object1 withObject:object2];
-        FLReleaseWithNil(theTarget);
+        [blockTarget performSelector_fl:action withObject:finisher withObject:blockObject1 withObject:blockObject2];
+        FLReleaseWithNil(blockTarget);
+        FLReleaseWithNil(blockObject1);
+        FLReleaseWithNil(blockObject2);
     }];
 }
 
@@ -301,11 +328,17 @@
 
     FLAssertNotNil(target);
     FLAssertNonNilPointer(action);
-    __block id theTarget = FLRetain(target);
+    __block id blockTarget = FLRetain(target);
+    __block id blockObject1 = FLRetain(object1);
+    __block id blockObject2 = FLRetain(object2);
+    __block id blockObject3 = FLRetain(object3);
 
     return [self queueFinishableBlock:^(FLFinisher *finisher) {
-        [target performSelector_fl:action withObject:finisher withObject:object1 withObject:object2 withObject:object3];
-        FLReleaseWithNil(theTarget);
+        [blockTarget performSelector_fl:action withObject:finisher withObject:blockObject1 withObject:blockObject2 withObject:blockObject3];
+        FLReleaseWithNil(blockTarget);
+        FLReleaseWithNil(blockObject1);
+        FLReleaseWithNil(blockObject2);
+        FLReleaseWithNil(blockObject3);
     }];
 
 }

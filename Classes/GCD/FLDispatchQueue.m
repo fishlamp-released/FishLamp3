@@ -225,7 +225,16 @@ void FLQueueOperation(id<FLQueueableAsyncOperation> operation, NSTimeInterval de
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, FLTimeIntervalToNanoSeconds(delay)), queue.dispatch_queue_t, block);
     }
     else {
-        dispatch_async(queue.dispatch_queue_t, block);
+
+#if DEBUG
+// this prevents bogus Clang warning.
+    if(queue) {
+#endif
+    dispatch_async(queue.dispatch_queue_t, block);
+
+#if DEBUG
+    }
+#endif
     }
 }
 
@@ -241,6 +250,11 @@ void FLRunSynchronousOperation(id<FLQueueableAsyncOperation> operation, FLDispat
     __block FLDispatchQueue* blockQueue = FLRetain(queue);
     __block FLFinisher* blockFinisher = FLRetain(finisher);
 
+#if DEBUG
+// this prevents bogus Clang warning.
+    if(queue) {
+#endif
+
     dispatch_queue_t queue_t = queue.dispatch_queue_t;
     dispatch_sync(queue_t, ^{
         @try {
@@ -253,6 +267,11 @@ void FLRunSynchronousOperation(id<FLQueueableAsyncOperation> operation, FLDispat
         FLReleaseWithNil(blockOperation);
         FLReleaseWithNil(blockFinisher);
     });
+
+#if DEBUG
+    }
+#endif
+
 }
 
 

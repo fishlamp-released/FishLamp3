@@ -83,20 +83,24 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
 
 - (void) requestCancel {
 
-    @synchronized(self) {
+    NSSet* copy = nil;
+    @try {
+        @synchronized(self) {
+            copy = [_operations copy];
+        }
 
-        // the reason we need a copy is because the set is likely going
-        // to change out from under us as we iterate it and cancel the operations
-        // (which then remove themselves from the context).
-        NSSet* copy = FLCopyWithAutorelease(_operations);
         for(id operation in copy) {
 #if TRACE
             FLLog(@"cancelled %@", [operation description]);
 #endif
-        
-            FLPerformSelector0(OperationInQueue(operation), @selector(requestCancel));
+
+            [operation requestCancel];
         }
     }
+    @finally {
+        FLReleaseWithNil(copy);
+    }
+
 }
 
 - (void) openContext {
@@ -153,7 +157,9 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
             [operation removeContext:self];
         }
 
-        [_finishers removeObjectForKey:operation];
+        if(operation) {
+            [_finishers removeObjectForKey:operation];
+        }
     }
 
     [self didRemoveOperation:operation];
@@ -204,23 +210,30 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
 - (void) setFinisher:(FLFinisher*) finisher
         forOperation:(id) operation {
 
+    FLAssertNotNil(finisher);
+    FLAssertNotNil(operation);
     FLAssertNotNil(_finishers);
 
     @synchronized(self) {
         [_finishers setObject:finisher
                        forKey:[NSValue valueWithNonretainedObject:operation]];
-
-        FLAssertNotNil([self finisherForOperation:operation]);
     }
 }
 
-- (FLFinisher*) finisherForOperation:(id) operation {
+- (FLFinisher*) popFinisherForOperation:(id) operation {
 
+    FLAssertNotNil(operation);
     FLAssertNotNil(_finishers);
 
+    FLFinisher* finisher = nil;
+    id key = [NSValue valueWithNonretainedObject:operation];
+
     @synchronized(self) {
-        return FLRetainWithAutorelease([_finishers objectForKey:[NSValue valueWithNonretainedObject:operation]]);
+        finisher = FLRetainWithAutorelease([_finishers objectForKey:key]);
+        [_finishers removeObjectForKey:key];
     }
+
+    return finisher;
 }
 
 

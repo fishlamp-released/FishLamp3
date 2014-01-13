@@ -60,7 +60,7 @@
 - (void) setFinisher:(FLFinisher*) finisher
         forOperation:(id) operation;
 
-- (FLFinisher*) finisherForOperation:(id) operation;
+- (FLFinisher*) popFinisherForOperation:(id) operation;
 
 @end
 

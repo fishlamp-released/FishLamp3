@@ -122,16 +122,20 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 - (void) willStartOperation:(FLOperation*) operation
             forQueuedObject:(id) object {
 
+    __block FLOperationQueue* blockSelf = FLRetain(self);
+    __block FLOperation* blockOperation = FLRetain(operation);
+    __block id blockObject = FLRetain(object);
 
     [FLBackgroundQueue queueBlock:^{
-        [self sendMessageToListeners:@selector(operationQueue:didStartOperation:forQueuedObject:)
-                          withObject:self
-                          withObject:operation
-                          withObject:object];
-        
-//          operationQueue:self
-//                           didStartOperation:operation
-//                             forQueuedObject:object];
+        [blockSelf sendMessageToListeners:@selector(operationQueue:didStartOperation:forQueuedObject:)
+                          withObject:blockSelf
+                          withObject:blockOperation
+                          withObject:blockObject];
+
+
+        FLReleaseWithNil(blockOperation);
+        FLReleaseWithNil(blockObject);
+        FLReleaseWithNil(blockSelf);
         }];
 }
 
@@ -139,19 +143,11 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
             forQueuedObject:(id) object
                  withResult:(FLPromisedResult) result {
 
-        [self sendMessageToListeners:@selector(operationQueue:didFinishOperation:forQueuedObject:withResult:)
-                          withObject:self
-                          withObject:operation
-                          withObject:object
-                          withObject:result];
-
-
-//    [FLBackgroundQueue queueBlock:^{
-//        [self.notify operationQueue:self
-//                           didFinishOperation:operation
-//                             forQueuedObject:object
-//                                   withResult:result];
-//    }];
+    [self sendMessageToListeners:@selector(operationQueue:didFinishOperation:forQueuedObject:withResult:)
+                      withObject:self
+                      withObject:operation
+                      withObject:object
+                      withObject:result];
 }
 
 - (void) didFinishWithResult:(FLPromisedResult) result {
@@ -283,6 +279,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 }
 
 - (void) startOperationForObject:(id) object {
+
     FLOperation* operation = [self createOperationForQueuedObject:object];
     [operation addListener:self withScheduling:FLScheduleMessagesInAnyThread];
 
@@ -296,12 +293,20 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 
     FLAssertNotNil(self.context);
 
+    __block FLOperationQueue* blockSelf = FLRetain(self);
+    __block FLOperation* blockOperation = FLRetain(operation);
+    __block id blockObject = FLRetain(object);
+
 // TODO: give operations chance to run in whatever queue they want?
     [self.context queueOperation:operation
                         completion:^(FLPromisedResult result) {
 
-        [self.schedulingQueue queueBlock: ^{
-            [self respondToOperationFinished:operation forQueuedObject:object withResult:result];
+        [blockSelf.schedulingQueue queueBlock: ^{
+            [blockSelf respondToOperationFinished:blockOperation forQueuedObject:blockObject withResult:result];
+
+            FLReleaseWithNil(blockOperation);
+            FLReleaseWithNil(blockObject);
+            FLReleaseWithNil(blockSelf);
         }];
     }];
 }
@@ -338,7 +343,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
                 result = FLSuccessfulResult;
             }
 
-            FLFinisher* finisher = [self.context finisherForOperation:self];
+            FLFinisher* finisher = [self.context popFinisherForOperation:self];
             FLAssertNotNil(finisher);
 
             [finisher setFinishedWithResult:result];

@@ -44,6 +44,7 @@
     return FLAutorelease([[[self class] alloc] initWithPromise:promise]);
 }
 
+#if DEBUG
 #if FL_MRC
 - (void) dealloc {
 //#if DEBUG
@@ -51,6 +52,7 @@
 //#endif
 	[super dealloc];
 }
+#endif
 #endif
 
 - (void) setFinishedWithResult:(FLPromisedResult) result {
