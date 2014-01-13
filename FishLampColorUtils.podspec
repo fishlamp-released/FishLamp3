@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
     s.homepage     = "http://fishlamp.com"
     s.license      = 'MIT'
     s.author       = { "Mike Fullerton" => "hello@fishlamp.com" }
-    s.source       = { :git => "https://github.com/fishlamp/ColorUtils.git", :tag => s.version.to_s }
+    s.source       = { :git => "https://github.com/fishlamp/FishLampColorUtils.git", :tag => s.version.to_s }
 
     s.ios.deployment_target = '6.1'
     s.osx.deployment_target = '10.6'
