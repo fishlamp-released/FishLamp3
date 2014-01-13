@@ -28,3 +28,19 @@ extern BOOL FLPerformSelectorOnMainThread2(id target, SEL selector, id object1, 
 extern BOOL FLPerformSelectorOnMainThread3(id target, SEL selector, id object1, id object2, id object3);
 extern BOOL FLPerformSelectorOnMainThread4(id target, SEL selector, id object1, id object2, id object3, id object4);
 
+typedef BOOL (*FLSelectorPerformer0)(id, SEL);
+typedef BOOL (*FLSelectorPerformer1)(id, SEL, id);
+typedef BOOL (*FLSelectorPerformer2)(id, SEL, id, id);
+typedef BOOL (*FLSelectorPerformer3)(id, SEL, id, id, id);
+typedef BOOL (*FLSelectorPerformer4)(id, SEL, id, id, id, id);
+
+typedef struct {
+    FLSelectorPerformer0 performSelector0;
+    FLSelectorPerformer1 performSelector1;
+    FLSelectorPerformer2 performSelector2;
+    FLSelectorPerformer3 performSelector3;
+    FLSelectorPerformer4 performSelector4;
+} FLDispatcher_t;
+
+extern const FLDispatcher_t FLMainThreadSelectorPerformer;
+extern const FLDispatcher_t FLSelectorPerformer;

@@ -287,11 +287,6 @@
     #define FLAssertConformsToProcol(__OBJ__, __PROTOCOL__, DESCRIPTION...) \
                 FLAssert([__OBJ__ conformsToProtocol:@protocol(__PROTOCOL__)], @"" DESCRIPTION)
 
-//    #define FLAssertStringIsNotEmptyWithComment(__STRING__, __FORMAT__, ...) \
-//                FL_ASSERT_STRING_IS_NOT_EMPTY_WITH_COMMENT(FL_ASSERT_THROWER, __STRING__, __FORMAT__, ##__VA_ARGS__)
-//
-//    #define FLAssertStringIsEmptyWithComment(__STRING__, __FORMAT__, ...) \
-//                FL_ASSERT_STRING_IS_EMPTY_WITH_COMMENT(FL_ASSERT_THROWER, __STRING__, __FORMAT__, ##__VA_ARGS__)
 
 #else
     #define FLAssert(...) 
@@ -311,14 +306,10 @@
 #endif
 
 
-//#define FLAssertNotNil \
-//            FLAssertNotNil
-//
-//#define FLAssertNil \
-//            FLAssertNil
-
 #define FLAssertionFailed \
             FLAssertFailed
 
-//#define FLAssertPointerIsNotNil FLAssertNonNilPointer
-//#define FLAssertPointerIsNil FLAssertNilPointer
+
+
+
+

@@ -15,6 +15,22 @@
 #pragma GCC diagnostic ignored "-Warc-performSelector-leaks"
 
 
+const FLDispatcher_t FLMainThreadSelectorPerformer = {
+    FLPerformSelectorOnMainThread0,
+    FLPerformSelectorOnMainThread1,
+    FLPerformSelectorOnMainThread2,
+    FLPerformSelectorOnMainThread3,
+    FLPerformSelectorOnMainThread4
+    };
+
+const FLDispatcher_t FLSelectorPerformer = {
+    FLPerformSelector0,
+    FLPerformSelector1,
+    FLPerformSelector2,
+    FLPerformSelector3,
+    FLPerformSelector4
+    };
+
 BOOL FLSelectorPerforming(id target, SEL selector, id __strong * arguments, int argCount) {
 
 // TODO: this was a nice assert. Add it back without taking dependency on Runtime
