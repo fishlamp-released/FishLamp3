@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
    
-    s.name         = "FishLampDatabase"
+    s.name         = "FishLampObjectDatabase"
     s.version      = "0.0.1"
     s.summary      = "This is one part of the FishLamp framework."
     s.homepage     = "http://fishlamp.com"
     s.license      = 'MIT'
     s.author       = { "Mike Fullerton" => "hello@fishlamp.com" }
-    s.source       = { :git => "https://github.com/fishlamp/FishLampDatabase.git", :tag => s.version.to_s }
+    s.source       = { :git => "https://github.com/fishlamp/FishLampObjectDatabase.git", :tag => s.version.to_s }
 
     s.ios.deployment_target = '6.1'
     s.osx.deployment_target = '10.6'
