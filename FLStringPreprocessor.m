@@ -23,15 +23,17 @@ FLSynthesizeSingleton(FLStringFormatterLineProprocessor);
 
     NSRange range = { 0, 0 };
 
-    for(NSUInteger i = 0; i < string.length; i++) {
-        if([string characterAtIndex:i] == '\n') {
-            foundLineRangeBlock(range);
-            range.location = i+1;
-            range.length = 0;
-            continue;
-        }
+    if(foundLineRangeBlock) {
+        for(NSUInteger i = 0; i < string.length; i++) {
+            if([string characterAtIndex:i] == '\n') {
+                foundLineRangeBlock(range);
+                range.location = i+1;
+                range.length = 0;
+                continue;
+            }
 
-        ++range.length;
+            ++range.length;
+        }
     }
 
     return range;
