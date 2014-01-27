@@ -323,6 +323,10 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
     return  _activeQueue.count == 0 && _objectQueue.count == 0;
 }
 
+- (id) operationQueueSuccessfullResult {
+    return FLSuccessfulResult;
+}
+
 - (void) respondToProcessQueueEvent {
     if(self.processing) {
         FLAssert(self.maxConcurrentOperations > 0, @"zero max concurrent operations");
@@ -340,7 +344,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 
             id result = [self.errorStrategy errorResult];
             if(!result) {
-                result = FLSuccessfulResult;
+                result = [self operationQueueSuccessfullResult];
             }
 
             FLFinisher* finisher = [self.context popFinisherForOperation:self];

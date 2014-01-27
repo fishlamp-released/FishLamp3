@@ -83,6 +83,10 @@
                  withResult:(FLPromisedResult) result;
 
 - (FLOperation*) createOperationForQueuedObject:(id) object;
+
+// normall sends FLSuccessfulResult. Override this for more specific results.
+- (id) operationQueueSuccessfullResult;
+
 @end
 
 
