@@ -11,11 +11,11 @@ Pod::Spec.new do |s|
     s.osx.deployment_target = '10.6'
     s.requires_arc = false
 
-# 	s.source_files  = 'Classes', 'Classes/**/*.{h,m}'
-
 	s.dependency 'FishLampCore'
 	s.dependency 'FishLampStrings'
 	s.dependency 'FishLampSimpleLogger'
+
+	s.source_files  = 'Classes/*.h'
 
 	s.subspec 'Activity' do |ss|
 		ss.dependency 'FishLampEventBroadcaster'

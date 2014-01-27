@@ -274,9 +274,9 @@ static int s_counter = 0;
             (long)self.retryHandler.retryCount,
             (long)self.retryHandler.maxRetryCount);
 
-        [self.operationStarter startOperation:self
+        [self.operationStarter queueOperation:self
                                     withDelay:self.retryHandler.retryDelay
-                                 withFinisher:[FLFinisher finisher]];
+                                     finisher:[FLFinisher finisher]];
 
 
 //        if(self.retryHandler > 0) {

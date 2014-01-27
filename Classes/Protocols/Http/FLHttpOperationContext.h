@@ -12,7 +12,6 @@
 #import "FLAuthenticationCredentials.h"
 #import "FLAuthenticationHandler.h"
 
-@protocol FLStorageService;
 @protocol FLAuthenticationCredentials;
 @protocol FLAuthenticateHttpRequestOperationDelegate;
 @protocol FLAuthenticatedEntity;
@@ -22,7 +21,6 @@
 
 @interface FLHttpOperationContext : FLOperationContext<FLHttpRequestAuthenticator, FLAuthenticationHandler> {
 @private
-    id<FLStorageService> _storageService;
     id<FLAuthenticatedEntity> _authenticatedEntity;
     id<FLAuthenticationCredentials> _authenticationCredentials;
     id<FLCredentialsStorage> _credentialsStorage;
@@ -46,20 +44,9 @@
 // getters
 @property (readonly, assign, nonatomic) BOOL isAuthenticated;
 
-@property (readonly, strong) id<FLStorageService> storageService;
-
 - (FLPromise*) beginAuthenticating:(fl_completion_block_t) completion;
 
 - (void) logoutEntity;
-
-@end
-
-@interface FLHttpOperationContext (OptionalOverrides)
-
-/// @return FLDatabaseStorageService by default
-- (id<FLStorageService>) createStorageService;
-
-- (void) prepareAuthenticatedOperation:(id) operation;
 
 @end
 

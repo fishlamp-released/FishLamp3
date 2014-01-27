@@ -22,8 +22,6 @@
 #import "FLFifoDispatchQueue.h"
 
 @interface FLHttpOperationContext ()
-
-@property (readwrite, strong) id<FLStorageService> storageService;
 @property (readwrite, strong) FLServiceList* serviceList;
 @property (readonly, strong) FLFifoDispatchQueue* authenticationQueue;
 @property (readwrite, strong) id<FLAuthenticatedEntity> authenticatedEntity;
@@ -33,7 +31,6 @@
 
 @implementation FLHttpOperationContext
 
-@synthesize storageService = _storageService;
 @synthesize serviceList = _serviceList;
 @synthesize authenticatedEntity = _authenticatedEntity;
 @synthesize authenticationQueue = _authenticationQueue;
@@ -48,12 +45,6 @@
         _authenticationQueue = [[FLFifoDispatchQueue alloc] init];
         _serviceList = [[FLServiceList alloc] init];
 
-        // create storage service
-        self.storageService = [self createStorageService];
-        if(self.storageService) {
-            [_serviceList addService:self.storageService];
-        }
-
    		self.credentialsStorage = [FLUserDefaultsCredentialStorage instance];
     }
     return self;
@@ -65,7 +56,6 @@
     [_credentialsStorage release];
     [_authenticationCredentials release];
     [_authenticatedEntity release];
-    [_storageService release];
     [_serviceList release];
     [super dealloc];
 }
@@ -93,7 +83,6 @@
     self.authenticationError = nil;
 
     [self saveCredentials];
-    [self.storageService openService];
 }
 
 - (BOOL) isAuthenticated {
@@ -157,9 +146,6 @@
 
 - (id<FLStorageService>) createStorageService {
     return [FLNoStorageService noStorageService];
-}
-
-- (void) prepareAuthenticatedOperation:(id) operation {
 }
 
 - (void) saveCredentials {
