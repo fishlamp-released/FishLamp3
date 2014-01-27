@@ -281,12 +281,18 @@
     #define FLAssertStringsNotEqual(a,b, DESCRIPTION...) \
                 FLAssert(!FLStringsAreEqual(a,b), @"" DESCRIPTION);
 
-    #define FLAssertIsKindOfClass(__OBJ__, __CLASS__, DESCRIPTION...) \
-                FLAssert([__OBJ__ isKindOfClass:[__CLASS__ class]], @"" DESCRIPTION)
+    #define FLAssertIsKindOfClass(OBJECT, CLASS, DESCRIPTION...) \
+                do { \
+                    id __OBJ__ = OBJECT; \
+                    FLAssert([__OBJ__ isKindOfClass:[CLASS class]], \
+                                @"expecting %@ but got %@ - %@", \
+                                NSStringFromClass([CLASS class]), \
+                                NSStringFromClass([__OBJ__ class]), \
+                                @"" DESCRIPTION);  \
+                } while(0)
 
-    #define FLAssertConformsToProcol(__OBJ__, __PROTOCOL__, DESCRIPTION...) \
+    #define FLAssertConformsToProtocol(__OBJ__, __PROTOCOL__, DESCRIPTION...) \
                 FLAssert([__OBJ__ conformsToProtocol:@protocol(__PROTOCOL__)], @"" DESCRIPTION)
-
 
 #else
     #define FLAssert(...) 
