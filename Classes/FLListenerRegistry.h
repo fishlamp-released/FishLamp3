@@ -13,8 +13,8 @@
 
 - (BOOL) hasListener:(id) listener;
 
-- (id) addListener:(id) listener;
-- (id) addListener:(id) listener withScheduling:(FLScheduleMessages) schedule;
+- (void) addListener:(id) listener;
+- (void) addListener:(id) listener withScheduling:(FLScheduleMessages) schedule;
 
 - (void) removeListener:(id) listener;
 

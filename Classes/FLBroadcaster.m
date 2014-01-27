@@ -70,18 +70,16 @@
     return _listeners;
 }
 
-- (id) addListener:(id) listener withScheduling:(FLScheduleMessages) schedule {
+- (void) addListener:(id) listener withScheduling:(FLScheduleMessages) schedule {
     [[self lazyListeners] addListener:listener withScheduling:schedule];
-    return self;
 }
 
 - (void) removeListener:(id) listener {
     [self.listeners removeListener:listener];
 }
 
-- (id) addListener:(id) listener {
+- (void) addListener:(id) listener {
     [[self lazyListeners] addListener:listener];
-    return self;
 }
 
 @end

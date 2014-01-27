@@ -48,19 +48,17 @@
     }
 }
 
-- (id) addListener:(id) aObject withScheduling:(FLScheduleMessages) schedule {
+- (void) addListener:(id) aObject withScheduling:(FLScheduleMessages) schedule {
 
     FLListener* listener = [FLListener listener:aObject schedule:schedule];
     @synchronized(self) {
         [_listeners addObject:listener];
         FLReleaseWithNil(_iteratableListeners);
     }
-
-    return self;
 }
 
-- (id) addListener:(id) listener {
-    return [self addListener:listener
+- (void) addListener:(id) listener {
+    [self addListener:listener
               withScheduling:[NSThread isMainThread] ?
                 FLScheduleMessagesInMainThreadOnly :
                 FLScheduleMessagesInAnyThread];
