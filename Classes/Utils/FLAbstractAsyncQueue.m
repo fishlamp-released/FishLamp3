@@ -9,6 +9,7 @@
 #import "FLAbstractAsyncQueue.h"
 #import "FLQueueableAsyncOperation.h"
 #import "FLBroadcaster.h"
+#import "FLFinisher_Internal.h"
 
 @interface FLQueueableBlockOperation : NSObject<FLQueueableAsyncOperation> {
 @private
@@ -35,37 +36,35 @@
 
     FLAssertNotNil(block);
 
-    return [self queueOperation:[FLQueueableBlockOperation queueableBlockOperation:block]
-                      withDelay:delay
-                   withFinisher:[FLFinisher finisherWithBlock:completion]];
+    FLFinisher* finisher = [FLAutoFinisher finisherWithBlock:completion];
+    finisher.asyncQueueBlock = block;
+
+    [self queueOperation:finisher withDelay:delay finisher:finisher];
+
+    return finisher;
 }
 
 - (FLPromise*) queueBlockWithDelay:(NSTimeInterval) delay
                              block:(fl_block_t) block {
-    FLAssertNotNil(block);
-
-    return [self queueOperation:[FLQueueableBlockOperation queueableBlockOperation:block]
-                      withDelay:0
-                   withFinisher:[FLFinisher finisher]];
+    return [self queueBlockWithDelay:delay block:block completion:nil];
 }
 
-- (FLPromise*) queueBlock:(fl_block_t) block {
-
-    FLAssertNotNil(block);
-
-    return [self queueOperation:[FLQueueableBlockOperation queueableBlockOperation:block]
-                      withDelay:0
-                   withFinisher:[FLFinisher finisher]];
-}
 
 - (FLPromise*) queueBlock:(fl_block_t) block
                completion:(fl_completion_block_t) completionOrNil {
 
     FLAssertNotNil(block);
 
-    return [self queueOperation:[FLQueueableBlockOperation queueableBlockOperation:block]
-                      withDelay:0
-                   withFinisher:[FLFinisher finisherWithBlock:completionOrNil]];
+    FLFinisher* finisher = [FLAutoFinisher finisherWithBlock:completionOrNil];
+    finisher.asyncQueueBlock = block;
+
+    [self queueOperation:finisher withDelay:0 finisher:finisher];
+
+    return finisher;
+}
+
+- (FLPromise*) queueBlock:(fl_block_t) block {
+    return [self queueBlock:block completion:nil];
 }
 
 - (FLPromise*) queueFinishableBlock:(fl_finisher_block_t) block
@@ -73,18 +72,16 @@
 
     FLAssertNotNil(block);
 
-    return [self queueOperation:[FLQueuableFinisherBlockOperation queueableFinisherBlockOperation:block]
-                      withDelay:0
-                   withFinisher:[FLFinisher finisherWithBlock:completionOrNil]];
+    FLFinisher* finisher = [FLAutoFinisher finisherWithBlock:completionOrNil];
+    finisher.asyncQueueFinisherBlock = block;
+
+    [self queueOperation:finisher withDelay:0 finisher:finisher];
+
+    return finisher;
 }
 
 - (FLPromise*) queueFinishableBlock:(fl_finisher_block_t) block {
-
-    FLAssertNotNil(block);
-
-    return [self queueOperation:[FLQueuableFinisherBlockOperation queueableFinisherBlockOperation:block]
-                      withDelay:0
-                   withFinisher:[FLFinisher finisher]];
+    return [self queueFinishableBlock:block completion:nil];
 }
 
 - (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) object
@@ -93,28 +90,22 @@
 
     FLAssertNotNil(object);
 
-    return [self queueOperation:object
-                      withDelay:delay
-                   withFinisher:[FLFinisher finisherWithBlock:completionOrNil]];
+    FLFinisher* finisher = [FLAutoFinisher finisherWithBlock:completionOrNil];
+
+    [self queueOperation:object withDelay:delay finisher:finisher];
+
+    return finisher;
 }
 
 - (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) object
                    completion:(fl_completion_block_t) completionOrNil {
 
-    FLAssertNotNil(object);
-
-    return [self queueOperation:object
-                      withDelay:0
-                   withFinisher:[FLFinisher finisherWithBlock:completionOrNil]];
+    return [self queueOperation:object withDelay:0 completion:completionOrNil];
 }
 
 - (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) object {
 
-    FLAssertNotNil(object);
-
-    return [self queueOperation:object
-                      withDelay:0
-                   withFinisher:[FLFinisher finisher]];
+    return [self queueOperation:object withDelay:0 completion:nil];
 }
 
 - (FLPromisedResult) runBlockSynchronously:(fl_block_t) block {
@@ -139,24 +130,19 @@
     return nil;
 }
 
-- (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) object
+- (void) queueOperation:(id<FLQueueableAsyncOperation>) object
                     withDelay:(NSTimeInterval) delay
-                 withFinisher:(FLFinisher*) finisher {
+                     finisher:(FLFinisher*) finisher {
 
     FLAssertionFailed(@"required override");
-
-    return nil;
 }
 
-- (FLPromise*) startOperation:(id<FLQueueableAsyncOperation>) object
-                    withDelay:(NSTimeInterval) delay
-                 withFinisher:(FLFinisher*) finisher {
+- (void) queueOperation:(id<FLQueueableAsyncOperation>) object
+                     finisher:(FLFinisher*) finisher {
 
-    FLAssertNotNil(object);
-    FLAssertNotNil(finisher);
-
-    return [self queueOperation:object withDelay: delay withFinisher:finisher];
+    [self queueOperation:object withDelay:0 finisher:finisher];
 }
+
 
 - (FLPromisedResult) runOperationSynchronously:(id<FLQueueableAsyncOperation>) asyncObject {
     return [self runSynchronously:asyncObject];
@@ -368,7 +354,7 @@
 }
 #endif
 
-- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher *)finisher {
+- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue finisher:(FLFinisher *)finisher {
 
     FLAssertNotNil(queue);
     FLAssertNotNil(finisher);
@@ -381,12 +367,12 @@
 }
 
 - (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue
-                                           withFinisher:(FLFinisher *)finisher {
+                                           finisher:(FLFinisher *)finisher {
 
     FLAssertNotNil(queue);
     FLAssertNotNil(finisher);
 
-    [self startAsyncOperationInQueue:queue withFinisher:finisher];
+    [self startAsyncOperationInQueue:queue finisher:finisher];
     [finisher waitUntilFinished];
 }
 
@@ -419,7 +405,7 @@
 }
 #endif
 
-- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher {
+- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue finisher:(FLFinisher*) finisher {
 
     FLAssertNotNil(queue);
     FLAssertNotNil(finisher);
@@ -429,12 +415,12 @@
     }
 }
 
-- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher {
+- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue finisher:(FLFinisher*) finisher {
 
     FLAssertNotNil(queue);
     FLAssertNotNil(finisher);
 
-    [self startAsyncOperationInQueue:queue withFinisher:finisher];
+    [self startAsyncOperationInQueue:queue finisher:finisher];
     [finisher waitUntilFinished];
 }
 

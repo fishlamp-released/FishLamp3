@@ -19,6 +19,16 @@
 
 @protocol FLAsyncQueue <NSObject, FLOperationStarter>
 
+- (void) queueOperation:(id<FLQueueableAsyncOperation>) operation
+              withDelay:(NSTimeInterval) delay
+               finisher:(FLFinisher*) finisher;
+
+- (void) queueOperation:(id<FLQueueableAsyncOperation>) operation
+               finisher:(FLFinisher*) finisher;
+
+
+// convienience methods
+
 - (FLPromise*) queueBlockWithDelay:(NSTimeInterval) delay
                              block:(fl_block_t) block
                         completion:(fl_completion_block_t) completionOrNil;

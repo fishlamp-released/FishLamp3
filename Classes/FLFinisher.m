@@ -14,19 +14,26 @@
 
 #import "FishLampSimpleLogger.h"
 
+#import "FLFinisher_Internal.h"
+
+@interface FLFinisher ()
+@end
+
 @implementation FLFinisher
 
+@synthesize asyncQueueBlock =_asyncQueueBlock;
+@synthesize asyncQueueFinisherBlock = _asyncQueueFinisherBlock;
+
+
+#if DEBUG
 - (id) init {
     self = [super init];
     if(self) {
-#if DEBUG
         _birth = [NSDate timeIntervalSinceReferenceDate];
-#endif
-
-        _finishOnMainThread = [NSThread isMainThread];
     }
     return self;
 }
+#endif
 
 + (id) finisher {
     return FLAutorelease([[[self class] alloc] init]);
@@ -44,27 +51,22 @@
     return FLAutorelease([[[self class] alloc] initWithPromise:promise]);
 }
 
-#if DEBUG
 #if FL_MRC
 - (void) dealloc {
 //#if DEBUG
 //    FLLog(@"finisher lifespan: %0.2f", [NSDate timeIntervalSinceReferenceDate] - _birth);
 //#endif
+
+    [_asyncQueueBlock release];
+    [_asyncQueueFinisherBlock release];
+
 	[super dealloc];
 }
-#endif
 #endif
 
 - (void) setFinishedWithResult:(FLPromisedResult) result {
 
     @try {
-
-        if(_finishOnMainThread && ![NSThread isMainThread]) {
-            [self performSelectorOnMainThread:@selector(setFinishedWithResult:)
-                                   withObject:result
-                                waitUntilDone:NO];
-            return;
-        }
 
         if(!result) {
             result = FLFailedResult;
@@ -94,5 +96,81 @@
     [self setFinishedWithResult:[NSError cancelError]];
 }
 
+- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue finisher:(FLFinisher *)finisher {
+
+    @try {
+        FLAssertNotNil(queue);
+        FLAssertNotNil(finisher);
+
+        if(_asyncQueueBlock) {
+            _asyncQueueBlock();
+            [finisher setFinished];
+        }
+        else if (_asyncQueueFinisherBlock) {
+            _asyncQueueFinisherBlock(finisher);
+        }
+        else {
+            [finisher setFinished];
+        }
+    }
+    @finally {
+        FLReleaseBlockWithNil(_asyncQueueBlock);
+        FLReleaseBlockWithNil(_asyncQueueFinisherBlock);
+    }
+}
+
+- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue
+                               finisher:(FLFinisher *)finisher {
+
+    FLAssertNotNil(queue);
+    FLAssertNotNil(finisher);
+
+    [self startAsyncOperationInQueue:queue finisher:finisher];
+    [finisher waitUntilFinished];
+}
+
+
 @end
 
+@implementation FLAutoFinisher
+
+- (id) init {	
+	self = [super init];
+	if(self) {
+        [self determineCallbackThread];
+	}
+	return self;
+}
+
+- (void) determineCallbackThread {
+    _finishOnMainThread = [NSThread isMainThread];
+}
+
+- (void) setFinishedWithResult:(FLPromisedResult) result {
+
+    if(_finishOnMainThread && ![NSThread isMainThread]) {
+        [self performSelectorOnMainThread:@selector(setFinishedWithResult:)
+                               withObject:result
+                            waitUntilDone:NO];
+        return;
+    }
+
+    [super setFinishedWithResult:result];
+}
+
+@end
+
+@implementation FLMainThreadFinisher
+
+- (void) setFinishedWithResult:(FLPromisedResult) result {
+
+    if(![NSThread isMainThread]) {
+        [self performSelectorOnMainThread:@selector(setFinishedWithResult:)
+                               withObject:result
+                            waitUntilDone:NO];
+        return;
+    }
+
+    [super setFinishedWithResult:result];
+}
+@end

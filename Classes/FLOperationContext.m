@@ -192,9 +192,9 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
 }
 
 
-- (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) operation
-                    withDelay:(NSTimeInterval) delay
-                 withFinisher:(FLFinisher*) finisher {
+- (void) queueOperation:(id<FLQueueableAsyncOperation>) operation
+              withDelay:(NSTimeInterval) delay
+               finisher:(FLFinisher*) finisher {
 
     FLAssertNotNil(operation);
     [self addOperation:operation];
@@ -204,7 +204,7 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
     id<FLOperationStarter> starter = [self starterForOperation:operation];
     FLAssertNotNil(starter);
 
-    return [starter startOperation:operation withDelay:delay withFinisher:finisher];
+    [starter queueOperation:operation withDelay:delay finisher:finisher];
 }
 
 - (void) setFinisher:(FLFinisher*) finisher

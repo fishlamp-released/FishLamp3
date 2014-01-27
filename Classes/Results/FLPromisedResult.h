@@ -15,7 +15,23 @@
 
 @interface NSObject (FLPromisedResult)
 - (BOOL) isError;
+- (NSError*) errorResult;
 + (id) fromPromisedResult:(FLPromisedResult) promisedResult;
 @end
 
 #define FLPromisedResultType(__TYPE__) FLPromisedResult
+
+#if DEBUG
+
+#define FLAssertPromisedResultIsType(RESULT, TYPE) \
+            do { \
+                id __RESULT__ = RESULT; \
+                if(![__RESULT__ isError]) { \
+                    FLAssertIsKindOfClass(__RESULT__, TYPE); \
+                } \
+            }   \
+            while(0)
+
+#else
+#define FLAssertIsPromisedType(RESULT, TYPE)
+#endif

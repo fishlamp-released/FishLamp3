@@ -11,18 +11,18 @@
 #import "FLAsyncBlockTypes.h"
 #import "FLPromisedResult.h"
 #import "FLPromise.h"
+#import "FLQueueableAsyncOperation.h"
 
 @protocol FLFinisherDelegate;
 
 // finisher callback fire on the main thread IF the finisher was created on the main thread.
 // otherwise they fire in whatever thread setFinished is called on.
 
-@interface FLFinisher : FLPromise {
+@interface FLFinisher : FLPromise<FLQueueableAsyncOperation> {
 @private
 #if DEBUG
     NSTimeInterval _birth;
 #endif
-    BOOL _finishOnMainThread;
 }
 
 + (id) finisher;
@@ -35,4 +35,18 @@
 // convienience methods - these call setFinishedWithResult:error
 - (void) setFinished;
 - (void) setFinishedWithCancel;
+@end
+
+@interface FLAutoFinisher : FLFinisher {
+@private
+    BOOL _finishOnMainThread;
+}
+
+// this is called at init time, but you can call it later if needed to override initial finding.
+- (void) determineCallbackThread;
+
+@end
+
+// will always fire on main thread
+@interface FLMainThreadFinisher : FLFinisher
 @end

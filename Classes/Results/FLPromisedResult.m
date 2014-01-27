@@ -28,6 +28,10 @@
 
 }
 
+- (NSError*) errorResult {
+    return nil;
+}
+
 @end
 
 @implementation NSError (FLPromisedResult)
@@ -45,5 +49,9 @@
 
     return promisedResult;
 
+}
+
+- (NSError*) errorResult {
+    return self;
 }
 @end

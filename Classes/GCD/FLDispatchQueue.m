@@ -96,17 +96,15 @@ void FLQueueOperation(id<FLQueueableAsyncOperation> operation, NSTimeInterval de
 }
 #endif
 
-- (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) operation
+- (void) queueOperation:(id<FLQueueableAsyncOperation>) operation
                     withDelay:(NSTimeInterval) delay
-                 withFinisher:(FLFinisher*) finisher {
+                 finisher:(FLFinisher*) finisher {
 
     FLAssertNotNil(operation);
     FLAssertNotNil(finisher);
     FLAssertNonZeroNumber(self.dispatch_queue_t);
 
     FLQueueOperation(operation, delay, self, finisher);
-
-    return finisher;
 }
 
 - (FLPromisedResult) runSynchronously:(id<FLQueueableAsyncOperation>) operation {
@@ -207,7 +205,7 @@ void FLQueueOperation(id<FLQueueableAsyncOperation> operation, NSTimeInterval de
 
     fl_block_t block = ^{
         @try {
-            [blockOperation startAsyncOperationInQueue:blockQueue withFinisher:blockFinisher];
+            [blockOperation startAsyncOperationInQueue:blockQueue finisher:blockFinisher];
         }
         @catch(NSException* ex) {
 
@@ -258,7 +256,7 @@ void FLRunSynchronousOperation(id<FLQueueableAsyncOperation> operation, FLDispat
     dispatch_queue_t queue_t = queue.dispatch_queue_t;
     dispatch_sync(queue_t, ^{
         @try {
-            [blockOperation runSynchronousOperationInQueue:blockQueue withFinisher:blockFinisher];
+            [blockOperation runSynchronousOperationInQueue:blockQueue finisher:blockFinisher];
         }
         @catch(NSException* ex) {
             [blockFinisher setFinishedWithResult:ex.error];
@@ -273,8 +271,6 @@ void FLRunSynchronousOperation(id<FLQueueableAsyncOperation> operation, FLDispat
 #endif
 
 }
-
-
 
 #if EXPERIMENTAL
 @implementation FLExecuteInQueueProxy

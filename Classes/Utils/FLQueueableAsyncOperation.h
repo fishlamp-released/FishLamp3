@@ -20,9 +20,9 @@
  */
 @protocol FLQueueableAsyncOperation <NSObject>
 
-- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher;
+- (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) queue finisher:(FLFinisher*) finisher;
 
-- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue withFinisher:(FLFinisher*) finisher;
+- (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) queue finisher:(FLFinisher*) finisher;
 
 @end
 

@@ -13,9 +13,9 @@
 
 @interface FLAbstractAsyncQueue : FLBroadcaster<FLAsyncQueue>
 
-- (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) object
+- (void) queueOperation:(id<FLQueueableAsyncOperation>) object
                     withDelay:(NSTimeInterval) delay
-                 withFinisher:(FLFinisher*) finisher;
+                     finisher:(FLFinisher*) finisher;
 
 - (FLPromisedResult) runSynchronously:(id<FLQueueableAsyncOperation>) asyncObject;
 

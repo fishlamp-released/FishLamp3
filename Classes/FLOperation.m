@@ -94,7 +94,7 @@
 
 
 - (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) asyncQueue
-                       withFinisher:(FLFinisher*) finisher {
+                       finisher:(FLFinisher*) finisher {
 
     @try {
         FLAssertNotNil(asyncQueue);
@@ -111,12 +111,12 @@
 }
 
 - (void) runSynchronousOperationInQueue:(id<FLAsyncQueue>) asyncQueue
-                           withFinisher:(FLFinisher*) finisher  {
+                           finisher:(FLFinisher*) finisher  {
 
     FLAssertNotNil(asyncQueue);
     FLAssertNotNil(finisher);
 
-    [self startAsyncOperationInQueue:asyncQueue withFinisher:finisher];
+    [self startAsyncOperationInQueue:asyncQueue finisher:finisher];
 
     // if the operation is implemented as synchronous, the finisher will be done already, else it will block on the GCD semaphor in the finisher.
     [finisher waitUntilFinished];

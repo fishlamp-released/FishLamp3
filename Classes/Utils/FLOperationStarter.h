@@ -17,8 +17,8 @@
 
 - (FLPromisedResult) runOperationSynchronously:(id<FLQueueableAsyncOperation>) asyncObject;
 
-- (FLPromise*) startOperation:(id<FLQueueableAsyncOperation>) operation
+- (FLPromise*) queueOperation:(id<FLQueueableAsyncOperation>) operation
                     withDelay:(NSTimeInterval) delay
-                 withFinisher:(FLFinisher*) finisher;
+                     finisher:(FLFinisher*) finisher;
 
 @end
