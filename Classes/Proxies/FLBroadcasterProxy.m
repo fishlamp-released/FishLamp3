@@ -41,7 +41,7 @@
 
     BOOL listenerHandled = NO;
 
-    for(id listener in [_broadcaster.listeners listeners]) {
+    for(id listener in [_broadcaster.events listeners]) {
         if([listener respondsToSelector:[anInvocation selector]]) {
             [anInvocation invokeWithTarget:listener];
             listenerHandled = YES;
@@ -54,7 +54,7 @@
 
 - (BOOL) respondsToSelector:(SEL) selector {
 
-    for(id listener in [_broadcaster.listeners listeners]) {
+    for(id listener in [_broadcaster.events listeners]) {
         if([listener respondsToSelector:selector]) {
             return YES;
         }
@@ -66,7 +66,7 @@
 - (NSMethodSignature*)methodSignatureForSelector:(SEL)selector {
 
     NSMethodSignature* signature = nil;
-    for(id listener in [_broadcaster.listeners listeners]) {
+    for(id listener in [_broadcaster.events listeners]) {
         signature = [listener methodSignatureForSelector:selector];
         if(signature) {
             return signature;
@@ -81,41 +81,41 @@
     return signature;
 }
 
-- (void) sendMessageToListeners:(SEL) selector {
-    [self.broadcaster sendMessageToListeners:selector];
+- (void) sendEvent:(SEL) selector {
+    [self.broadcaster sendEvent:selector];
 }
 
-- (void) sendMessageToListeners:(SEL) selector  
+- (void) sendEvent:(SEL) selector  
                      withObject:(id) object {
 
-   [self.broadcaster sendMessageToListeners:selector withObject:object];
+   [self.broadcaster sendEvent:selector withObject:object];
 }
 
-- (void) sendMessageToListeners:(SEL) selector 
+- (void) sendEvent:(SEL) selector 
                      withObject:(id) object1
                      withObject:(id) object2 {
 
-    [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2];
+    [self.broadcaster sendEvent:selector withObject:object1 withObject:object2];
 }
 
-- (void) sendMessageToListeners:(SEL) selector 
+- (void) sendEvent:(SEL) selector 
                      withObject:(id) object1
                      withObject:(id) object2
                      withObject:(id) object3 {
-    [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2 withObject:object3];
+    [self.broadcaster sendEvent:selector withObject:object1 withObject:object2 withObject:object3];
 }
 
-- (void) sendMessageToListeners:(SEL) selector 
+- (void) sendEvent:(SEL) selector 
                      withObject:(id) object1
                      withObject:(id) object2
                      withObject:(id) object3
                      withObject:(id) object4 {
 
-    [self.broadcaster sendMessageToListeners:selector withObject:object1 withObject:object2 withObject:object3 withObject:object4];
+    [self.broadcaster.events sendEvent:selector withObject:object1 withObject:object2 withObject:object3 withObject:object4];
 }
 
 - (void) removeListener:(id) listener {
-    [self.broadcaster removeListener:listener];
+    [self.broadcaster.events removeListener:listener];
 }
 
 @end

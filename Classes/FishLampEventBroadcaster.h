@@ -12,4 +12,5 @@
 #import "FishLampAssertions.h"
 #import "FishLampProxies.h"
 
+#import "FLEventBroadcaster.h"
 #import "FLBroadcaster.h"

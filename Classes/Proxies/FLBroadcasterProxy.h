@@ -9,7 +9,7 @@
 #import "FishLampCore.h"
 #import "FLBroadcaster.h"
 
-@interface FLBroadcasterProxy : NSProxy<FLBroadcaster> {
+@interface FLBroadcasterProxy : NSProxy<FLEventBroadcaster> {
 @private
     FLBroadcaster* _broadcaster;
 }

@@ -9,77 +9,110 @@
 
 #import "FLBroadcaster.h"
 
+@interface FLBroadcaster ()
+@property (readwrite, strong) FLEventBroadcaster* eventBroadcaster;
+@end
+
 @implementation FLBroadcaster
 
-@synthesize listeners = _listeners;
+@synthesize eventBroadcaster = _eventBroadcaster;
 
 #if FL_MRC
 - (void)dealloc {
-	[_listeners release];
+	[_eventBroadcaster release];
 	[super dealloc];
 }
 #endif
 
-- (void) sendMessageToListeners:(SEL) messageSelector {
-   [self sendMessage:messageSelector toListeners:self.listeners.listeners];
+- (void) sendEvent:(SEL) messageSelector {
+    FLEventBroadcaster* broadcaster = self.eventBroadcaster;
+    if(broadcaster) {
+        [broadcaster sendEvent:messageSelector];
+    }
 }
 
-- (void) sendMessageToListeners:(SEL) messageSelector
+- (void) sendEvent:(SEL) messageSelector
               withObject:(id) object {
 
-    [self sendMessage:messageSelector withObject:object toListeners:self.listeners.listeners];
+    FLEventBroadcaster* broadcaster = self.eventBroadcaster;
+    if(broadcaster) {
+        [broadcaster sendEvent:messageSelector withObject:object];
+    }
 }
 
-- (void) sendMessageToListeners:(SEL) messageSelector
+- (void) sendEvent:(SEL) messageSelector
               withObject:(id) object1
               withObject:(id) object2 {
 
-    [self sendMessage:messageSelector withObject:object1 withObject:object2 toListeners:self.listeners.listeners];
+    FLEventBroadcaster* broadcaster = self.eventBroadcaster;
+    if(broadcaster) {
+        [broadcaster sendEvent:messageSelector withObject:object1 withObject:object2];
+    }
 }
 
-- (void) sendMessageToListeners:(SEL) messageSelector
+- (void) sendEvent:(SEL) messageSelector
               withObject:(id) object1
               withObject:(id) object2
               withObject:(id) object3 {
 
-    [self sendMessage:messageSelector withObject:object1 withObject:object2 withObject:object3 toListeners:self.listeners.listeners];
+    FLEventBroadcaster* broadcaster = self.eventBroadcaster;
+    if(broadcaster) {
+        [broadcaster sendEvent:messageSelector withObject:object1 withObject:object2 withObject:object3];
+    }
 }
 
 
-- (void) sendMessageToListeners:(SEL) messageSelector
+- (void) sendEvent:(SEL) messageSelector
               withObject:(id) object1
               withObject:(id) object2
               withObject:(id) object3
               withObject:(id) object4 {
 
-    [self sendMessage:messageSelector withObject:object1 withObject:object2 withObject:object3 withObject:object4 toListeners:self.listeners.listeners];
+    FLEventBroadcaster* broadcaster = self.eventBroadcaster;
+    if(broadcaster) {
+        [broadcaster sendEvent:messageSelector withObject:object1 withObject:object2 withObject:object3 withObject:object4];
+    }
 }
 
-- (BOOL) hasListener:(id) listener {
-    return self.listeners && [self.listeners hasListener:listener];
-}
+- (FLEventBroadcaster*) events {
 
-- (FLListenerRegistry*) lazyListeners {
-    if(!_listeners) {
+    FLEventBroadcaster* broadcaster = self.eventBroadcaster;
+    if(!broadcaster) {
         @synchronized(self) {
-            if(!_listeners) {
-                _listeners = [[FLListenerRegistry alloc] init];
+            broadcaster = self.eventBroadcaster;
+            if(!broadcaster) {
+                broadcaster = [[FLEventBroadcaster alloc] init];;
+                self.eventBroadcaster = broadcaster;
             }
         }
     }
-    return _listeners;
+
+    return broadcaster;
 }
 
-- (void) addListener:(id) listener withScheduling:(FLScheduleMessages) schedule {
-    [[self lazyListeners] addListener:listener withScheduling:schedule];
+- (NSString*) description {
+    return [NSString stringWithFormat:@"%@:\n %@", [super description], [self.eventBroadcaster description]];
 }
 
-- (void) removeListener:(id) listener {
-    [self.listeners removeListener:listener];
+- (BOOL) hasListener:(id) listener {
+    FLEventBroadcaster* broadcaster = self.eventBroadcaster;
+    return broadcaster ? [broadcaster hasListener:listener] : NO;
 }
 
 - (void) addListener:(id) listener {
-    [[self lazyListeners] addListener:listener];
+    [self.events addListener:listener];
 }
+
+- (void) addListener:(id) listener withScheduling:(FLEventThread) schedule {
+    [self.events addListener:listener withScheduling:schedule];
+}
+
+- (void) removeListener:(id) listener {
+    FLEventBroadcaster* broadcaster = self.eventBroadcaster;
+    if(broadcaster) {
+        [broadcaster removeListener:listener];
+    }
+}
+
 
 @end

@@ -8,39 +8,15 @@
 //
 
 #import "FishLampCore.h"
+#import "FLEventBroadcaster.h"
 
-#import "FLMessageSender.h"
-#import "FLListenerRegistry.h"
-
-@protocol FLBroadcaster <NSObject>
-
-- (void) sendMessageToListeners:(SEL) messageSelector;
-
-- (void) sendMessageToListeners:(SEL) messageSelector
-              withObject:(id) object;
-
-- (void) sendMessageToListeners:(SEL) messageSelector
-              withObject:(id) object1
-              withObject:(id) object2;
-
-- (void) sendMessageToListeners:(SEL) messageSelector
-              withObject:(id) object1
-              withObject:(id) object2
-              withObject:(id) object3;
-
-- (void) sendMessageToListeners:(SEL) messageSelector
-              withObject:(id) object1
-              withObject:(id) object2
-              withObject:(id) object3
-              withObject:(id) object4;
-
-@end
-
-@interface FLBroadcaster : FLMessageSender <FLBroadcaster, FLListenerRegistry> {
+@interface FLBroadcaster : NSObject <FLEventBroadcaster> {
 @private
-    FLListenerRegistry* _listeners;
+    FLEventBroadcaster* _eventBroadcaster;
 }
 
-@property (readonly, strong) FLListenerRegistry* listeners;
+@property (readonly, strong) FLEventBroadcaster* events;
 
 @end
+
+

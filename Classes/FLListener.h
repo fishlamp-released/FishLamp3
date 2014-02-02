@@ -7,11 +7,7 @@
 //
 
 #import "FishLampCore.h"
-
-typedef NS_ENUM(NSUInteger, FLScheduleMessages) {
-    FLScheduleMessagesInMainThreadOnly,
-    FLScheduleMessagesInAnyThread
-};
+#import "FLEventThread.h"
 
 @interface FLListener : NSObject {
 @private
@@ -21,7 +17,7 @@ typedef NS_ENUM(NSUInteger, FLScheduleMessages) {
 
 @property (readonly, nonatomic, assign) id listener;
 
-+ (id) listener:(id) listener schedule:(FLScheduleMessages) schedule;
++ (id) listener:(id) listener schedule:(FLEventThread) schedule;
 
 - (void) receiveMessage:(SEL) messageSelector;
 
@@ -42,5 +38,6 @@ typedef NS_ENUM(NSUInteger, FLScheduleMessages) {
           withObject:(id) object2
           withObject:(id) object3
           withObject:(id) object4;
+
 
 @end

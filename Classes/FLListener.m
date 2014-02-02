@@ -14,7 +14,7 @@
 @synthesize listener = _listener;
 
 - (id) initWithListener:(id) listener
-               schedule:(FLScheduleMessages) schedule {
+               schedule:(FLEventThread) schedule {
 
 	self = [super init];
 	if(self) {
@@ -27,7 +27,7 @@
 	return self;
 }
 
-+ (id) listener:(id) listener schedule:(FLScheduleMessages) schedule {
++ (id) listener:(id) listener schedule:(FLEventThread) schedule {
     return FLAutorelease([[[self class] alloc] initWithListener:listener schedule:schedule]);
 }
 
@@ -72,6 +72,10 @@
 
 - (NSUInteger)hash {
     return [_listener hash];
+}
+
+- (NSString*) description {
+    return [NSString stringWithFormat:@"%@: %@", [super description], NSStringFromClass([_listener class])];
 }
 
 
