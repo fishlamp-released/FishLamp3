@@ -11,15 +11,17 @@
 #import "FLStringFormatter.h"
 #import "FLCompatibility.h"
 #import "FLPrettyAttributedString.h"
-
-extern NSString* const FLActivityLogUpdated;
-extern NSString* const FLActivityLogStringKey;
+#import "FLBroadcaster.h"
 
 @interface FLActivityLog : FLPrettyAttributedString {
 @private 
     SDKFont* _textFont;
     SDKColor* _textColor;
+    FLEventBroadcaster* _events;
 }
+
+@property (readonly, strong) FLEventBroadcaster* events;
+
 @property (readwrite, strong, nonatomic) SDKFont* activityLogTextFont;
 @property (readwrite, strong, nonatomic) SDKColor* activityLogTextColor;
 
@@ -36,5 +38,7 @@ extern NSString* const FLActivityLogStringKey;
 - (void) clear;
 @end
 
-
-
+@protocol FLActivityLogEvents <NSObject>
+- (void) activityLog:(FLActivityLog*) activityLog didAppendString:(NSAttributedString*) string;
+- (void) activityLogDidClearActivity:(FLActivityLog*) activityLog;
+@end

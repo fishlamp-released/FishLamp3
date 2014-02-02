@@ -19,8 +19,17 @@ NSString* const FLActivityLogStringKey = @"FLActivityLogStringKey";
 @synthesize activityLogTextFont = _textFont;
 @synthesize activityLogTextColor = _textColor;
 
+- (id) init {	
+	self = [super init];
+	if(self) {
+        _events = [[FLForegroundEventBroadcaster alloc] init];
+	}
+	return self;
+}
+
 #if FL_MRC
 - (void) dealloc {
+    [_events release];
     [_textFont release];
     [_textColor release];
     [super dealloc];
@@ -30,10 +39,6 @@ NSString* const FLActivityLogStringKey = @"FLActivityLogStringKey";
 + (id) activityLog {
     return FLAutorelease([[[self class] alloc] init]);
 }
-
-//- (void) stringFormatterAppendBlankLine:(FLStringFormatter*) stringFormatter {
-//    [_log stringFormatterAppendBlankLine:stringFormatter];
-//}
 
 - (void) willOpenLine {
 
@@ -55,47 +60,6 @@ NSString* const FLActivityLogStringKey = @"FLActivityLogStringKey";
         [self appendString:string];
     }
 }
-
-//- (void) stringFormatterCloseLine:(FLStringFormatter*) stringFormatter {
-//    [_log stringFormatterCloseLine:stringFormatter];
-//}
-//
-//- (void) stringFormatter:(FLStringFormatter*) stringFormatter appendString:(NSString*) string {
-//    [_log stringFormatter:stringFormatter appendString:string];
-//}
-//
-//- (void) stringFormatter:(FLStringFormatter*) stringFormatter appendAttributedString:(NSAttributedString*) attributedString {
-//    [_log stringFormatter:stringFormatter appendAttributedString:attributedString];
-//}
-//
-//- (void) stringFormatterIndent:(FLStringFormatter*) stringFormatter {
-//    [_log stringFormatterIndent:stringFormatter];
-//}
-//
-//- (void) stringFormatterOutdent:(FLStringFormatter*) stringFormatter {
-//    [_log stringFormatterOutdent:stringFormatter];
-//}
-//
-//- (NSUInteger) stringFormatterGetLength:(FLStringFormatter*) stringFormatter {
-//    return [_log length];
-//}
-//
-//- (void) stringFormatter:(FLStringFormatter*) myFormatter
-//appendContentsToStringFormatter:(id<FLStringFormatter>) anotherStringFormatter {
-//    [_log stringFormatter:myFormatter appendContentsToStringFormatter:anotherStringFormatter];
-//}
-//
-//- (NSString*) string {
-//    return [_log string];
-//}
-//
-//- (NSAttributedString*) attributedString {
-//    return [_log attributedString];
-//}
-//
-//- (NSString*) description {
-//    return [_log description];
-//}
 
 - (NSError*) exportToPath:(NSURL*) url {
     NSString* log = [self formattedString];
@@ -132,9 +96,11 @@ NSString* const FLActivityLogStringKey = @"FLActivityLogStringKey";
     
     [super whitespaceStringFormatter:stringFormatter appendAttributedString:theString];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:FLActivityLogUpdated
-                                                        object:self
-                                                        userInfo:[NSDictionary dictionaryWithObject:string forKey:FLActivityLogStringKey]];
+    [self.events sendEvent:@selector(activityLog:didAppendString:) withObject:self withObject:string];
+
+//    [[NSNotificationCenter defaultCenter] postNotificationName:FLActivityLogUpdated
+//                                                        object:self
+//                                                        userInfo:[NSDictionary dictionaryWithObject:string forKey:FLActivityLogStringKey]];
 }
 
 - (void) appendURL:(NSURL*) url string:(NSString*) string {
@@ -153,6 +119,7 @@ NSString* const FLActivityLogStringKey = @"FLActivityLogStringKey";
 
 - (void) clear {
     [self deleteAllCharacters];
+    [self.events sendEvent:@selector(activityLogDidClearActivity:) withObject:self];
 }
 
 - (void) appendErrorLine:(NSString*) errorLine {
