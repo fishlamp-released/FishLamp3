@@ -133,7 +133,7 @@ static int s_counter = 0;
     self.busyIndicator = [[FLGlobalNetworkActivity instance] setBusy];
     
     [self willOpen];
-    [self sendMessageToListeners:@selector(httpRequestWillOpen:) withObject:self];
+    [self sendEvent:@selector(httpRequestWillOpen:) withObject:self];
 
     if(!self.inputSink) {
         self.inputSink = [FLDataSink dataSink];
@@ -196,12 +196,12 @@ static int s_counter = 0;
 
     if(self.httpRequestAuthenticator && !self.disableAuthenticator) {
         [self willAuthenticate];
-        [self sendMessageToListeners:@selector(httpRequestWillAuthenticate:) withObject:self];
+        [self sendEvent:@selector(httpRequestWillAuthenticate:) withObject:self];
 
         [self.httpRequestAuthenticator authenticateHttpRequest:self];
 
         [self didAuthenticate];
-        [self sendMessageToListeners:@selector(httpRequestDidAuthenticate:) withObject:self];
+        [self sendEvent:@selector(httpRequestDidAuthenticate:) withObject:self];
     }
 
     [self openStreamWithURL:url];
@@ -225,7 +225,7 @@ static int s_counter = 0;
 }
 
 - (void) networkStreamDidOpen:(FLHttpStream*) networkStream {
-    [self sendMessageToListeners:@selector(httpRequestDidOpen:) withObject:self];
+    [self sendEvent:@selector(httpRequestDidOpen:) withObject:self];
     [self.byteCount setStartTime];
 }
 
@@ -235,7 +235,7 @@ static int s_counter = 0;
     [self.byteCount incrementByteCount:amountRead];
     [self didReadBytes:amountRead];
 
-    [self sendMessageToListeners:@selector(httpRequest:didReadBytes:) withObject:self withObject:self.byteCount];
+    [self sendEvent:@selector(httpRequest:didReadBytes:) withObject:self withObject:self.byteCount];
 }
 
 - (void) finishRequestWithResult:(FLPromisedResult) result {
@@ -245,7 +245,7 @@ static int s_counter = 0;
 
     [self setFinishedWithResult:result];
 
-    [self sendMessageToListeners:@selector(httpRequest:didFinishWithResult:) withObject:self withObject:result];
+    [self sendEvent:@selector(httpRequest:didFinishWithResult:) withObject:self withObject:result];
     
     [self.retryHandler resetRetryCount];
 

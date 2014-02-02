@@ -141,7 +141,7 @@
                     didAuthenticateEntity:(id<FLAuthenticatedEntity>) entity {
     self.authenticatedEntity = entity;
 
-    [self sendMessageToListeners:@selector(httpOperationContext:didAuthenticateUser:) withObject:self withObject:entity];
+    [self sendEvent:@selector(httpOperationContext:didAuthenticateUser:) withObject:self withObject:entity];
 }
 
 - (id<FLStorageService>) createStorageService {
@@ -161,7 +161,7 @@
     id<FLAuthenticationCredentials> creds = self.authenticationCredentials;
     self.authenticationCredentials = [FLAuthenticationCredentials authenticationCredentials:creds.userName password:nil];
 
-    [self sendMessageToListeners:@selector(httpOperationContext:didLogoutUser:)
+    [self sendEvent:@selector(httpOperationContext:didLogoutUser:)
                       withObject:self
                       withObject:self.authenticationCredentials];
 

@@ -35,7 +35,7 @@
             _busy = NO;
             FLTrace(@"hiding global network indicator");
 
-            [self sendMessageToListeners:@selector(networkActivityDidStop:) withObject:self];
+            [self sendEvent:@selector(networkActivityDidStop:) withObject:self];
         }
         else {  
         
@@ -52,7 +52,7 @@
     else if(!_busy && _busyCount > 0) {
         _busy = YES;
         FLTrace(@"showing global network indicator");
-        [self sendMessageToListeners:@selector(networkActivityDidStart:) withObject:self];
+        [self sendEvent:@selector(networkActivityDidStart:) withObject:self];
     }
     else {
         FLTrace(@"nothing happending in update listeners");

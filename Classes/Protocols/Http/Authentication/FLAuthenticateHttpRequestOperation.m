@@ -79,7 +79,7 @@
 
     [entity.session touchAuthenticationTimestamp];
 
-    [self sendMessageToListeners:@selector(authenticateHttpRequestOperation:didAuthenticateEntity:) withObject:self withObject:entity];
+    [self sendEvent:@selector(authenticateHttpRequestOperation:didAuthenticateEntity:) withObject:self withObject:entity];
 
     return entity;
 }
