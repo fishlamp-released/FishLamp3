@@ -8,6 +8,7 @@
 #import "FLOperationQueue.h"
 #import "FLFifoDispatchQueue.h"
 #import "FLOperation.h"
+#import "FishLampSimpleLogger.h"
 
 typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
 
