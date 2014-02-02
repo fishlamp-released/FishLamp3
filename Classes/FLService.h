@@ -9,12 +9,9 @@
 
 #import "FishLampCore.h"
 #import "FLBroadcaster.h"
-//#import "FishLampAsync.h"
-//
-//extern NSString* const FLServiceDidCloseNotificationKey;
-//extern NSString* const FLServiceDidOpenNotificationKey;
 
-@protocol FLService <NSObject, FLBroadcaster>
+@protocol FLService <NSObject>
+@property (readonly, strong) FLEventBroadcaster* events;
 @property (readonly, assign) BOOL canOpenService;
 @property (readonly, assign) BOOL isServiceOpen;
 - (void) openService;
