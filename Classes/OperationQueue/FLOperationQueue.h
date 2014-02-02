@@ -1,45 +1,88 @@
 //
 //  FLOperationQueue.h
-//  FishLampCocoa
+//  Pods
 //
-//  Created by Mike Fullerton on 4/20/13.
-//  Copyright (c) 2013 GreenTongue Software LLC, Mike Fullerton. 
-//  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
+//  Created by Mike Fullerton on 2/1/14.
+//
 //
 
 #import "FishLampCore.h"
 #import "FLOperation.h"
-#import "FLDispatchQueues.h"
-#import "FLAsyncQueue.h"
-#import "FLBroadcaster.h"
+#import "FLPromisedResult.h"
+#import "FLAsyncBlockTypes.h"
 
+@protocol FLOperationQueueDelegate;
 @class FLFifoDispatchQueue;
-@class FLOperation;
 
-@protocol FLOperationQueueOperationFactory;
-@protocol FLOperationQueueErrorStrategy;
 
-@interface FLOperationQueue : FLOperation {
+@interface FLOperationQueue : NSObject {
 @private
+    __unsafe_unretained id<FLOperationQueueDelegate> _delegate;
     FLFifoDispatchQueue* _schedulingQueue;
     NSMutableArray* _objectQueue;
     NSMutableArray* _activeQueue;
-    NSMutableArray* _operationFactories;
-    id<FLOperationQueueErrorStrategy> _errorStrategy;
-
-    UInt32 _maxOperationsCount;
     NSInteger _finishedCount;
     NSInteger _totalCount;
-    BOOL _processing;
+    id _result;
+}
+
+@property (readonly, assign) NSInteger totalCount;
+@property (readonly, assign) NSInteger processedCount;
+
+- (id) initWithDelegate:(id<FLOperationQueueDelegate>) delegate;
+
++ (id) operationQueue:(id<FLOperationQueueDelegate>) delegate;
+
+- (void) requestCancel;
+
+- (void) setFinishedWithResult:(id) result;
+
+- (void) queueObjectsFromArray:(NSArray*) queuedObjects;
+- (void) queueObject:(id) object;
+
+@end
+
+@protocol FLOperationQueueDelegate <NSObject>
+
+- (void) operationQueue:(FLOperationQueue*) operationQueue
+         startOperation:(FLOperation*) operation
+             completion:(fl_completion_block_t) completion;
+
+- (BOOL) operationQueue:(FLOperationQueue*) operationQueue
+shouldStartAnotherOperation:(NSInteger) activeOperatinCount;
+
+- (FLOperation*) operationQueue:(FLOperationQueue*) operationQueue
+ createOperationForQueuedObject:(id) object;
+
+- (void) operationQueue:(FLOperationQueue*) operationQueue
+     willStartOperation:(FLOperation*) operation
+        forQueuedObject:(id) object;
+
+- (void) operationQueue:(FLOperationQueue*) operationQueue
+     didFinishOperation:(FLOperation*) operation
+        forQueuedObject:(id) object
+             withResult:(FLPromisedResult) result;
+
+- (void) operationQueue:(FLOperationQueue*) operationQueue
+    didFinishProcessingWithResult:(FLPromisedResult) result;
+
+@end
+
+
+
+
+#if 0
+#import "FLFinisher.h"
+#import "FLOperationQueue.h"
+@class FLOperationQueue;
+@interface FLOperationQueue : NSObject<FLOperationQueueDelegate> {
+@private
+    FLOperationQueue* _processor;
+    UInt32 _maxConcurrentOperations;
 }
 
 // concurrent operations, defaults to 1
 @property (readwrite, assign) UInt32 maxConcurrentOperations;
-
-- (id) initWithErrorStrategy:(id<FLOperationQueueErrorStrategy>) errorStrategy;
-
-+ (id) operationQueue;
-+ (id) operationQueueWithErrorStrategy:(id<FLOperationQueueErrorStrategy>) errorStrategy;
 
 // info
 @property (readonly, assign) NSInteger finishedCount;
@@ -69,11 +112,6 @@
 ///    cancel all the operations and stop processing
 - (void) requestCancel;
 
-///    add factory for creating operations to be executed in the operation queue.
-- (void) addOperationFactory:(id<FLOperationQueueOperationFactory>) factory;
-
-
-// optional overrides
 
 - (void) willStartOperation:(FLOperation*) operation
             forQueuedObject:(id) object;
@@ -87,33 +125,9 @@
 // normall sends FLSuccessfulResult. Override this for more specific results.
 - (id) operationQueueSuccessfullResult;
 
+- (void) startOperation:(FLOperation*) operation completion:(fl_completion_block_t) completion;
+
+- (BOOL) shouldStartAnotherOperation:(NSInteger) processingCount;
+
 @end
-
-
-@protocol FLQueuedObject <NSObject>
-@optional
-- (FLOperation*) createOperationForOperationQueue:(FLOperationQueue*) operationQueue;
-@end
-
-@protocol FLOperationQueueOperationFactory <NSObject>
-- (FLOperation*) createOperationForQueuedObject:(id) object;
-@end
-
-@protocol FLOperationQueueListener <NSObject>
-
-- (void) operationQueueDidStart:(FLOperationQueue*) operationQueue;
-
-- (void) operationQueue:(FLOperationQueue*) operationQueue
-    didFinishWithResult:(FLPromisedResult) result;
-
-- (void) operationQueue:(FLOperationQueue*) operationQueue
-      didStartOperation:(FLOperation*) operation
-        forQueuedObject:(id) object;
-
-- (void) operationQueue:(FLOperationQueue*) operationQueue
-     didFinishOperation:(FLOperation*) operation
-        forQueuedObject:(id) object
-             withResult:(FLPromisedResult) result;
-@end
-
-
+#endif

@@ -1,178 +1,249 @@
 //
 //  FLOperationQueue.m
-//  FishLampCocoa
+//  Pods
 //
-//  Created by Mike Fullerton on 4/20/13.
-//  Copyright (c) 2013 GreenTongue Software LLC, Mike Fullerton. 
-//  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
+//  Created by Mike Fullerton on 2/1/14.
 //
-
+//
 #import "FLOperationQueue.h"
-#import "FLDispatchQueues.h"
-#import "FLLog.h"
-#import "FLSuccessfulResult.h"
+#import "FLFifoDispatchQueue.h"
 #import "FLOperation.h"
-#import "FLOperationContext.h"
-#import "FLOperationQueueErrorStrategy.h"
 
-#import "FishLampSimpleLogger.h"
-
-// #import "FLTrace.h"
+typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
 
 @interface FLOperationQueue ()
-@property (readwrite, assign) NSInteger finishedCount;
+
+// referenced by others, so must be atomic
 @property (readwrite, assign) NSInteger totalCount;
-@property (readwrite, assign) BOOL processing;
-@property (readonly, strong) NSMutableArray* operationFactories;
-@property (readonly, strong) NSMutableArray* activeQueue;
-@property (readonly, strong) NSMutableArray* objectQueue;
-@property (readonly, strong) FLFifoDispatchQueue* schedulingQueue;
-@property (readwrite, assign) UInt32 maxOperationsCount;
-
-@property (readonly, strong) id<FLOperationQueueErrorStrategy> errorStrategy;
+@property (readwrite, assign) NSInteger processedCount;
 
 
-@end
+// our stuff is pumped through queue, so doesn't need to be atomic
+@property (readonly, strong, nonatomic) NSMutableArray* activeQueue;
+@property (readonly, strong, nonatomic) NSMutableArray* objectQueue;
+@property (readonly, strong, nonatomic) FLFifoDispatchQueue* schedulingQueue;
+@property (readonly, assign, nonatomic) id<FLOperationQueueDelegate> delegate;
 
-@interface FLOperationQueue (SchedulingQueue)
-- (void) respondToProcessQueueEvent;
-- (void) respondToCancelEvent;
-- (void) respondToAddObjectArrayEvent:(NSArray*) array;
-- (void) respondToAddObjectEvent:(id) object;
-@end
+@property (readwrite, strong) id result;
 
-@implementation NSObject (FLOperationQueue)
-- (FLOperation*) createOperationForOperationQueue:(FLOperationQueue*) operationQueue {
-    return nil;
-}
-@end
+- (void) processQueue;
 
-@implementation FLOperation (FLOperationQueue)
-- (FLOperation*) createOperationForOperationQueue:(FLOperationQueue*) operationQueue {
-    return self;
-}
 @end
 
 @implementation FLOperationQueue
 
-@synthesize maxOperationsCount = _maxOperationsCount;
-@synthesize finishedCount = _finishedCount;
-@synthesize totalCount = _totalCount;
-@synthesize processing = _processing;
+@synthesize result = _result;
+@synthesize delegate = _delegate;
 @synthesize activeQueue = _activeQueue;
 @synthesize objectQueue = _objectQueue;
 @synthesize schedulingQueue = _schedulingQueue;
-@synthesize errorStrategy = _errorStrategy;
+@synthesize totalCount = _totalCount;
+@synthesize processedCount = _processedCount;
 
-FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories, NSMutableArray);
-
-- (id) initWithErrorStrategy:(id<FLOperationQueueErrorStrategy>) errorStrategy {
+- (id) initWithDelegate:(id<FLOperationQueueDelegate>) delegate {
 	self = [super init];
 	if(self) {
+        _delegate = delegate;
         _schedulingQueue = [[FLFifoDispatchQueue alloc] init];
         _activeQueue = [[NSMutableArray alloc] init];
         _objectQueue = [[NSMutableArray alloc] init];
-        _maxOperationsCount = INT_MAX;
-
-        if(errorStrategy) {
-            _errorStrategy = FLRetain(errorStrategy);
-        }
-        else {
-            _errorStrategy = [[FLSingleErrorOperationQueueStrategy alloc] init];
-        }
 	}
 	return self;
 }
 
-- (id) init {
-    return [self initWithErrorStrategy:nil];
++ (id) operationQueue:(id<FLOperationQueueDelegate>) delegate {
+    return FLAutorelease([[[self class] alloc] initWithDelegate:delegate]);
 }
 
-+ (id) operationQueue {
-    return FLAutorelease([[[self class] alloc] init]);
+#if FL_MRC 
+- (void) dealloc {
+    [_result release];
+    [_schedulingQueue release];
+    [_objectQueue release];
+    [_activeQueue release];
+    [super dealloc];
+}
+#endif
+
+
+- (void) queueBlock:(FLOperationQueueBlock) block {
+
+    FLAssertNotNil(block);
+
+    __block FLOperationQueue* blockSelf = FLRetain(self);
+
+    [_schedulingQueue queueBlock:^{
+        if(block) {
+            block(blockSelf);
+        }
+
+        FLReleaseWithNil(blockSelf);
+    }];
 }
 
-+ (id) operationQueueWithErrorStrategy:(id<FLOperationQueueErrorStrategy>) errorStrategy {
-    return FLAutorelease([[[self class] alloc] initWithErrorStrategy:errorStrategy]);
-}
+- (void) queueObjectsFromArray:(NSArray*) array {
 
-- (void) addOperationFactory:(id<FLOperationQueueOperationFactory>)factory {
-//    FLAssertNotNil(factory);
-    FLAssert(self.processing == NO, @"can't add a factory while processing");
+    FLAssertNotNil(array);
 
-    [self.operationFactories addObject:factory];
-}
+    if(array) {
+        [self queueBlock:^(FLOperationQueue* operationQueue) {
 
-- (void) startOperation:(FLFinisher*) finisher {
-    [self startProcessing:finisher];
-}
-
-- (UInt32) maxConcurrentOperations {
-    return self.maxOperationsCount;
-}
-
-- (void) setMaxConcurrentOperations:(UInt32) max {
-    self.maxOperationsCount = max;
-
-    if(self.processing) {
-        [self processQueue];
+            [operationQueue.objectQueue addObjectsFromArray:array];
+            operationQueue.totalCount += array.count;
+            [operationQueue processQueue];
+        }];
     }
 }
 
-- (void) willStartOperation:(FLOperation*) operation
-            forQueuedObject:(id) object {
+- (void) queueObject:(id) object {
 
-    __block FLOperationQueue* blockSelf = FLRetain(self);
-    __block FLOperation* blockOperation = FLRetain(operation);
-    __block id blockObject = FLRetain(object);
+    FLAssertNotNil(object);
 
-    [FLBackgroundQueue queueBlock:^{
-        [blockSelf sendMessageToListeners:@selector(operationQueue:didStartOperation:forQueuedObject:)
-                          withObject:blockSelf
-                          withObject:blockOperation
-                          withObject:blockObject];
+    if(object) {
+        [self queueBlock:^(FLOperationQueue* operationQueue) {
 
-
-        FLReleaseWithNil(blockOperation);
-        FLReleaseWithNil(blockObject);
-        FLReleaseWithNil(blockSelf);
+            [operationQueue.objectQueue addObject:object];
+            operationQueue.totalCount++;
+            [operationQueue processQueue];
         }];
+    }
 }
 
-- (void) didFinishOperation:(FLOperation*) operation
-            forQueuedObject:(id) object
-                 withResult:(FLPromisedResult) result {
+- (void) requestCancel {
+    [self queueBlock:^(FLOperationQueue* operationQueue) {
 
-    [self sendMessageToListeners:@selector(operationQueue:didFinishOperation:forQueuedObject:withResult:)
-                      withObject:self
-                      withObject:operation
-                      withObject:object
-                      withObject:result];
+        for(FLOperation* operation in operationQueue.activeQueue) {
+            FLTrace(@"operation queue cancelled: %@", [operation description]);
+            [operation requestCancel];
+        }
+        FLTrace(@"cancelled %ld queued operations", (long) operationQueue.objectQueue.count);
+    }];
 }
 
-- (void) didFinishWithResult:(FLPromisedResult) result {
-    [super didFinishWithResult:result];
-    self.processing = NO;
-    [self sendMessageToListeners:@selector(operationQueue:didFinishWithResult:) withObject:self withObject:self];
-    
-//        operationQueue:self
-//                      didFinishWithResult:result];
+- (void) startOperationForObject:(id) object {
+
+    FLOperation* operation = [_delegate operationQueue:self 
+                        createOperationForQueuedObject:object];
+
+    if(operation) {
+
+        [_activeQueue addObject:operation];
+
+        [_delegate operationQueue:self willStartOperation:operation forQueuedObject:object];
+
+        [self queueBlock:^(FLOperationQueue* operationQueue) {
+
+            [operationQueue.delegate operationQueue:operationQueue startOperation:operation completion:^(FLPromisedResult result) {
+
+                [operationQueue queueBlock:^(FLOperationQueue* operationQueue) {
+
+                    operationQueue.processedCount++;
+
+                    [operationQueue.activeQueue removeObject:operation];
+
+                    [operationQueue.delegate operationQueue:self
+                                         didFinishOperation:operation
+                                            forQueuedObject:object
+                                                 withResult:result];
+
+                    [operationQueue processQueue];
+                }];
+            }];
+        }];
+    }
+}
+
+- (BOOL) shouldStartOperation {
+    return  _result == nil &&
+            _objectQueue.count > 0 &&
+            [_delegate operationQueue:self shouldStartAnotherOperation:_activeQueue.count];
+}
+
+- (BOOL) willFinish {
+    return  _activeQueue.count == 0 && _objectQueue.count == 0;
+}
+
+- (void) setFinishedWithResult:(id) result {
+    self.result = result;
+    [self requestCancel];
 }
 
 - (void) processQueue {
-    [self.schedulingQueue queueTarget:self action:@selector(respondToProcessQueueEvent)];
+
+    while([self shouldStartOperation]) {
+
+        id obj = FLRetainWithAutorelease([_objectQueue objectAtIndex:0]);
+        [_objectQueue removeObjectAtIndex:0];
+
+        [self startOperationForObject:obj];
+    }
+
+    if([self willFinish]) {
+        id result = FLRetainWithAutorelease(_result);
+        self.result = nil;
+        [_delegate operationQueue:self didFinishProcessingWithResult:result];
+    }
 }
 
-- (void) queueObjectsInArray:(NSArray*) queuedObjects {
-    [self.schedulingQueue queueTarget:self action:@selector(respondToAddObjectArrayEvent:) withObject:queuedObjects];
+@end
+
+
+
+#if 0
+#import "FLOperationQueue.h"
+#import "FLOperationQueue.h"
+
+@implementation FLOperationQueue
+
+@synthesize maxConcurrentOperations = _maxConcurrentOperations;
+
+- (id) init {	
+	self = [super init];
+	if(self) {
+		_operationQueue = [[FLOperationQueue alloc] initWithDelegate:self];
+	}
+	return self;
 }
 
-- (void) queueObject:(id) object {
-    [self.schedulingQueue queueTarget:self action:@selector(respondToAddObjectEvent:) withObject:object];
+- (void)dealloc {
+    [_operationQueue requestCancel];
+
+#if FL_MRC
+	[_operationQueue release];
+	[super dealloc];
+#endif
 }
 
-- (void) queueOperation:(FLOperation*) operation {
-    [self.schedulingQueue queueTarget:self action:@selector(respondToAddObjectEvent:) withObject:operation];
+- (FLOperation*) createOperationForQueuedObject:(id) object {
+
+/*
+    FLOperation* operation = [object createOperationForOperationQueue:self];
+
+    if(!operation) {
+        for(id<FLOperationQueueOperationFactory> factory in _operationFactories) {
+            operation = [factory createOperationForQueuedObject:object];
+
+            if(operation) {
+                break;
+            }
+        }
+    }
+
+    FLAssertNotNil(operation, @"no operation created for queue for: %@", [object description]);
+*/
+
+    return operation;
+}
+
+- (void) queueEncounteredError:(NSError*) error {
+
+}
+
+- (void) requestCancel {
+    FLAssertNotNil(self.context);
+
+    [super requestCancel];
+    [self.schedulingQueue queueTarget:self action:@selector(respondToCancelEvent)];
 }
 
 - (void) startProcessing:(FLFinisher*) finisher {
@@ -196,54 +267,66 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
     self.processing = NO;
 }
 
-- (void) requestCancel {
+- (void) queueObjectsFromArray:(NSArray*) queuedObjects {
+    [self.operationQueue queueObjectsFromArray:queuedObjects];
+}
+
+- (void) queueObject:(id) object {
+    [self.operationQueue queueObject:object];
+}
+
+- (void) queueOperation:(FLOperation*) operation {
+    [self.operationQueue queueObject:operation];
+}
+
+- (void) startOperation:(FLOperation*) operation completion:(fl_completion_block_t) completion {
+
+}
+
+- (BOOL) shouldStartAnotherOperation:(NSInteger) processingCount {
+
+        FLAssert(self.delegate.maxConcurrentOperations > 0, @"zero max concurrent operations");
+        FLTrace(@"max connections: %d", self.delegate.maxConcurrentOperations);
+
+    return  self.error != nil &&
+            processingCount < self.maxConcurrentOperations;
+}
+
+- (id) operationQueueSuccessfullResult {
+    return FLSuccessfulResult;
+}
+
+- (void) willStartOperation:(FLOperation*) operation
+            forQueuedObject:(id) object {
+
+    FLTrace(@"starting operation: %@, queued object: %@",
+        NSStringFromClass([operation class]),
+        [object description]);
+
     FLAssertNotNil(self.context);
 
-    [super requestCancel];
-    [self.schedulingQueue queueTarget:self action:@selector(respondToCancelEvent)];
 }
 
-#if FL_MRC 
-- (void) dealloc {
-    [_schedulingQueue release];
-    [_objectQueue release];
-    [_activeQueue release];
-    [_operationFactories release];
-    [_errorStrategy release];
-    [super dealloc];
-}
-#endif
 
-- (void) sendCancelRequests {
-    for(FLOperation* operation in self.activeQueue) {
-        FLTrace(@"operation queue cancelled: %@", [operation description]);
-        [operation requestCancel];
+- (void) didFinishProcessingObjectsInQueue:(FLOperationQueue*) operationQueue {
+
+    id result = [self.errorStrategy errorResult];
+    if(!result) {
+        result = [self operationQueueSuccessfullResult];
     }
-    FLTrace(@"cancelled %ld queued operations", (long) _objectQueue.count);
+
+    FLFinisher* finisher = [self.context popFinisherForOperation:self];
+    FLAssertNotNil(finisher);
+
+    [finisher setFinishedWithResult:result];
+
 }
 
-- (void) respondToCancelEvent {
-    [self sendCancelRequests];
-    [self respondToProcessQueueEvent];
-}
 
-- (void) respondToAddObjectArrayEvent:(NSArray*) array {
-    [_objectQueue addObjectsFromArray:array];
-    self.totalCount += array.count;
-    [self processQueue];
-}
 
-- (void) respondToAddObjectEvent:(id) object {
-    [_objectQueue addObject:object];
-    self.totalCount ++;
-    [self processQueue];
-}
-
-- (void) respondToOperationFinished:(FLOperation*) operation
-                    forQueuedObject:(id) queuedObject
-                         withResult:(FLPromisedResult) result {
-
-    self.finishedCount++;
+- (void) didFinishOperation:(FLOperation*) operation
+            forQueuedObject:(id) object
+                 withResult:(FLPromisedResult) result {
 
     if([result isError]) {
         [self.errorStrategy operationQueue:self encounteredError:result];
@@ -253,106 +336,8 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
             operation,
             [result isError] ? result : @"OK");
 
-    [self didFinishOperation:operation forQueuedObject:queuedObject withResult:result];
-
-    [_activeQueue removeObject:operation];
-    [self respondToProcessQueueEvent];
 }
 
-- (FLOperation*) createOperationForQueuedObject:(id) object {
 
-    FLOperation* operation = [object createOperationForOperationQueue:self];
-
-    if(!operation) {
-        for(id<FLOperationQueueOperationFactory> factory in _operationFactories) {
-            operation = [factory createOperationForQueuedObject:object];
-
-            if(operation) {
-                break;
-            }
-        }
-    }
-
-    FLAssertNotNil(operation, @"no operation created for queue for: %@", [object description]);
-
-    return operation;
-}
-
-- (void) startOperationForObject:(id) object {
-
-    FLOperation* operation = [self createOperationForQueuedObject:object];
-    [operation addListener:self withScheduling:FLScheduleMessagesInAnyThread];
-
-    [_activeQueue addObject:operation];
-
-    [self willStartOperation:operation forQueuedObject:object];
-    
-    FLTrace(@"starting operation: %@, queued object: %@",
-        NSStringFromClass([operation class]),
-        [object description]);
-
-    FLAssertNotNil(self.context);
-
-    __block FLOperationQueue* blockSelf = FLRetain(self);
-    __block FLOperation* blockOperation = FLRetain(operation);
-    __block id blockObject = FLRetain(object);
-
-// TODO: give operations chance to run in whatever queue they want?
-    [self.context queueOperation:operation
-                        completion:^(FLPromisedResult result) {
-
-        [blockSelf.schedulingQueue queueBlock: ^{
-            [blockSelf respondToOperationFinished:blockOperation forQueuedObject:blockObject withResult:result];
-
-            FLReleaseWithNil(blockOperation);
-            FLReleaseWithNil(blockObject);
-            FLReleaseWithNil(blockSelf);
-        }];
-    }];
-}
-
-- (BOOL) shouldStartAnotherOperation {
-    return  self.processing &&
-            !self.wasCancelled &&
-            ![self.errorStrategy operationQueueWillHalt:self] &&
-            _activeQueue.count < self.maxConcurrentOperations &&
-            _objectQueue.count > 0;
-}
-
-- (BOOL) shouldFinish {
-    return  _activeQueue.count == 0 && _objectQueue.count == 0;
-}
-
-- (id) operationQueueSuccessfullResult {
-    return FLSuccessfulResult;
-}
-
-- (void) respondToProcessQueueEvent {
-    if(self.processing) {
-        FLAssert(self.maxConcurrentOperations > 0, @"zero max concurrent operations");
-        FLTrace(@"max connections: %d", self.maxConcurrentOperations);
-
-        while([self shouldStartAnotherOperation]) {
-
-            id obj = FLRetainWithAutorelease([_objectQueue objectAtIndex:0]);
-            [_objectQueue removeObjectAtIndex:0];
-
-            [self startOperationForObject:obj];
-        }
-
-        if([self shouldFinish]) {
-
-            id result = [self.errorStrategy errorResult];
-            if(!result) {
-                result = [self operationQueueSuccessfullResult];
-            }
-
-            FLFinisher* finisher = [self.context popFinisherForOperation:self];
-            FLAssertNotNil(finisher);
-
-            [finisher setFinishedWithResult:result];
-        }
-    }
-}
 @end
-
+#endif

@@ -36,7 +36,7 @@
 
     FLAssertNotNil(block);
 
-    FLFinisher* finisher = [FLAutoFinisher finisherWithBlock:completion];
+    FLFinisher* finisher = [FLFinisher finisherWithBlock:completion];
     finisher.asyncQueueBlock = block;
 
     [self queueOperation:finisher withDelay:delay finisher:finisher];
@@ -55,7 +55,7 @@
 
     FLAssertNotNil(block);
 
-    FLFinisher* finisher = [FLAutoFinisher finisherWithBlock:completionOrNil];
+    FLFinisher* finisher = [FLFinisher finisherWithBlock:completionOrNil];
     finisher.asyncQueueBlock = block;
 
     [self queueOperation:finisher withDelay:0 finisher:finisher];
@@ -72,7 +72,7 @@
 
     FLAssertNotNil(block);
 
-    FLFinisher* finisher = [FLAutoFinisher finisherWithBlock:completionOrNil];
+    FLFinisher* finisher = [FLFinisher finisherWithBlock:completionOrNil];
     finisher.asyncQueueFinisherBlock = block;
 
     [self queueOperation:finisher withDelay:0 finisher:finisher];
@@ -90,7 +90,7 @@
 
     FLAssertNotNil(object);
 
-    FLFinisher* finisher = [FLAutoFinisher finisherWithBlock:completionOrNil];
+    FLFinisher* finisher = [FLFinisher finisherWithBlock:completionOrNil];
 
     [self queueOperation:object withDelay:delay finisher:finisher];
 
