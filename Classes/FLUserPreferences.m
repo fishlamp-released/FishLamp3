@@ -12,7 +12,7 @@
 
 //#import "NSUserDefaults+FLAdditions.h"
 
-#define kAppVersion @"AppVersion"
+#define kAppVersion @"app-version"
 
 @interface FLUserPreferences()
 @property (readonly, strong, nonatomic) NSUserDefaults* userDefaults;
@@ -42,11 +42,11 @@
 }
 
 - (NSString*) readAppVersion {
-    return [[self userDefaults] stringForKey:kAppVersion];
+    return [[self userDefaults] stringForKey:[self getKey:kAppVersion]];
 }
 
 - (void) writeAppVersion {
-    [[self userDefaults] setObject:[NSBundle appVersionString] forKey:kAppVersion];
+    [[self userDefaults] setObject:[NSBundle appVersionString] forKey:[self getKey:kAppVersion]];
 }
 
 - (void) deleteAllIfVersionChanged {
@@ -66,7 +66,7 @@
 }
 
 - (NSString*) getKey:(NSString*) key {
-    return [FLUserPreferences isAppSpecificKey:key] ? key : [FLUserPreferences appSpecificKey:key];
+    return [FLUserPreferences appSpecificKey:key];
 }
 
 - (void)removeObjectForKey:(id)aKey {
@@ -81,8 +81,8 @@
     return [[self userDefaults] boolForKey:[self getKey:key]];
 }
 
-- (void)setBool:(BOOL)value forKey:(NSString *)defaultName {
-    [[self userDefaults] setBool:value forKey:defaultName];
+- (void)setBool:(BOOL)value forKey:(NSString *)key {
+    [[self userDefaults] setBool:value forKey:[self getKey:key]];
 }
 
 - (void) setObject:(id) object forKey:(id) key {
@@ -108,5 +108,10 @@
 
 
 }
+
+- (void) restoreAppState {
+
+}
+
 
 @end

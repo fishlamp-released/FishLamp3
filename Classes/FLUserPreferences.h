@@ -28,4 +28,6 @@
 - (void) synchronize;
 - (void)removeObjectForKey:(id)aKey;
 
+- (void) restoreAppState;
+
 @end
