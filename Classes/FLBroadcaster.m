@@ -81,7 +81,7 @@
         @synchronized(self) {
             broadcaster = self.eventBroadcaster;
             if(!broadcaster) {
-                broadcaster = [[FLEventBroadcaster alloc] init];;
+                broadcaster = [FLEventBroadcaster eventBroadcaster];
                 self.eventBroadcaster = broadcaster;
             }
         }
@@ -99,12 +99,8 @@
     return broadcaster ? [broadcaster hasListener:listener] : NO;
 }
 
-- (void) addListener:(id) listener {
-    [self.events addListener:listener];
-}
-
-- (void) addListener:(id) listener withScheduling:(FLEventThread) schedule {
-    [self.events addListener:listener withScheduling:schedule];
+- (void) addListener:(id) listener sendEventsOnMainThread:(BOOL) mainThread {
+    [self.events addListener:listener sendEventsOnMainThread:mainThread];
 }
 
 - (void) removeListener:(id) listener {

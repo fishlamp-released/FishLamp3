@@ -7,7 +7,6 @@
 //
 
 #import "FishLampCore.h"
-#import "FLEventThread.h"
 
 @interface FLListener : NSObject {
 @private
@@ -17,7 +16,7 @@
 
 @property (readonly, nonatomic, assign) id listener;
 
-+ (id) listener:(id) listener schedule:(FLEventThread) schedule;
++ (id) listener:(id) listener dispatcher:(FLDispatcher_t) dispatcher;
 
 - (void) receiveMessage:(SEL) messageSelector;
 

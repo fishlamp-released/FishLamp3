@@ -7,7 +7,9 @@
 //
 
 #import "FishLampCore.h"
-#import "FLEventThread.h"
+
+extern const FLDispatcher_t FLDispatchOnMainThread;
+extern const FLDispatcher_t FLDispatchOnCurrentThread;
 
 @protocol FLEventBroadcaster <NSObject>
 
@@ -33,8 +35,7 @@
 
 - (BOOL) hasListener:(id) listener;
 
-- (void) addListener:(id) listener;
-- (void) addListener:(id) listener withScheduling:(FLEventThread) schedule;
+- (void) addListener:(id) listener sendEventsOnMainThread:(BOOL) mainThread;
 
 - (void) removeListener:(id) listener;
 
@@ -45,15 +46,12 @@
     NSMutableSet* _listeners;
     NSArray* _iteratableListeners;
 }
+
++ (id) eventBroadcaster;
+
 @property (readwrite, assign) BOOL logEvents;
 
 @property (readonly, strong) NSArray* listeners;
 
-
-
 @end
 
-
-@interface FLForegroundEventBroadcaster : FLEventBroadcaster
-
-@end

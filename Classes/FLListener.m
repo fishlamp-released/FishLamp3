@@ -14,21 +14,18 @@
 @synthesize listener = _listener;
 
 - (id) initWithListener:(id) listener
-               schedule:(FLEventThread) schedule {
+             dispatcher:(FLDispatcher_t) dispatcher {
 
 	self = [super init];
 	if(self) {
         _listener = listener;
-
-        _dispatcher = (schedule == FLScheduleMessagesInMainThreadOnly) ?
-            FLMainThreadSelectorPerformer :
-            FLSelectorPerformer;
+        _dispatcher = dispatcher;
 	}
 	return self;
 }
 
-+ (id) listener:(id) listener schedule:(FLEventThread) schedule {
-    return FLAutorelease([[[self class] alloc] initWithListener:listener schedule:schedule]);
++ (id) listener:(id) listener dispatcher:(FLDispatcher_t) dispatcher {
+    return FLAutorelease([[[self class] alloc] initWithListener:listener dispatcher:dispatcher]);
 }
 
 - (void) receiveMessage:(SEL) messageSelector {

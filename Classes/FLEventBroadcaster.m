@@ -11,7 +11,7 @@
 #import "FLListener.h"
 
 #if DEBUG
-#define LOG_EVENTS_DEFAULT YES
+#define LOG_EVENTS_DEFAULT NO
 #else
 #define LOG_EVENTS_DEFAULT NO
 #endif
@@ -55,6 +55,10 @@
 	return self;
 }
 
++ (id) eventBroadcaster {
+    return FLAutorelease([[[self class] alloc] init]);
+}
+
 #if FL_MRC
 - (void)dealloc {
     [_iteratableListeners release];
@@ -82,25 +86,29 @@
     }
 }
 
-- (void) addListener:(id) aObject withScheduling:(FLEventThread) schedule {
+- (void) addListener:(id) aObject onQueue:(FLDispatcher_t) eventQueue {
 
-    FLListener* listener = [FLListener listener:aObject schedule:schedule];
+    FLListener* listener = [FLListener listener:aObject dispatcher:eventQueue];
     @synchronized(self) {
         [_listeners addObject:listener];
         FLReleaseWithNil(_iteratableListeners);
     }
 }
 
-- (void) addListener:(id) listener {
-
-    [self addListener:listener
-              withScheduling:FLScheduleMessagesInAnyThread];
-
-//    [self addListener:listener
-//              withScheduling:[NSThread isMainThread] ?
-//                FLScheduleMessagesInMainThreadOnly :
-//                FLScheduleMessagesInAnyThread];
+- (void) addListener:(id) listener sendEventsOnMainThread:(BOOL) mainThread {
+    [self addListener:listener onQueue:mainThread ? FLDispatchOnMainThread : FLDispatchOnCurrentThread];
 }
+
+//- (void) addListener:(id) listener {
+//
+//    [self addListener:listener
+//              onQueue:];
+//
+////    [self addListener:listener
+////              onQueue:[NSThread isMainThread] ?
+////                FLScheduleMessagesInMainThreadOnly :
+////                FLRecieveEventInCurrentThread];
+//}
 
 
 - (void) removeListener:(id) listener {
@@ -228,11 +236,3 @@
 
 @end
 
-@implementation FLForegroundEventBroadcaster
-
-- (void) addListener:(id) listener {
-    [self addListener:listener
-       withScheduling:FLScheduleMessagesInMainThreadOnly];
-}
-
-@end
