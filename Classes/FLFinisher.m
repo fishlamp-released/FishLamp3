@@ -23,7 +23,7 @@
 
 @synthesize asyncQueueBlock =_asyncQueueBlock;
 @synthesize asyncQueueFinisherBlock = _asyncQueueFinisherBlock;
-
+@synthesize delegate = _delegate;
 
 #if DEBUG
 - (id) init {
@@ -64,9 +64,17 @@
 }
 #endif
 
-- (void) setFinishedWithResult:(FLPromisedResult) result {
+- (void) setFinishedWithResult:(FLPromisedResult) aResult {
 
     @try {
+        id result = nil;
+
+        if(_delegate) {
+            result = [_delegate finisher:self didFinishWithResult:aResult];
+        }
+        else {
+            result = aResult;
+        }
 
         if(!result) {
             result = FLFailedResult;

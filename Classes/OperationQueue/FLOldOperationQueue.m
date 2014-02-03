@@ -283,7 +283,7 @@ FLSynthesizeLazyGetter(operationFactories, NSMutableArray*, _operationFactories,
 - (void) startOperationForObject:(id) object {
 
     FLOperation* operation = [self createOperationForQueuedObject:object];
-    [operation.events addListener:self withScheduling:FLScheduleMessagesInAnyThread];
+    [operation.events addListener:self onQueue:FLRecieveEventInCurrentThread];
 
     [_activeQueue addObject:operation];
 

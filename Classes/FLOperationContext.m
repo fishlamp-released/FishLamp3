@@ -214,9 +214,11 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
     FLAssertNotNil(operation);
     FLAssertNotNil(_finishers);
 
-    @synchronized(self) {
-        [_finishers setObject:finisher
-                       forKey:[NSValue valueWithNonretainedObject:operation]];
+    if(finisher) {
+        @synchronized(self) {
+            [_finishers setObject:finisher
+                           forKey:[NSValue valueWithNonretainedObject:operation]];
+        }
     }
 }
 

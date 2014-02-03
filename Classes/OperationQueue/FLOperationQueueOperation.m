@@ -11,23 +11,19 @@
 
 @interface FLOperationQueueOperation ()
 @property (readwrite, strong) FLOperationQueue* operationQueue;
+@property (readwrite, strong, nonatomic) NSArray* objects;
 @end
 
 @implementation FLOperationQueueOperation
 
-@synthesize operationQueue = _operationQueue;
-@synthesize maxConcurrentOperations = _maxConcurrentOperations;
+static UInt32 s_defaultMaxConcurrentOperations = FLDefaultConconcurrentOperationCount;
 
-- (id) init {	
-	self = [super init];
-	if(self) {
-		self.maxConcurrentOperations = FLDefaultConconcurrentOperationCount;
-	}
-	return self;
-}
+@synthesize operationQueue = _operationQueue;
+@synthesize objects = _objects;
 
 #if FL_MRC
 - (void)dealloc {
+    [_objects release];
 	[_operationQueue release];
 	[super dealloc];
 }
@@ -37,15 +33,45 @@
 
 }
 
+
+- (NSMutableArray*) objectsArray {
+    if(!_objects) {
+        _objects = [[NSMutableArray alloc] init];
+    }
+    return _objects;
+}
+
+- (NSArray*) popQueuedObjects {
+
+    NSArray* outArray = nil;
+    @synchronized(self) {
+        outArray = FLRetainWithAutorelease(_objects);
+        self.objects = nil;
+    }
+
+    return outArray;
+}
+
+- (void) queueObjectsFromArray:(NSArray*) array {
+
+    @synchronized(self) {
+        [[self objectsArray] addObjectsFromArray:array];
+    }
+}
+
+- (void) queueObject:(id) object {
+    @synchronized(self) {
+        [[self objectsArray] addObject:object];
+    }
+}
+
 - (void) startOperation:(FLFinisher *)finisher {
 
-    self.operationQueue = [FLOperationQueue operationQueue:self];
-
-    [self willStartWithOperationQueue:self.operationQueue];
-
     FLAssert(self.maxConcurrentOperations >= 1);
-
     [self.context setFinisher:finisher forOperation:self];
+
+    self.operationQueue = [FLOperationQueue operationQueue:self];
+    [self.operationQueue queueObjectsFromArray:[self popQueuedObjects]];
 }
 
 - (void) operationQueue:(FLOperationQueue*) operationQueue
@@ -56,20 +82,33 @@
     [self.context queueOperation:operation completion:completion];
 }
 
-- (BOOL) operationQueue:(FLOperationQueue*) operationQueue
-shouldStartAnotherOperation:(NSInteger) activeOperationCount {
+- (BOOL) operationQueueShouldStartAnotherOperation:(FLOperationQueue*) operationQueue {
 
-    return activeOperationCount < self.maxConcurrentOperations;
+    BOOL result = operationQueue.queueState.currentCount <= self.maxConcurrentOperations;
+
+    return result;
+}
+
+- (void) operationQueueIsProcessing:(FLOperationQueue*) operationQueue {
+
+    NSArray* objects = [self popQueuedObjects];
+
+    if(objects) {
+        [operationQueue queueObjectsFromArray:objects];
+    }
 }
 
 - (FLOperation*) operationQueue:(FLOperationQueue*) operationQueue
  createOperationForQueuedObject:(id) object {
-    return nil;
+
+    return object;
 }
 
 - (void) operationQueue:(FLOperationQueue*) operationQueue
      willStartOperation:(FLOperation*) operation
         forQueuedObject:(id) object {
+
+    [operation.events addListener:self sendEventsOnMainThread:NO];
 }
 
 - (void) operationQueue:(FLOperationQueue*) operationQueue
@@ -77,30 +116,40 @@ shouldStartAnotherOperation:(NSInteger) activeOperationCount {
         forQueuedObject:(id) object
              withResult:(FLPromisedResult) result {
 
+    [operation removeListener:self];
+
     if([result isError]) {
         [operationQueue setFinishedWithResult:result];
     }
 }
 
-// normall sends FLSuccessfulResult. Override this for more specific results.
-- (id) operationQueueSuccessfullResult {
-    return FLSuccessfulResult;
+- (void) setFinishedWithResult:(id) result {
+    FLFinisher* finisher = [self.context popFinisherForOperation:self];
+    FLAssertNotNil(finisher);
+    [finisher setFinishedWithResult:result];
 }
 
 - (void) operationQueue:(FLOperationQueue*) operationQueue
     didFinishProcessingWithResult:(FLPromisedResult) result {
 
-    FLFinisher* finisher = [self.context popFinisherForOperation:self];
-    FLAssertNotNil(finisher);
+    [self setFinishedWithResult:result];
+}
 
-    if([result isError]) {
-        [finisher setFinishedWithResult:result];
-    }
-    else {
-        [finisher setFinishedWithResult:[self operationQueueSuccessfullResult]];
-    }
+- (void) setMaxConcurrentOperations:(UInt32)maxConcurrentOperations {
+    FLAtomicSetInt32(_maxConcurrentOperations, maxConcurrentOperations);
+}
 
-    self.operationQueue = nil;
+- (UInt32) maxConcurrentOperations {
+    UInt32 count = FLAtomicGetInt32(_maxConcurrentOperations);
+    return count != 0 ? count : [[self class] defaultMaxConcurrentOperations];
+}
+
++ (void) setDefaultMaxConcurrentOperations:(UInt32) threadCount {
+    FLAtomicSetInt32(s_defaultMaxConcurrentOperations, threadCount);
+}
+
++ (UInt32) defaultMaxConcurrentOperations {
+    return FLAtomicGetInt32(s_defaultMaxConcurrentOperations);
 }
 
 @end

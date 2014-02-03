@@ -36,7 +36,8 @@
 /// There are two ways to define an operation:
 /// 1. synchronously - override runSynchronously. These operations are best for simple tasks that are themselves not asynchrous. Like sorting a big array. When runSynchronously completes, the FLOperations is done - e.g. finishOperation is called automatically.
 /// 2. asynchronously - override startOperation. These operations are for managing tasks that are asynchronous, such as a doing someting on the network. When startOperation completes, the FLOperation is not done. The FLOperation runs until setFinished (see FLFinishable) is called.
-@interface FLOperation : FLBroadcaster<FLQueueableAsyncOperation> {
+
+@interface FLOperation : FLBroadcaster<FLQueueableAsyncOperation, FLFinisherDelegate> {
 @private
     BOOL _cancelled;
     __unsafe_unretained id _context;
@@ -54,17 +55,19 @@
 
 
 /// return YES is was cancelled
+
 @property (readonly, assign, getter=wasCancelled) BOOL cancelled;
 
-/// someone has cancelled you. stop, and be quick about it.
+/*! someone has cancelled you. stop, and be quick about it. */
+
 - (void) requestCancel;
 
 //
 // Override either startOperation or runSynchronously.
 //
 
-
 /// Override this for a async operation. You are responsible for calling setFinished (See FLFinishable)
+
 - (void) startOperation:(FLFinisher*) finisher;
 
 
@@ -85,6 +88,8 @@
 /// Optional override. This is called immediately before startOperation or runSynchronously.
 - (void) willStartOperation;
 
+
+- (id) willFinishWithResult:(id) result;
 
 /// Optional override. This is called after the finisher fufills promises, etc..
 /// 
@@ -110,24 +115,6 @@
 
 @end
 
-
-///// Since a FLOperation is FLBroadcaster, it sends these events to its listeners.
-//@protocol FLOperationEvents <NSObject>
-//@optional
-//
-//
-///// Called with the operation is about to start.
-///// 
-///// @param operation the operation sending the message
-//- (void) operationWillBegin:(id) operation;
-//
-//
-///// The operation has completed.
-///// 
-///// @param operation the operation that has finished
-///// @param result    the results of the operation.
-//- (void) operationDidFinish:(id) operation withResult:(FLPromisedResult) result;
-//@end
 
 #if EXPERIMENTAL
 #define FLDeclareExpectedResult(__CLASS_NAME__) \

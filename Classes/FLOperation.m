@@ -82,25 +82,32 @@
     [finisher setFinishedWithResult:result];
 }
 
-
-- (void) finisherDidFinishWithResult:(FLPromisedResult) result {
-
-    FLAssertNotNil(result);
-
-    [self didFinishWithResult:result];
-    self.context = nil;
-    self.cancelled = NO;
+- (id) willFinishWithResult:(id) result {
+    return result;
 }
 
+- (void) didFinishWithResult:(FLPromisedResult) result {
+}
+
+- (id) finisher:(FLFinisher*) finisher didFinishWithResult:(id) result {
+
+    id newResult = [self willFinishWithResult:result];
+
+    [self didFinishWithResult:newResult];
+    self.context = nil;
+    self.cancelled = NO;
+
+    return newResult;
+}
 
 - (void) startAsyncOperationInQueue:(id<FLAsyncQueue>) asyncQueue
-                       finisher:(FLFinisher*) finisher {
+                           finisher:(FLFinisher*) finisher {
 
     @try {
         FLAssertNotNil(asyncQueue);
         FLAssertNotNil(finisher);
 
-        [finisher addPromiseWithTarget:self action:@selector(finisherDidFinishWithResult:)];
+        finisher.delegate = self;
 
         [self willStartOperation];
         [self startOperation:finisher];
@@ -177,8 +184,6 @@
     }
 }
 
-- (void) didFinishWithResult:(FLPromisedResult) result {
-}
 
 #if EXPERIMENTAL
 - (void) addPrerequisite:(id<FLPrerequisite>) prerequisite {

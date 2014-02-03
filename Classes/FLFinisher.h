@@ -23,7 +23,10 @@
 #if DEBUG
     NSTimeInterval _birth;
 #endif
+    __unsafe_unretained id<FLFinisherDelegate> _delegate;
 }
+
+@property (readwrite, assign) id<FLFinisherDelegate> delegate;
 
 + (id) finisher;
 + (id) finisherWithBlock:(fl_completion_block_t) completion;
@@ -49,4 +52,9 @@
 
 // will always fire on main thread
 @interface FLMainThreadFinisher : FLFinisher
+@end
+
+
+@protocol FLFinisherDelegate <NSObject>
+- (id) finisher:(FLFinisher*) finisher didFinishWithResult:(id) result;
 @end

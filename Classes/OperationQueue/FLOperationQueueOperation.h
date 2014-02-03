@@ -14,26 +14,25 @@
 @interface FLOperationQueueOperation : FLOperation<FLOperationQueueDelegate> {
 @private
     FLOperationQueue* _operationQueue;
-    UInt32 _macConcurrentOperations;
+    UInt32 _maxConcurrentOperations;
+    NSMutableArray* _objects;
 }
 
-// this is queried live.
+// this is queried live, so changing it while operation is running is supported
+// and queue will adjust.
 @property (readwrite, assign) UInt32 maxConcurrentOperations;
 
 - (void) willStartWithOperationQueue:(FLOperationQueue*) queue;
 
-// required overrides
-- (FLOperation*) operationQueue:(FLOperationQueue*) operationQueue
- createOperationForQueuedObject:(id) object;
+- (void) queueObjectsFromArray:(NSArray*) array;
+- (void) queueObject:(id) object;
 
-// optional overrides
-- (void) operationQueue:(FLOperationQueue*) operationQueue
-     willStartOperation:(FLOperation*) operation
-        forQueuedObject:(id) object;
+@end
 
-- (void) operationQueue:(FLOperationQueue*) operationQueue
-     didFinishOperation:(FLOperation*) operation
-        forQueuedObject:(id) object
-             withResult:(FLPromisedResult) result;
 
+@interface FLOperationQueueOperation (GlobalDefault)
+
++ (void) setDefaultMaxConcurrentOperations:(UInt32) threadCount;
+
++ (UInt32) defaultMaxConcurrentOperations;
 @end
