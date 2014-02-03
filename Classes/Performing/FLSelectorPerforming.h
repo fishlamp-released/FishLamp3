@@ -40,7 +40,9 @@ typedef struct {
     FLSelectorPerformer2 performSelector2;
     FLSelectorPerformer3 performSelector3;
     FLSelectorPerformer4 performSelector4;
+    const char* name;
 } FLDispatcher_t;
 
-extern const FLDispatcher_t FLMainThreadSelectorPerformer;
-extern const FLDispatcher_t FLSelectorPerformer;
+extern const FLDispatcher_t FLDispatchOnMainThread;
+extern const FLDispatcher_t FLDispatchOnCurrentThread;
+

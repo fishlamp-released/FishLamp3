@@ -66,7 +66,7 @@ BOOL FLTestAllBits(FLBitFlags_t flags, FLBitMask_t mask) {
             else                 FLClearBitsAtomic(__FLAGS__, __BITS__)
 
 #define FLGetBitsAtomic(__FLAGS__, __BITS__)  \
-            FLGetBits(FLAtomicGet32(__FLAGS__), __BITS__)
+            FLGetBits(FLAtomicGetInt32(__FLAGS__), __BITS__)
 
             
 #define FLBitsEqualResultAtomic(__FLAGS__, __BITS__, __RESULT__) \

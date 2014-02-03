@@ -10,8 +10,6 @@
 #import "FishLampRequired.h"
 #import "FishLampAssertions.h"
 
-#import <libkern/OSAtomic.h>
-
 void FLAtomicSet64Ptr(int64_t *target, int64_t new_value) {
     while (true) {
         int64_t old_value = *target;

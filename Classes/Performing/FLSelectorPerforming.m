@@ -15,21 +15,24 @@
 #pragma GCC diagnostic ignored "-Warc-performSelector-leaks"
 
 
-const FLDispatcher_t FLMainThreadSelectorPerformer = {
+const FLDispatcher_t FLDispatchOnMainThread = {
     FLPerformSelectorOnMainThread0,
     FLPerformSelectorOnMainThread1,
     FLPerformSelectorOnMainThread2,
     FLPerformSelectorOnMainThread3,
-    FLPerformSelectorOnMainThread4
+    FLPerformSelectorOnMainThread4,
+    "com.fishlamp.dispatcher.main-thread"
     };
 
-const FLDispatcher_t FLSelectorPerformer = {
+const FLDispatcher_t FLDispatchOnCurrentThread = {
     FLPerformSelector0,
     FLPerformSelector1,
     FLPerformSelector2,
     FLPerformSelector3,
-    FLPerformSelector4
+    FLPerformSelector4,
+    "com.fishlamp.dispatcher.current-thread"
     };
+
 
 BOOL FLSelectorPerforming(id target, SEL selector, id __strong * arguments, int argCount) {
 

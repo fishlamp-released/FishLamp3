@@ -12,12 +12,12 @@
 
 #define FLSythesizeAtomicInt32Getter(__GETTER__, __PROPERTY_TYPE__, __MEMBER_NAME__) \
     - (__PROPERTY_TYPE__) __GETTER__ { \
-        return (__PROPERTY_TYPE__) FLAtomicGet32((int32_t*) &(__MEMBER_NAME__)); \
+        return (__PROPERTY_TYPE__) FLAtomicGetInt32((int32_t*) &(__MEMBER_NAME__)); \
         } 
 
 #define FLSythesizeAtomicInt32Setter(__SETTER__, __PROPERTY_TYPE__, __MEMBER_NAME__) \
     - (void) __SETTER__:(__PROPERTY_TYPE__) value { \
-        FLAtomicSet32((int32_t*) &(__MEMBER_NAME__), (int32_t)value); \
+        FLAtomicSetInt32((int32_t*) &(__MEMBER_NAME__), (int32_t)value); \
         }
 
 #define FLSythesizeAtomicInt32Property(__GETTER__, __SETTER__, __PROPERTY_TYPE__, __MEMBER_NAME__) \
