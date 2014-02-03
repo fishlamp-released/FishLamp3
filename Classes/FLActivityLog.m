@@ -22,7 +22,7 @@ NSString* const FLActivityLogStringKey = @"FLActivityLogStringKey";
 - (id) init {	
 	self = [super init];
 	if(self) {
-        _events = [[FLForegroundEventBroadcaster alloc] init];
+        _events = [[FLEventBroadcaster alloc] init];
 	}
 	return self;
 }
