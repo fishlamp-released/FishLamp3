@@ -123,7 +123,7 @@
         [operation setOperationStarter:self.authenticationQueue];
     }
 
-    [operation addListener:self];
+    [operation addListener:self sendEventsOnMainThread:NO];
 }
 
 - (void) didRemoveOperation:(FLOperation*) operation {
