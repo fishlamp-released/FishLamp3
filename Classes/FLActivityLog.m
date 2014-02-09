@@ -47,7 +47,7 @@ NSString* const FLActivityLogStringKey = @"FLActivityLogStringKey";
         NSString* timeStamp = [NSString stringWithFormat:@"[%@]: ", 
             [NSDateFormatter localizedStringFromDate:[NSDate date] 
                                            dateStyle:NSDateFormatterShortStyle 
-                                           timeStyle:kCFDateFormatterLongStyle]];
+                                           timeStyle:NSDateFormatterLongStyle]];
 
 
         NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
