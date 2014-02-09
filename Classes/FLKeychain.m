@@ -78,18 +78,18 @@
 	//  add new password to default keychain
 	OSStatus status = SecKeychainAddInternetPassword (
 		NULL,								//  search default keychain
-		strlen(domain),                     //  serverNameLength
+		(UInt32)strlen(domain),                     //  serverNameLength
 		domain,								//  serverName
 		0,                                  //  securityDomainLength
 		NULL,								//  security domain
-		strlen(username),                   //  account name length
+		(UInt32) strlen(username),                   //  account name length
 		username,							//  account name
 		strlen(""),                         //  pathLength
 		"",									//  path on domain
 		0,									//  port (0 == ignore)
 		kSecProtocolTypeHTTP,				//  http internet protocol
 		kSecAuthenticationTypeDefault,		//  default authentication type
-		strlen(password),                   //  password length
+		(UInt32)strlen(password),                   //  password length
 		password,							//  password data (stores password)
 		NULL								//  ref to the actual item (not needed now)
 	);
@@ -132,11 +132,11 @@
 	//  search the default keychain for a password
 	OSStatus err = SecKeychainFindInternetPassword (
 		NULL,								//  search default keychain
-		strlen(domain),
+		(UInt32)strlen(domain),
 		domain,								//  domain
 		0,
 		NULL,								//  security domain
-		strlen(username),
+		(UInt32)strlen(username),
 		username,							//  username
 		strlen(""),
 		"",									//  path on domain
