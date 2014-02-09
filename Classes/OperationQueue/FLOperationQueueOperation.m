@@ -29,11 +29,6 @@ static UInt32 s_defaultMaxConcurrentOperations = FLDefaultConconcurrentOperation
 }
 #endif
 
-- (void) willStartWithOperationQueue:(FLOperationQueue*) queue {
-
-}
-
-
 - (NSMutableArray*) objectsArray {
     if(!_objects) {
         _objects = [[NSMutableArray alloc] init];
@@ -50,6 +45,11 @@ static UInt32 s_defaultMaxConcurrentOperations = FLDefaultConconcurrentOperation
     }
 
     return outArray;
+}
+
+- (void) requestCancel {
+    [self.operationQueue requestCancel];
+    [super requestCancel];
 }
 
 - (void) queueObjectsFromArray:(NSArray*) array {

@@ -22,8 +22,6 @@
 // and queue will adjust.
 @property (readwrite, assign) UInt32 maxConcurrentOperations;
 
-- (void) willStartWithOperationQueue:(FLOperationQueue*) queue;
-
 - (void) queueObjectsFromArray:(NSArray*) array;
 - (void) queueObject:(id) object;
 

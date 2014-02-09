@@ -109,8 +109,13 @@
 
         finisher.delegate = self;
 
-        [self willStartOperation];
-        [self startOperation:finisher];
+        if(self.wasCancelled) {
+            [finisher setFinishedWithResult:[NSError cancelError]];
+        }
+        else {
+            [self willStartOperation];
+            [self startOperation:finisher];
+        }
     }
     @catch(NSException* ex) {
         [finisher setFinishedWithResult:ex.error];
