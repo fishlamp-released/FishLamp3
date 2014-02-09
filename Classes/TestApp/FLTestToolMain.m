@@ -8,17 +8,12 @@
 //
 
 #import "FLTestToolMain.h"
-#import "FLRunAllTestsOperation.h"
-#import "FLAsyncQueue.h"
-#import "FLOperation.h"
-#import "FLTestable.h"
 #import "NSBundle+FLVersion.h"
-#import "FLDispatchQueues.h"
-#import "FLTestLoggingManager.h"
 
-#import "FishLampAsync.h"
 
 #import "FLConsoleLogSink.h"
+
+#import "FLTestOrganizer.h"
 
 int FLTestToolMain(int argc, const char *argv[], NSString* bundleIdentifier, NSString* appName, NSString* version) {
     @autoreleasepool {
@@ -29,17 +24,16 @@ int FLTestToolMain(int argc, const char *argv[], NSString* bundleIdentifier, NSS
         
             FLLogger* logger = [FLLogger logger];
             [logger addLoggerSink:[FLConsoleLogSink consoleLogSink:FLLogOutputSimple]];
-            [[FLTestLoggingManager instance] addLogger:logger];
+            [[FLTestOrganizer instance].logger addLogger:logger];
 
             FLTestableSetLogger(logger);
 
-            id<FLOperationContext> testContext = [FLOperationContext operationContext];
+            FLSortedTestGroupList* tests = [[FLTestOrganizer instance] organizeTests];
+            [[FLTestOrganizer instance] runTests:tests];
 
-            FLPromisedResult result = [testContext runSynchronously:[FLRunAllTestsOperation testRunner]];
-
-            if([result isError]) {
-                return 1;
-            }
+//            if([result isError]) {
+//                return 1;
+//            }
 
             return 0;
         }

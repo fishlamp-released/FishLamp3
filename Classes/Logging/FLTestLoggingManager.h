@@ -20,8 +20,6 @@
     NSMutableArray* _loggers;
 }
 
-FLSingletonProperty(FLTestLoggingManager);
-
 /**
  *  Add A logger a the end of the logger list. The first logger in the list gets the input.
  *  
@@ -45,8 +43,6 @@ FLSingletonProperty(FLTestLoggingManager);
 - (id<FLStringFormatter>) logger;
 
 - (void) logger:(id<FLStringFormatter>) logger logInBlock:(dispatch_block_t) block;
-
-- (void) appendTestCaseOutput:(FLTestCase*) testCase;
 
 @end
 

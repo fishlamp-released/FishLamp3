@@ -69,11 +69,6 @@
 
 @property (readwrite, strong) FLTestCaseList* testCaseList;
 
-//@property (readwrite, strong) FLTestCase* currentTestCase;
-//
-//- (FLAsyncTest*) startAsyncTest;
-//- (FLAsyncTest*) startAsyncTestWithTimeout:(NSTimeInterval) timeout;
-
 @end
 
 /**
@@ -84,7 +79,12 @@
     FLTestCaseList* _testCaseList;
     FLExpectedTestResult* _expectedTestResult;
     FLTestResultCollection* _testResults;
+    id<FLStringFormatter> _logger;
 }
+
+- (id) initWithLogger:(id<FLStringFormatter>) logger;
+
+@property (readonly, strong) id<FLStringFormatter> logger;
 
 /**
  *  Return a custom name for the unit test. By default this is the name of the class.
@@ -94,12 +94,7 @@
 
 - (FLTestCase*) testCaseForName:(NSString*) name;
 
-
 @end
-
-extern void FLTestableSetLogger(id<FLStringFormatter> logger);
-
-extern id<FLStringFormatter> FLTestLogger();
 
 /**
  *  Macro that all the tests should use for output.

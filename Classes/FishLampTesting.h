@@ -25,3 +25,4 @@
 #import "FLTestable+Utils.h"
 #import "FLTestableRunOrder.h"
 
+#import "FLTestOrganizer.h"

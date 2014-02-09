@@ -18,8 +18,6 @@
 
 dispatch_once_t s_predicate = 0;
 
-FLSynthesizeSingleton(FLTestLoggingManager)
-
 - (NSArray*) array {
     return _loggers;
 }
@@ -162,30 +160,15 @@ appendContentsToStringFormatter:(id<FLStringFormatter>) stringFormatter {
 
 - (void) logger:(id<FLStringFormatter>) logger logInBlock:(dispatch_block_t) block {
     @try {
-        [[FLTestLoggingManager instance] pushLogger:logger];
+        [self pushLogger:logger];
         block();
     }
     @finally {
-        [[FLTestLoggingManager instance] popLogger];
+        [self popLogger];
     }
 }
 
-- (void) appendTestCaseOutput:(FLTestCase*) testCase {
-    if(!testCase.result.passed) {
-        [self appendLine:@"Log Entries:"];
-        [self indentLinesInBlock:^{
-            NSArray* logEntries = testCase.result.logEntries;
-            for(FLTestResultLogEntry* entry in logEntries) {
-                [self appendLine:entry.line];
-                if(entry.stackTrace) {
-                    [self indentLinesInBlock:^{
-                        [entry.stackTrace appendToStringFormatter:self];
-                    }];
-                }
-            }
-        }];
-    }
-}
+
 
 
 @end

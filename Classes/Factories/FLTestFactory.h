@@ -10,11 +10,10 @@
 
 #import "FLTestable.h"
 
-@class FLTestableOperation;
 
 @protocol FLTestFactory <NSObject>
 
-- (FLTestableOperation*) createTest;
+- (FLTestable*) createTestable:(id<FLStringFormatter>) logger;
 
 - (Class) testableClass;
 

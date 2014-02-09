@@ -9,10 +9,12 @@
 #import "FLTestableSubclassFactory.h"
 #import "FLTestable.h"
 #import "FLObjcRuntime.h"
-#import "FLTestableOperation.h"
 
 #import "FLTestCase.h"
 #import "FLTestCaseList.h"
+
+#import "FLAsyncTestCase.h"
+#import "FLAsyncTestable.h"
 
 @interface FLTestable (Internal)
 @property (readwrite, strong) FLTestCaseList* testCaseList;
@@ -20,8 +22,8 @@
 
 @implementation FLTestable (TestCases)
 
-- (id) initWithTestCaseCreation {
-	self = [self init];
+- (id) initWithTestCaseCreation:(id<FLStringFormatter>) logger {
+	self = [self initWithLogger:logger];
 	if(self) {
 		self.testCaseList = [self createTestCases];
 	}
@@ -59,6 +61,16 @@
     }];
 }
 
+- (FLTestCase*) createTestCase:(NSString*) testName
+           testable:(id<FLTestable>) testable
+             target:(id) target
+           selector:(SEL) selector {
+
+    return [FLTestCase testCase:testName
+                       testable:self
+                         target:self
+                       selector:selector];
+}
 
 - (FLTestCaseList*) createTestCases {
 
@@ -67,7 +79,7 @@
     FLRuntimeVisitEachSelectorInClassAndSuperclass([self class],
         ^(FLRuntimeInfo info, BOOL* stop) {
             if(!info.isMetaClass) {
-                if(info.class == [FLTestable class]) {
+                if(info.class == [FLTestable class] || info.class == [FLAsyncTestable class]) {
                     *stop = YES;
                 }
                 else {
@@ -83,7 +95,6 @@
             }
         });
 
-
     NSMutableArray* testCaseList = [NSMutableArray array];
 
     NSString* myName = NSStringFromClass([self class]);
@@ -92,7 +103,7 @@
 
         NSString* testName = [NSString stringWithFormat:@"%@.%@", myName, selectorName];
 
-        FLTestCase* testCase = [FLTestCase testCase:testName
+        FLTestCase* testCase = [self createTestCase:testName
                                            testable:self
                                              target:self
                                            selector:NSSelectorFromString(selectorName)];
@@ -104,6 +115,21 @@
     return [FLTestCaseList testCaseListWithArrayOfTestCases:testCaseList];
 }
 
+
+@end
+
+@implementation FLAsyncTestable (FLTestCases)
+
+- (FLTestCase*) createTestCase:(NSString*) name
+           testable:(id<FLTestable>) testable
+             target:(id) target
+           selector:(SEL) selector {
+
+    return [FLAsyncTestCase testCase:name
+                       testable:self
+                         target:self
+                       selector:selector];
+}
 
 @end
 
@@ -124,9 +150,9 @@
     return FLAutorelease([[[self class] alloc] initWithUnitTestClass:aClass]);
 }
 
-- (id) createTestableObject {
+- (FLTestable*) createTestable:(id<FLStringFormatter>) logger {
 
-    id<FLTestable> testable = FLAutorelease([[self.testableClass alloc] initWithTestCaseCreation]);
+    id<FLTestable> testable = FLAutorelease([[self.testableClass alloc] initWithTestCaseCreation:logger]);
 
     FLConfirmNotNil(testable);
     FLConfirm([testable isKindOfClass:[FLTestable class]],
@@ -134,11 +160,6 @@
                             NSStringFromClass([testable class]));
 
     return testable;
-}
-
-- (FLTestableOperation*) createTest {
-    FLTestable* testObject = [self createTestableObject];
-    return [FLTestableOperation testWithTestable:testObject];
 }
 
 

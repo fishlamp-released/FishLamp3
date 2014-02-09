@@ -21,17 +21,26 @@
 
 @implementation FLTestable
 
+- (id) initWithLogger:(id<FLStringFormatter>) logger {
+    self = [self init];
+    if(self) {
+        _logger = FLRetain(logger);
+    }
+
+    return self;
+}
+
 @synthesize testCaseList = _testCaseList;
 @synthesize expectedTestResult = _expectedTestResult;
 @synthesize testResults = _testResults;
-//@synthesize currentTestCase = _currentTestCase;
+@synthesize logger = _logger;
 
 #if FL_MRC
 - (void)dealloc {
-//    [_currentTestCase release];
 	[_testCaseList release];
     [_expectedTestResult release];
     [_testResults release];
+    [_logger release];
 
     [super dealloc];
 }
@@ -53,12 +62,6 @@
     return [self.testCaseList testCaseForName:name];
 }
 
-- (void) willRunTestCases:(FLTestCaseList*) testCases {
-}
-
-- (void) didRunTestCases:(FLTestCaseList*) testCases {
-}
-
 + (void) specifyRunOrder:(id<FLTestableRunOrder>) runOrder {
 }
 
@@ -70,18 +73,4 @@
     return NSStringFromClass([self testGroupClass]);
 }
 
-//- (FLAsyncTest*) startAsyncTest {
-//    return [self.currentTestCase startAsyncTest];
-//}
-
 @end
-
-static id<FLStringFormatter> s_logger = nil;
-
-void FLTestableSetLogger(id<FLStringFormatter> logger) {
-    FLSetObjectWithRetain(s_logger, logger);
-}
-
-id<FLStringFormatter> FLTestLogger() {
-    return s_logger;
-}
