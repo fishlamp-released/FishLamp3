@@ -294,12 +294,12 @@ void FLDebugCompareStrings(NSString* lhs, NSString* rhs)
 		if(i >= (int)lhs.length)
 		{
 			FLLog(@"lhs ran out of chars");
-			FLLog(str);
+			FLLog(@"%@", str);
 		}
 		else if(i >= (int)rhs.length)
 		{
 			FLLog(@"rhs ran out of chars");
-			FLLog(str);
+			FLLog(@"%@", str);
 		}
 		else if([lhs characterAtIndex:i] == [rhs characterAtIndex:i])
 		{
@@ -307,7 +307,7 @@ void FLDebugCompareStrings(NSString* lhs, NSString* rhs)
 		}
 		else
 		{
-			FLLog(str);
+			FLLog(@"%@", str);
 			FLLog(@"%d: %c != %c", i, [lhs characterAtIndex:i], [rhs characterAtIndex:i]); 
 			return;
 		}
