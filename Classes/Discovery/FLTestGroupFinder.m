@@ -47,13 +47,13 @@
 
     NSMutableArray* newList = [NSMutableArray array];
 
-    for(NSInteger i = 0; i < factoryList.count; i++) {
+    for(NSUInteger i = 0; i < factoryList.count; i++) {
         id<FLTestFactory> factory = [factoryList objectAtIndex:i];
         Class outerClass = [factory testableClass];
 
         BOOL foundSubclass = NO;
 
-        for(NSInteger j = 0; j < factoryList.count; j++) {
+        for(NSUInteger j = 0; j < factoryList.count; j++) {
 
             if( i == j ) {
                 continue;

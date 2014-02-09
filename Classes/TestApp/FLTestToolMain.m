@@ -26,7 +26,6 @@ int FLTestToolMain(int argc, const char *argv[], NSString* bundleIdentifier, NSS
             [logger addLoggerSink:[FLConsoleLogSink consoleLogSink:FLLogOutputSimple]];
             [[FLTestOrganizer instance].logger addLogger:logger];
 
-            FLTestableSetLogger(logger);
 
             FLSortedTestGroupList* tests = [[FLTestOrganizer instance] organizeTests];
             [[FLTestOrganizer instance] runTests:tests];

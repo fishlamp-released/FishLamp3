@@ -52,7 +52,7 @@
     FLConfirmIsNotNil(info.selector);
     
     int selectorArgCount = info.argumentCount;
-    NSLog([info prettyString]);
+//    NSLog(@"%@", [info prettyString]);
     BOOL passed = NO;
 
     @try {

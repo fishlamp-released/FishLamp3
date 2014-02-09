@@ -80,9 +80,6 @@ Pod::Spec.new do |s|
     
 
 
-    
-
-
     s.xcconfig = {
         "CLANG_ANALYZER_DEADCODE_DEADSTORES" => "YES",
         "CLANG_ANALYZER_GCD" => "YES",
@@ -158,5 +155,5 @@ Pod::Spec.new do |s|
         "GCC_WARN_UNUSED_VARIABLE" => "YES",
         "GCC_TREAT_WARNINGS_AS_ERRORS" => "YES"
     }
-    s.compiler_flags = '-Werror', '-Waddress', '-Warray-bounds', '-Wc++11-compat', '-Wchar-subscripts', '-Wimplicit-function-declaration', '-Wcomment', '-Wformat', '-Wmain ', '-Wmissing-braces', '-Wnonnull', '-Wparentheses', '-Wpointer-sign', '-Wreorder', '-Wreturn-type', '-Wsequence-point', '-Wsign-compare', '-Wswitch', '-Wtrigraphs', '-Wmissing-prototypes', '-Wmissing-declarations'
+
 end
