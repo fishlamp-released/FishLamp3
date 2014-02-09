@@ -9,5 +9,7 @@
 #import "FLTestable.h"
 #import "FLCoreFrameworkTest.h"
 
+#if 0
 @interface FLOwnershipTests : FLCoreFrameworkTest
 @end
+#endif

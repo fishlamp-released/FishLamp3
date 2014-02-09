@@ -9,7 +9,9 @@
 #import "FLOwnershipTests.h"
 #import "FishLampTesting.h"
 
+#if 0
 #import "FLObjectProxies.h"
+
 @interface FLObjectProxyTestObject : NSObject {
 @private
     BOOL _propertyWasCalled;
@@ -77,3 +79,4 @@ static BOOL s_deleted = NO;
 }
 
 @end
+#endif

@@ -8,8 +8,7 @@
 //
 
 #import "FLErrorTests.h"
-#import "NSError+FLExtras.h"
-#import "FishLampMinimum.h"
+#import "FishLampCore.h"
 
 @class FLDeleteNotifier;
 
@@ -66,9 +65,7 @@ FLSynthesizeAssociatedProperty(FLAssociationPolicyRetainNonatomic, deleteNotifie
     FLAssert(error.isCancelError);
 }
 
-- (void) testThrowError:(FLTestCase*) testCase {
-
-    [testCase startAsyncTest];
+- (void) testThrowError {
 
     @autoreleasepool {
         NSError* error  = [NSError cancelError];
@@ -79,10 +76,6 @@ FLSynthesizeAssociatedProperty(FLAssociationPolicyRetainNonatomic, deleteNotifie
         }
         @catch(NSException* ex) {
             caughtError = FLRetainWithAutorelease(ex.error);
-            caughtError.deleteNotifier_fl = [FLDeleteNotifier deleteNotifier:^{
-
-                [testCase finishAsyncTest];
-            }];
         }
 
         FLConfirmNotNil(caughtError);

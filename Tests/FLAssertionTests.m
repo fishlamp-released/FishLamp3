@@ -17,9 +17,9 @@
 
 
 //- (void) testNotImplemented_broken_debug_verbose:(FLTestCase*) test {
-//    [FLTestCase runTestWithExpectedFailure:^{  FLAssertIsImplementedWithComment(@"this is a test"); }];
-//    [FLTestCase runTestWithExpectedFailure:^{  FLAssertIsImplementedWithComment(nil); } ];
-//    [FLTestCase runTestWithExpectedFailure:^{  FLAssertIsBugWithComment(@"this is a bug", nil); } ];
+//    [FLTestCase runTestWithExpectedFailure:^{  FLAssertIsImplemented(@"this is a test"); }];
+//    [FLTestCase runTestWithExpectedFailure:^{  FLAssertIsImplemented(nil); } ];
+//    [FLTestCase runTestWithExpectedFailure:^{  FLAssertIsBug(@"this is a bug", nil); } ];
 //}
 
 
