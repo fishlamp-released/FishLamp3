@@ -143,7 +143,7 @@ didStartElement:(NSString *)elementName
 
     FLPrettyString* prettyString = [FLPrettyString prettyString];
     [prettyString appendFormat: @"XMLParsing Error: %@ (%ld) at line: %ld, column: %ld in %@",
-                                FLXmlParserErrorCodeStringFromEnum(parseError.code),
+                                FLXmlParserErrorCodeStringFromEnum((FLXmlParserErrorCode) parseError.code),
                                 (unsigned long) parseError.code,
                                 (unsigned long) parser.lineNumber,
                                 (unsigned long) parser.columnNumber,
