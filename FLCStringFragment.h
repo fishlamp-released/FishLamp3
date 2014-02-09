@@ -11,13 +11,13 @@
 
 typedef struct {
     const char* string;
-    NSUInteger length;
+    size_t length;
 } FLCStringFragment;
 
 extern FLCStringFragment FLParseFragmentFromCString(const char* string, char stopChar);
 
 NS_INLINE 
-const char* FLCStringCopyWithLength(const char* str, int len) {
+const char* FLCStringCopyWithLength(const char* str, size_t len) {
     char* copy = malloc(len + 1);
     memcpy(copy, str, len);
     copy[len] = 0;
