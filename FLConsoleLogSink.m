@@ -41,13 +41,13 @@
 
 - (void) logEntry:(FLLogEntry*) entry stopPropagating:(BOOL*) stop {
 
-    FLPrintf(entry.logString);
+    FLPrintf(@"%@", entry.logString);
 
     if(FLTestAnyBit(self.outputFlags, FLLogOutputWithLocation | FLLogOutputWithStackTrace)) { 
         [[FLPrintfStringFormatter instance] indentLinesInBlock:^{
             NSString* moreInfo = [entry.object moreDescriptionForLogging];
             if(moreInfo) {
-                FLPrintf(moreInfo);
+                FLPrintf(@"%@", moreInfo);
             }
             
             FLPrintf(@"%@:%d: %@",
