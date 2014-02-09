@@ -218,9 +218,9 @@ typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
 
             [operationQueue startOperation:operation completion:^(FLPromisedResult result) {
 
-                [operationQueue queueBlock:^(FLOperationQueue* operationQueue) {
+                [operationQueue queueBlock:^(FLOperationQueue* innerOperationQueue) {
 
-                    [operationQueue finishOperation:operation forObject:object withResult:result];
+                    [innerOperationQueue finishOperation:operation forObject:object withResult:result];
 
                 }];
             }];
