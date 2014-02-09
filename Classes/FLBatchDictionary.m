@@ -17,7 +17,7 @@ NSString* _FLKeyForProperty(NSString* prop) {
         return [prop substringFromIndex:kSelfDot.length];
     }
     else if ([prop hasPrefix:kBracketSelf]) {
-        int len = kBracketSelf.length;
+        NSUInteger len = kBracketSelf.length;
         return [prop substringWithRange:NSMakeRange(len, prop.length - len - 1)];
     }
 
