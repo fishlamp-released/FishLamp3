@@ -66,6 +66,7 @@
     #define BUG(x)
 #endif    
 
+#if 1
 
 //
 // compiler warnings
@@ -127,4 +128,6 @@
 
 #if DEBUG
 #pragma GCC diagnostic ignored "-Wunused-variable"
+#endif
+
 #endif

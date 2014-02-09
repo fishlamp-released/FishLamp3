@@ -28,7 +28,7 @@ extern FLStackTrace_t FLStackTraceMake( FLFileLocation_t loc, BOOL withCallStack
 
 NS_INLINE
 const char* FLStackEntryAtIndex(FLCallStack_t stack, NSUInteger index) {
-    return (index < stack.depth) ? stack.lines[index] : nil;
+    return (((int)index) < stack.depth) ? stack.lines[index] : nil;
 }
 
 #define FLStackTraceToHere(__WITH_STACK_TRACE__) \

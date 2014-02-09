@@ -32,17 +32,17 @@ void FLStackTraceFree(FLStackTrace_t* trace) {
 }
 
 
-NS_INLINE
-const char* __copy_str(const char* str, int* len) {
-    if(str != nil) {
-        *len = strlen(str);
-        char* outStr = malloc(*len + 1);
-        strncpy(outStr, str, *len);
-        return outStr;
-    }
-    
-    return nil;
-}
+//NS_INLINE
+//const char* __copy_str(const char* str, size_t* len) {
+//    if(str != nil) {
+//        *len = strlen(str);
+//        char* outStr = malloc(*len + 1);
+//        strncpy(outStr, str, *len);
+//        return outStr;
+//    }
+//    
+//    return nil;
+//}
 
 // [NSThread callStackSymbols]
 
