@@ -26,7 +26,7 @@
         __block id blockObject = FLRetain(object);
         __block NSInvocation* theInvocation = FLRetain(anInvocation);
 
-        int argCount = theInvocation.methodSignature.numberOfArguments;
+        NSUInteger argCount = theInvocation.methodSignature.numberOfArguments;
 
         for(int i = 2; i < argCount; i++) {
             id arg = nil;
