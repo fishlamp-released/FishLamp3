@@ -40,6 +40,7 @@
 }
 
 - (void) organizeTests {
+/*
     [self sortUsingComparator:^NSComparisonResult(id<FLTestFactory> obj1, id<FLTestFactory> obj2) {
 
         NSString* lhs = [obj1.testableClass testName];
@@ -47,7 +48,8 @@
 
         return [lhs compare:rhs];
     }];
-
+ */
+ 
     [self organize];
 }
 

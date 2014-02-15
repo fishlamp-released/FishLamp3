@@ -102,14 +102,9 @@
         NSString* testGroupName = [[factory testableClass] testGroupName];
         if(testGroupName) {
             testGroupClass = [discoveredGroups objectForKey:testGroupName];
-
-            FLConfirmNotNil(testGroupClass, @"Unknown test group: %@", testGroupName);
         }
 
-        if(!testGroupClass) {
-            testGroupClass = [[factory testableClass] testGroupClass];
-        }
-
+        // default test group
         if(!testGroupClass) {
             testGroupClass = [FLTestGroup class];
         }

@@ -46,13 +46,14 @@
 }
 #endif
 
-+ (NSString*) testName {
-    return NSStringFromClass([self class]);
-}
 
 - (NSString*) description {
     return [NSString stringWithFormat:@"%@ { group=%@ }", [super description], [[self class] testGroupName]];
 }
+
+//+ (NSString*) testName {
+//    return NSStringFromClass([self class]);
+//}
 
 - (FLTestCase*) testCaseForSelector:(SEL) selector {
     return [self.testCaseList testCaseForSelector:selector];
@@ -62,15 +63,13 @@
     return [self.testCaseList testCaseForName:name];
 }
 
-+ (void) specifyRunOrder:(id<FLTestableRunOrder>) runOrder {
-}
+//+ (void) specifyRunOrder:(id<FLTestableRunOrder>) runOrder {
+//}
 
-+ (Class) testGroupClass {
-    return [FLTestGroup class];
-}
-
-+ (NSString*) testGroupName {
-    return NSStringFromClass([self testGroupClass]);
-}
+//+ (NSString*) testGroupName {
+//    return
+//
+//    NSStringFromClass([self testGroupClass]);
+//}
 
 @end

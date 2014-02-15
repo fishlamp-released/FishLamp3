@@ -12,6 +12,29 @@
 
 #define kPadWidth [@"starting" length]
 
+@implementation NSObject (FLTestable)
+
+- (void) willRunTestCases:(FLTestCaseList*) testCases {
+}
+
+- (void) didRunTestCases:(FLTestCaseList*) testCases {
+}
+
++ (void) specifyRunOrder:(id<FLTestableRunOrder>) runOrder {
+}
+
+
++ (NSString*) testGroupName {
+    return NSStringFromClass([self class]);
+}
+
++ (NSString*) testName {
+    return NSStringFromClass([self class]);
+}
+
+@end
+
+
 @implementation FLTestable (Running)
 
 - (void) finishTestCase:(FLTestCase*) testCase {

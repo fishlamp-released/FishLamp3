@@ -83,6 +83,16 @@ Pod::Spec.new do |s|
     
 
 
+    
+
+    
+
+
+
+    
+
+
+
     s.xcconfig = {
         "CLANG_ANALYZER_DEADCODE_DEADSTORES" => "YES",
         "CLANG_ANALYZER_GCD" => "YES",
@@ -96,10 +106,8 @@ Pod::Spec.new do |s|
         "CLANG_ANALYZER_OBJC_RETAIN_COUNT" => "YES",
         "CLANG_ANALYZER_OBJC_SELF_INIT" => "YES",
         "CLANG_ANALYZER_OBJC_UNUSED_IVARS" => "YES",
-        "CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER" => "NO",
         "CLANG_ANALYZER_SECURITY_INSECUREAPI_GETPW_GETS" => "YES",
         "CLANG_ANALYZER_SECURITY_INSECUREAPI_MKSTEMP" => "YES",
-        "CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND" => "NO",
         "CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY" => "YES",
         "CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN" => "YES",
         "CLANG_ANALYZER_SECURITY_INSECUREAPI_VFORK" => "YES",
@@ -110,53 +118,53 @@ Pod::Spec.new do |s|
         "CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS" => "YES",
         "CLANG_WARN_DIRECT_OBJC_ISA_USAGE" => "YES_ERROR",
         "CLANG_WARN_EMPTY_BODY" => "YES",
-        "CLANG_WARN_EMPTY_BODY" => "YES",
-        "CLANG_WARN_ENUM_CONVERSION" => "YES",
-        "CLANG_WARN_IMPLICIT_SIGN_CONVERSION" => "NO",
-        "CLANG_WARN_INT_CONVERSION" => "YES",
         "CLANG_WARN_OBJCPP_ARC_ABI" => "YES",
-        "CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES" => "NO",
         "CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS" => "YES",
         "CLANG_WARN_OBJC_RECEIVER_WEAK" => "YES",
         "CLANG_WARN_OBJC_ROOT_CLASS" => "YES",
-        "CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION" => "NO",
         "CLANG_WARN__ARC_BRIDGE_CAST_NONARC" => "YES",
         "CLANG_WARN__DUPLICATE_METHOD_MATCH" => "YES",
-        "CLANG_WARN__EXIT_TIME_DESTRUCTORS" => "NO",
-        "GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS" => "YES",
-        "GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS" => "NO",
         "GCC_WARN_64_TO_32_BIT_CONVERSION" => "YES",
         "GCC_WARN_64_TO_32_BIT_CONVERSION" => "YES",
         "GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS" => "YES",
         "GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO" => "YES",
         "GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS" => "YES",
-        "GCC_WARN_ABOUT_MISSING_NEWLINE" => "NO",
         "GCC_WARN_ABOUT_MISSING_PROTOTYPES" => "YES",
         "GCC_WARN_ABOUT_POINTER_SIGNEDNESS" => "YES",
         "GCC_WARN_ABOUT_RETURN_TYPE" => "YES",
         "GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL" => "YES",
         "GCC_WARN_CHECK_SWITCH_STATEMENTS" => "YES",
-        "GCC_WARN_FOUR_CHARACTER_CONSTANTS" => "NO",
-        "GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS" => "NO",
-        "GCC_WARN_INHIBIT_ALL_WARNINGS" => "NO",
         "GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED" => "YES",
         "GCC_WARN_MISSING_PARENTHESES" => "YES",
-        "GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR" => "NO",
-        "GCC_WARN_NON_VIRTUAL_DESTRUCTOR" => "NO",
-        "GCC_WARN_PEDANTIC" => "NO",
         "GCC_WARN_SHADOW" => "YES",
-        "GCC_WARN_SIGN_COMPARE" => "NO",
-        "GCC_WARN_STRICT_SELECTOR_MATCH" => "NO",
         "GCC_WARN_TYPECHECK_CALLS_TO_PRINTF" => "YES",
         "GCC_WARN_UNDECLARED_SELECTOR" => "YES",
         "GCC_WARN_UNINITIALIZED_AUTOS" => "YES",
-        "GCC_WARN_UNKNOWN_PRAGMAS" => "NO",
-        "GCC_WARN_UNUSED_FUNCTION" => "NO",
         "GCC_WARN_UNUSED_LABEL" => "YES",
-        "GCC_WARN_UNUSED_PARAMETER" => "NO",
         "GCC_WARN_UNUSED_VALUE" => "YES",
         "GCC_WARN_UNUSED_VARIABLE" => "YES",
+        "CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND" => "NO",
+        "CLANG_WARN__EXIT_TIME_DESTRUCTORS" => "NO",
+        "CLANG_WARN_IMPLICIT_SIGN_CONVERSION" => "NO",
+        "CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION" => "NO",
+        "CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES" => "NO",
+        "CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER" => "NO",
+        "GCC_WARN_ABOUT_MISSING_NEWLINE" => "NO",
+        "GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS" => "NO",
+        "GCC_WARN_UNKNOWN_PRAGMAS" => "NO",
+        "GCC_WARN_FOUR_CHARACTER_CONSTANTS" => "NO",
+        "GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS" => "NO",
+        "GCC_WARN_INHIBIT_ALL_WARNINGS" => "NO",
+        "GCC_WARN_UNUSED_FUNCTION" => "NO",
+        "GCC_WARN_UNUSED_PARAMETER" => "NO",
+        "GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR" => "NO",
+        "GCC_WARN_NON_VIRTUAL_DESTRUCTOR" => "NO",
+        "GCC_WARN_PEDANTIC" => "NO",
+        "GCC_WARN_SIGN_COMPARE" => "NO",
+        "GCC_WARN_STRICT_SELECTOR_MATCH" => "NO",
         "GCC_TREAT_WARNINGS_AS_ERRORS" => "YES"
     }
-    s.compiler_flags = '-Werror', '-Waddress', '-Warray-bounds', '-Wc++11-compat', '-Wchar-subscripts', '-Wimplicit-function-declaration', '-Wcomment', '-Wformat', '-Wmain ', '-Wmissing-braces', '-Wnonnull', '-Wparentheses', '-Wpointer-sign', '-Wreorder', '-Wreturn-type', '-Wsequence-point', '-Wsign-compare', '-Wswitch', '-Wtrigraphs', '-Wmissing-prototypes', '-Wmissing-declarations'
+
+    s.compiler_flags = '-Werror', '-Waddress', '-Warray-bounds', '-Wc++11-compat', '-Wchar-subscripts', '-Wimplicit-function-declaration', '-Wcomment', '-Wformat', '-Wmain ', '-Wmissing-braces', '-Wnonnull', '-Wparentheses', '-Wpointer-sign', '-Wreorder', '-Wreturn-type', '-Wsequence-point', '-Wsign-compare', '-Wswitch', '-Wtrigraphs'
+
 end

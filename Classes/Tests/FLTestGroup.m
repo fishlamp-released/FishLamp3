@@ -15,7 +15,7 @@
 }
 
 + (NSString*) testGroupName {
-    return NSStringFromClass([self class]);
+    return @"com.fishlamp.testgroup.default";
 }
 
 @end

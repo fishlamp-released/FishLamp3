@@ -56,7 +56,6 @@
  *  
  *  @return return Class of a FLTestGroup subclass or nil.
  */
-+ (Class) testGroupClass;
 
 + (NSString*) testGroupName;
 
@@ -65,9 +64,8 @@
  *  
  *  @return return name. Default value is name of class.
  */
-+ (NSString*) testName;
+//+ (NSString*) testName;
 
-@property (readwrite, strong) FLTestCaseList* testCaseList;
 
 @end
 
@@ -82,13 +80,10 @@
     id<FLStringFormatter> _logger;
 }
 
-- (id) initWithLogger:(id<FLStringFormatter>) logger;
-
+@property (readwrite, strong) FLTestCaseList* testCaseList;
 @property (readonly, strong) id<FLStringFormatter> logger;
 
-/**
- *  Return a custom name for the unit test. By default this is the name of the class.
- */
+- (id) initWithLogger:(id<FLStringFormatter>) logger;
 
 - (FLTestCase*) testCaseForSelector:(SEL) selector;
 
