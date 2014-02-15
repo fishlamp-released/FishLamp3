@@ -12,6 +12,8 @@
 #define kSelfDot        @"self."
 #define kBracketSelf    @"[self "
 
+NSString* _FLKeyForProperty(NSString* prop);
+
 NSString* _FLKeyForProperty(NSString* prop) {
     if([prop hasPrefix:kSelfDot]) {
         return [prop substringFromIndex:kSelfDot.length];

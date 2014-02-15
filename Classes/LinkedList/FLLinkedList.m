@@ -13,6 +13,25 @@
 #define HARDCORE_CHECKING_ACTION 1
 #endif
 
+void FLMergeSortSplitLists(
+    id head, 
+    id tail,
+    id* frontHead, 
+    id* frontTail, 
+    id* backHead, 
+    id* backTail);
+
+id FLSortedMerge(
+    id frontHead, 
+    id backHead, 
+    id* newTail,
+    NSComparator comparator);
+
+void FLMergeSort(
+    id* firstObject, 
+    id* lastObject,
+    NSComparator comparator);
+
 @interface FLLinkedListMutableEnumerator : NSEnumerator {
 @private
     FLLinkedList* _list;
