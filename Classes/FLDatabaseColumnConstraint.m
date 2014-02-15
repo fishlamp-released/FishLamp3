@@ -12,6 +12,8 @@
 
 #define FLDatabaseColumnConstraintPrimaryKeyAsc @"PRIMARY KEY ASC NOT NULL UNIQUE"
 
+NSString* FLSqlConflictActionString(FLDatabaseOnConflictAction action);
+
 NSString* FLSqlConflictActionString(FLDatabaseOnConflictAction action) {
 	switch(action) {
 		case FLDatabaseOnConflictActionAbort: // this is default. 
