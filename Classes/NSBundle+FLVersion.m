@@ -23,6 +23,7 @@ static NSString* s_defaultUserAgent = nil;
 #include <sys/sysctl.h>
 
 // TODO: move this to an OSX lib
+NSString* FLMachineModel(void);
 NSString* FLMachineModel()
 {
     size_t len = 0;
