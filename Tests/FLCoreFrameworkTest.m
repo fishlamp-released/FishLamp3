@@ -12,8 +12,8 @@
 
 @implementation FLCoreFrameworkTest
 
-+ (Class) testGroupClass {
-    return [FLCoreTestGroup class];
++ (NSString*) testGroupName {
+    return @"com.fishlamp.tests.core";
 }
 
 @end

@@ -9,6 +9,13 @@
 
 #import "FLErrorTests.h"
 #import "FishLampCore.h"
+#import "FLTestable.h"
+#import "FLCoreFrameworkTest.h"
+
+@interface FLErrorTests : FLCoreFrameworkTest
+
+
+@end
 
 @class FLDeleteNotifier;
 

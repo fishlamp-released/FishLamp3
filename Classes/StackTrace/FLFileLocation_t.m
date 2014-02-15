@@ -10,6 +10,8 @@
 
 const FLFileLocation_t FLFileLocationZero = { nil, nil, nil, 0 };
 
+const char* FLFileNameFromPathNoCopy(const char* filePath);
+
 const char* FLFileNameFromPathNoCopy(const char* filePath) {
     if(filePath) {
         const char* lastComponent = nil;

@@ -10,6 +10,8 @@
 #import "NSError+FLException.h"
 #import "FLExceptionThrowing.h"
 
+NSException* FLDefaultWillThrowExceptionHandler(NSException *exception);
+
 NSException* FLDefaultWillThrowExceptionHandler(NSException *exception) {
     return exception;
 }

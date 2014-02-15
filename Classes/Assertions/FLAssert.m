@@ -12,6 +12,7 @@
 #import "NSError+FLStackTrace.h"
 #import "FLAssert.h"
 
+#if 0
 id _FLAssertIsClass(id object, Class aClass) {
     if(object) {
         FLCAssertNotNil(aClass, @"class for %@ is nil", NSStringFromClass(aClass));
@@ -35,4 +36,6 @@ id _FLAssertConformsToProtocol(id object, Protocol* proto) {
 id NARG() {
     return (void*) 0L;
 }
+#endif
+
 #endif

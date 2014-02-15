@@ -10,7 +10,7 @@
 #import "FishLampRequired.h"
 #import "FLVersion.h"
 
-extern FLVersion FLGetOSVersion();
+extern FLVersion FLGetOSVersion(void);
 
 #if IOS
     #define OSVersionIsAtLeast3_2() FLVersionGreaterThanEqualToVersion(FLGetOSVersion(), FLVersionMake(3,2,0,0))

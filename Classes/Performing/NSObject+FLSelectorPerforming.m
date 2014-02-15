@@ -21,11 +21,6 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Warc-performSelector-leaks"
 
-//NS_INLINE
-void FLConfirmNoReturnObject(id obj) {
-    FLConfirmIsNil(obj, @"selector must return nil (or ARC will leak the object). Selector returned: %@", [obj description]); \
-}
-
 
 #define FLAssertNotMetaClass(c) FLAssert(!class_isMetaClass(c), @"attempting to execute selector on a meta class");
 

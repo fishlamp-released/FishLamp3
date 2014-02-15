@@ -7,12 +7,3 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampCore.h"
-
-#import "FLTestable.h"
-#import "FLCoreFrameworkTest.h"
-
-@interface FLBitFlagTests : FLCoreFrameworkTest {
-}
-
-@end

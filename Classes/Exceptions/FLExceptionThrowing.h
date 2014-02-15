@@ -21,7 +21,7 @@ typedef NSException* FLWillThrowExceptionHandler(NSException *exception);
 
 extern void FLSetWillThrowExceptionHandler(FLWillThrowExceptionHandler* handler);
 
-extern FLWillThrowExceptionHandler* FLGetWillThrowExceptionHandler();
+extern FLWillThrowExceptionHandler* FLGetWillThrowExceptionHandler(void);
 
 #define FL_THROW_ERROR(ERROR, THROWER) \
             do {  \

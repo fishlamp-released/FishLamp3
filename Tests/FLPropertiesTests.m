@@ -7,7 +7,12 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FLPropertiesTests.h"
+#import "FLTestable.h"
+#import "FLCoreFrameworkTest.h"
+
+
+@interface FLPropertiesTests : FLCoreFrameworkTest
+@end
 
 @implementation FLPropertiesTests
 
@@ -27,9 +32,5 @@
 ////    [array addObject:autorelease([FLCriticalWeakRefTest new])];
 //}
 
-
-+ (NSString*) testGroupName {
-    return @"Framework";
-}
 
 @end
