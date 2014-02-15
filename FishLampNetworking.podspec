@@ -12,8 +12,6 @@ Pod::Spec.new do |s|
     s.requires_arc = false
 
 	s.dependency 'FishLampCore'
-	s.dependency 'FishLampStrings'
-	s.dependency 'FishLampSimpleLogger'
 
 	s.source_files  = 'Classes/*.h'
 
@@ -50,7 +48,7 @@ Pod::Spec.new do |s|
 	end
 
 	s.subspec 'ProtocolSupport' do |ss|
-		ss.dependency 'FishLampStrings'
+		s
 		ss.dependency 'FishLampEventBroadcaster'
 		ss.dependency 'FishLampAsync'
 		ss.dependency 'FishLampTimer'
