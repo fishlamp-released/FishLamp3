@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
    
-    s.name         = "FishLampAsync"
+    s.name         = "FishLampAsyncTests"
     s.version      = "0.0.1"
     s.summary      = "This is the core functionality of the FishLamp Framework."
     s.homepage     = "http://fishlamp.com"
@@ -18,28 +18,9 @@ Pod::Spec.new do |s|
 	s.dependency 'FishLampSimpleLogger'
 	s.dependency 'FishLampEventBroadcaster'
 	s.dependency 'FishLampTimer'
+	s.dependency 'FishLampAsync'
 
-	s.source_files = 'Classes/*.{h,m}'
-
-	s.subspec 'GCD' do |ss|
-		ss.source_files = 'Classes/GCD/*.{h,m}'
-	end
-
-	s.subspec 'OperationQueue' do |ss|
-		ss.source_files = 'Classes/OperationQueue/*.{h,m}'
-	end
-
-	s.subspec 'Operations' do |ss|
-		ss.source_files = 'Classes/Operations/*.{h,m}'
-	end
-
-	s.subspec 'Results' do |ss|
-		ss.source_files = 'Classes/Results/*.{h,m}'
-	end
-
-	s.subspec 'Utils' do |ss|
-		ss.source_files = 'Classes/Utils/*.{h,m}'
-	end
+	s.source_files = 'Tests/**/*.{h,m}'
 
     s.xcconfig = {
         "CLANG_ANALYZER_DEADCODE_DEADSTORES" => "YES",
