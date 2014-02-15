@@ -116,6 +116,7 @@ extern CGRect CGRectMove(CGRect rect, CGFloat xDelta, CGFloat yDelta);
 // construction
 extern CGRect CGRectMakeWithSize(CGSize size);
 extern CGRect CGRectMakeWithWidthAndHeight(CGFloat width, CGFloat height);
+extern CGRect CGRectMakeIntegral(CGRect r);
 
 // misc
 extern BOOL CGRectEnclosesRect(CGRect container, CGRect containee);
