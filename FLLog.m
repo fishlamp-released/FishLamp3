@@ -15,6 +15,8 @@
 
 #import "FLConsoleLogSink.h"
 
+NSException* FLWillThrowExceptionHandlerForLogger(NSException *exception);
+
 NSException* FLWillThrowExceptionHandlerForLogger(NSException *exception) {
     [[FLLogLogger instance] logObject:exception];
     return exception;
