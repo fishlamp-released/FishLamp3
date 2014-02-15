@@ -38,6 +38,9 @@
 //} FLPropertyAttribute;
 
 
+const char* FLParsePropertyType(FLPropertyAttributes_t* attributes, const char* str, const char* end);
+const char* FLParseTrailingAttributes(FLPropertyAttributes_t* attributes, const char* str, const char* end);
+
 const char* FLParsePropertyType(FLPropertyAttributes_t* attributes, const char* str, const char* end) {
 
     if(*str != 'T') {
