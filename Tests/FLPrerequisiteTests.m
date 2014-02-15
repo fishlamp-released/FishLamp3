@@ -8,6 +8,8 @@
 
 #import "FLPrerequisiteTests.h"
 
+#if 0
+
 #import "FLPrerequisite.h"
 
 
@@ -49,3 +51,5 @@
 }
 
 @end
+
+#endif

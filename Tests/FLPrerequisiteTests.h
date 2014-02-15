@@ -8,6 +8,8 @@
 
 #import "FLTestable.h"
 
+#if 0
 @interface FLPrerequisiteTests : FLTestable
 
 @end
+#endif

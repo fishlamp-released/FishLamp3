@@ -12,6 +12,8 @@
 #import "FLDispatchQueue.h"
 #import "FLAsyncTestGroup.h"
 
+#import "FishLampAsync.h"
+
 @implementation FLOperation (Tests)
 
 //- (void) assertNotRun {

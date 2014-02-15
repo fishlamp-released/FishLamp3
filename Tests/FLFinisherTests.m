@@ -8,7 +8,7 @@
 //
 
 #import "FLFinisherTests.h"
-#import "FLTimeoutTests.h"
+
 #import "FishLampAsync.h"
 #import "FLAsyncTestGroup.h"
 #import "FLAsyncTest.h"
@@ -24,7 +24,7 @@
 }
 
 + (void) specifyRunOrder:(id<FLTestableRunOrder>) runOrder {
-    [runOrder orderClass:[self class] afterClass:[FLTimeoutTests class]];
+//    [runOrder orderClass:[self class] afterClass:[FLTimeoutTests class]];
 }
 
 - (void) testSingleCount {
@@ -81,7 +81,7 @@
 
     FLTestLog(testCase, @"async self test");
 
-    [testCase startAsyncTest];
+    FLAsyncTest* asyncTest = [testCase startAsyncTest];
 
     __block FLPromisedResult resultFromBlock = nil;
 
@@ -93,12 +93,14 @@
     __block BOOL finishedOk = NO;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, nil), ^{
-        [testCase finishAsyncTestWithBlock:^{
+        [asyncTest setFinishedWithBlock:^{
             finishedOk = YES;
             FLTestLog(testCase, @"done in thread");
             [finisher setFinishedWithResult:@"Hello"];
         }];
     });
+
+    [asyncTest waitUntilFinished];
 
     FLPromisedResult result = [finisher waitUntilFinished];
     FLConfirmTrue(finisher.isFinished);
@@ -108,8 +110,6 @@
     FLConfirmNotNil(resultFromBlock);
     FLConfirm([result isEqualToString:@"Hello"]);
     FLConfirm([resultFromBlock isEqualToString:result]);
-
-    [testCase waitUntilAsyncTestIsFinished];
 }
 
 - (void) testPromiseAdding {

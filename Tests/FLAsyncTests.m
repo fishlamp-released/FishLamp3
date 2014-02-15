@@ -11,7 +11,7 @@
 #import "FLPerformSelectorOperation.h"
 
 #import "FLTestable.h"
-#import "FLTimeoutTests.h"
+//#import "FLTimeoutTests.h"
 
 #import "FLAsyncTestGroup.h"
 #import "FLDispatchQueue.h"
@@ -22,9 +22,9 @@
     return [FLAsyncTestGroup class];
 }
 
-+ (void) specifyRunOrder:(id<FLTestableRunOrder>) runOrder {
-    [runOrder orderClass:[self class] afterClass:[FLTimeoutTests class]];
-}
+//+ (void) specifyRunOrder:(id<FLTestableRunOrder>) runOrder {
+//    [runOrder orderClass:[self class] afterClass:[FLTimeoutTests class]];
+//}
 
 //- (void) _didExecuteOperation:(FLPerformSelectorOperation*) operation {
 //	FLTestLog(self, @"did execute");
@@ -63,15 +63,15 @@
 
 - (void) testAsyncTest:(FLTestCase*) testCase {
 
-    [testCase startAsyncTest];
+    FLAsyncTest* asyncTest = [testCase startAsyncTest];
 
     dispatch_semaphore_t semaphor = dispatch_semaphore_create(0);
 
     __block BOOL finishedOk = NO;
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, nil), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, nil), ^{
 
-        [testCase finishAsyncTestWithBlock:^{
+        [asyncTest setFinishedWithBlock:^{
 
             @try {
                 FLConfirmFalse(finishedOk);
@@ -96,8 +96,8 @@
 
 - (void) testAsyncTest2:(FLTestCase*) testCase {
 
-    [testCase startAsyncTest];
-    [testCase finishAsyncTest];
+//    [testCase startAsyncTest];
+//    [testCase finishAsyncTest];
 
 //    FLPromise* promise =
 //    [FLBackgroundQueue queueBlock:^{
