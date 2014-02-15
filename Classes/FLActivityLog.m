@@ -18,6 +18,7 @@ NSString* const FLActivityLogStringKey = @"FLActivityLogStringKey";
 
 @synthesize activityLogTextFont = _textFont;
 @synthesize activityLogTextColor = _textColor;
+@synthesize events = _events;
 
 - (id) init {	
 	self = [super init];
