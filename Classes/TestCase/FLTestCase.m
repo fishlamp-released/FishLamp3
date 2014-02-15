@@ -13,6 +13,7 @@
 #import "FLTestable.h"
 #import "FLSelectorPerforming.h"
 #import "FLStringFormatter.h"
+#import "FLAsyncTest.h"
 
 @interface FLTestCase ()
 @property (readwrite, strong) NSString* testCaseName;
@@ -21,6 +22,7 @@
 @property (readwrite, strong) NSString* disabledReason;
 @property (readwrite, strong) FLTestResult* result;
 @property (readonly, strong) FLIndentIntegrity* indentIntegrity;
+@property (readwrite, strong) FLAsyncTest* asyncTest;
 @end
 
 @implementation FLTestCase
@@ -33,6 +35,7 @@
 @synthesize testable = _unitTest;
 @synthesize result = _result;
 @synthesize indentIntegrity = _indentIntegrity;
+@synthesize asyncTest = _asyncTest;
 
 - (id) init {	
 	self = [super init];
@@ -66,6 +69,7 @@
     [_testCaseName release];
 	[_selector release];
     [_result release];
+    [_asyncTest release];
     [super dealloc];
 }
 #endif
@@ -120,6 +124,7 @@
     return [NSString stringWithFormat:@"%@ %@", [super description], self.testCaseName];
 }
 
+
 - (void) performTestCase {
 
     @try {
@@ -134,7 +139,20 @@
 
         [self performTestCaseSelector:_selector optional:self];
 
-        [self.result setPassed];
+        if(self.asyncTest) {
+            [self.asyncTest waitUntilFinished];
+
+            if(self.asyncTest.error) {
+                [self.result setFailedWithError:self.asyncTest.error];
+            }
+            else {
+                [self.result setPassed];
+            }
+        }
+        else {
+            [self.result setPassed];
+        }
+
     }
     @catch(NSException* ex) {
         [self.result setFailedWithError:[ex error]];
@@ -144,6 +162,15 @@
     }
 }
 
+- (FLAsyncTest*) startAsyncTestWithTimeout:(NSTimeInterval) timeout timedOutBlock:(FLAsyncTestTimedOutBlock) timeoutBlock {
+    self.asyncTest = [FLAsyncTest asyncTestWithTimeout:timeout timedOutBlock:timeoutBlock];
+    [self.asyncTest start];
+    return self.asyncTest;
+}
+
+- (FLAsyncTest*) startAsyncTest {
+    return [self startAsyncTestWithTimeout:0 timedOutBlock:nil];
+}
 
 @end
 

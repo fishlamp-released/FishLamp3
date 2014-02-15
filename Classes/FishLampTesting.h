@@ -13,6 +13,9 @@
 #import "FLTestCase.h"
 #import "FLTestCaseList.h"
 
+// async
+#import "FLAsyncTest.h"
+
 // results
 #import "FLTestResult.h"
 #import "FLTestCaseResult.h"

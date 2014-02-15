@@ -9,6 +9,7 @@
 
 #import "FishLampCore.h"
 #import "FLSelector.h"
+#import "FLAsyncTest.h"
 
 @protocol FLTestable;
 
@@ -31,6 +32,8 @@
     __unsafe_unretained id _target;
     __unsafe_unretained id<FLTestable> _unitTest;
     BOOL _disabled;
+
+    FLAsyncTest* _asyncTest;
 }
 
 - (id) initWithName:(NSString*) name
@@ -55,12 +58,9 @@
 @property (readonly, strong, nonatomic) NSString* disabledReason;
 - (void) setDisabledWithReason:(NSString*) reason;
 
-// optional overrides
-- (void) prepareTestCase;
-- (void) finishTestCase;
-
-// actually run the test, this calls prepareTestCase then finishTestCase
-- (void) performTestCase;
+- (FLAsyncTest*) startAsyncTest;
+- (FLAsyncTest*) startAsyncTestWithTimeout:(NSTimeInterval) timeout
+                             timedOutBlock:(FLAsyncTestTimedOutBlock) timeoutBlock;
 
 @end
 

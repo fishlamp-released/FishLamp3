@@ -13,9 +13,6 @@
 #import "FLTestCase.h"
 #import "FLTestCaseList.h"
 
-#import "FLAsyncTestCase.h"
-#import "FLAsyncTestable.h"
-
 @interface FLTestable (Internal)
 @property (readwrite, strong) FLTestCaseList* testCaseList;
 @end
@@ -31,7 +28,7 @@
 }
 
 - (BOOL) isFirstTest:(NSString*) name {
-    return FLStringsAreEqual(name, @"setup") || [name rangeOfString:@"firstTest" options:NSCaseInsensitiveSearch].length > 0;
+    return FLStringsAreEqual(name, @"setUp") || [name rangeOfString:@"firstTest" options:NSCaseInsensitiveSearch].length > 0;
 
 }
 
@@ -72,6 +69,11 @@
                        selector:selector];
 }
 
+- (BOOL) shouldStopOnClass:(Class) aClass {
+
+    return aClass == [FLTestable class];
+}
+
 - (FLTestCaseList*) createTestCases {
 
     NSMutableSet* set = [NSMutableSet set];
@@ -79,7 +81,7 @@
     FLRuntimeVisitEachSelectorInClassAndSuperclass([self class],
         ^(FLRuntimeInfo info, BOOL* stop) {
             if(!info.isMetaClass) {
-                if(info.class == [FLTestable class] || info.class == [FLAsyncTestable class]) {
+                if([self shouldStopOnClass:info.class]) {
                     *stop = YES;
                 }
                 else {
@@ -115,21 +117,6 @@
     return [FLTestCaseList testCaseListWithArrayOfTestCases:testCaseList];
 }
 
-
-@end
-
-@implementation FLAsyncTestable (FLTestCases)
-
-- (FLTestCase*) createTestCase:(NSString*) name
-           testable:(id<FLTestable>) testable
-             target:(id) target
-           selector:(SEL) selector {
-
-    return [FLAsyncTestCase testCase:name
-                       testable:self
-                         target:self
-                       selector:selector];
-}
 
 @end
 

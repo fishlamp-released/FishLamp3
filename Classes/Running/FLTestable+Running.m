@@ -10,6 +10,8 @@
 
 #import "FLTestLoggingManager.h"
 
+#import "FLTestCase_Internal.h"
+
 #define kPadWidth [@"starting" length]
 
 @implementation NSObject (FLTestable)

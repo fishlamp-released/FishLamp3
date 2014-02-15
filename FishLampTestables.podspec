@@ -14,9 +14,7 @@ Pod::Spec.new do |s|
     
 # these are the core pods
     s.dependency 'FishLampCore'
-    
-    
-    
+
     s.source_files = 'Classes/*.{h,m}'
 
     s.subspec 'Async' do |ss|
@@ -72,26 +70,6 @@ Pod::Spec.new do |s|
     s.subspec 'Utils' do |ss|
         ss.source_files = 'Classes/Utils/*.{h,m}'
 	end
-
-    
-
-    
-
-    
-
-
-    
-
-
-    
-
-    
-
-
-
-    
-
-
 
     s.xcconfig = {
         "CLANG_ANALYZER_DEADCODE_DEADSTORES" => "YES",
