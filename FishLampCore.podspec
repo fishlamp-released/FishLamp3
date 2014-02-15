@@ -27,51 +27,56 @@ Pod::Spec.new do |s|
 
 		classes.subspec 'Atomic' do |ss|
 			ss.dependency 'FishLampCore/Classes/ObjcCompiling'
-			ss.source_files = 'Classes/Atomic/**/*.{h,m}'
+			ss.source_files = 'Classes/Atomic/*.{h,m}'
 		end
 
 		classes.subspec 'ObjcPropertyDeclaring' do |ss|
 			ss.dependency 'FishLampCore/Classes/ObjcCompiling'
 			ss.dependency 'FishLampCore/Classes/Atomic'
-			ss.source_files = 'Classes/ObjcPropertyDeclaring/**/*.{h,m}'
+			ss.source_files = 'Classes/ObjcPropertyDeclaring/*.{h,m}'
 		end
 
 		classes.subspec 'Errors' do |ss|
 			ss.dependency 'FishLampCore/Classes/ObjcCompiling'
 			ss.dependency 'FishLampCore/Classes/StackTrace'
-			ss.source_files = 'Classes/Errors/**/*.{h,m}'
+			ss.source_files = 'Classes/Errors/*.{h,m}'
 		end
 
 		classes.subspec 'Exceptions' do |ss|
 			ss.dependency 'FishLampCore/Classes/ObjcCompiling'
 			ss.dependency 'FishLampCore/Classes/Errors'
-			ss.source_files = 'Classes/Exceptions/**/*.{h,m}'
+			ss.source_files = 'Classes/Exceptions/*.{h,m}'
 		end
 
 		classes.subspec 'Assertions' do |ss|
 			ss.dependency 'FishLampCore/Classes/ObjcCompiling'
-			ss.source_files = 'Classes/Assertions/**/*.{h,m}'
+			ss.source_files = 'Classes/Assertions/*.{h,m}'
 		end
 
 		classes.subspec 'Performing' do |ss|
 			ss.dependency 'FishLampCore/Classes/ObjcCompiling'
-			ss.source_files = 'Classes/Performing/**/*.{h,m}'
+			ss.source_files = 'Classes/Performing/*.{h,m}'
 		end
 
 		classes.subspec 'StackTrace' do |ss|
 			ss.dependency 'FishLampCore/Classes/ObjcCompiling'
-			ss.source_files = 'Classes/StackTrace/**/*.{h,m}'
+			ss.source_files = 'Classes/StackTrace/*.{h,m}'
 		end
 
 		classes.subspec 'Utils' do |ss|
 			ss.dependency 'FishLampCore/Classes/ObjcCompiling'
-			ss.source_files = 'Classes/Utils/**/*.{h,m}'
+			ss.source_files = 'Classes/Utils/*.{h,m}'
 		end
 
 		classes.subspec 'Versioning' do |ss|
 			ss.dependency 'FishLampCore/Classes/ObjcCompiling'
-			ss.source_files = 'Classes/Versioning/**/*.{h,m}'
+			ss.source_files = 'Classes/Versioning/*.{h,m}'
 		end
+
+		classes.subspec 'Strings' do |ss|
+			ss.source_files = 'Classes/Strings/*.{h,m}'
+		end
+
 	end
 	
 	s.subspec 'Tests' do |ss|
