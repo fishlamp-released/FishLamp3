@@ -204,6 +204,12 @@ extern void FLDebugCompareHeaders(NSString* lhs, NSString* rhs);
 @end
 
 #if DEBUG
+NSDictionary* FLGetHeaders(NSString* header);
+BOOL FLCompareDicts(NSDictionary* lhsDict, NSDictionary* rhsDict);
+NSString* removeOAuth(NSString* str);
+void FLDebugCompareHeaders(NSString* lhs, NSString* rhs);
+void FLDebugCompareStrings(NSString* lhs, NSString* rhs);
+void TestEncoding(void);
 
 NSDictionary* FLGetHeaders(NSString* header)
 {	
