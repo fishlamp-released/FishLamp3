@@ -14,21 +14,9 @@ Pod::Spec.new do |s|
     
 # these are the core pods
 	s.dependency 'FishLampCore'
-	s.dependency 'FishLampStrings'
-	s.dependency 'FishLampSimpleLogger'
-	
 	s.dependency 'FishLampFiles'
 
 	s.source_files = 'Classes/**/*.{h,m}'
-
-
-    
-
-
-
-    
-
-
 
     s.xcconfig = {
         "CLANG_ANALYZER_DEADCODE_DEADSTORES" => "YES",
