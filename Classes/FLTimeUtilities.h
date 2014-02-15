@@ -11,5 +11,5 @@
 
 extern NSTimeInterval FLTimeBlock (dispatch_block_t block);
 
-extern uint64_t FLTimeGetHighResolutionTimeStamp();
+extern uint64_t FLTimeGetHighResolutionTimeStamp(void);
 extern NSTimeInterval FLTimeGetInterval(uint64_t start, uint64_t end);
