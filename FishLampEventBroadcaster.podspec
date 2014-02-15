@@ -19,15 +19,6 @@ Pod::Spec.new do |s|
 		ss.source_files = 'Classes/Proxies/*.{h,m}'
 	end
 
-
-    
-
-
-
-    
-
-
-
     s.xcconfig = {
         "CLANG_ANALYZER_DEADCODE_DEADSTORES" => "YES",
         "CLANG_ANALYZER_GCD" => "YES",
