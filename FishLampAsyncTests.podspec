@@ -14,8 +14,6 @@ Pod::Spec.new do |s|
     s.requires_arc = false
 
 	s.dependency 'FishLampCore'
-	s.dependency 'FishLampStrings'
-	s.dependency 'FishLampSimpleLogger'
 	s.dependency 'FishLampEventBroadcaster'
 	s.dependency 'FishLampTimer'
 	s.dependency 'FishLampAsync'
