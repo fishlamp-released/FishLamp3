@@ -19,28 +19,25 @@
 #define FLLogError(__FORMAT__, ...) \
             FLLogToLogger([FLLogLogger instance], FLLogTypeError, __FORMAT__, ##__VA_ARGS__)
 
+#define FLLog(__FORMAT__, ...)   \
+			FLLogToLogger([FLLogLogger instance], FLLogTypeLog, __FORMAT__, ##__VA_ARGS__)
 
-#if 1
+#define FLLogIf(__CONDITION__, __FORMAT__, ...) \
+			if(__CONDITION__) FLLogDebug(__FORMAT__, ##__VA_ARGS__)
 
-    #ifdef FLLog
-    #undef FLLog
-    #endif
+#define FLLogIndent(__BLOCK__) [[FLLogLogger instance] indentLinesInBlock:__BLOCK__]
 
-    #define FLLog(__FORMAT__, ...)   \
-                FLLogToLogger([FLLogLogger instance], FLLogTypeLog, __FORMAT__, ##__VA_ARGS__)
+#define FLLogFileLocation() \
+			FLLog(@"%s, file: %s:%d", __PRETTY_FUNCTION__, __FILE__, __LINE__)
 
-    #define FLLogIf(__CONDITION__, __FORMAT__, ...) \
-                if(__CONDITION__) FLLogDebug(__FORMAT__, ##__VA_ARGS__)
+#if DEBUG
+#define FLDebugLog FLLog
 
-    #define FLLogIndent(__BLOCK__) [[FLLogLogger instance] indentLinesInBlock:__BLOCK__]
-
-    #define FLLogFileLocation() \
-                FLLog(@"%s, file: %s:%d", __PRETTY_FUNCTION__, __FILE__, __LINE__)
+#define FLDebugLog(__FORMAT__, ...)   \
+			FLLogToLogger([FLLogLogger instance], FLLogTypeDebug, __FORMAT__, ##__VA_ARGS__)
 
 #else
-    #define FLLog(__FORMAT__, ...)
-    #define FLLogIf(__CONDITION__, __FORMAT__, ...)
-    #define FLLogFileLocation()
+#define FLDebugLog(...)
 #endif
 
 #ifdef FLTrace

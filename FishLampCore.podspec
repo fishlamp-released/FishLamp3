@@ -77,29 +77,15 @@ Pod::Spec.new do |s|
 			ss.source_files = 'Classes/Strings/*.{h,m}'
 		end
 
+		classes.subspec 'SimpleLogger' do |ss|
+			ss.source_files = 'Classes/SimpleLogger/*.{h,m}'
+		end
 	end
 	
 	s.subspec 'Tests' do |ss|
 # 		ss.dependency 'FishLampCore/Classes'
-	
 		ss.source_files = 'Tests/**/*.{h,m}'
 	end
-
-    
-
-
-
-    
-
-
-
-    
-
-
-
-    
-
-
 
     s.xcconfig = {
         "CLANG_ANALYZER_DEADCODE_DEADSTORES" => "YES",
