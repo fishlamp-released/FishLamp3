@@ -141,6 +141,8 @@
                     didAuthenticateEntity:(id<FLAuthenticatedEntity>) entity {
     self.authenticatedEntity = entity;
 
+    [self saveCredentials];
+
     [self sendEvent:@selector(httpOperationContext:didAuthenticateUser:) withObject:self withObject:entity];
 }
 
@@ -150,7 +152,6 @@
 
 - (void) saveCredentials {
     if(self.credentialsStorage) {
-        [self.credentialsStorage writeCredentials:self.authenticationCredentials];
         [self.credentialsStorage setCredentialsForLastUser:self.authenticationCredentials];
     }
 }
