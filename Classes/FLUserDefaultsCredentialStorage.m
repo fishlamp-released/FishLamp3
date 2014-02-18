@@ -36,11 +36,11 @@ FLSynthesizeSingleton(FLUserDefaultsCredentialStorage);
     if(lastUserName && ![lastUserName isEqualToString:newLastUser.userName]) {
         [self removePasswordForUser:lastUserName];
     }
-    else {
-        [self writeCredentials:newLastUser];
-        [[NSUserDefaults standardUserDefaults] setObject:newLastUser.userName forKey:FLDefaultsKeyWizardLastUserNameKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+
+    [self writeCredentials:newLastUser];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:newLastUser.userName forKey:FLDefaultsKeyWizardLastUserNameKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL) rememberPasswordSetting {
