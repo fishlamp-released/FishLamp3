@@ -12,7 +12,6 @@ typedef struct {
     UInt64 processedCount;
     UInt64 totalCount;
     UInt64 currentCount;
-
 } FLOperationQueueState;
 
 

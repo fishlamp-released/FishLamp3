@@ -31,6 +31,8 @@ typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
 @property (readonly, assign, nonatomic) id<FLOperationQueueDelegate> delegate;
 
 @property (readwrite, strong) id result;
+@property (readwrite, assign) BOOL isFinished;
+
 
 - (void) processQueue;
 
@@ -47,6 +49,7 @@ typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
 @synthesize processedCount = _processedCount;
 @synthesize queuedCount = _queuedCount;
 @synthesize queueState = _queueState;
+@synthesize isFinished = _isFinished;
 
 - (id) initWithDelegate:(id<FLOperationQueueDelegate>) delegate {
 	self = [super init];
@@ -97,6 +100,7 @@ typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
 
         self.queuedCount ++;
         self.totalCount += array.count;
+        self.isFinished = NO;
 
         [self queueBlock:^(FLOperationQueue* operationQueue) {
 
@@ -114,6 +118,7 @@ typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
     if(object) {
         self.queuedCount++;
         self.totalCount++;
+        self.isFinished = NO;
 
         [self queueBlock:^(FLOperationQueue* operationQueue) {
 
@@ -242,7 +247,7 @@ typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
     return  _objectQueue.count > 0 && [self askDelegateToStart];
 }
 
-- (BOOL) isFinished {
+- (BOOL) checkedFinishedState {
 // the queue is ONLY finished when it is empty. We may be waiting for cancelled operations.
     return  _activeQueue.count == 0 && _objectQueue.count == 0 && self.queuedCount == 0;
 }
@@ -283,7 +288,7 @@ typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
 
     [self updateState];
 
-    if(self.isFinished) {
+    if(self.checkedFinishedState) {
 
         id result = FLRetainWithAutorelease(_result);
         self.result = nil;
@@ -291,6 +296,8 @@ typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
         if(!result) {
             result = FLSuccessfulResult;
         }
+
+        self.isFinished = YES;
 
         if([_delegate respondsToSelector:@selector(operationQueue:didFinishProcessingWithResult:)]) {
             [_delegate operationQueue:self didFinishProcessingWithResult:result];

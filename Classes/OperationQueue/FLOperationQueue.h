@@ -26,9 +26,12 @@
     UInt64 _totalCount;
     UInt64 _queuedCount;
     FLOperationQueueState _queueState;
+    BOOL _isFinished;
 
     id _result;
 }
+
+@property (readonly, assign) BOOL isFinished;
 
 @property (readonly, assign) FLOperationQueueState queueState;
 
