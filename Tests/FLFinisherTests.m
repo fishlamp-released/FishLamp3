@@ -81,8 +81,6 @@
 
     FLTestLog(testCase, @"async self test");
 
-    FLAsyncTest* asyncTest = [testCase startAsyncTest];
-
     __block FLPromisedResult resultFromBlock = nil;
 
     FLFinisher* finisher = [FLFinisher finisherWithBlock:^(FLPromisedResult result) {
@@ -92,24 +90,27 @@
 
     __block BOOL finishedOk = NO;
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, nil), ^{
-        [asyncTest setFinishedWithBlock:^{
-            finishedOk = YES;
-            FLTestLog(testCase, @"done in thread");
-            [finisher setFinishedWithResult:@"Hello"];
-        }];
-    });
+    testCase.asyncStartTest = ^(FLAsyncTestFinisher* testFinisher) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, nil), ^{
+            [testFinisher setFinishedWithBlock:^{
+                finishedOk = YES;
+                FLTestLog(testCase, @"done in thread");
+                [finisher setFinishedWithResult:@"Hello"];
+            }];
+        });
+    };
 
-    [asyncTest waitUntilFinished];
+    testCase.asyncFinishTest = ^{
+        FLPromisedResult result = [finisher waitUntilFinished];
+        FLConfirmTrue(finisher.isFinished);
+        FLConfirmNotError(result);
+        FLConfirmTrue(finishedOk);
+        FLConfirmNotNil(result);
+        FLConfirmNotNil(resultFromBlock);
+        FLConfirm([result isEqualToString:@"Hello"]);
+        FLConfirm([resultFromBlock isEqualToString:result]);
+    };
 
-    FLPromisedResult result = [finisher waitUntilFinished];
-    FLConfirmTrue(finisher.isFinished);
-    FLConfirmNotError(result);
-    FLConfirmTrue(finishedOk);
-    FLConfirmNotNil(result);
-    FLConfirmNotNil(resultFromBlock);
-    FLConfirm([result isEqualToString:@"Hello"]);
-    FLConfirm([resultFromBlock isEqualToString:result]);
 }
 
 - (void) testPromiseAdding {

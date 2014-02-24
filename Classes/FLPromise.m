@@ -15,7 +15,6 @@
 @property (readwrite, strong) FLPromisedResult result;
 @property (readwrite, copy) fl_completion_block_t completion;
 @property (readwrite, assign) BOOL isFinished;
-//@property (readwrite, assign) dispatch_semaphore_t semaphore;
 @end
 
 #define CHECK_COUNT 0
@@ -138,10 +137,7 @@ static NSInteger s_max = 0;
 
             FLTrace(@"waiting for semaphore for %X, thread %@", (unsigned int) _semaphore, [NSThread currentThread]);
 
-            if(_semaphore) {
-                // HMM could there be an edge case here?
-                dispatch_semaphore_wait(_semaphore, DISPATCH_TIME_FOREVER);
-            }
+            dispatch_semaphore_wait(_semaphore, DISPATCH_TIME_FOREVER);
 
             FLTrace(@"finished waiting for %X", (unsigned int) _semaphore);
         } 
@@ -175,20 +171,12 @@ static NSInteger s_max = 0;
     _target = nil;
     _action = nil;
 
-    if(_semaphore) {
-    // this shouldn't be nil, but if it is dispatch_semaphore_signal
-    // will crash.
-        FLTrace(@"releasing semaphore for %X, ont thread %@",
-                    (unsigned int) _semaphore,
-                    [NSThread currentThread]);
+    FLTrace(@"releasing semaphore for %X, ont thread %@",
+                (unsigned int) _semaphore,
+                [NSThread currentThread]);
 
-        self.isFinished = YES;
-        dispatch_semaphore_signal(_semaphore);
-
-        FLDispatchRelease(_semaphore);
-
-        _semaphore = nil;
-    }
+    self.isFinished = YES;
+    dispatch_semaphore_signal(_semaphore);
 }
 
 - (void) addPromise:(FLPromise*) promise {

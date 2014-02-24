@@ -33,5 +33,5 @@
             while(0)
 
 #else
-#define FLAssertIsPromisedType(RESULT, TYPE)
+#define FLAssertPromisedResultIsType(...)
 #endif

@@ -63,41 +63,47 @@
 
 - (void) testAsyncTest:(FLTestCase*) testCase {
 
-    FLAsyncTest* asyncTest = [testCase startAsyncTest];
-
-    dispatch_semaphore_t semaphor = dispatch_semaphore_create(0);
+    __block dispatch_semaphore_t semaphor = dispatch_semaphore_create(0);
 
     __block BOOL finishedOk = NO;
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, nil), ^{
+    testCase.asyncStartTest = ^(FLAsyncTestFinisher* finisher){
 
-        [asyncTest setFinishedWithBlock:^{
 
-            @try {
-                FLConfirmFalse(finishedOk);
-                finishedOk = YES;
-            }
-            @finally {
-                dispatch_semaphore_signal(semaphor);
-            }
-        }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, nil), ^{
 
-    });
+            [finisher setFinishedWithBlock:^{
 
-    dispatch_semaphore_wait(semaphor, DISPATCH_TIME_FOREVER);
+                @try {
+                    FLConfirmFalse(finishedOk);
+                    finishedOk = YES;
+                }
+                @finally {
+                    dispatch_semaphore_signal(semaphor);
+                }
+            }];
 
-    FLConfirm(finishedOk);
-    FLConfirm(testCase.result.passed);
-    FLConfirm(testCase.result.started);
-    FLConfirm(testCase.result.finished);
+        });
 
-    FLDispatchRelease(semaphor);
+        dispatch_semaphore_wait(semaphor, DISPATCH_TIME_FOREVER);
+
+    };
+
+
+    testCase.asyncFinishTest = ^(FLAsyncTest* asyncTest) {
+        FLConfirm(finishedOk);
+        FLConfirm(testCase.result.passed);
+        FLConfirm(testCase.result.started);
+        FLConfirm(testCase.result.finished);
+
+        FLDispatchRelease(semaphor);
+    };
 }
 
 - (void) testAsyncTest2:(FLTestCase*) testCase {
 
-//    [testCase startAsyncTest];
-//    [testCase finishAsyncTest];
+//    [testCase asyncStartTest];
+//    [testCase asyncFinishTest];
 
 //    FLPromise* promise =
 //    [FLBackgroundQueue queueBlock:^{
