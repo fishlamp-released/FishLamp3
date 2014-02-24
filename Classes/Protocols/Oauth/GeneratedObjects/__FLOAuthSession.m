@@ -56,12 +56,12 @@
 - (void) copySelfTo:(id) object
 {
 //    [super copySelfTo:object];
-    ((FLOAuthSession*)object).userGuid = FLCopyOrRetainObject(__userGuid);
-    ((FLOAuthSession*)object).appName = FLCopyOrRetainObject(__appName);
-    ((FLOAuthSession*)object).oauth_token_secret = FLCopyOrRetainObject(__oauth_token_secret);
-    ((FLOAuthSession*)object).user_id = FLCopyOrRetainObject(__user_id);
-    ((FLOAuthSession*)object).screen_name = FLCopyOrRetainObject(__screen_name);
-    ((FLOAuthSession*)object).oauth_token = FLCopyOrRetainObject(__oauth_token);
+    ((FLOAuthSession*)object).userGuid = FLCopyOrRetainObjectWithAutorelease(__userGuid);
+    ((FLOAuthSession*)object).appName = FLCopyOrRetainObjectWithAutorelease(__appName);
+    ((FLOAuthSession*)object).oauth_token_secret = FLCopyOrRetainObjectWithAutorelease(__oauth_token_secret);
+    ((FLOAuthSession*)object).user_id = FLCopyOrRetainObjectWithAutorelease(__user_id);
+    ((FLOAuthSession*)object).screen_name = FLCopyOrRetainObjectWithAutorelease(__screen_name);
+    ((FLOAuthSession*)object).oauth_token = FLCopyOrRetainObjectWithAutorelease(__oauth_token);
 }
 
 - (id) copyWithZone:(NSZone*) zone

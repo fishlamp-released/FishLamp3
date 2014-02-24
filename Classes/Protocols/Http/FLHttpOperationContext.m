@@ -52,6 +52,7 @@
 
 #if FL_MRC
 - (void) dealloc {
+    [_authenticationQueue release];
     [_authenticationError release];
     [_credentialsStorage release];
     [_authenticationCredentials release];
@@ -161,6 +162,8 @@
 
     id<FLAuthenticationCredentials> creds = self.authenticationCredentials;
     self.authenticationCredentials = [FLAuthenticationCredentials authenticationCredentials:creds.userName password:nil];
+
+    [self saveCredentials];
 
     [self sendEvent:@selector(httpOperationContext:didLogoutUser:)
                       withObject:self
