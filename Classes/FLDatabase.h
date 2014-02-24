@@ -153,15 +153,15 @@ typedef void (^FLDatabaseTableUpgradedBlock)(     FLDatabaseTable* table, NSStri
 //#import "FLDatabase+Introspection.h"
 
 #if FL_DATABASE_DEBUG
-#define FLDbLog(__FORMAT__, ...)   \
-        FLLogWithType(FLLogTypeDatabase, __FORMAT__, ##__VA_ARGS__)
+#define FLDbLog(FORMAT, ...)   \
+        FLLogWithType(FLLogTypeDatabase, FORMAT, ##__VA_ARGS__)
 
-#define FLDbLogIf(__CONDITION__, __FORMAT__, ...)   \
-        if(__CONDITION__) FLLogWithType(FLLogTypeDatabase, __FORMAT__, ##__VA_ARGS__)
+#define FLDbLogIf(CONDITION, FORMAT, ...)   \
+        if(CONDITION) FLLogWithType(FLLogTypeDatabase, FORMAT, ##__VA_ARGS__)
 
 #else 
-#define FLDbLog(__FORMAT__, ...)
-#define FLDbLogIf(__CONDITION__, __FORMAT__, ...)
+#define FLDbLog(FORMAT, ...)
+#define FLDbLogIf(CONDITION, FORMAT, ...)
 #endif
 
 #define FLDatabaseIsInternalNameEncoded_(__NAME__) [__NAME__ hasPrefix:FL_DATABASE_PREFIX]
