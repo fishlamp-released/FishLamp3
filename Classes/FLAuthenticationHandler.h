@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-@protocol FLAuthenticationCredentials;
-@protocol FLAuthenticatedEntity;
+#import "FishLampCore.h"
+#import "FLAuthenticationCredentials.h"
+#import "FLAuthenticatedEntity.h"
 
 typedef void (^FLAuthenticationHandlerCompletionBlock)(id result);
 
