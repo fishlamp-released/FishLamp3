@@ -19,7 +19,9 @@
     FLTestLoggingManager* _logger;
 }
 
-FLSingletonProperty(FLTestOrganizer);
++ (id) testOrganizer;
+
+//FLSingletonProperty(FLTestOrganizer);
 
 @property (readonly, strong) FLTestLoggingManager* logger;
 

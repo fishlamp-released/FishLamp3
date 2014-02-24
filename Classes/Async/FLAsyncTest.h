@@ -7,6 +7,7 @@
 //
 
 #import "FishLampCore.h"
+#import "FLAsyncTestFinisher.h"
 
 #define FLAsyncTestDefaultTimeout 2.0f
 
@@ -17,44 +18,26 @@ typedef void (^FLAsyncTestBlock)();
 
 typedef void (^FLAsyncTestTimedOutBlock)(FLAsyncTest* test);
 
-@interface FLAsyncTest : NSObject{
+@interface FLAsyncTest : FLAsyncTestFinisher {
 @private
     dispatch_semaphore_t _semaphor;
     NSError* _error;
     NSTimer* _timer;
     BOOL _isFinished;
     BOOL _isStarted;
-    NSTimeInterval _timeout;
+    NSTimeInterval _timeoutInterval;
     FLAsyncTestTimedOutBlock _timedOutBlock;
 }
 
 @property (readonly, assign) BOOL isFinished;
-
 @property (readonly, copy, nonatomic) NSError* error;
-
-//@property (readwrite, assign) id<FLAsyncTestDelegate> delegate;
+@property (readwrite, assign) NSTimeInterval timeoutInterval;
 
 + (id) asyncTest;
 + (id) asyncTestWithTimeout:(NSTimeInterval) timeout timedOutBlock:(FLAsyncTestTimedOutBlock) timeoutBlock;
 - (id) initWithTimeout:(NSTimeInterval) timeout timedOutBlock:(FLAsyncTestTimedOutBlock) timeoutBlock;
 
 - (void) start;
-
-- (void) setFinishedWithBlock:(FLAsyncTestBlock) finishBlock;
-- (void) setFinished;
-- (void) setFinishedWithError:(NSError*) error;
-
-// utils
-// it's okay to thow
-- (void) verifyAsyncResults:(FLAsyncTestBlock) block;
-
-- (void) validateResultsWhenFinished:(FLAsyncTestBlock) finishedValidator;
-
 - (void) waitUntilFinished;
 
 @end
-
-//@protocol FLAsyncTestDelegate <NSObject>
-//- (void) asyncTestDidFinish:(FLAsyncTest*) asyncTest;
-//@end
-

@@ -23,7 +23,7 @@
 
 @implementation FLTestOrganizer
 
-FLSynthesizeSingleton(FLTestOrganizer)
+//FLSynthesizeSingleton(FLTestOrganizer)
 
 @synthesize sortedGroupList = _sortedGroupList;
 @synthesize logger = _logger;

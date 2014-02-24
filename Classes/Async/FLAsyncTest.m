@@ -16,7 +16,8 @@
 @property (readwrite, assign) BOOL isStarted;
 @property (readwrite, assign) NSTimer* timer;
 @property (readwrite, copy) FLAsyncTestTimedOutBlock timedOutBlock;
-@property (readwrite, copy) FLAsyncTestBlock finishValidator;
+
+
 @end
 
 @implementation FLAsyncTest
@@ -26,10 +27,7 @@
 @synthesize timer =_timer;
 @synthesize isStarted = _isStarted;
 @synthesize timedOutBlock = _timedOutBlock;
-@synthesize finishValidator = _finishValidator;
-
-//@synthesize delegate = _delegate;
-
+@synthesize timeoutInterval = _timeoutInterval;
 
 - (id) init {
     return [self initWithTimeout:0 timedOutBlock:nil];
@@ -39,7 +37,7 @@
 	self = [super init];
 	if(self) {
         _semaphor = dispatch_semaphore_create(0);
-        _timeout = timeout;
+        _timeoutInterval = timeout;
 
         if(timeoutBlock) {
             _timedOutBlock = [timeoutBlock copy];
@@ -67,7 +65,6 @@
     [_timer invalidate];
 
 #if FL_MRC
-    [_finishValidator release];
     [_timedOutBlock release];
     [_timer release];
     [_error release];
@@ -88,8 +85,9 @@
     @synchronized(self) {
         if(!self.isStarted) {
             self.isStarted = YES;
-            if(_timeout > 0) {
-                self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeout
+
+            if(_timeoutInterval > 0) {
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeoutInterval
                                                               target:self
                                                             selector:@selector(timerTimedOut:)
                                                             userInfo:nil
@@ -108,8 +106,8 @@
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate date]];
         }
     }
-    else if(_semaphor) {
-        dispatch_semaphore_wait(_semaphor, DISPATCH_TIME_FOREVER);
+    else {
+        dispatch_semaphore_wait(_semaphor,  DISPATCH_TIME_FOREVER);
     }
 }
 
@@ -136,29 +134,12 @@
 }
 
 - (void) didFinish {
+// this is called from within a synchronized block.
+
     [self stopTimer];
     self.isFinished = YES;
 
-//        [self.delegate asyncTestDidFinish:self];
-
-    if(!self.error && self.finishValidator) {
-        @try {
-            self.finishValidator();
-        }
-        @catch(NSException* ex) {
-            self.error = ex.error;
-        }
-
-    }
-
-    if(_semaphor) {
-        dispatch_semaphore_signal(_semaphor);
-    }
-
-}
-
-- (void) validateResultsWhenFinished:(FLAsyncTestBlock) finishedValidator {
-    self.finishValidator = finishedValidator;
+    dispatch_semaphore_signal(_semaphor);
 }
 
 - (void) setFinishedWithBlock:(FLAsyncTestBlock) block {

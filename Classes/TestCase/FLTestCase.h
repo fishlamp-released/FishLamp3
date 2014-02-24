@@ -9,12 +9,16 @@
 
 #import "FishLampCore.h"
 #import "FLSelector.h"
-#import "FLAsyncTest.h"
+#import "FLAsyncTestFinisher.h"
 
 @protocol FLTestable;
 
 @class FLTestResult;
 @class FLIndentIntegrity;
+@class FLAsyncTest;
+
+typedef void (^FLAsyncTestCaseBlock)(FLAsyncTestFinisher* testFinisher);
+typedef void (^FLTestCaseBlock)();
 
 @interface FLTestCase : NSObject {
 @private
@@ -33,7 +37,9 @@
     __unsafe_unretained id<FLTestable> _unitTest;
     BOOL _disabled;
 
-    FLAsyncTest* _asyncTest;
+    FLAsyncTestCaseBlock asyncStartTest;
+    FLTestCaseBlock asyncFinishTest;
+    FLAsyncTestCaseBlock asyncTimeout;
 }
 
 - (id) initWithName:(NSString*) name
@@ -58,9 +64,13 @@
 @property (readonly, strong, nonatomic) NSString* disabledReason;
 - (void) setDisabledWithReason:(NSString*) reason;
 
-- (FLAsyncTest*) startAsyncTest;
-- (FLAsyncTest*) startAsyncTestWithTimeout:(NSTimeInterval) timeout
-                             timedOutBlock:(FLAsyncTestTimedOutBlock) timeoutBlock;
+@property (readwrite, copy) FLAsyncTestCaseBlock asyncStartTest;
+@property (readwrite, copy) FLTestCaseBlock asyncFinishTest;
+@property (readwrite, copy) FLAsyncTestCaseBlock asyncTimeout;
+
+//- (void) startAsync
+//- (void) startAsyncTestWithTimeout:(NSTimeInterval) timeout
+//                             timedOutBlock:(FLAsyncTestTimedOutBlock) timeoutBlock;
 
 @end
 

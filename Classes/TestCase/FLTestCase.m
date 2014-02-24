@@ -37,6 +37,10 @@
 @synthesize indentIntegrity = _indentIntegrity;
 @synthesize asyncTest = _asyncTest;
 
+@synthesize asyncStartTest = _startAsyncTest;
+@synthesize asyncFinishTest = _finishAsyncTest;
+@synthesize asyncTimeout = _asyncTimeout;
+
 - (id) init {	
 	self = [super init];
 	if(self) {
@@ -64,6 +68,10 @@
 
 #if FL_MRC
 - (void) dealloc {
+    [_startAsyncTest release];
+    [_finishAsyncTest release];
+    [_asyncTimeout release];
+
     [_indentIntegrity release];
     [_disabledReason release];
     [_testCaseName release];
@@ -139,8 +147,18 @@
 
         [self performTestCaseSelector:_selector optional:self];
 
-        if(self.asyncTest) {
-            [self.asyncTest waitUntilFinished];
+        if(self.asyncStartTest) {
+
+            FLAsyncTest* asyncTest = [FLAsyncTest asyncTest];
+            [asyncTest start];
+
+            self.asyncStartTest(asyncTest);
+
+            [asyncTest waitUntilFinished];
+
+            if(self.asyncFinishTest) {
+                self.asyncFinishTest(asyncTest);
+            }
 
             if(self.asyncTest.error) {
                 [self.result setFailedWithError:self.asyncTest.error];
@@ -162,15 +180,15 @@
     }
 }
 
-- (FLAsyncTest*) startAsyncTestWithTimeout:(NSTimeInterval) timeout timedOutBlock:(FLAsyncTestTimedOutBlock) timeoutBlock {
-    self.asyncTest = [FLAsyncTest asyncTestWithTimeout:timeout timedOutBlock:timeoutBlock];
-    [self.asyncTest start];
-    return self.asyncTest;
-}
-
-- (FLAsyncTest*) startAsyncTest {
-    return [self startAsyncTestWithTimeout:0 timedOutBlock:nil];
-}
+//- (FLAsyncTest*) startAsyncTestWithTimeout:(NSTimeInterval) timeout timedOutBlock:(FLAsyncTestTimedOutBlock) timeoutBlock {
+//    self.asyncTest = [FLAsyncTest asyncTestWithTimeout:timeout timedOutBlock:timeoutBlock];
+//    [self.asyncTest start];
+//    return self.asyncTest;
+//}
+//
+//- (FLAsyncTest*) asyncStartTest {
+//    return [self startAsyncTestWithTimeout:0 timedOutBlock:nil];
+//}
 
 @end
 

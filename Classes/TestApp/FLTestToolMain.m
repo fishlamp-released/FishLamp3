@@ -21,14 +21,18 @@ int FLTestToolMain(int argc, const char *argv[], NSString* bundleIdentifier, NSS
 
 
             [NSBundle setFakeBundleIdentifier:bundleIdentifier bundleName:appName appVersion:FLVersionFromString(version)];
-        
+
+            FLLogSinkBehavior* behavior = [FLLogSinkBehavior logSinkBehavior];
+
             FLLogger* logger = [FLLogger logger];
-            [logger addLoggerSink:[FLConsoleLogSink consoleLogSink:FLLogOutputSimple]];
-            [[FLTestOrganizer instance].logger addLogger:logger];
+            [logger addLoggerSink:[FLConsoleLogSink consoleLogSink:behavior]];
 
 
-            FLSortedTestGroupList* tests = [[FLTestOrganizer instance] organizeTests];
-            [[FLTestOrganizer instance] runTests:tests];
+            FLTestOrganizer* organizer = [FLTestOrganizer testOrganizer];
+            [organizer.logger addLogger:logger];
+
+            FLSortedTestGroupList* tests = [organizer organizeTests];
+            [organizer runTests:tests];
 
 //            if([result isError]) {
 //                return 1;

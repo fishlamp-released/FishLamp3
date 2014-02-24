@@ -94,11 +94,11 @@
 /**
  *  Macro that all the tests should use for output.
  */
-#define FLTestLog(__TESTCASE__, __FORMAT__, ...) \
-            [__TESTCASE__.result appendLogEntry:[FLTestResultLogEntry testResultLogEntry:FLStringWithFormatOrNil(__FORMAT__, ##__VA_ARGS__) stackTrace:nil]]
+#define FLTestLog(__TESTCASE__, FORMAT, ...) \
+            [__TESTCASE__.result appendLogEntry:[FLTestResultLogEntry testResultLogEntry:FLStringWithFormatOrNil(FORMAT, ##__VA_ARGS__) stackTrace:nil]]
 
-#define FLTestLogHeavy(__TESTABLE__, __FORMAT__, ...) \
-            [__TESTABLE__.result appendLogEntry:[FLTestResultLogEntry testResultLogEntry:FLStringWithFormatOrNil(__FORMAT__, ##__VA_ARGS__) stackTrace:FLCreateStackTrace(YES)]]
+#define FLTestLogHeavy(__TESTABLE__, FORMAT, ...) \
+            [__TESTABLE__.result appendLogEntry:[FLTestResultLogEntry testResultLogEntry:FLStringWithFormatOrNil(FORMAT, ##__VA_ARGS__) stackTrace:FLCreateStackTrace(YES)]]
 
 #define FLDisableTest() \
             do { \

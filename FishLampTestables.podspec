@@ -15,60 +15,64 @@ Pod::Spec.new do |s|
 # these are the core pods
     s.dependency 'FishLampCore'
 
-    s.source_files = 'Classes/*.{h,m}'
+	s.default_subspec = 'Core'
 
-    s.subspec 'Async' do |ss|
-        ss.dependency 'FishLampAsync'
-        ss.source_files = 'Classes/Async/*.{h,m}'
-    end
+    s.subspec 'Core' do |core|
+    	
+		core.source_files = 'Classes/*.{h,m}'
 
-#   s.subspec 'AsyncRunner' do |ss|
-#       ss.dependency 'FishLampAsync'
-#       ss.source_files = 'Classes/AsyncRunner/*.{h,m}'
-#   end
+	    core.subspec 'Async' do |ss|
+	        ss.source_files = 'Classes/Async/*.{h,m}'
+	    end
 
-    s.subspec 'Discovery' do |ss|
-        ss.source_files = 'Classes/Discovery/*.{h,m}'
-    end
+	    core.subspec 'Discovery' do |ss|
+	        ss.source_files = 'Classes/Discovery/*.{h,m}'
+	    end
 
-    s.subspec 'Factories' do |ss|
-        ss.source_files = 'Classes/Factories/*.{h,m}'
-    end
+	    core.subspec 'Factories' do |ss|
+	        ss.source_files = 'Classes/Factories/*.{h,m}'
+	    end
 
-    s.subspec 'Lists' do |ss|
-        ss.source_files = 'Classes/Lists/*.{h,m}'
-    end
+	    core.subspec 'Lists' do |ss|
+	        ss.source_files = 'Classes/Lists/*.{h,m}'
+	    end
 
-    s.subspec 'Logging' do |ss|
-        ss.source_files = 'Classes/Logging/*.{h,m}'
-    end
+	    core.subspec 'Logging' do |ss|
+	        ss.source_files = 'Classes/Logging/*.{h,m}'
+	    end
 
-    s.subspec 'Results' do |ss|
-        ss.source_files = 'Classes/Results/*.{h,m}'
-    end
+	    core.subspec 'Results' do |ss|
+	        ss.source_files = 'Classes/Results/*.{h,m}'
+	    end
 
-    s.subspec 'Running' do |ss|
-        ss.source_files = 'Classes/Running/*.{h,m}'
-    end
+	    core.subspec 'Running' do |ss|
+	        ss.source_files = 'Classes/Running/*.{h,m}'
+	    end
 
-    s.subspec 'Testable' do |ss|
-        ss.source_files = 'Classes/Testable/*.{h,m}'
-    end
+	    core.subspec 'Testable' do |ss|
+	        ss.source_files = 'Classes/Testable/*.{h,m}'
+	    end
 
-    s.subspec 'TestApp' do |ss|
-        ss.source_files = 'Classes/TestApp/*.{h,m}'
-    end
+	    core.subspec 'TestApp' do |ss|
+	        ss.source_files = 'Classes/TestApp/*.{h,m}'
+	    end
 
-    s.subspec 'TestCase' do |ss|
-        ss.source_files = 'Classes/TestCase/*.{h,m}'
-    end
+	    core.subspec 'TestCase' do |ss|
+	        ss.source_files = 'Classes/TestCase/*.{h,m}'
+	    end
 
-    s.subspec 'Tests' do |ss|
-        ss.source_files = 'Classes/Tests/*.{h,m}'
-    end
+	    core.subspec 'Tests' do |ss|
+	        ss.source_files = 'Classes/Tests/*.{h,m}'
+	    end
 
-    s.subspec 'Utils' do |ss|
-        ss.source_files = 'Classes/Utils/*.{h,m}'
+	    core.subspec 'Utils' do |ss|
+	        ss.source_files = 'Classes/Utils/*.{h,m}'
+		end
+	end
+	
+    s.subspec 'OSX' do |osx|
+    	osx.source_files = 'OSX/**/*.{h,m}'
+		osx.resources = ['OSX/**/*.{png,xib}']
 	end
 
     s.xcconfig = {
