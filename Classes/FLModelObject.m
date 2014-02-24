@@ -25,6 +25,10 @@
     return nil;
 }
 
+- (id) bestCopy {
+    return FLCopyOrRetainObjectWithAutorelease(self);
+}
+
 @end
 
 @implementation FLModelObject 
@@ -64,6 +68,10 @@ FLSynthesizeModelObjectMethods();
     return _changeTracker;
 }
 
+- (id) bestCopy {
+    return FLAutorelease([self copy]);
+}
+
 
 @end
 
@@ -75,7 +83,7 @@ id FLModelObjectCopy(id object, Class classOrNil) {
     
     id copy = [[theClass alloc] init];
     for(FLPropertyDescriber* type in [[typeDesc properties] objectEnumerator]) {
-        [copy setValue:FLCopyOrRetainObject([object valueForKey:type.propertyName]) forKey:type.propertyName];
+        [copy setValue:[[object valueForKey:type.propertyName] bestCopy] forKey:type.propertyName];
     }
     return copy;
 }
