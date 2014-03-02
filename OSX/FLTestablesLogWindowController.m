@@ -56,11 +56,10 @@ static NSMutableArray* s_windows = nil;
 
 - (void) runTests:(id) sender {
 
-    FLLogSinkBehavior* behavior = [FLLogSinkBehavior logSinkBehavior];
-
     FLLogger* logger = [FLLogger logger];
     [logger addLoggerSink:_logViewController];
 
+    [logger updateLogSinkBehavior:[FLLogSinkBehavior logSinkBehavior]];
 
     FLTestOrganizer* organizer = [FLTestOrganizer testOrganizer];
     [organizer.logger addLogger:logger];

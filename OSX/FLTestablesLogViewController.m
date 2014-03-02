@@ -44,7 +44,6 @@
             FLAutorelease([[NSAttributedString alloc] initWithString:line]);
 
         NSTextStorage* textStorage = [_textView textStorage];
-        NSRange range = NSMakeRange(textStorage.length, 0);
 
         [textStorage beginEditing];
         [textStorage appendAttributedString:attrString];
@@ -53,6 +52,11 @@
         [_textView scrollRangeToVisible:NSMakeRange([[_textView string] length], 0)];
     });
 }
+
+- (void) updateLogSinkBehavior:(id<FLLogSinkBehavior>) behavior {
+
+}
+
 
 - (void) logEntry:(FLLogEntry*) entry stopPropagating:(BOOL*) stop {
 

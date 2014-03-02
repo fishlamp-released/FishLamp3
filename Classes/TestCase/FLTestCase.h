@@ -37,9 +37,9 @@ typedef void (^FLTestCaseBlock)();
     __unsafe_unretained id<FLTestable> _unitTest;
     BOOL _disabled;
 
-    FLAsyncTestCaseBlock asyncStartTest;
-    FLTestCaseBlock asyncFinishTest;
-    FLAsyncTestCaseBlock asyncTimeout;
+    FLAsyncTestCaseBlock _asyncStartTest;
+    FLTestCaseBlock _asyncFinishTest;
+    FLAsyncTestCaseBlock _asyncTimeout;
 }
 
 - (id) initWithName:(NSString*) name

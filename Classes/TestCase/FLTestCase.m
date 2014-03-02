@@ -37,8 +37,8 @@
 @synthesize indentIntegrity = _indentIntegrity;
 @synthesize asyncTest = _asyncTest;
 
-@synthesize asyncStartTest = _startAsyncTest;
-@synthesize asyncFinishTest = _finishAsyncTest;
+@synthesize asyncStartTest = _asyncStartTest;
+@synthesize asyncFinishTest = _asyncFinishTest;
 @synthesize asyncTimeout = _asyncTimeout;
 
 - (id) init {	
@@ -68,8 +68,8 @@
 
 #if FL_MRC
 - (void) dealloc {
-    [_startAsyncTest release];
-    [_finishAsyncTest release];
+    [_asyncStartTest release];
+    [_asyncFinishTest release];
     [_asyncTimeout release];
 
     [_indentIntegrity release];
