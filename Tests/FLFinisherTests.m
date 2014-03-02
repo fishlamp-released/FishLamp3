@@ -119,7 +119,9 @@
     FLConfirmNil(promise.nextPromise);
 
     NSMutableArray* array = [NSMutableArray array];
-    [array addObject:promise];
+    if(promise) {
+        [array addObject:promise];
+    }
 
     for(int i = 0; i < 5; i++) {
         FLPromise* anotherPromise = [FLPromise promise];

@@ -219,20 +219,13 @@ void FLQueueOperation(id<FLQueueableAsyncOperation> operation, NSTimeInterval de
         FLReleaseWithNil(blockQueue);
     };
 
-    if(0.0f != delay) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, FLTimeIntervalToNanoSeconds(delay)), queue.dispatch_queue_t, block);
-    }
-    else {
-
-#if DEBUG
-// this prevents bogus Clang warning.
     if(queue) {
-#endif
-    dispatch_async(queue.dispatch_queue_t, block);
-
-#if DEBUG
-    }
-#endif
+        if(0.0f != delay) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, FLTimeIntervalToNanoSeconds(delay)), queue.dispatch_queue_t, block);
+        }
+        else {
+            dispatch_async(queue.dispatch_queue_t, block);
+        }
     }
 }
 
@@ -248,28 +241,21 @@ void FLRunSynchronousOperation(id<FLQueueableAsyncOperation> operation, FLDispat
     __block FLDispatchQueue* blockQueue = FLRetain(queue);
     __block FLFinisher* blockFinisher = FLRetain(finisher);
 
-#if DEBUG
 // this prevents bogus Clang warning.
     if(queue) {
-#endif
-
-    dispatch_queue_t queue_t = queue.dispatch_queue_t;
-    dispatch_sync(queue_t, ^{
-        @try {
-            [blockOperation runSynchronousOperationInQueue:blockQueue finisher:blockFinisher];
-        }
-        @catch(NSException* ex) {
-            [blockFinisher setFinishedWithResult:ex.error];
-        }
-        FLReleaseWithNil(blockQueue);
-        FLReleaseWithNil(blockOperation);
-        FLReleaseWithNil(blockFinisher);
-    });
-
-#if DEBUG
+        dispatch_queue_t queue_t = queue.dispatch_queue_t;
+        dispatch_sync(queue_t, ^{
+            @try {
+                [blockOperation runSynchronousOperationInQueue:blockQueue finisher:blockFinisher];
+            }
+            @catch(NSException* ex) {
+                [blockFinisher setFinishedWithResult:ex.error];
+            }
+            FLReleaseWithNil(blockQueue);
+            FLReleaseWithNil(blockOperation);
+            FLReleaseWithNil(blockFinisher);
+        });
     }
-#endif
-
 }
 
 #if EXPERIMENTAL
