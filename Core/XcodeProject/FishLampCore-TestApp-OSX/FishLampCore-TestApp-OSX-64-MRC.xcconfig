@@ -1,0 +1,11 @@
+//
+//  FishLampCore-TestApp-OSX-64-MRC.xcconfig
+//  FishLampCore
+//
+//  Created by Mike Fullerton on 9/9/13.
+//  Copyright (c) 2013 Mike Fullerton. All rights reserved.
+//
+
+#include "XcodeBuildSupportConfigs/TargetSettings/OSX-64-MRC.xcconfig"
+#include "FishLampCore-TestApp-OSX/FishLampCore-TestApp-SharedTargetSettings.xcconfig"
+

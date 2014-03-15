@@ -1,0 +1,3 @@
+
+#include "XcodeBuildSupportConfigs/Includes/iOS.xcconfig"
+#include "XcodeBuildSupportConfigs/Includes/Preprocessor.xcconfig"

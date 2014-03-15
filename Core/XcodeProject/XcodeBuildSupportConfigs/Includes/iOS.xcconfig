@@ -1,0 +1,17 @@
+
+SUPPORTED_PLATFORMS = iphonesimulator iphoneos
+SDKROOT = iphoneos
+CLANG_ENABLE_OBJC_ARC = YES
+IPHONEOS_DEPLOYMENT_TARGET = 6.1
+MACH_O_TYPE = mh_execute
+
+ARCHS = $(ARCHS_STANDARD)
+
+// for iOS 7 64bit change this in your project configs
+// ARCHS = $(ARCHS_STANDARD_INCLUDING_64_BIT)
+
+//:configuration = Debug
+ARCHS = $(ARCHS_STANDARD)
+
+// don't care as much about backward compatibility on iOS
+CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO

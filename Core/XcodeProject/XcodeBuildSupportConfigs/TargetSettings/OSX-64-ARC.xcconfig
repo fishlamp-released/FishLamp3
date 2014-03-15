@@ -1,0 +1,4 @@
+
+#include "XcodeBuildSupportConfigs/Includes/OSX-64.xcconfig"
+#include "XcodeBuildSupportConfigs/Includes/ARC.xcconfig"
+#include "XcodeBuildSupportConfigs/Includes/Preprocessor.xcconfig"
