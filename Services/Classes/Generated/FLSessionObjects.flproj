@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project projectName="FishLamp">
+    <generatorOptions typePrefix="FL"/>
+    <organization name="GreenTongue Software LLC, Mike Fullerton"/>
+    <license>
+        <licenseName>The FishLamp Framework is released under the MIT License: http://fishlamp.com/license</licenseName>
+    </license>
+    <objects>
+        <class name="FLApplicationSession">
+            <properties>
+                <property type="int" name="sessionId">
+                    <storageOptions isPrimaryKey="YES"/>
+                </property>
+                <property type="NSString" name="userGuid"/>
+            </properties>
+        </class>
+        <class name="FLLastUpdateTime">
+            <properties>
+                <property type="string" name="lastUpdateId">
+                    <storageOptions isPrimaryKey="YES"/>
+                </property>
+                <property type="date" name="lastUpdate"/>
+            </properties>
+        </class>
+        <class name="FLApplicationDataVersion">
+            <properties>
+                <property type="string" name="userGuid">
+                    <storageOptions isPrimaryKey="YES"/>
+                </property>
+                <property type="string" name="versionString"/>
+            </properties>
+        </class>
+    </objects>
+</project>
