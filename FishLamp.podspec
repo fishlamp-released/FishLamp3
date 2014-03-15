@@ -1,31 +1,91 @@
 Pod::Spec.new do |s|
    
-    s.name         = "FishLampActivityLog"
-    s.version      = "0.0.1"
-    s.summary      = "This is one part of the FishLamp framework."
+    s.name         = "FishLamp"
+    s.version      = "0.0.2"
+    s.summary      = "This is the pod for FishLamp"
     s.homepage     = "http://fishlamp.com"
     s.license      = 'MIT'
     s.author       = { "Mike Fullerton" => "hello@fishlamp.com" }
-    s.source       = { :git => "https://github.com/fishlamp/ActivityLog.git", :tag => s.version.to_s }
+    s.source       = { :git => "https://github.com/fishlamp/FishLampCore.git", :tag => s.version.to_s }
 
     s.ios.deployment_target = '6.1'
     s.osx.deployment_target = '10.6'
     s.requires_arc = false
+	s.default_subspec = 'Core'
     
-# these are the core pods
-	s.dependency 'FishLampCore'
-	s.dependency 'FishLampColorUtils'
+#     s.ios.frameworks = 'Security', 'MobileCoreServices', 'SystemConfiguration'
+#     s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'Quartz', 'QuartzCore', 'CoreFoundation',  'Foundation'
+
+
+	s.subspec 'Core' do |ss|
 	
-	s.source_files = 'Classes/**/*.{h,m}'
+		ss.source_files = 'Core/*.h'
 
+		ss.subspec 'ObjcCompiling' do |sss|
+			sss.source_files = 'Core/ObjcCompiling/**/*.{h,m}'
+		end
 
-    
+		ss.subspec 'Atomic' do |sss|
+			sss.dependency 'FishLampCore/Core/ObjcCompiling'
+			sss.source_files = 'Core/Atomic/*.{h,m}'
+		end
 
+		ss.subspec 'ObjcPropertyDeclaring' do |sss|
+			sss.dependency 'FishLampCore/Core/ObjcCompiling'
+			sss.dependency 'FishLampCore/Core/Atomic'
+			sss.source_files = 'Core/ObjcPropertyDeclaring/*.{h,m}'
+		end
 
+		ss.subspec 'Errors' do |sss|
+			sss.dependency 'FishLampCore/Core/ObjcCompiling'
+			sss.dependency 'FishLampCore/Core/StackTrace'
+			sss.source_files = 'Core/Errors/*.{h,m}'
+		end
 
-    
+		ss.subspec 'Exceptions' do |sss|
+			sss.dependency 'FishLampCore/Core/ObjcCompiling'
+			sss.dependency 'FishLampCore/Core/Errors'
+			sss.source_files = 'Core/Exceptions/*.{h,m}'
+		end
 
+		ss.subspec 'Assertions' do |sss|
+			sss.dependency 'FishLampCore/Core/ObjcCompiling'
+			sss.source_files = 'Core/Assertions/*.{h,m}'
+		end
 
+		ss.subspec 'Performing' do |sss|
+			sss.dependency 'FishLampCore/Core/ObjcCompiling'
+			sss.source_files = 'Core/Performing/*.{h,m}'
+		end
+
+		ss.subspec 'StackTrace' do |sss|
+			sss.dependency 'FishLampCore/Core/ObjcCompiling'
+			sss.source_files = 'Core/StackTrace/*.{h,m}'
+		end
+
+		ss.subspec 'Utils' do |sss|
+			sss.dependency 'FishLampCore/Core/ObjcCompiling'
+			sss.source_files = 'Core/Utils/*.{h,m}'
+		end
+
+		ss.subspec 'Versioning' do |sss|
+			sss.dependency 'FishLampCore/Core/ObjcCompiling'
+			sss.source_files = 'Core/Versioning/*.{h,m}'
+		end
+
+		ss.subspec 'Strings' do |sss|
+			sss.source_files = 'Core/Strings/*.{h,m}'
+		end
+
+		ss.subspec 'SimpleLogger' do |sss|
+			sss.source_files = 'Core/SimpleLogger/*.{h,m}'
+		end
+	end
+	
+	s.subspec 'CoreTests' do |ss|
+# 		ss.dependency 'FishLampCore/ss'
+		ss.source_files = 'Core/Tests/**/*.{h,m}'
+	end
 
     s.xcconfig = {
         "CLANG_ANALYZER_DEADCODE_DEADSTORES" => "YES",
