@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fishlamp>
+    <info>
+        <projectName>FishLamp Code Generator</projectName>
+        <organization name="GreenTongue Software LLC, Mike Fullerton"/>
+        <license>The FishLamp Framework is released under the MIT License: http://fishlamp.com/license</license>
+    </info>
+    <options>
+        <canLazyCreate>YES</canLazyCreate>
+        <allIncludesFileName>FishLampCodeGeneratorObjects</allIncludesFileName>
+        <typePrefix>FL</typePrefix>
+        <generateUserObjects>YES</generateUserObjects>
+        <objectsFolderName>Objects</objectsFolderName>
+        <userObjectsFolderName>Objects</userObjectsFolderName>
+    </options>
+    <!--
+    <import path="Defaults.flproj"/>
+    <defines>
+        <define define="FLDataTypeObject" value="object" isString="YES" comment="used for dataType in dataTypeDefinition"/>
+        <define define="FLDataTypeValue" value="value" isString="YES" comment="used for dataType in dataTypeDefinition"/>
+        <define define="FLDataTypeEnum" value="enum" isString="YES" comment="used for dataType in dataTypeDefinition"/>
+        <define define="FLDataTypeImmutableObject" value="immutuble" isString="YES" comment="used for dataType in dataTypeDefinition"/>
+    </defines>
+-->
+    <enumType name="FLDataType">
+        <enum name="Object"/>
+        <enum name="Value"/>
+        <enum name="Enum"/>
+        <enum name="Immuteable"/>
+    </enumType>
+    <enumType name="FLCodeInputType">
+        <enum name="Http"/>
+        <enum name="File"/>
+        <enum name="Wsdl"/>
+    </enumType>
+    <enumType name="FLCodeStorageMask">
+        <enum name="None"/>
+        <enum name="Stored"/>
+        <enum name="Required"/>
+        <enum name="PrimaryKey"/>
+        <enum name="Indexed"/>
+    </enumType>
+    <class name="FLCodeImport">
+        <property name="path" type="string" comment="import a whittle file"/>
+        <property name="type" type="FLCodeInputType" comment="import wsdl url (file or HTTP)"/>
+    </class>
+    <class name="FLCodeStorageOptions">
+        <!-- defaults to NO -->
+        <!-- defaultValue="YES" -->
+        <property name="isStorable" type="bool" comment="this defaults to NO. Note that storage options are ignored if the superclass class is not storable."/>
+        <property name="isPrimaryKey" type="bool" comment="set this property to be a primary key in the data store"/>
+        <property name="isIndexed" type="bool" comment="set this property to be indexed for fast searches on it"/>
+        <property name="isUnique" type="bool" comment="make sure this value is unique is the data store for this type"/>
+        <property name="isRequired" type="bool" comment="make sure this value isn't empty in the data store"/>
+    </class>
+    <class name="FLCodeGeneratorOptions">
+        <property name="disabled" type="bool" comment="don't compile this class is set to YES"/>
+        <property name="typePrefix" type="string"/>
+        <property name="comment" type="string"/>
+        <property name="globalDefine" type="FLCodeDefine"/>
+        <property name="canLazyCreate" type="bool"/>
+        <property name="generateUserObjects" type="bool"/>
+        <property name="allIncludesFileName" type="string" comment="set this to YES to create an includes file that includes all the generated headers"/>
+        <property name="userObjectsFolderName" type="string"/>
+        <property name="objectsFolderName" type="string" comment="folder to generated the files to. By default this is the same as the xml schema file"/>
+    </class>
+    <class name="FLCodeTypeDefinition">
+        <property name="dataType" type="FLDataType" comment="the dataType of the type, e.g. class, struct, int, array" useForEquality="YES"/>
+        <property name="typeName" type="string" comment="name of the type, e.g. MyObject" useForEquality="YES"/>
+        <property name="import" type="string"/>
+        <property name="importIsPrivate" type="BOOL"/>
+    </class>
+    <class name="FLCodeCompany">
+        <property name="name" type="string" comment="name of the company for the file headers"/>
+        <property name="website" type="string" comment="name of the company for the file headers"/>
+        <property name="address1" type="string" comment="company address1"/>
+        <property name="address2" type="string" comment="company address1"/>
+        <property name="address3" type="string" comment="company address1"/>
+        <property name="phone" type="string" comment="company phone"/>
+    </class>
+    <class name="FLCodeProjectInfo">
+        <property name="organization" type="FLCodeCompany"/>
+        <property name="license" type="string"/>
+        <property name="projectName" type="string" useForEquality="YES"/>
+        <property name="schemaName" type="string" comment="name of the project for the file headers"/>
+    </class>
+    <class name="FLCodeProject">
+        <property name="info" type="FLCodeProjectInfo"/>
+        <property name="comment" type="string"/>
+        <property name="options" type="FLCodeGeneratorOptions" comment="set properties of this class to control code generation"/>
+        <property name="enumTypes" type="array" comment="list of enum types, these are generated into a single file with handy lookup methods">
+            <arrayType name="enumType" type="FLCodeEnumType"/>
+        </property>
+        <property name="classes" type="array" comment="list of objects, these are generated into their own files">
+            <arrayType name="class" type="FLCodeObject"/>
+        </property>
+        <property name="dependencies" type="array" comment="list of includes for all the files">
+            <arrayType name="dependency" type="FLCodeTypeDefinition"/>
+        </property>
+        <property name="defines" type="array" comment="defines for all the files">
+            <arrayType name="define" type="FLCodeDefine"/>
+        </property>
+        <property name="arrays" type="array" comment="list of methods (FLCodeMethod) for this class">
+            <arrayType name="array" type="FLCodeArray"/>
+        </property>
+        <property name="imports" type="array">
+            <arrayType name="import" type="FLCodeImport"/>
+        </property>
+        <property name="typeDefinitions" type="array">
+            <arrayType name="typeDefinition" type="FLCodeTypeDefinition"/>
+        </property>
+    </class>
+    <class name="FLCodeComment" comment="don't use this class directly, used internally">
+        <property name="object" type="string"/>
+        <property name="commentID" type="string"/>
+        <property name="comment" type="string" useForEquality="YES"/>
+    </class>
+    <class name="FLCodeArrayType" superclass="FLCodeVariable">
+        <property name="wildcardProperty" type="FLCodeProperty"/>
+    </class>
+    <class name="FLCodeArray">
+        <property name="name" type="string" useForEquality="YES"/>
+        <property name="types" type="array">
+            <arrayType name="arrayType" type="FLCodeArrayType"/>
+        </property>
+    </class>
+    <class name="FLCodeObjectCategory">
+        <property name="objectName" type="string" comment="name of the type, e.g. bagelCount"/>
+        <property name="categoryName" type="string" comment="name of the type, e.g. bagelCount"/>
+        <property name="properties" type="array" comment="list of properties (FLCodeProperty or FLCodeObjectArray) for this class">
+            <arrayType name="property" type="FLCodeProperty"/>
+        </property>
+        <property name="methods" type="array" comment="list of methods (FLCodeMethod) for this class">
+            <arrayType name="method" type="FLCodeMethod"/>
+        </property>
+    </class>
+    <class name="FLCodeObject">
+        <property name="protocols" type="string" comment="comma delimeted string"/>
+        <property name="name" type="string" comment="name of the type, e.g. bagelCount"/>
+        <property name="storageOptions" type="FLCodeStorageOptions"/>
+        <property name="comment" type="string" comment="comment for this class"/>
+        <property name="superclass" type="string" comment="superclass for the class. by default this is set to NSObject"/>
+        <property name="canLazyCreate" type="bool"/>
+        <property name="isSingleton" type="bool" comment="if set to YES the standard FishLamp singleton objects will be generated for this class"/>
+        <property name="properties" type="array" comment="list of properties (FLCodeProperty or FLCodeObjectArray) for this class">
+            <arrayType name="property" type="FLCodeProperty"/>
+        </property>
+        <property name="dependencies" type="array" comment="list of includes (string) only for this class">
+            <arrayType name="dependency" type="FLCodeTypeDefinition"/>
+        </property>
+        <property name="members" type="array" comment="list of member data (FLCodeVariable) for this class">
+            <arrayType name="member" type="FLCodeVariable"/>
+        </property>
+        <property name="methods" type="array" comment="list of methods (FLCodeMethod) for this class">
+            <arrayType name="method" type="FLCodeMethod"/>
+        </property>
+        <property name="categories" type="array">
+            <arrayType name="category" type="FLCodeObjectCategory"/>
+        </property>
+        <property name="constructors" type="array">
+            <arrayType name="constructor" type="FLCodeConstructor"/>
+        </property>
+    </class>
+    <class name="FLCodeEnum">
+        <property name="name" type="string" comment="This is the name of the enum, e.g. kFoo" useForEquality="YES"/>
+        <property name="value" type="int" comment="This is the optional value of the enum, e.g. 5"/>
+        <property name="stringValue" type="string" comment="This is the string optional value of the define"/>
+    </class>
+    <class name="FLCodeEnumType">
+        <property name="name" type="string" comment="This is the name of the enum, e.g. kFoo" useForEquality="YES"/>
+        <property name="enums" type="array" comment="this is the list of enums">
+            <arrayType name="enum" type="FLCodeEnum"/>
+        </property>
+    </class>
+    <class name="FLCodeProperty">
+        <!-- required -->
+        <property name="name" type="string" useForEquality="YES"/>
+        <property name="type" type="string"/>
+        <property name="storageOptions" type="FLCodeStorageOptions" comment=""/>
+        <property name="memberName" type="string" comment="set member name. this is the same as the property name by default, but can be anything"/>
+        <property name="defaultValue" type="object"/>
+        <property name="comment" type="string" comment="comment about this property"/>
+        <property name="getter" type="FLCodeMethod" comment=""/>
+        <property name="setter" type="FLCodeMethod" comment=""/>
+        <!-- Arrays have one of more of these types set, otherwise it's a normal property -->
+        <property name="arrayTypes" type="array" comment="list of types and keys this array accepts. This list is igored for types other than array.">
+            <arrayType name="arrayType" type="FLCodeArrayType"/>
+        </property>
+        <property name="canLazyCreate" type="bool" comment="automatically create the data (if it's an object) when the property getter is called and the value is nil"/>
+        <property name="isPrivate" type="bool" comment="don't declare the property in the file header (good for overriding superclass methods)"/>
+        <property name="isReadOnly" type="bool" comment="make this property readonly"/>
+        <property name="isImmutable" type="bool" comment="immutable means readonly, and directly return the default value without storing it in a member variable"/>
+        <property name="isStatic" type="bool" comment="is this property a class method e.g. + (void) foo"/>
+        <property name="useForEquality" type="bool"/>
+        <property name="isWildcardArray" type="bool" comment=""/>
+        <property name="isWeak" type="bool" comment="NO by default"/>
+        <property name="storage" type="FLCodeStorageMask"/>
+    </class>
+    <class name="FLCodeMethod">
+        <property name="isStatic" type="bool" comment="is this a class method, e.g. + (void) foo"/>
+        <property name="isPrivate" type="bool" comment="don't show the header in the header for this method"/>
+        <property name="returnType" type="string" comment="return type of the method, by default this is void"/>
+        <property name="name" type="string" comment="name of the method" useForEquality="YES"/>
+        <property name="comment" type="string" comment="comment about this method"/>
+        <property name="code" type="FLCodeCodeSnippet" comment=""/>
+        <property name="codeLines" type="array">
+            <arrayType name="codeLine" type="FLCodeElement"/>
+        </property>
+        <property name="parameters" type="array" comment="list of parameters (FLCodeVariable) for this method">
+            <arrayType name="parameter" type="FLCodeVariable"/>
+        </property>
+    </class>
+    <class name="FLCodeObjectMemberType">
+        <property name="name" type="string" comment="name of the variabl, e.g. bagelCount" useForEquality="YES"/>
+        <property name="type" type="string" comment="name of the type, e.g. bagelCount" useForEquality="YES"/>
+        <property name="isStatic" type="bool"/>
+        <property name="isWeak" type="bool" comment="NO by default"/>
+    </class>
+    <class name="FLCodeType" comment="represents a type an name">
+        <property name="typeName" type="string" comment="name of the type, e.g. MyObject" useForEquality="YES"/>
+        <property name="defaultValue" type="string"/>
+    </class>
+    <class name="FLCodeVariable">
+        <property name="name" type="string" comment="name of the variabl, e.g. bagelCount" useForEquality="YES"/>
+        <property name="type" type="string" comment="name of the type, e.g. bagelCount" useForEquality="YES"/>
+    </class>
+    <class name="FLCodeDefine">
+        <property name="define" type="string" comment=""/>
+        <property name="value" type="string" comment=""/>
+        <property name="isString" type="BOOL" comment=""/>
+        <property name="comment" type="string" comment="" useForEquality="YES"/>
+    </class>
+    <class name="FLCodeCodeSnippet" comment="represents a block of code">
+        <property name="scopedBy" type="string"/>
+        <property name="name" type="string" comment="name of snippet (used for file)"/>
+        <property name="comment" type="string" comment="a comment about this snippet"/>
+        <property name="lines" type="string"/>
+    </class>
+    <class name="FLCodeKeyValuePair">
+        <property name="key" type="string" comment="" useForEquality="YES"/>
+        <property name="value" type="string" comment=""/>
+    </class>
+    <class name="FLCodeConstructorParameter">
+        <property name="name" type="string"/>
+        <property name="type" type="string"/>
+        <property name="passToSuper" type="bool"/>
+        <property name="setProperty" type="string"/>
+    </class>
+    <class name="FLCodeConstructor">
+        <property name="parameters" type="array">
+            <arrayType name="parameter" type="FLCodeConstructorParameter"/>
+        </property>
+        <property name="lines" type="array">
+            <arrayType name="line" type="FLCodeElement"/>
+        </property>
+    </class>
+    <class name="FLCodeElement" superclass="FLModelObject">
+    </class>
+    <class name="FLCodeReturn" superclass="FLCodeElement">
+	<property name="returns" type="object"/>
+        <constructor>
+            <parameter name="returns" type="object" setProperty="returns"/>
+        </constructor>
+    </class>
+    <class name="FLCodeString" superclass="FLCodeElement">
+	<property name="string" type="object"/>
+        <constructor>
+            <parameter name="string" type="object" setProperty="string"/>
+        </constructor>
+    </class>
+    <class name="FLCodeCreateObject" superclass="FLCodeElement">
+        <property name="objectType" type="object"/>
+        <constructor>
+            <parameter name="objectType" type="object" setProperty="objectType"/>
+        </constructor>
+    </class>
+    <class name="FLCodeClassName" superclass="FLCodeElement">
+       <property name="className" type="object"/>
+         <constructor>
+            <parameter name="className" type="object" setProperty="className"/>
+        </constructor>
+    </class>
+    <class name="FLCodePropertyName">
+        <property name="propertyName" type="object"/>
+        <constructor>
+            <parameter name="propertyName" type="object" setProperty="propertyName"/>
+        </constructor>
+    </class>
+    <class name="FLCodeStatement" superclass="FLCodeElement">
+        <property name="statement" type="object"/>
+        <constructor>
+            <parameter name="statement" type="object" setProperty="statement"/>
+        </constructor>
+    </class>
+    <class name="FLCodeGetPropertyValue" superclass="FLCodeElement" >
+        <property name="property" type="object"/>
+        <property name="object" type="object"/>
+         <constructor>
+            <parameter name="object" type="object" setProperty="object"/>
+            <parameter name="property" type="object" setProperty="property"/>
+        </constructor>
+    </class>
+    <class name="FLCodeObjectReference" superclass="FLCodeElement">
+        <property name="object" type="object"/>
+        <constructor>
+            <parameter name="object" type="object" setProperty="object"/>
+        </constructor>
+    </class>
+    <class name="FLCodeObjectSelfReference" superclass="FLCodeElement" >
+    </class>
+
+    <class name="FLCodeSequence" superclass="FLCodeElement">
+        <property name="statements" type="array">
+            <arrayType name="statement" type="FLCodeElement"/>
+        </property>
+    </class>
+</fishlamp>

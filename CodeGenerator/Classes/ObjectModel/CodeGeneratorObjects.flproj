@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fishlamp>
+    <import path="CodeOptions.flproj"/>
+    <import path="CodeElements.flproj"/>
+    <import path="CodeEnum.flproj"/>
+    <import path="CodeObject.flproj"/>
+    <import path="CodeProject.flproj"/>
+</fishlamp>
