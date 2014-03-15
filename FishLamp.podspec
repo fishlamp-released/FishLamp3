@@ -306,7 +306,7 @@ Pod::Spec.new do |s|
 
   	s.subspec 'Networking' do |ss|
         ss.dependency 'FishLamp/Core'
-		ss.source_files  = 'Classes/*.h'
+		ss.source_files  = 'Networking/Classes/*.h'
 
 		ss.subspec 'Reachability' do |folder|
 			folder.ios.frameworks = 'SystemConfiguration'
