@@ -11,96 +11,96 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = '7.0'
     s.osx.deployment_target = '10.6'
     s.requires_arc = false
-	s.default_subspec = 'Required'
+	s.default_subspec = 'Core'
     
 #     s.ios.frameworks = 'Security', 'MobileCoreServices', 'SystemConfiguration'
 #     s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'Quartz', 'QuartzCore', 'CoreFoundation',  'Foundation'
 
 
-	s.subspec 'Required' do |ss|
+	s.subspec 'Core' do |ss|
 	
-		ss.source_files = 'Required/Classes/*.h'
+		ss.source_files = 'Core/Classes/*.h'
 
 		ss.subspec 'ObjcCompiling' do |folder|
-			folder.source_files = 'Required/Classes/ObjcCompiling/**/*.{h,m}'
+			folder.source_files = 'Core/Classes/ObjcCompiling/**/*.{h,m}'
 		end
 
 		ss.subspec 'Atomic' do |folder|
-			folder.source_files = 'Required/Classes/Atomic/*.{h,m}'
+			folder.source_files = 'Core/Classes/Atomic/*.{h,m}'
 		end
 
 		ss.subspec 'ObjcPropertyDeclaring' do |folder|
-			folder.source_files = 'Required/Classes/ObjcPropertyDeclaring/*.{h,m}'
+			folder.source_files = 'Core/Classes/ObjcPropertyDeclaring/*.{h,m}'
 		end
 
 		ss.subspec 'Errors' do |folder|
-			folder.source_files = 'Required/Classes/Errors/*.{h,m}'
+			folder.source_files = 'Core/Classes/Errors/*.{h,m}'
 		end
 
 		ss.subspec 'Exceptions' do |folder|
-			folder.source_files = 'Required/Classes/Exceptions/*.{h,m}'
+			folder.source_files = 'Core/Classes/Exceptions/*.{h,m}'
 		end
 
 		ss.subspec 'Assertions' do |folder|
-			# folder.dependency 'FishLamp/Required/ObjcCompiling'
-			folder.source_files = 'Required/Classes/Assertions/*.{h,m}'
+			# folder.dependency 'FishLamp/Core/ObjcCompiling'
+			folder.source_files = 'Core/Classes/Assertions/*.{h,m}'
 		end
 
 		ss.subspec 'Performing' do |folder|
-			# folder.dependency 'FishLamp/Required/ObjcCompiling'
-			folder.source_files = 'Required/Classes/Performing/*.{h,m}'
+			# folder.dependency 'FishLamp/Core/ObjcCompiling'
+			folder.source_files = 'Core/Classes/Performing/*.{h,m}'
 		end
 
 		ss.subspec 'StackTrace' do |folder|
-			# folder.dependency 'FishLamp/Required/ObjcCompiling'
-			folder.source_files = 'Required/Classes/StackTrace/*.{h,m}'
+			# folder.dependency 'FishLamp/Core/ObjcCompiling'
+			folder.source_files = 'Core/Classes/StackTrace/*.{h,m}'
 		end
 
 		ss.subspec 'Utils' do |folder|
-			# folder.dependency 'FishLamp/Required/ObjcCompiling'
-			folder.source_files = 'Required/Classes/Utils/*.{h,m}'
+			# folder.dependency 'FishLamp/Core/ObjcCompiling'
+			folder.source_files = 'Core/Classes/Utils/*.{h,m}'
 		end
 
 		ss.subspec 'Versioning' do |folder|
-			# folder.dependency 'FishLamp/Required/ObjcCompiling'
-			folder.source_files = 'Required/Classes/Versioning/*.{h,m}'
+			# folder.dependency 'FishLamp/Core/ObjcCompiling'
+			folder.source_files = 'Core/Classes/Versioning/*.{h,m}'
 		end
 
 		ss.subspec 'Strings' do |folder|
-			folder.source_files = 'Required/Classes/Strings/*.{h,m}'
+			folder.source_files = 'Core/Classes/Strings/*.{h,m}'
 		end
 
 		ss.subspec 'SimpleLogger' do |folder|
-			folder.source_files = 'Required/Classes/SimpleLogger/*.{h,m}'
+			folder.source_files = 'Core/Classes/SimpleLogger/*.{h,m}'
 		end
 	end
 	
 	s.subspec 'CoreTests' do |ss|
-		ss.source_files = 'Required/Tests/**/*.{h,m}'
+		ss.source_files = 'Core/Tests/**/*.{h,m}'
 	end
 
     s.subspec 'EventBroadcaster' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'EventBroadcaster/Classes/**/*.{h,m}'
     end
 
     s.subspec 'Timer' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'Timer/Classes/**/*.{h,m}'
     end
 
     s.subspec 'ByteBuffer' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'ByteBuffer/Classes/**/*.{h,m}'
     end
 
     s.subspec 'BundleUtils' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'BundleUtils/Classes/**/*.{h,m}'
     end
 
     s.subspec 'Async' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.dependency 'FishLamp/EventBroadcaster'
         ss.dependency 'FishLamp/Timer'
 
@@ -128,78 +128,78 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'UserPrefs' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'UserPrefs/Classes/**/*.{h,m}'
     end
 
     s.subspec 'Services' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'Services/Classes/**/*.{h,m}'
     end
 
     s.subspec 'ObjcRuntime' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'ObjcRuntime/Classes/**/*.{h,m}'
     end
 
     s.subspec 'MoreStrings' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'MoreStrings/Classes/**/*.{h,m}'
     end
 
     s.subspec 'Storage' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.dependency 'FishLamp/Files'
         ss.source_files = 'Storage/Classes/**/*.{h,m}'
     end
 
     s.subspec 'CommandLineProcessor' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'CommandLineProcessor/Classes/**/*.{h,m}'
     end
     
     s.subspec 'Containers' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'Containers/Classes/**/*.{h,m}'
     end
 
     s.subspec 'Files' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'Files/Classes/**/*.{h,m}'
     end
     
     s.subspec 'CodeBuilder' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.dependency 'FishLamp/MoreStrings'
         ss.source_files = 'CodeBuilder/Classes/**/*.{h,m}'
     end
     
     s.subspec 'CodeGenerator' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.dependency 'FishLamp/CodeBuilder'
         ss.source_files = 'CodeGenerator/Classes/**/*.{h,m}'
     end
 
     s.subspec 'Keychain' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'Keychain/Classes/**/*.{h,m}'
     end
 
     s.subspec 'ModelObject' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.dependency 'FishLamp/ObjcRuntime'
         ss.dependency 'FishLamp/Containers'
         ss.source_files = 'ModelObject/Classes/**/*.{h,m}'
     end
 
     s.subspec 'Database' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.library = 'sqlite3'
         ss.source_files = 'Database/Classes/**/*.{h,m}'
     end
     
     s.subspec 'ObjectDatabase' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.dependency 'FishLamp/ModelObject'
         ss.dependency 'FishLamp/ObjcRuntime'
         ss.dependency 'FishLamp/Database'
@@ -210,7 +210,7 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'Testables' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.source_files = 'Testables/Classes/*.{h,m}'
 
         ss.subspec 'Async' do |folder|
@@ -269,7 +269,7 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'Encoding' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.dependency 'FishLamp/ObjcRuntime'
         ss.dependency 'FishLamp/CodeBuilder'
 
@@ -301,7 +301,7 @@ Pod::Spec.new do |s|
     end
 
   	s.subspec 'Networking' do |ss|
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
 		ss.source_files  = 'Classes/*.h'
 
 		ss.subspec 'Reachability' do |folder|
@@ -420,7 +420,7 @@ Pod::Spec.new do |s|
         ss.dependency 'FishLamp/Networking'
         ss.dependency 'FishLamp/ObjcRuntime'
         ss.dependency 'FishLamp/ObjectDatabase'
-        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Core'
         ss.dependency 'FishLamp/Services'
         ss.dependency 'FishLamp/Storage'
         ss.dependency 'FishLamp/Testables'
