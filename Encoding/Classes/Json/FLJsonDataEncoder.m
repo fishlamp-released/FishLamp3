@@ -8,7 +8,6 @@
 //
 
 #import "FLJsonDataEncoder.h"
-#import "FLGeometry.h"
 #import "NSString+FishLamp.h"
 #import "FLBase64Encoding.h"
 #import "FLDateMgr.h"

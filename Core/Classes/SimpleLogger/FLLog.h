@@ -31,7 +31,6 @@
 			FLLog(@"%s, file: %s:%d", __PRETTY_FUNCTION__, __FILE__, __LINE__)
 
 #if DEBUG
-#define FLDebugLog FLLog
 
 #define FLDebugLog(__FORMAT__, ...)   \
 			FLLogToLogger([FLLogLogger instance], FLLogTypeDebug, __FORMAT__, ##__VA_ARGS__)

@@ -147,6 +147,7 @@ Pod::Spec.new do |s|
 
     s.subspec 'MoreStrings' do |ss|
         ss.dependency 'FishLamp/Core'
+        ss.dependency 'FishLamp/Utils'
         ss.source_files = 'MoreStrings/Classes/**/*.{h,m}'
     end
 
@@ -320,6 +321,7 @@ Pod::Spec.new do |s|
 	   
 		ss.subspec 'Authentication' do |folder|
 			folder.dependency 'FishLamp/EventBroadcaster'
+			folder.dependency 'FishLamp/Keychain'
 			folder.source_files = 'Networking/Classes/Authentication/**/*.{h,m}'
 		end
 		
