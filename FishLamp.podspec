@@ -8,84 +8,427 @@ Pod::Spec.new do |s|
     s.author       = { "Mike Fullerton" => "hello@fishlamp.com" }
     s.source       = { :git => "https://github.com/fishlamp/FishLampCore.git", :tag => s.version.to_s }
 
-    s.ios.deployment_target = '6.1'
+    s.ios.deployment_target = '7.0'
     s.osx.deployment_target = '10.6'
     s.requires_arc = false
-	s.default_subspec = 'Core'
+	s.default_subspec = 'Required'
     
 #     s.ios.frameworks = 'Security', 'MobileCoreServices', 'SystemConfiguration'
 #     s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'Quartz', 'QuartzCore', 'CoreFoundation',  'Foundation'
 
 
-	s.subspec 'Core' do |ss|
+	s.subspec 'Required' do |ss|
 	
-		ss.source_files = 'Core/*.h'
+		ss.source_files = 'Required/Classes/*.h'
 
-		ss.subspec 'ObjcCompiling' do |sss|
-			sss.source_files = 'Core/ObjcCompiling/**/*.{h,m}'
+		ss.subspec 'ObjcCompiling' do |folder|
+			folder.source_files = 'Required/Classes/ObjcCompiling/**/*.{h,m}'
 		end
 
-		ss.subspec 'Atomic' do |sss|
-			sss.dependency 'FishLampCore/Core/ObjcCompiling'
-			sss.source_files = 'Core/Atomic/*.{h,m}'
+		ss.subspec 'Atomic' do |folder|
+			folder.source_files = 'Required/Classes/Atomic/*.{h,m}'
 		end
 
-		ss.subspec 'ObjcPropertyDeclaring' do |sss|
-			sss.dependency 'FishLampCore/Core/ObjcCompiling'
-			sss.dependency 'FishLampCore/Core/Atomic'
-			sss.source_files = 'Core/ObjcPropertyDeclaring/*.{h,m}'
+		ss.subspec 'ObjcPropertyDeclaring' do |folder|
+			folder.source_files = 'Required/Classes/ObjcPropertyDeclaring/*.{h,m}'
 		end
 
-		ss.subspec 'Errors' do |sss|
-			sss.dependency 'FishLampCore/Core/ObjcCompiling'
-			sss.dependency 'FishLampCore/Core/StackTrace'
-			sss.source_files = 'Core/Errors/*.{h,m}'
+		ss.subspec 'Errors' do |folder|
+			folder.source_files = 'Required/Classes/Errors/*.{h,m}'
 		end
 
-		ss.subspec 'Exceptions' do |sss|
-			sss.dependency 'FishLampCore/Core/ObjcCompiling'
-			sss.dependency 'FishLampCore/Core/Errors'
-			sss.source_files = 'Core/Exceptions/*.{h,m}'
+		ss.subspec 'Exceptions' do |folder|
+			folder.source_files = 'Required/Classes/Exceptions/*.{h,m}'
 		end
 
-		ss.subspec 'Assertions' do |sss|
-			sss.dependency 'FishLampCore/Core/ObjcCompiling'
-			sss.source_files = 'Core/Assertions/*.{h,m}'
+		ss.subspec 'Assertions' do |folder|
+			# folder.dependency 'FishLamp/Required/ObjcCompiling'
+			folder.source_files = 'Required/Classes/Assertions/*.{h,m}'
 		end
 
-		ss.subspec 'Performing' do |sss|
-			sss.dependency 'FishLampCore/Core/ObjcCompiling'
-			sss.source_files = 'Core/Performing/*.{h,m}'
+		ss.subspec 'Performing' do |folder|
+			# folder.dependency 'FishLamp/Required/ObjcCompiling'
+			folder.source_files = 'Required/Classes/Performing/*.{h,m}'
 		end
 
-		ss.subspec 'StackTrace' do |sss|
-			sss.dependency 'FishLampCore/Core/ObjcCompiling'
-			sss.source_files = 'Core/StackTrace/*.{h,m}'
+		ss.subspec 'StackTrace' do |folder|
+			# folder.dependency 'FishLamp/Required/ObjcCompiling'
+			folder.source_files = 'Required/Classes/StackTrace/*.{h,m}'
 		end
 
-		ss.subspec 'Utils' do |sss|
-			sss.dependency 'FishLampCore/Core/ObjcCompiling'
-			sss.source_files = 'Core/Utils/*.{h,m}'
+		ss.subspec 'Utils' do |folder|
+			# folder.dependency 'FishLamp/Required/ObjcCompiling'
+			folder.source_files = 'Required/Classes/Utils/*.{h,m}'
 		end
 
-		ss.subspec 'Versioning' do |sss|
-			sss.dependency 'FishLampCore/Core/ObjcCompiling'
-			sss.source_files = 'Core/Versioning/*.{h,m}'
+		ss.subspec 'Versioning' do |folder|
+			# folder.dependency 'FishLamp/Required/ObjcCompiling'
+			folder.source_files = 'Required/Classes/Versioning/*.{h,m}'
 		end
 
-		ss.subspec 'Strings' do |sss|
-			sss.source_files = 'Core/Strings/*.{h,m}'
+		ss.subspec 'Strings' do |folder|
+			folder.source_files = 'Required/Classes/Strings/*.{h,m}'
 		end
 
-		ss.subspec 'SimpleLogger' do |sss|
-			sss.source_files = 'Core/SimpleLogger/*.{h,m}'
+		ss.subspec 'SimpleLogger' do |folder|
+			folder.source_files = 'Required/Classes/SimpleLogger/*.{h,m}'
 		end
 	end
 	
 	s.subspec 'CoreTests' do |ss|
-# 		ss.dependency 'FishLampCore/ss'
-		ss.source_files = 'Core/Tests/**/*.{h,m}'
+		ss.source_files = 'Required/Tests/**/*.{h,m}'
 	end
+
+    s.subspec 'EventBroadcaster' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'EventBroadcaster/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Timer' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'Timer/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'ByteBuffer' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'ByteBuffer/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'BundleUtils' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'BundleUtils/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Async' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/EventBroadcaster'
+        ss.dependency 'FishLamp/Timer'
+
+        ss.source_files = 'Async/Classes/*.{h,m}'
+
+        ss.subspec 'GCD' do |folder|
+            folder.source_files = 'Async/Classes/GCD/*.{h,m}'
+        end
+
+        ss.subspec 'OperationQueue' do |folder|
+            folder.source_files = 'Async/Classes/OperationQueue/*.{h,m}'
+        end
+
+        ss.subspec 'Operations' do |folder|
+            folder.source_files = 'Async/Classes/Operations/*.{h,m}'
+        end
+
+        ss.subspec 'Results' do |folder|
+            folder.source_files = 'Async/Classes/Results/*.{h,m}'
+        end
+
+        ss.subspec 'Utils' do |folder|
+            folder.source_files = 'Async/Classes/Utils/*.{h,m}'
+        end
+    end
+
+    s.subspec 'UserPrefs' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'UserPrefs/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Services' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'Services/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'ObjcRuntime' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'ObjcRuntime/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'MoreStrings' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'MoreStrings/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Storage' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Files'
+        ss.source_files = 'Storage/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'CommandLineProcessor' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'CommandLineProcessor/Classes/**/*.{h,m}'
+    end
+    
+    s.subspec 'Containers' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'Containers/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Files' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'Files/Classes/**/*.{h,m}'
+    end
+    
+    s.subspec 'CodeBuilder' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/MoreStrings'
+        ss.source_files = 'CodeBuilder/Classes/**/*.{h,m}'
+    end
+    
+    s.subspec 'CodeGenerator' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/CodeBuilder'
+        ss.source_files = 'CodeGenerator/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Keychain' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'Keychain/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'ModelObject' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/ObjcRuntime'
+        ss.dependency 'FishLamp/Containers'
+        ss.source_files = 'ModelObject/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Database' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.library = 'sqlite3'
+        ss.source_files = 'Database/Classes/**/*.{h,m}'
+    end
+    
+    s.subspec 'ObjectDatabase' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/ModelObject'
+        ss.dependency 'FishLamp/ObjcRuntime'
+        ss.dependency 'FishLamp/Database'
+        ss.dependency 'FishLamp/Storage'
+        ss.dependency 'FishLamp/Services'
+        ss.dependency 'FishLamp/Async'
+        ss.source_files = 'ObjectDatabase/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Testables' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.source_files = 'Testables/Classes/*.{h,m}'
+
+        ss.subspec 'Async' do |folder|
+            folder.source_files = 'Testables/Classes/Async/*.{h,m}'
+        end
+
+        ss.subspec 'Discovery' do |folder|
+            folder.source_files = 'Testables/Classes/Discovery/*.{h,m}'
+        end
+
+        ss.subspec 'Factories' do |folder|
+            folder.source_files = 'Testables/Classes/Factories/*.{h,m}'
+        end
+
+        ss.subspec 'Lists' do |folder|
+            folder.source_files = 'Testables/Classes/Lists/*.{h,m}'
+        end
+
+        ss.subspec 'Logging' do |folder|
+            folder.source_files = 'Testables/Classes/Logging/*.{h,m}'
+        end
+
+        ss.subspec 'Results' do |folder|
+            folder.source_files = 'Testables/Classes/Results/*.{h,m}'
+        end
+
+        ss.subspec 'Running' do |folder|
+            folder.source_files = 'Testables/Classes/Running/*.{h,m}'
+        end
+
+        ss.subspec 'Testable' do |folder|
+            folder.source_files = 'Testables/Classes/Testable/*.{h,m}'
+        end
+
+        ss.subspec 'TestApp' do |folder|
+            folder.source_files = 'Testables/Classes/TestApp/*.{h,m}'
+        end
+
+        ss.subspec 'TestCase' do |folder|
+            folder.source_files = 'Testables/Classes/TestCase/*.{h,m}'
+        end
+
+        ss.subspec 'Tests' do |folder|
+            folder.source_files = 'Testables/Classes/Tests/*.{h,m}'
+        end
+
+        ss.subspec 'Utils' do |folder|
+            folder.source_files = 'Testables/Classes/Utils/*.{h,m}'
+        end        
+    end
+
+    s.subspec 'TestablesOSX' do |ss|
+        ss.dependency 'FishLamp/Testables'
+        ss.source_files = 'Testables/OSX/**/*.{h,m}'
+        ss.resources = ['Testables/OSX/**/*.{png,xib}']
+    end
+
+    s.subspec 'Encoding' do |ss|
+        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/ObjcRuntime'
+        ss.dependency 'FishLamp/CodeBuilder'
+
+        ss.source_files  = 'Encoding/Classes/*h'
+
+        ss.subspec 'Xml' do |folder|
+            folder.source_files = 'Encoding/Classes/Xml/**/*.{h,m}'
+        end
+
+        ss.subspec 'Json' do |folder|
+            folder.source_files = 'Encoding/Classes/Json/**/*.{h,m}'
+        end
+
+        ss.subspec 'Url' do |folder|
+            folder.source_files = 'Encoding/Classes/URL/**/*.{h,m}'
+        end
+
+        ss.subspec 'Soap' do |folder|
+            folder.source_files = 'Encoding/Classes/Soap/**/*.{h,m}'
+        end
+
+        ss.subspec 'Html' do |folder|
+            folder.source_files = 'Encoding/Classes/Html/**/*.{h,m}'
+        end
+
+        ss.subspec 'Base64' do |folder|
+            folder.source_files = 'Encoding/Classes/Base64/**/*.{h,m,c}'
+        end
+    end
+
+  	s.subspec 'Networking' do |ss|
+        ss.dependency 'FishLamp/Required'
+		ss.source_files  = 'Classes/*.h'
+
+		ss.subspec 'Reachability' do |folder|
+			folder.ios.frameworks = 'SystemConfiguration'
+			folder.osx.frameworks = 'SystemConfiguration'
+			folder.source_files = 'Networking/Classes/Reachability/**/*.{h,m}'
+		end
+
+		ss.subspec 'Activity' do |folder|
+			folder.dependency 'FishLamp/EventBroadcaster'
+			folder.source_files = 'Networking/Classes/Activity/**/*.{h,m}'
+		end
+	   
+		ss.subspec 'Authentication' do |folder|
+			folder.dependency 'FishLamp/EventBroadcaster'
+			folder.source_files = 'Networking/Classes/Authentication/**/*.{h,m}'
+		end
+		
+		ss.subspec 'Errors' do |folder|
+			folder.source_files = 'Networking/Classes/Errors/**/*.{h,m}'
+		end
+	
+		ss.subspec 'Sinks' do |folder|
+			folder.source_files = 'Networking/Classes/Sinks/**/*.{h,m}'
+		end
+
+		ss.subspec 'Utils' do |folder|
+            ss.dependency 'FishLamp/Files'
+			folder.source_files = 'Networking/Classes/Utils/**/*.{h,m}'
+		end
+
+		ss.subspec 'Streams' do |folder|
+			folder.dependency 'FishLamp/EventBroadcaster'
+			folder.dependency 'FishLamp/Timer'
+			folder.dependency 'FishLamp/Async'
+			folder.dependency 'FishLamp/Networking/Errors'
+			folder.dependency 'FishLamp/Networking/Utils'
+			folder.dependency 'FishLamp/Networking/Sinks'
+			folder.ios.frameworks = 'CFNetwork'
+			folder.osx.frameworks = 'CFNetwork'
+			folder.source_files = 'Networking/Classes/Streams/**/*.{h,m}'
+		end
+
+
+
+
+
+		ss.subspec 'Protocol' do |protocol|
+			protocol.dependency 'FishLamp/EventBroadcaster'
+			protocol.dependency 'FishLamp/Async'
+			protocol.dependency 'FishLamp/Timer'
+			protocol.dependency 'FishLamp/BundleUtils'
+			protocol.dependency 'FishLamp/CodeBuilder'
+			protocol.dependency 'FishLamp/ModelObject'
+			protocol.dependency 'FishLamp/Services'
+			protocol.dependency 'FishLamp/Storage'
+
+			protocol.dependency 'FishLamp/Encoding'
+		
+			protocol.dependency 'FishLamp/Networking/Errors'
+			protocol.dependency 'FishLamp/Networking/Utils'
+			protocol.dependency 'FishLamp/Networking/Sinks'
+			protocol.dependency 'FishLamp/Networking/Activity'
+			protocol.dependency 'FishLamp/Networking/Authentication'
+			protocol.dependency 'FishLamp/Networking/Reachability'
+			protocol.dependency 'FishLamp/Networking/Streams'
+	
+			protocol.subspec 'DNS' do |folder|
+				folder.source_files = 'Networking/Classes/Protocols/DNS/**/*.{h,m}'
+			end
+
+			protocol.subspec 'HTTP' do |folder|
+				folder.source_files = 'Networking/Classes/Protocols/HTTP/**/*.{h,m}'
+			end
+
+			protocol.subspec 'Json' do |folder|
+				folder.dependency 'FishLamp/Networking/Protocol/HTTP'
+				folder.source_files = 'Networking/Classes/Protocols/Json/**/*.{h,m}'
+			end
+
+			protocol.subspec 'Soap' do |folder|
+				folder.dependency 'FishLamp/Networking/Protocol/HTTP'
+				folder.source_files = 'Networking/Classes/Protocols/Soap/**/*.{h,m}'
+			end
+
+			protocol.subspec 'Oauth' do |folder|
+				folder.dependency 'FishLamp/Networking/Protocol/HTTP'
+				folder.source_files = 'Networking/Classes/Protocols/Oauth/**/*.{h,m}'
+			end
+
+			protocol.subspec 'Tcp' do |folder|
+				folder.source_files = 'Networking/Classes/Protocols/Tcp/**/*.{h,m}'
+			end
+
+			protocol.subspec 'XmlRpc' do |folder|
+				folder.source_files = 'Networking/Classes/Protocols/XmlRpc/**/*.{h,m}'
+			end
+		end
+	end  
+
+    s.subspec 'All' do |ss|
+        ss.dependency 'FishLamp/Async'
+        ss.dependency 'FishLamp/BundleUtils'
+        ss.dependency 'FishLamp/ByteBuffer'
+        ss.dependency 'FishLamp/CodeBuilder'
+        ss.dependency 'FishLamp/CodeGenerator'
+        ss.dependency 'FishLamp/CommandLineProcessor'
+        ss.dependency 'FishLamp/Containers'
+        ss.dependency 'FishLamp/Database'
+        ss.dependency 'FishLamp/Encoding'
+        ss.dependency 'FishLamp/EventBroadcaster'
+        ss.dependency 'FishLamp/Files'
+        ss.dependency 'FishLamp/Keychain'
+        ss.dependency 'FishLamp/ModelObject'
+        ss.dependency 'FishLamp/MoreStrings'
+        ss.dependency 'FishLamp/Networking'
+        ss.dependency 'FishLamp/ObjcRuntime'
+        ss.dependency 'FishLamp/ObjectDatabase'
+        ss.dependency 'FishLamp/Required'
+        ss.dependency 'FishLamp/Services'
+        ss.dependency 'FishLamp/Storage'
+        ss.dependency 'FishLamp/Testables'
+        ss.dependency 'FishLamp/Timer'
+        ss.dependency 'FishLamp/UserPrefs'
+
+        ss.dependency 'FishLamp/TestablesOSX'
+    end
 
     s.xcconfig = {
         "CLANG_ANALYZER_DEADCODE_DEADSTORES" => "YES",
