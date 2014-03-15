@@ -1,5 +1,5 @@
 //
-//  FLPrintf.m
+//  printf_fl.m
 //  FishLampFrameworks
 //
 //  Created by Mike Fullerton on 8/22/12.
@@ -7,9 +7,9 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FLPrintf.h"
+#import "printf_fl.h"
 #import "FLWhitespace.h"
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
 
 @implementation FLPrintfStringFormatter
 
@@ -30,13 +30,34 @@ FLSynthesizeSingleton(FLPrintfStringFormatter);
 - (void) whitespaceStringFormatter:(FLWhitespaceStringFormatter*) stringFormatter
                       appendString:(NSString*) string {
 
-    [_history appendString:string];
 
-    _length += string.length;
+//    if(string) {
+//        CFShow(FLBridge(CFStringRef,string));
+//        [_history appendString:string];
+//        _length += string.length;
+//    }
+//
+//    const char* c_str = [string cStringUsingEncoding:NSUTF8StringEncoding];
+//    if(c_str) {
+//        fprintf(stderr, "stderr: %s", c_str);
+//    }
+//
+//    CFShow(@"WTF");
 
-    const char* c_str = [string cStringUsingEncoding:NSUTF8StringEncoding];
-    if(c_str) {
-        printf("%s", c_str);
+
+//        fprintf(stderr, "(%s) (%s:%d) %s",
+//            functionName, [fileName UTF8String],
+//            lineNumber, [body UTF8String]);
+//
+//
+
+    if(string.length) {
+
+        string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+        if(string.length) {
+            NSLog(@"%@", string);
+        }
     }
 }
 

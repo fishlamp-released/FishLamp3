@@ -1,15 +1,15 @@
 //
-//  NSString+FishLampCore.h
-//  FishLampTestLibraries
+//  FLStringUtilities.h
+//  Pods
 //
-//  Created by Mike Fullerton on 12/24/13.
+//  Created by Mike Fullerton on 2/18/14.
 //
 //
 
-#import <Foundation/Foundation.h>
-#import "FishLampRequired.h"
+#import "NSString+FishLamp.h"
 
-extern NSString* FLStringWithFormatOrNil(NSString* format, ...);
+// this also accepts a nil formatString (which is why it exists)
+extern NSString* FLStringWithFormatOrNil(NSString* formatOrNil, ...) NS_FORMAT_FUNCTION(1,2);
 
 // these work with nil strings, which is why they're not
 // category additions.
@@ -25,9 +25,9 @@ NSString* FLEmptyStringOrString(NSString* string) {
     return FLStringIsEmpty(string) ? @"" : string;
 }
 
-@interface NSString (FishLampCore)
-
-- (BOOL)isEqualToString_fl:(NSString *)aString caseSensitive:(BOOL) caseSensitive;
-
-@end
-
+NS_INLINE
+void FLAppendString(NSMutableString* string, NSString* aString) {
+    if(FLStringIsNotEmpty(aString)) {
+        [string appendString:aString];
+    }
+}

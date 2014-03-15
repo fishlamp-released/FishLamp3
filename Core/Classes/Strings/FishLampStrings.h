@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FishLampCore.h"
-#import "FishLampAssertions.h"
-#import "FishLampErrors.h"
+#import "FishLampRequired.h"
 
 // misc NSString stuff
 #import "NSString+FishLamp.h"
+#import "NSMutableString+FishLamp.h"
+#import "FLStringUtilities.h"
 
 // string formatter
 #import "FLStringFormatter.h"
@@ -21,6 +21,7 @@
 // for formatting nice strings
 #import "FLPrettyString.h"
 #import "FLPrettyAttributedString.h"
+
 
 // low level char* string helper
 #import "FLCStringFragment.h"

@@ -7,7 +7,7 @@
 //
 
 #import "FishLampRequired.h"
-#import "NSString+FishLampCore.h"
+#import "NSString+FishLamp.h"
 #import "NSError+FLStackTrace.h"
 //#import "FLAssertionFailedError.h"
 

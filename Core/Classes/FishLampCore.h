@@ -19,6 +19,9 @@
 
 #import "FLOSVersion.h"
 
+#import "FishLampStrings.h"
+#import "FishLampSimpleLogger.h"
+
 //#define FLLog   NSLog
 //#define FLTrace FLLog
 

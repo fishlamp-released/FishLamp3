@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
+#import "FishLampPropertyDeclaring.h"
 
 typedef void (^FLStringPreprocessorResultBlock)(NSRange range);
 

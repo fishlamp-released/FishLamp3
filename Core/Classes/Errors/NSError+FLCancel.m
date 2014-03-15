@@ -11,7 +11,7 @@
 
 #import "FishLampExceptions.h"
 #import "NSError+FishLampCore.h"
-#import "NSString+FishLampCore.h"
+#import "NSString+FishLamp.h"
 #import "FishLampCoreErrorDomain.h"
 #import "FishLampAssertions.h"
 

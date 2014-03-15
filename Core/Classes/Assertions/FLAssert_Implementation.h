@@ -17,45 +17,45 @@
             __THROWER__( FLAssertionFailureCondition, @"Condition failed", \
                             FLStringWithFormatOrNil(__COMMENT__, ##__VA_ARGS__))
 
-#define FL_ASSERT(__THROWER__, __CONDITION__) \
-            if(!(__CONDITION__)) \
+#define FL_ASSERT(__THROWER__, CONDITION) \
+            if(!(CONDITION)) \
                 __THROWER__(    FLAssertionFailureCondition, \
-                                FLStringWithFormatOrNil(@"\"%s\"", #__CONDITION__), \
+                                FLStringWithFormatOrNil(@"\"%s\"", #CONDITION), \
                                 @"Assertion Failure")
 
-#define FL_ASSERT_WITH_COMMENT(__THROWER__, __CONDITION__, __FORMAT__, ...) \
-            if(!(__CONDITION__)) \
+#define FL_ASSERT_WITH_COMMENT(__THROWER__, CONDITION, FORMAT, ...) \
+            if(!(CONDITION)) \
                 __THROWER__(    FLAssertionFailureCondition, \
-                                FLStringWithFormatOrNil(@"\"%s\"", #__CONDITION__), \
-                                FLStringWithFormatOrNil(__FORMAT__, ##__VA_ARGS__))
+                                FLStringWithFormatOrNil(@"\"%s\"", #CONDITION), \
+                                FLStringWithFormatOrNil(FORMAT, ##__VA_ARGS__))
 
 /// @brief: Assert a pointer is nil
-#define FL_ASSERT_IS_NIL(__THROWER__, __CONDITION__) \
-    if((__CONDITION__) != nil) \
+#define FL_ASSERT_IS_NIL(__THROWER__, CONDITION) \
+    if((CONDITION) != nil) \
         __THROWER__( FLAssertionFailureIsNotNil, \
-                                            FLStringWithFormatOrNil(@"\"%s != nil\"", #__CONDITION__), \
+                                            FLStringWithFormatOrNil(@"\"%s != nil\"", #CONDITION), \
                                             @"unexpected non nil ptr")
 
 /// @brief: Assert a pointer is nil
-#define FL_ASSERT_IS_NIL_WITH_COMMENT(__THROWER__, __CONDITION__, __COMMENT__, ...) \
-    if((__CONDITION__) != nil) \
+#define FL_ASSERT_IS_NIL_WITH_COMMENT(__THROWER__, CONDITION, __COMMENT__, ...) \
+    if((CONDITION) != nil) \
         __THROWER__( FLAssertionFailureIsNotNil, \
-                                            FLStringWithFormatOrNil(@"\"%s != nil\"", #__CONDITION__), \
+                                            FLStringWithFormatOrNil(@"\"%s != nil\"", #CONDITION), \
                                             FLStringWithFormatOrNil(__COMMENT__, ##__VA_ARGS__)) 
 
 /// @brief: Assert a pointer is NOT nil
-#define FL_ASSERT_IS_NOT_NIL(__THROWER__, __CONDITION__) \
-    if((__CONDITION__) == nil) \
+#define FL_ASSERT_IS_NOT_NIL(__THROWER__, CONDITION) \
+    if((CONDITION) == nil) \
         __THROWER__( FLAssertionFailureIsNil, \
-                                            FLStringWithFormatOrNil(@"\"%s == nil\"", #__CONDITION__), \
+                                            FLStringWithFormatOrNil(@"\"%s == nil\"", #CONDITION), \
                                             @"unexpected nil ptr")
 
 
 /// @brief: Assert a pointer is NOT nil
-#define FL_ASSERT_IS_NOT_NIL_WITH_COMMENT(__THROWER__, __CONDITION__, __COMMENT__, ...) \
-    if((__CONDITION__) == nil) \
+#define FL_ASSERT_IS_NOT_NIL_WITH_COMMENT(__THROWER__, CONDITION, __COMMENT__, ...) \
+    if((CONDITION) == nil) \
         __THROWER__( FLAssertionFailureIsNil, \
-                                            FLStringWithFormatOrNil(@"\"%s == nil\"", #__CONDITION__), \
+                                            FLStringWithFormatOrNil(@"\"%s == nil\"", #CONDITION), \
                                             FLStringWithFormatOrNil(__COMMENT__, ##__VA_ARGS__)) 
 
 /// @brief: Assert a string is empty (either nil or of length 0)

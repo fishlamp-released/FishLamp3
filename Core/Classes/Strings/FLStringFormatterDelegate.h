@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
 
 @class FLStringFormatter;
 @protocol FLStringFormatter;

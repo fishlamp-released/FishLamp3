@@ -12,21 +12,33 @@
 
 @implementation FLLogSink
 
-@synthesize outputFlags = _outputFlags;
+@synthesize behavior = _behavior;
 
-- (id) initWithOutputFlags:(FLLogSinkOutputFlags) outputFlags  {
+- (id) initWithBehavior:(id<FLLogSinkBehavior>) behavior  {
 
     self = [super init];
     if(self) {
-        _outputFlags = outputFlags;
+        _behavior = FLRetain(behavior);
     }
     
     return self;
 }
 
 - (id) init {
-    return [self initWithOutputFlags:0];
+    return [self initWithBehavior:nil];
 }
+
+- (void) updateLogSinkBehavior:(id<FLLogSinkBehavior>) behavior {
+    self.behavior = behavior;
+}
+
+
+#if FL_MRC
+- (void)dealloc {
+	[_behavior release];
+	[super dealloc];
+}
+#endif
 
 - (void) logEntry:(FLLogEntry*) entry stopPropagating:(BOOL*) stop {
 }

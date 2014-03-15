@@ -39,7 +39,12 @@ FLSynthesizeSingleton(FLLogLogger);
 - (id) init {
     self = [super init];
     if(self) {
-        [self addLoggerSink:[FLConsoleLogSink consoleLogSink:FLLogOutputSimple|FLLogOutputWithLocation]];
+
+        FLLogSinkBehavior* behavior = [FLLogSinkBehavior logSinkBehavior];
+        behavior.outputLocation = YES;
+        behavior.outputStackTrace = YES;
+
+        [self addLoggerSink:[FLConsoleLogSink consoleLogSink:behavior]];
     }
     
     return self;

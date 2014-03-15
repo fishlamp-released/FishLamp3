@@ -6,16 +6,18 @@
 //  Copyright (c) 2013 Mike Fullerton. All rights reserved.
 //
 
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
+
 #import "FLLogger.h"
 
+#import "FLLogSinkBehavior.h"
 #import "FLLogSink.h"
 #import "FLLogEntry.h"
 
 #import "FLConsoleLogSink.h"
 #import "FLLogger.h"
 
-#import "FLPrintf.h"
+#import "printf_fl.h"
 #import "FLLog.h"
 
 // NOTE: FLTrace.h is NOT included here. Including it in your file turns it on

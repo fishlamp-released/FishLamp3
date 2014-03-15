@@ -7,11 +7,11 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
 
 // NOTE: see NSScanner.h
 
-@interface NSString (FLStringUtilities)
+@interface NSString (FishLamp)
 
 - (BOOL)isEqualToString_fl:(NSString *)aString caseSensitive:(BOOL) caseSensitive;
 
@@ -55,23 +55,4 @@
 - (NSString*) stringByAppendingSuffix_fl:(NSString*) suffix;
 @end
 
-@interface NSMutableString (FLStringUtilities)
-- (BOOL) insertString_fl:(NSString*) substring
-            beforeString:(NSString*) beforeString
-     withBackwardsSearch:(BOOL) searchBackwards;
 
-- (BOOL) insertString_fl:(NSString*) substring
-             afterString:(NSString*) afterString
-     withBackwardsSearch:(BOOL) searchBackwards;
-@end
-
-// this also accepts a nil formatString (which is why it exists)
-extern NSString* FLStringWithFormatOrNil(NSString* formatOrNil, ...) NS_FORMAT_FUNCTION(1,2);
-
-
-NS_INLINE
-void FLAppendString(NSMutableString* string, NSString* aString) {
-    if(FLStringIsNotEmpty(aString)) {
-        [string appendString:aString];
-    }
-}

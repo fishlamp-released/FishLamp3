@@ -1,5 +1,5 @@
 //
-//  FLPrintf.h
+//  printf_fl.h
 //  FishLampFrameworks
 //
 //  Created by Mike Fullerton on 8/22/12.
@@ -7,8 +7,9 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
 #import "FLWhitespaceStringFormatter.h"
+#import "FishLampPropertyDeclaring.h"
 
 @interface FLPrintfStringFormatter : FLWhitespaceStringFormatter<FLWhitespaceStringFormatterDelegate> {
 @private
@@ -23,6 +24,6 @@ FLSingletonProperty(FLPrintfStringFormatter);
 
 @end
 
-#define FLPrintf(__FORMAT__, ...) [[FLPrintfStringFormatter instance] appendLineWithFormat:__FORMAT__, ##__VA_ARGS__]
+#define printf_fl(FORMAT, ...) [[FLPrintfStringFormatter instance] appendLineWithFormat:FORMAT, ##__VA_ARGS__]
 
-//#define FLPrintf [FLPrintfStringFormatter instance]
+//#define printf_fl [FLPrintfStringFormatter instance]

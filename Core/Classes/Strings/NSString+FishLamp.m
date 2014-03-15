@@ -9,7 +9,7 @@
 
 #import "NSString+FishLamp.h"
 
-@implementation NSString (FLStringUtilities)
+@implementation NSString (FishLamp)
 
 - (BOOL)isEqualToString_fl:(NSString *)aString caseSensitive:(BOOL) caseSensitive {
 	return caseSensitive ?	[self isEqualToString:aString] :		
@@ -231,39 +231,3 @@
 
 
 @end
-
-@implementation NSMutableString (FLStringUtilities)
-
-- (BOOL) insertString_fl:(NSString*) substring beforeString:(NSString*) beforeString withBackwardsSearch:(BOOL) searchBackwards {
-
-    NSStringCompareOptions options = searchBackwards ? NSBackwardsSearch: 0;
-    
-    NSRange range = [self rangeOfString:beforeString options:options];
-
-    if(range.length) {
-        [self insertString:substring atIndex:range.location];
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (BOOL) insertString_fl:(NSString*) substring afterString:(NSString*) afterString withBackwardsSearch:(BOOL) searchBackwards {
-
-    NSStringCompareOptions options = searchBackwards ? NSBackwardsSearch: 0;
-    
-    NSRange range = [self rangeOfString:afterString options:options];
-
-    if(range.length) {
-        [self insertString:substring atIndex:range.location + range.length];
-        return YES;
-    }
-
-    return NO;
-}
-
-
-
-@end
-
-

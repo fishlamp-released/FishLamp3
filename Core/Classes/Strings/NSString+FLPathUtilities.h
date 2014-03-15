@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
 
 typedef void (^FLPathUtilitiesVisitor)(NSRange range, BOOL* stop);
 

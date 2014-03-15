@@ -1,16 +1,12 @@
 //
-//  NSString+FishLampCore.m
-//  FishLampTestLibraries
+//  FLStringUtilities.m
+//  Pods
 //
-//  Created by Mike Fullerton on 12/24/13.
+//  Created by Mike Fullerton on 2/18/14.
 //
 //
 
-#import "NSString+FishLampCore.h"
-
-//@implementation NSString (FishLampCore)
-//
-//@end
+#import "FLStringUtilities.h"
 
 NSString* FLStringWithFormatOrNil(NSString* format, ...) {
     if(format) {
@@ -27,12 +23,12 @@ NSString* FLStringWithFormatOrNil(NSString* format, ...) {
 
 
 //NS_INLINE
-BOOL FLStringIsEmpty(id string) {
+BOOL FLStringIsEmpty(NSString* string) {
 	return string == nil || [string length] == 0;
 }
 
 //NS_INLINE
-BOOL FLStringIsNotEmpty(id string) {
+BOOL FLStringIsNotEmpty(NSString* string) {
 	return string != nil && [string length] > 0;
 }
 
@@ -46,11 +42,3 @@ BOOL FLStringsAreEqualCaseInsensitive(NSString* lhs, NSString* rhs) {
 	return [(lhs == nil ? @"" : lhs) isEqualToString_fl:(rhs == nil ) ? @"" :rhs caseSensitive:NO];
 }
 
-@implementation NSString (FishLampCore)
-
-- (BOOL)isEqualToString_fl:(NSString *)aString caseSensitive:(BOOL) caseSensitive {
-	return caseSensitive ?	[self isEqualToString:aString] :		
-							[self caseInsensitiveCompare:aString] == NSOrderedSame; 
-}
-
-@end

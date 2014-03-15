@@ -8,7 +8,5 @@
 
 #import "FishLampRequired.h"
 
-// dependencies
-#import "NSString+FishLampCore.h"
 #import "FLBitFlags.h"
 #import "FLMath.h"

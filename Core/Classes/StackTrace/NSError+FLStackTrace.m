@@ -7,7 +7,7 @@
 //
 
 #import "NSError+FLStackTrace.h"
-#import "NSString+FishLampCore.h"
+#import "NSString+FishLamp.h"
 
 #import "FLDeclareDictionaryProperty.h"
 

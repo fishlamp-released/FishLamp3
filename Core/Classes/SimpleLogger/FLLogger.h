@@ -7,7 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
 #import "FLStringFormatter.h"
 
 #define FLLogTypeNone       nil
@@ -16,6 +16,8 @@
 #define FLLogTypeException  @"com.fishlamp.exception"
 
 @protocol FLLogSink;
+@protocol FLLogSinkBehavior;
+
 @class FLLogger;
 @class FLLogEntry;
 @class FLStackTrace;
@@ -25,6 +27,7 @@
     NSMutableArray* _sinks;
     dispatch_queue_t _fifoQueue;
     NSMutableString* _line;
+    OSSpinLock _spinLock;
 }
 
 + (id) logger;
@@ -37,6 +40,8 @@
 - (void) logObject:(id) object;
 - (void) logArrayOfLogEntries:(NSArray*) entryArray;
 
+- (void) updateLogSinkBehavior:(id<FLLogSinkBehavior>) behavior;
+
 @end
 
 @interface FLLogger (UglyImplementationMethods)
@@ -48,7 +53,4 @@
         stackTrace:(FLStackTrace*) stackTrace;
 
 @end
-
-#define FLLogToLogger(__LOGGER_, __TYPE__, __FORMAT__, ...) \
-            [__LOGGER_ logString:FLStringWithFormatOrNil(__FORMAT__, ##__VA_ARGS__) logType:__TYPE__ stackTrace:FLCreateStackTrace(NO)];
 

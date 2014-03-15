@@ -8,7 +8,7 @@
 
 #import "FLObjc.h"
 
-id FLCopyOrRetainObject(id src) {	
+id FLCopyOrRetainObjectWithAutorelease(id src) {
 	if([src conformsToProtocol:@protocol(NSMutableCopying)]) {
 		return FLAutorelease([src mutableCopy]);
 	}

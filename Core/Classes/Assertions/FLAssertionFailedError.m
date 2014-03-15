@@ -10,7 +10,7 @@
 #import "FLAssertionFailedError.h"
 #import "FishLampExceptions.h"
 #import "NSError+FLStackTrace.h"
-#import "NSString+FishLampCore.h"
+#import "NSString+FishLamp.h"
 #import "FLAssertionFailureErrorDomain.h"
 
 @implementation NSError (FLAssertions)

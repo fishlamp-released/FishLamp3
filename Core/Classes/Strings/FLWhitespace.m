@@ -10,6 +10,8 @@
 #import "FLWhitespace.h"
 #import "FishLampAssertions.h"
 
+#import "FishLampPropertyDeclaring.h"
+
 @interface FLWhitespace ()
 @end
 

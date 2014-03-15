@@ -6,24 +6,34 @@
 //	Copyright (c) 2013 GreenTongue Software LLC, Mike Fullerton. 
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
-#import "FishLampCore.h"
+#import "FishLampRequired.h"
+#import "FishLampPropertyDeclaring.h"
 #import "FLLogger.h"
-// WARNING: don't import anything here. This file is imported by FishLamp.  This is imported by everything.
+
+@interface FLLogLogger : FLLogger
+FLSingletonProperty(FLLogLogger);
+@end
 
 #define FLLogTypeTrace      @"com.fishlamp.trace"
 #define FLLogTypeDebug      @"com.fishlamp.debug"
 
-#define FLLogRelease(__FORMAT__, ...)   \
-            FLLogToLogger([FLLogLogger instance], FLLogTypeLog, __FORMAT__, ##__VA_ARGS__)
+#define FLLogError(FORMAT...) \
+            [[FLLogLogger instance] logString:[NSString stringWithFormat:FORMAT] \
+                                      logType:FLLogTypeLog \
+                                   stackTrace:FLCreateStackTrace(YES)];
 
-#define FLLogError(__FORMAT__, ...) \
-            FLLogToLogger([FLLogLogger instance], FLLogTypeError, __FORMAT__, ##__VA_ARGS__)
+#define FLLog(FORMAT...)   \
+            [[FLLogLogger instance] logString:[NSString stringWithFormat:FORMAT] \
+                                      logType:FLLogTypeLog \
+                                   stackTrace:FLCreateStackTrace(NO)];
 
-#define FLLog(__FORMAT__, ...)   \
-			FLLogToLogger([FLLogLogger instance], FLLogTypeLog, __FORMAT__, ##__VA_ARGS__)
-
-#define FLLogIf(__CONDITION__, __FORMAT__, ...) \
-			if(__CONDITION__) FLLogDebug(__FORMAT__, ##__VA_ARGS__)
+#define FLLogIf(CONDITION, FORMAT...) \
+            do { \
+                if(CONDITION) { \
+                    FLLog(FORMAT); \
+                } \
+            } \
+            while(0)
 
 #define FLLogIndent(__BLOCK__) [[FLLogLogger instance] indentLinesInBlock:__BLOCK__]
 
@@ -32,30 +42,30 @@
 
 #if DEBUG
 
-#define FLDebugLog(__FORMAT__, ...)   \
-			FLLogToLogger([FLLogLogger instance], FLLogTypeDebug, __FORMAT__, ##__VA_ARGS__)
+    #define FLDebugLog(FORMAT...)   \
+            [[FLLogLogger instance] logString:[NSString stringWithFormat:FORMAT] \
+                                      logType:FLLogTypeDebug \
+                                   stackTrace:FLCreateStackTrace(YES)];
 
 #else
-#define FLDebugLog(...)
+    #define FLDebugLog(...)
+
 #endif
 
 #ifdef FLTrace
-#undef FLTrace
+    #undef FLTrace
 #endif
 
-#define FLTrace(__FORMAT__, ...)
-#define FLTraceIf(__CONDITION__, __FORMAT__, ...)
+#define FLTrace(FORMAT...)
+#define FLTraceIf(CONDITION, FORMAT...)
 
 #ifndef FL_DIVERT_NSLOG
-#define FL_DIVERT_NSLOG 0
+    #define FL_DIVERT_NSLOG 0
 #endif
 
 #if FL_DIVERT_NSLOG
-#define NSLog FLLog
+    #define NSLog FLLog
 #endif
 
-@interface FLLogLogger : FLLogger
-FLSingletonProperty(FLLogLogger);
-@end
 
 
