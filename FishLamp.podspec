@@ -57,12 +57,10 @@ Pod::Spec.new do |s|
 		end
 
 		ss.subspec 'Utils' do |folder|
-			# folder.dependency 'FishLamp/Core/ObjcCompiling'
 			folder.source_files = 'Core/Classes/Utils/*.{h,m}'
 		end
 
 		ss.subspec 'Versioning' do |folder|
-			# folder.dependency 'FishLamp/Core/ObjcCompiling'
 			folder.source_files = 'Core/Classes/Versioning/*.{h,m}'
 		end
 
@@ -92,6 +90,11 @@ Pod::Spec.new do |s|
     s.subspec 'ByteBuffer' do |ss|
         ss.dependency 'FishLamp/Core'
         ss.source_files = 'ByteBuffer/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Utils' do |ss|
+        ss.dependency 'FishLamp/Core'
+        ss.source_files = 'Utils/Classes/**/*.{h,m}'
     end
 
     s.subspec 'BundleUtils' do |ss|

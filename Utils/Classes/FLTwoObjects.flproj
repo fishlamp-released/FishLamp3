@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<code projectName="FishLamp">
+    <organization name="GreenTongue Software LLC, Mike Fullerton"/>
+    <license>
+        <licenseName>The FishLamp Framework is released under the MIT License: http://fishlamp.com/license</licenseName>
+    </license>
+    <generatorOptions typePrefix="FL"/>
+    <class name="FLTwoObjects" superclass="NSObject">
+        <property name="object1" type="object"/>
+        <property name="object2" type="object"/>
+    </class>
+</code>
