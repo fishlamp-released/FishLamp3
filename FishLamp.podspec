@@ -9,13 +9,12 @@ Pod::Spec.new do |s|
     s.source       = { :git => "https://github.com/fishlamp/FishLampCore.git", :tag => s.version.to_s }
 
     s.ios.deployment_target = '7.0'
-    s.osx.deployment_target = '10.6'
+    s.osx.deployment_target = '10.8'
     s.requires_arc = false
 	s.default_subspec = 'Core'
     
-#     s.ios.frameworks = 'Security', 'MobileCoreServices', 'SystemConfiguration'
-#     s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'Quartz', 'QuartzCore', 'CoreFoundation',  'Foundation'
-
+    s.ios.frameworks = 'Security', 'MobileCoreServices', 'SystemConfiguration', 'Foundation'
+    s.osx.frameworks = 'CoreServices', 'Security', 'SystemConfiguration', 'ApplicationServices', 'CoreFoundation',  'Foundation'
 
 	s.subspec 'Core' do |ss|
 	
@@ -305,6 +304,9 @@ Pod::Spec.new do |s|
     end
 
   	s.subspec 'Networking' do |ss|
+        s.ios.frameworks = 'CFNetwork'
+        s.osx.frameworks = 'CFNetwork'
+
         ss.dependency 'FishLamp/Core'
 		ss.source_files  = 'Networking/Classes/*.h'
 
