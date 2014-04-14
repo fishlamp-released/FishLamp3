@@ -51,7 +51,7 @@
 
 - (void) deleteAllIfVersionChanged {
     if(FLStringsAreNotEqual(self.readAppVersion, [NSBundle appVersionString])) {
-        FLLog(@"removing prefs: %@ to %@", self.readAppVersion, [NSBundle appVersionString]);
+        FLDebugLog(@"removing prefs: %@ to %@", self.readAppVersion, [NSBundle appVersionString]);
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     }
@@ -100,7 +100,7 @@
     for(id key in prefs) {
         if([FLUserPreferences isAppSpecificKey:key]) {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
-            FLLog(@"removed key: %@", key);
+            FLDebugLog(@"removed key: %@", key);
         }
     }
 

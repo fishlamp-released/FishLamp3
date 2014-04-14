@@ -66,7 +66,7 @@
         }
         @catch(NSException* ex) {
             [theStream addError:ex.error];
-            FLLog(@"stream encountered secondary error: %@", [ex.error localizedDescription]);
+            FLDebugLog(@"stream encountered secondary error: %@", [ex.error localizedDescription]);
         }
 
         FLReleaseWithNil(theStream);

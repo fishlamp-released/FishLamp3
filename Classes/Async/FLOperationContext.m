@@ -91,7 +91,7 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
 
         for(id operation in copy) {
 #if TRACE
-            FLLog(@"cancelled %@", [operation description]);
+            FLDebugLog(@"cancelled %@", [operation description]);
 #endif
 
             [operation requestCancel];
@@ -125,7 +125,7 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
     @synchronized(self) {
     
 #if TRACE
-        FLLog(@"Operation added to context: %@", [operation description]);
+        FLDebugLog(@"Operation added to context: %@", [operation description]);
 #endif
         [_operations addObject:operation];
 
@@ -148,7 +148,7 @@ typedef void (^FLOperationVisitor)(id operation, BOOL* stop);
     @synchronized(self) {
     
 #if TRACE
-        FLLog(@"Operation removed from context: %@", [operation description]);
+        FLDebugLog(@"Operation removed from context: %@", [operation description]);
 #endif
 
         [_operations removeObject:FLRetainWithAutorelease(operation)];

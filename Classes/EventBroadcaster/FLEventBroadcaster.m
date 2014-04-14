@@ -21,7 +21,7 @@
                 if(self.logEvents) { \
                     id __LISTENER = [OBJ listener]; \
                     if([__LISTENER respondsToSelector:SELECTOR]) { \
-                        FLLog(@"%@: -[%@ %@]", \
+                        FLDebugLog(@"%@: -[%@ %@]", \
                             [NSThread isMainThread] ? @"F" : @"B", \
                             NSStringFromClass([__LISTENER class]), \
                             NSStringFromSelector(SELECTOR) \

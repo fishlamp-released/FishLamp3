@@ -113,7 +113,7 @@
     FLAssertNotNil(_propertyDescriber);
 
     if(parent && _object) {
-//        FLLog(@"Adding %@ to %@ parent with object %@", NSStringFromClass([self class]), NSStringFromClass([parent class]), [_object description]);
+//        FLDebugLog(@"Adding %@ to %@ parent with object %@", NSStringFromClass([self class]), NSStringFromClass([parent class]), [_object description]);
         [_object addToXmlElement:self propertyDescriber:_propertyDescriber];
     }
 }

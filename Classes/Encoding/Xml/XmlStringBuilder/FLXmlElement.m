@@ -186,7 +186,7 @@ appendContentsToStringFormatter:(id<FLStringFormatter>)stringFormatter {
     FLAssertNotNil(stringFormatter);
     FLAssertNotNil(self.lines);
 
-  //  FLLog(@"appending %@ to %@", [self description], [stringFormatter description]);
+  //  FLDebugLog(@"appending %@ to %@", [self description], [stringFormatter description]);
 
     if(_comments) {
         [stringFormatter appendString:_comments];
@@ -197,7 +197,7 @@ appendContentsToStringFormatter:(id<FLStringFormatter>)stringFormatter {
 
 #if TRACE
     if(!hasLines) {
-        FLLog(@"xml element %@ has no lines", self.xmlElementTag)
+        FLDebugLog(@"xml element %@ has no lines", self.xmlElementTag)
     }
 #endif
 

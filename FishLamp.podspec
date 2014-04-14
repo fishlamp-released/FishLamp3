@@ -161,12 +161,6 @@ Pod::Spec.new do |s|
         ss.source_files = 'Classes/ModelObject/**/*.{h,m}'
     end
         
-    # s.subspec 'TestablesOSX' do |ss|
-    #     ss.dependency 'FishLamp/Testables'
-    #     ss.source_files = 'Classes/Testables/OSX/**/*.{h,m}'
-    #     ss.resources = ['Testables/OSX/**/*.{png,xib}']
-    # end
-
     s.subspec 'CodeGenerator' do |ss|
         ss.dependency 'FishLamp/Core'
         ss.dependency 'FishLamp/CodeBuilder'
@@ -282,7 +276,7 @@ Pod::Spec.new do |s|
         ss.dependency 'FishLamp/ObjcRuntime'
         ss.dependency 'FishLamp/CodeBuilder'
 
-        ss.source_files  = 'Encoding/*h'
+        ss.source_files  = 'Classes/Encoding/*h'
 
         ss.subspec 'Xml' do |folder|
             folder.source_files = 'Classes/Encoding/Xml/**/*.{h,m}'
@@ -314,7 +308,7 @@ Pod::Spec.new do |s|
         s.osx.frameworks = 'CFNetwork'
 
         ss.dependency 'FishLamp/Core'
-		ss.source_files  = 'Networking/*.h'
+		ss.source_files  = 'Classes/Networking/*.h'
 
 		ss.subspec 'Reachability' do |folder|
 			folder.ios.frameworks = 'SystemConfiguration'
@@ -439,8 +433,6 @@ Pod::Spec.new do |s|
         ss.dependency 'FishLamp/Testables'
         ss.dependency 'FishLamp/Timer'
         ss.dependency 'FishLamp/UserPrefs'
-
-    #    ss.dependency 'FishLamp/TestablesOSX'
     end
 
     s.xcconfig = {

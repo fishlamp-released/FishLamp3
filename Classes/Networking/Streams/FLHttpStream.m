@@ -90,7 +90,7 @@
 - (CFReadStreamRef) allocReadStreamRef {
 
 #if TRACE
-    FLLog(@"connecting to %@", _requestHeaders.requestURL)
+    FLDebugLog(@"connecting to %@", _requestHeaders.requestURL)
 #endif
 
     if(_bodyStream) {

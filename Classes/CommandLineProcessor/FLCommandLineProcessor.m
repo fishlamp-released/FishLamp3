@@ -135,7 +135,7 @@
 //- (void) _wait:(FLArgumentHandler*) handler {
 //
 //    NSTimeInterval pause = [handler.inputData floatValue];
-//    FLLog(@"Pausing for %f seconds", pause);
+//    FLDebugLog(@"Pausing for %f seconds", pause);
 //    NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
 //    
 //    while([NSDate timeIntervalSinceReferenceDate] < (start + pause)) {
@@ -180,17 +180,17 @@
 
 
 //- (void) willPrintHelp:(id) sender {
-//    FLLog(@"%@ Help:", self.toolName);
-//    FLLog(self.helpBlurb);
-//    FLLog(@"");
+//    FLDebugLog(@"%@ Help:", self.toolName);
+//    FLDebugLog(self.helpBlurb);
+//    FLDebugLog(@"");
 //    [self willPrintUsage:sender];
 //}
 
 //- (void) willPrintUsage:(id) sender {
-//    FLLog(@"%@ Usage:", self.toolName);
+//    FLDebugLog(@"%@ Usage:", self.toolName);
 //    for(FLArgumentHandler* handler in _argumentHandlers) {
 //        NSString* inputParms = [[NSString stringWithFormat:@"%@:", handler.inputParametersAsString] stringWithPadding_fl:40];
-//        FLLog(@"%@%@", inputParms, handler.helpDescription);
+//        FLDebugLog(@"%@%@", inputParms, handler.helpDescription);
 //    }
 //}
 
@@ -331,7 +331,7 @@
 //    [self _parseParameters:input];
 //    
 //    if(self.toolMode.debug) {
-//        FLLog([input description]);
+//        FLDebugLog([input description]);
 //    }
 //
 //    for(FLArgumentHandler* handler in self.arguments.objectEnumerator) {
@@ -346,9 +346,9 @@
 
 //- (void) onHandleError:(NSError*) error {
 //    if(FLStringIsNotEmpty(error.localizedDescription)) {
-//        FLLog(@"EPIC FAIL: %@", error.localizedDescription);
+//        FLDebugLog(@"EPIC FAIL: %@", error.localizedDescription);
 //    } 
 //    else { 
-//        FLLog(@"EPIC FAIL: %@", [error description]);
+//        FLDebugLog(@"EPIC FAIL: %@", [error description]);
 //    }
 //}

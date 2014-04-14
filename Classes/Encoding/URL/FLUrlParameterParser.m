@@ -37,7 +37,7 @@
 	}
 	else
 	{
-		FLLog(@"FLUrlParameterParser skipped data (not in dest object): %@=%@", key, data);
+		FLDebugLog(@"FLUrlParameterParser skipped data (not in dest object): %@=%@", key, data);
 	}
 	
 	return NO;

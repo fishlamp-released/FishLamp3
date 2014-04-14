@@ -175,7 +175,7 @@ extern void FLDebugCompareHeaders(NSString* lhs, NSString* rhs);
 	}
 
 #if LOG
-	FLLog(@"OAuth auth header: %@", outString);
+	FLDebugLog(@"OAuth auth header: %@", outString);
 #endif
 	
 	return outString;
@@ -196,7 +196,7 @@ extern void FLDebugCompareHeaders(NSString* lhs, NSString* rhs);
                                                          consumerKey:consumerKey
                                                               secret:secret];
 #if DEBUG
-    FLLog(@"%@ = %@", FLOAuthHttpAuthorizationHeader, header);
+    FLDebugLog(@"%@ = %@", FLOAuthHttpAuthorizationHeader, header);
 #endif
     [self.requestHeaders setValue:header forHTTPHeaderField:FLOAuthHttpAuthorizationHeader];
 }
@@ -237,16 +237,16 @@ BOOL FLCompareDicts(NSDictionary* lhsDict, NSDictionary* rhsDict)
 		if(!rhsValue)
 		{
 			equal = NO;
-			FLLog(@"rhs missing %@/%@", key, lhsValue);
+			FLDebugLog(@"rhs missing %@/%@", key, lhsValue);
 		}
 		else if(!FLStringsAreEqual(lhsValue, rhsValue))
 		{
 			equal = NO;
-			FLLog(@"value for key %@ are not equal: %@ != %@", key, lhsValue, rhsValue);
+			FLDebugLog(@"value for key %@ are not equal: %@ != %@", key, lhsValue, rhsValue);
 		}
 		else 
 		{
-			FLLog(@"found %@=%@ in both headers", key, lhsValue);
+			FLDebugLog(@"found %@=%@ in both headers", key, lhsValue);
 		}
 	}
 	
@@ -276,22 +276,22 @@ void FLDebugCompareHeaders(NSString* lhs, NSString* rhs)
 	
 	if(equal)
 	{
-		FLLog(@"header:\n%@\n==\n%@", lhs, rhs);
+		FLDebugLog(@"header:\n%@\n==\n%@", lhs, rhs);
 	}
 	else
 	{
-		FLLog(@"header:\n%@\n!=\n%@", lhs, rhs);
+		FLDebugLog(@"header:\n%@\n!=\n%@", lhs, rhs);
 	}
 }
 
 void FLDebugCompareStrings(NSString* lhs, NSString* rhs)
 {
-	FLLog(@"lhs:\n%@", lhs);
-	FLLog(@"rhs:\n%@", rhs);
+	FLDebugLog(@"lhs:\n%@", lhs);
+	FLDebugLog(@"rhs:\n%@", rhs);
 
 	if(lhs.length != rhs.length)
 	{
-		FLLog(@"lhs length: %ld != rhs length: %ld", (unsigned long)lhs.length, (unsigned long)rhs.length);
+		FLDebugLog(@"lhs length: %ld != rhs length: %ld", (unsigned long)lhs.length, (unsigned long)rhs.length);
 	}
 
 	NSMutableString* str = [NSMutableString string];
@@ -299,13 +299,13 @@ void FLDebugCompareStrings(NSString* lhs, NSString* rhs)
 	{
 		if(i >= (int)lhs.length)
 		{
-			FLLog(@"lhs ran out of chars");
-			FLLog(@"%@", str);
+			FLDebugLog(@"lhs ran out of chars");
+			FLDebugLog(@"%@", str);
 		}
 		else if(i >= (int)rhs.length)
 		{
-			FLLog(@"rhs ran out of chars");
-			FLLog(@"%@", str);
+			FLDebugLog(@"rhs ran out of chars");
+			FLDebugLog(@"%@", str);
 		}
 		else if([lhs characterAtIndex:i] == [rhs characterAtIndex:i])
 		{
@@ -313,13 +313,13 @@ void FLDebugCompareStrings(NSString* lhs, NSString* rhs)
 		}
 		else
 		{
-			FLLog(@"%@", str);
-			FLLog(@"%d: %c != %c", i, [lhs characterAtIndex:i], [rhs characterAtIndex:i]); 
+			FLDebugLog(@"%@", str);
+			FLDebugLog(@"%d: %c != %c", i, [lhs characterAtIndex:i], [rhs characterAtIndex:i]); 
 			return;
 		}
 	}
 	
-	FLLog(@"%@\n==\n%@", lhs, rhs); 
+	FLDebugLog(@"%@\n==\n%@", lhs, rhs); 
 
 }
 void TestEncoding()
@@ -356,9 +356,9 @@ void TestEncoding()
 //
 //	FLDebugCompareStrings(key, @"8wUi7m5HFQy76nowoCThusfgB+Q=");
 //	
-////	FLLog(@"Keys are equal: %d", FLStringsAreEqual(@"8wUi7m5HFQy76nowoCThusfgB+Q=", key));
+////	FLDebugLog(@"Keys are equal: %d", FLStringsAreEqual(@"8wUi7m5HFQy76nowoCThusfgB+Q=", key));
 //
-//	FLLog(key);
+//	FLDebugLog(key);
 //
 //	[sig setParameter:kFLOAuthHeaderSignature value:key];
 //
@@ -395,9 +395,9 @@ void TestEncoding()
 //
 //	FLDebugCompareStrings(key, [@"TV9uaB7Wl4w9uRW4%2BQ6K%2FkEQeYg%3D" urlDecodeString:NSUTF8StringEncoding]);
 //	
-////	FLLog(@"Keys are equal: %d", FLStringsAreEqual(@"8wUi7m5HFQy76nowoCThusfgB+Q=", key));
+////	FLDebugLog(@"Keys are equal: %d", FLStringsAreEqual(@"8wUi7m5HFQy76nowoCThusfgB+Q=", key));
 //
-//	FLLog(key);
+//	FLDebugLog(key);
 //
 //	[sig setParameter:kFLOAuthHeaderSignature value:key];
 //
@@ -405,7 +405,7 @@ void TestEncoding()
 //	
 //	NSString* authHeader = [sig buildAuthorizationHeader];
 //	
-//	FLLog(authHeader);
+//	FLDebugLog(authHeader);
 //	
 ////	NSString* refAuthHeader = @"OAuth oauth_nonce=\"QP70eNmVz8jvdPevU3oJD2AfF7R7odC2XJcn4XlZJqk\", oauth_callback=\"http%3A%2F%2Flocalhost%3A3005%2Fthe_dance%2Fprocess_callback%3Fservice_provider_id%3D11\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"1272323042\", oauth_consumer_key=\"GDdmIQH6jhtmLUypg82g\", oauth_signature=\"8wUi7m5HFQy76nowoCThusfgB%2BQ%3D\", oauth_version=\"1.0\"";
 //	

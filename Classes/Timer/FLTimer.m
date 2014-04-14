@@ -80,7 +80,7 @@ NSString* const FLTimedOutNotification = @"FLTimedOutNotification";
     
     
 #if TRACE
-    FLLog(@"checked for timeout: %d, elapsed time: %f", _updateCount, self.idleDuration);
+    FLDebugLog(@"checked for timeout: %d, elapsed time: %f", _updateCount, self.idleDuration);
 #endif
     ++_updateCount;
     

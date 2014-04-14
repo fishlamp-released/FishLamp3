@@ -96,7 +96,7 @@
 
 #if DEBUG
     if(status != noErr) {
-        FLLog(@"addInternetPassword returned %ld", (long) status);
+        FLDebugLog(@"addInternetPassword returned %ld", (long) status);
     }
 #endif
 
@@ -160,7 +160,7 @@
 
 #if DEBUG
     if(err != noErr && err != errSecItemNotFound) {
-        FLLog(@"Find internet password returned: %ld", (long) err);
+        FLDebugLog(@"Find internet password returned: %ld", (long) err);
     }
 #endif
 

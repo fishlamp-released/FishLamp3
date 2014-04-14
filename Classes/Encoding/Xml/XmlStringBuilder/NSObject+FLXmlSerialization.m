@@ -37,7 +37,7 @@
                 foundIt = YES;
             }
 
-//            FLLog(@"%@.%@ = %@", NSStringFromClass([self class]), property.propertyName, [object description])
+//            FLDebugLog(@"%@.%@ = %@", NSStringFromClass([self class]), property.propertyName, [object description])
 
             if(object) {
                 [xmlElement appendSection:[FLObjectXmlElement objectXmlElement:object
@@ -63,7 +63,7 @@
             [xmlElement appendLine:line];
         }
         else {
-            FLLog(@"No encoder for %@ found", NSStringFromClass([self class]));
+            FLDebugLog(@"No encoder for %@ found", NSStringFromClass([self class]));
         }
     }
 }
@@ -100,7 +100,7 @@
                                                               propertyDescriber:containedType]];
                 }
                 else {
-                    FLLog(@"array property describer for %@ not found", NSStringFromClass([obj class]));
+                    FLDebugLog(@"array property describer for %@ not found", NSStringFromClass([obj class]));
                 }
                 
 //                BOOL found = NO;
@@ -112,7 +112,7 @@
 //					}
 //				}
 //                if(!found) {
-//                    FLLog(@"array property describer for %@ not found", NSStringFromClass([obj class]));
+//                    FLDebugLog(@"array property describer for %@ not found", NSStringFromClass([obj class]));
 //                
 //                }
 			}		
@@ -120,7 +120,7 @@
 	}
 #if DEBUG
 	else if(!propertyDescriber) {
-		FLLog(@"Warning not streaming object of type: %@", NSStringFromClass([self class]));
+		FLDebugLog(@"Warning not streaming object of type: %@", NSStringFromClass([self class]));
 	}
 #endif	
 }

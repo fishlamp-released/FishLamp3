@@ -44,7 +44,7 @@ delayBetweenRetries:(NSTimeInterval) retryDelay {
 //    if(!self.isDisabled && self.retryCount < self.maxRetryCount) {
 //        self.retryCount++;
 //        
-//        FLLog(@"Retrying HTTP Request %@ (%ld of %ld)", self.requestHeaders.requestURL, self.retryCount, self.maxRetryCount);
+//        FLDebugLog(@"Retrying HTTP Request %@ (%ld of %ld)", self.requestHeaders.requestURL, self.retryCount, self.maxRetryCount);
 //
 //        if(_retryDelay > 0) {
 //            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_retryDelay * NSEC_PER_SEC));

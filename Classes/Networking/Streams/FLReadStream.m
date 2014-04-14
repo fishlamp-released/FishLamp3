@@ -58,7 +58,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef streamRef, CFStreamEventTyp
 - (void) dealloc {
 #if DEBUG
     if(_streamRef) {
-        FLLog(@"WARNING: stream not closed in dealloc");
+        FLDebugLog(@"WARNING: stream not closed in dealloc");
     }
 #endif     
     
@@ -145,7 +145,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef streamRef, CFStreamEventTyp
                 [self.inputSink closeSinkWithCommit:NO];
                 result = FLRetainWithAutorelease(self.error);
 
-                FLLog(@"closed stream with error: %@", self.error);
+                FLDebugLog(@"closed stream with error: %@", self.error);
             }
             else {
                 result = [self createSuccessfulResult:self.inputSink];

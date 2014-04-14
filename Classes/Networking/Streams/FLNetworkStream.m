@@ -209,13 +209,10 @@ static Class s_eventHandlerClass = nil;
 
 - (void) timerWasUpdated:(FLTimer*) timer {
 
-#if DEBUG
     if(timer.idleDuration - self.idleDuration > 5.0f) {
         FLLog(@"Server hasn't responded for %f seconds (%@)", timer.idleDuration, self.identifier);
         self.idleDuration = timer.idleDuration;
     }
-#endif
-
 }
 
 - (void) addError:(NSError*) error {

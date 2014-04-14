@@ -18,7 +18,7 @@ FLSynthesizeDefaultProperty(id, defaultExceptionHandler);
 - (void) handleException:(NSException*) exception
               completion:(FLExceptionHandlerBlock) completion {
 
-//    FLLog(@"Unhandled exception: %@", [exception description]);
+//    FLDebugLog(@"Unhandled exception: %@", [exception description]);
 
     if(completion) {
         completion(NO);

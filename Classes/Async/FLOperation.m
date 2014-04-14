@@ -51,7 +51,7 @@
 
 - (FLPromisedResult) runSynchronously {
 
-    FLLog(@"%@ operation did nothing, you must override startOperation or runSynchronously.", NSStringFromClass([self class]));
+    FLDebugLog(@"%@ operation did nothing, you must override startOperation or runSynchronously.", NSStringFromClass([self class]));
 
     return FLSuccessfulResult;
 }

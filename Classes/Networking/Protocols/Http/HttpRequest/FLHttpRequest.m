@@ -300,13 +300,7 @@ static int s_counter = 0;
 - (void) networkStream:(FLHttpStream*) readStream 
       encounteredError:(NSError*) error {
 
-//    [self.httpStream requestCancel];
-
-//    if( [error isCancelError] || self.wasCancelled || ![self tryRetry]) {       
-//        [self finishRequestWithResult:error];
-//    }
-
-    FLLog(@"got error: %@", [error description])
+    FLLog(@"Network stream encountered error: %@", [error description])
 }
 
 - (NSTimeInterval) networkStreamGetTimeoutInterval:(FLNetworkStream*) stream {
@@ -432,7 +426,7 @@ static int s_counter = 0;
 //            self.totalBytesSent = bytesSent;
 //
 //#if TRACE
-//            FLLog(@"bytes this time: %qu, total bytes sent: %qu, expected to send: %qu",  
+//            FLDebugLog(@"bytes this time: %qu, total bytes sent: %qu, expected to send: %qu",  
 //                self.lastBytesSent,
 //                self.totalBytesSent, 
 //                [[_requestQueue lastObject] postLength]);

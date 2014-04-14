@@ -54,7 +54,7 @@
 #if FL_MRC
 - (void) dealloc {
 //#if DEBUG
-//    FLLog(@"finisher lifespan: %0.2f", [NSDate timeIntervalSinceReferenceDate] - _birth);
+//    FLDebugLog(@"finisher lifespan: %0.2f", [NSDate timeIntervalSinceReferenceDate] - _birth);
 //#endif
 
     [_asyncQueueBlock release];
@@ -92,7 +92,7 @@
         }
     }
     @catch(NSException* ex) {
-        FLLog(@"%@", [ex description]);
+        FLDebugLog(@"%@", [ex description]);
     }
 }
 

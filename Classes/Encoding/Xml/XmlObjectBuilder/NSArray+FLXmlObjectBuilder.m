@@ -43,7 +43,7 @@
 //                [newArray addObject:value];
 //            }
 //            else {
-//                FLLog(@"Unable to inflate xml element %@:%@", elementName, [elementOrArray description]);
+//                FLDebugLog(@"Unable to inflate xml element %@:%@", elementName, [elementOrArray description]);
 //            }
 //        }
 //    }
@@ -110,7 +110,7 @@ arrayWithElementContents:(FLPropertyDescriber*) propertyDescriber {
                 else {
 #if DEBUG
                     if(FLStringIsNotEmpty(walker.elementValue)) {
-                        FLLog(@"Unable to inflate xml element %@:%@", walker.elementName, [walker description]);
+                        FLDebugLog(@"Unable to inflate xml element %@:%@", walker.elementName, [walker description]);
                     }
 #endif                    
                 }
@@ -128,7 +128,7 @@ arrayWithElementContents:(FLPropertyDescriber*) propertyDescriber {
                 [newArray addObject:object];
             }
             else {
-                FLLog(@"Unable to inflate xml element %@:%@", [element elementName], [element description]);
+                FLDebugLog(@"Unable to inflate xml element %@:%@", [element elementName], [element description]);
             }
         }
     }

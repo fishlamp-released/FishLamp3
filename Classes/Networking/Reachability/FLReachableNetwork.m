@@ -80,7 +80,7 @@ NSString* const FLReachabilityChangedNotification = @"FLReachabilityChangedNotif
 - (void) monitoredFlagsDidChange:(SCNetworkReachabilityFlags) oldFlags 
                 toMonitoredFlags:(SCNetworkReachabilityFlags) newFlags {
 
-    FLLog(@"%@ reachability status changed to %@",
+    FLDebugLog(@"%@ reachability status changed to %@",
                     [self description],
                     self.isReachable ? @"reachable" : @"unreachable");
 
@@ -170,7 +170,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 		}
 	*/
 	} else {
-		FLLog(@"Warning SCNetworkReachabilityGetFlags returned false!");
+		FLDebugLog(@"Warning SCNetworkReachabilityGetFlags returned false!");
 	}
 	
 	

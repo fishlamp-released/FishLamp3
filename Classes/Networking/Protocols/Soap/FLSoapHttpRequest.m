@@ -90,7 +90,7 @@
 //                                                         withObjectBuilder:[FLSoapObjectBuilder instance]];
 
             FLAssertNotNil(soapFault);
-			FLLog(@"Soap Fault:%@/%@", [soapFault faultcode], [soapFault faultstring]);
+			FLDebugLog(@"Soap Fault:%@/%@", [soapFault faultcode], [soapFault faultstring]);
             return soapFault;
 		}
 	}
@@ -115,9 +115,9 @@
     [self.requestBody setUtf8Content:soap];
     
 #if BIG_TRACE
-    FLLog(@"Soap Request:");
-    FLLog([self.requestHeaders description]);
-    FLLog(soap);
+    FLDebugLog(@"Soap Request:");
+    FLDebugLog([self.requestHeaders description]);
+    FLDebugLog(soap);
 #endif
 
 //#if DEBUG
@@ -130,8 +130,8 @@
 ////    FLTrace(@"Soap Request:"); 
 //    
 //    FLLogIndent(^{
-//        FLLog([self.requestHeaders description]);
-//        FLLog([self.requestBody description]);
+//        FLDebugLog([self.requestHeaders description]);
+//        FLDebugLog([self.requestBody description]);
 //    });
 //    
 //    
@@ -139,7 +139,7 @@
 ////    FLTrace(@"%@", debugString.string);
 //#endif    
 //    
-////    FLLog([self description]);
+////    FLDebugLog([self description]);
 //#endif    
 }
 
@@ -155,7 +155,7 @@
     if(fault) {
         NSError* error =  [NSError errorWithSoapFault:fault];
 #if DEBUG
-        FLLog(@"Soap Fault: %@", [fault description]);
+        FLDebugLog(@"Soap Fault: %@", [fault description]);
 #endif
         FLThrowError(error);
     }
@@ -167,9 +167,9 @@
     FLAssertNotNil(data);
 
 #if BIG_TRACE
-    FLLog(@"Soap Response:");
-    FLLog([[httpResponse responseHeaders] description]);
-    FLLog(FLAutorelease([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]));
+    FLDebugLog(@"Soap Response:");
+    FLDebugLog([[httpResponse responseHeaders] description]);
+    FLDebugLog(FLAutorelease([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]));
 #endif    
 
     FLParsedXmlElement* parsedSoap = [[FLSoapParser soapParser] parseData:data fileNameForErrors:self.soapAction];

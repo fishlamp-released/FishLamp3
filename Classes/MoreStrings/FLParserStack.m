@@ -46,7 +46,7 @@ void FLParserStackLogState(FLParserStack* stack, NSString* why)
         }
     }
 
-	FLLog([prettyString string]);
+	FLDebugLog([prettyString string]);
 }
 #endif 
 */

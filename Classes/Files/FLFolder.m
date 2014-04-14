@@ -154,7 +154,7 @@
         
 #if DEBUG
     NSArray* everything2 = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self folderPath] error:&err];
-    FLLog(@"After delete, %ld items left", (unsigned long) everything2.count);
+    FLDebugLog(@"After delete, %ld items left", (unsigned long) everything2.count);
 #endif         
 	}
 }

@@ -127,12 +127,12 @@
 		}
 
 #if TRACE		
-		FLLog(@"Updated %@:%@", key, object);
+		FLDebugLog(@"Updated %@:%@", key, object);
 #endif
 
 		
 #if OUTPUT_ON_CHANGE
-		FLLog([_list description]);
+		FLDebugLog([_list description]);
 #endif		
 	}
 }
@@ -145,7 +145,7 @@
 		if(node)
 		{
 #if TRACE		
-			FLLog(@"Cache Hit %@:%@", node.key, node.object);
+			FLDebugLog(@"Cache Hit %@:%@", node.key, node.object);
 #endif		  
 
 			[_list moveObjectToHead:node];
@@ -154,7 +154,7 @@
 #if TRACE
 		else
 		{
-			FLLog(@"Cache miss %@", key);
+			FLDebugLog(@"Cache miss %@", key);
 		}
 #endif		  
 	}
@@ -180,7 +180,7 @@
 		if(node)
 		{
 #if TRACE		
-			FLLog(@"Removed %@:%@", node.key, node.object);
+			FLDebugLog(@"Removed %@:%@", node.key, node.object);
 #endif
 
 			[_objects removeObjectForKey:forKey];

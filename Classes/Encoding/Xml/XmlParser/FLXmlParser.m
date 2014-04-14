@@ -156,7 +156,7 @@ didStartElement:(NSString *)elementName
     }
 
 #if DEBUG
-    FLLog(@"Parsing error: %@", prettyString.string);
+    FLDebugLog(@"Parsing error: %@", prettyString.string);
 #endif
 
     self.error = [NSError errorWithDomain:parseError.domain code:parseError.code localizedDescription:prettyString.string];
@@ -166,7 +166,7 @@ didStartElement:(NSString *)elementName
 
 - (void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError {
 #if DEBUG
-    FLLog(@"Parsing validation error: %@", validationError);
+    FLDebugLog(@"Parsing validation error: %@", validationError);
 #endif
 
     self.error = validationError;

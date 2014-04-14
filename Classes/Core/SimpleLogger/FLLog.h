@@ -17,15 +17,41 @@ FLSingletonProperty(FLLogLogger);
 #define FLLogTypeTrace      @"com.fishlamp.trace"
 #define FLLogTypeDebug      @"com.fishlamp.debug"
 
+
+#define FLLogIndent(__BLOCK__) [[FLLogLogger instance] indentLinesInBlock:__BLOCK__]
+
+#define FLLogFileLocation() \
+			FLLog(@"%s, file: %s:%d", __PRETTY_FUNCTION__, __FILE__, __LINE__)
+
+#if DEBUG
+
+    #define FLLog(FORMAT...)   \
+            [[FLLogLogger instance] logString:[NSString stringWithFormat:FORMAT] \
+                                      logType:FLLogTypeLog \
+                                   stackTrace:FLCreateStackTrace(NO)];
+
+
+    #define FLDebugLog(FORMAT...)   \
+            [[FLLogLogger instance] logString:[NSString stringWithFormat:FORMAT] \
+                                      logType:FLLogTypeDebug \
+                                   stackTrace:FLCreateStackTrace(NO)];
+
+#else
+
+    #define FLLog(FORMAT...)   \
+            [[FLLogLogger instance] logString:[NSString stringWithFormat:FORMAT] \
+                                      logType:FLLogTypeLog \
+                                   stackTrace:nil];
+
+    #define FLDebugLog(...)
+
+#endif
+
 #define FLLogError(FORMAT...) \
             [[FLLogLogger instance] logString:[NSString stringWithFormat:FORMAT] \
                                       logType:FLLogTypeLog \
                                    stackTrace:FLCreateStackTrace(YES)];
 
-#define FLLog(FORMAT...)   \
-            [[FLLogLogger instance] logString:[NSString stringWithFormat:FORMAT] \
-                                      logType:FLLogTypeLog \
-                                   stackTrace:FLCreateStackTrace(NO)];
 
 #define FLLogIf(CONDITION, FORMAT...) \
             do { \
@@ -35,22 +61,6 @@ FLSingletonProperty(FLLogLogger);
             } \
             while(0)
 
-#define FLLogIndent(__BLOCK__) [[FLLogLogger instance] indentLinesInBlock:__BLOCK__]
-
-#define FLLogFileLocation() \
-			FLLog(@"%s, file: %s:%d", __PRETTY_FUNCTION__, __FILE__, __LINE__)
-
-#if DEBUG
-
-    #define FLDebugLog(FORMAT...)   \
-            [[FLLogLogger instance] logString:[NSString stringWithFormat:FORMAT] \
-                                      logType:FLLogTypeDebug \
-                                   stackTrace:FLCreateStackTrace(YES)];
-
-#else
-    #define FLDebugLog(...)
-
-#endif
 
 #ifdef FLTrace
     #undef FLTrace

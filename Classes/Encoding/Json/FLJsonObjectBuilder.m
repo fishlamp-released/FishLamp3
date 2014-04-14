@@ -32,7 +32,7 @@
         return [builder.decoder objectFromString:self forTypeName:forTypeName];
     }
     else {
-        FLLog(@"Json property %@ has no encoder key", typeDesc.propertyName);
+        FLDebugLog(@"Json property %@ has no encoder key", typeDesc.propertyName);
     }
 
     return nil;
@@ -66,7 +66,7 @@
 
 //    Class objectClass = typeDesc.propertyClass;
 //    if(!objectClass) {
-//        FLLog(@"Object description has nil object class: %@", [typeDesc description]);
+//        FLDebugLog(@"Object description has nil object class: %@", [typeDesc description]);
 //        return nil;
 //    }
     
@@ -87,7 +87,7 @@
 
         FLPropertyDescriber* subType = [typeDesc containedTypeForName:key];
         if(!subType) {
-            FLLog(@"object builder skipped missing typeDesc named: %@", key);
+            FLDebugLog(@"object builder skipped missing typeDesc named: %@", key);
             continue;
         }
         

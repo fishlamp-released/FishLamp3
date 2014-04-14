@@ -56,7 +56,7 @@
 //    
 //    if(FLStringIsNotEmpty(parser.error))
 //    {	
-//        FLLog(@"JSON parse failed: %@", parser.error);
+//        FLDebugLog(@"JSON parse failed: %@", parser.error);
 //
 //        self.error = [NSError errorWithDomain:FLJsonParserErrorDomain code:FLJsonParserParseFailedErrorCode localizedDescription:parser.error]; 
 //

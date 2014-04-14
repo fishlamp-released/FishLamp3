@@ -43,23 +43,28 @@
             if(moreInfo) {
                 printf_fl(@"%@", moreInfo);
             }
-            
-            printf_fl(@"%@:%d: %@",
-                         entry.stackTrace.fileName,
-                         entry.stackTrace.lineNumber,
-                         entry.stackTrace.function);
+
+            if(entry.stackTrace) {
+                printf_fl(@"%@:%d: %@",
+                             entry.stackTrace.fileName,
+                             entry.stackTrace.lineNumber,
+                             entry.stackTrace.function);
+            }
         }];
     }
 
     if(self.behavior.outputStackTrace) {
 
-        [[FLPrintfStringFormatter instance] indentLinesInBlock:^{
-            if(entry.stackTrace.callStack.depth) {
-                for(int i = 0; i < entry.stackTrace.callStack.depth; i++) {
-                    printf_fl(@"%s", [entry.stackTrace stackEntryAtIndex:i]);
+        if(entry.stackTrace) {
+
+            [[FLPrintfStringFormatter instance] indentLinesInBlock:^{
+                if(entry.stackTrace.callStack.depth) {
+                    for(int i = 0; i < entry.stackTrace.callStack.depth; i++) {
+                        printf_fl(@"%s", [entry.stackTrace stackEntryAtIndex:i]);
+                    }
                 }
-            }
-        }];
+            }];
+        }
     }
 }
 

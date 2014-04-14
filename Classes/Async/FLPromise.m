@@ -43,7 +43,7 @@ static NSInteger s_max = 0;
             s_max = s_promiseCount;
         }
         if(c % 10 == 0) {
-            FLLog(@"++ promise count: %ld, max: %ld", c, s_max);
+            FLDebugLog(@"++ promise count: %ld, max: %ld", c, s_max);
         }
         if(c > 2000) {
 //            int i = 0;
@@ -89,7 +89,7 @@ static NSInteger s_max = 0;
 #if CHECK_COUNT
     NSInteger c = --s_promiseCount;
     if(c % 10 == 0 || s_promiseCount == 0) {
-       FLLog(@"-- promise count: %ld, max: %ld", c, s_max);
+       FLDebugLog(@"-- promise count: %ld, max: %ld", c, s_max);
     }
 #endif
 

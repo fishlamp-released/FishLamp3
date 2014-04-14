@@ -131,7 +131,7 @@ static NSMutableDictionary* s_registry = nil;
             FLPropertyDescriber* contained = [describer containedTypeForName:name];
             if(contained) {
                 if(outDescriber) {
-                    FLLog(@"duplicated contained type for %@", name);
+                    FLDebugLog(@"duplicated contained type for %@", name);
                 }
                 outDescriber = describer;
             }
