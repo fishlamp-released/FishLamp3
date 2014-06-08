@@ -10,19 +10,17 @@
 #import "NSError+FLException.h"
 #import "FLExceptionThrowing.h"
 
-NSException* FLDefaultWillThrowExceptionHandler(NSException *exception);
-
 NSException* FLDefaultWillThrowExceptionHandler(NSException *exception) {
     return exception;
 }
 
-static FLWillThrowExceptionHandler* s_will_throw_exception_handler = nil;
+static FLWillThrowExceptionHandlerFunction* s_will_throw_exception_handler = nil;
 
-void FLSetWillThrowExceptionHandler(FLWillThrowExceptionHandler handler) {
+void FLSetWillThrowExceptionHandler(FLWillThrowExceptionHandlerFunction handler) {
     s_will_throw_exception_handler = handler;
 }
 
-FLWillThrowExceptionHandler* FLGetWillThrowExceptionHandler() {
+FLWillThrowExceptionHandlerFunction* FLGetWillThrowExceptionHandler() {
     return s_will_throw_exception_handler == nil ? FLDefaultWillThrowExceptionHandler : s_will_throw_exception_handler;
 }
 

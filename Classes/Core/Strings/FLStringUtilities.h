@@ -13,6 +13,11 @@ extern NSString* FLStringWithFormatOrNil(NSString* formatOrNil, ...) NS_FORMAT_F
 
 // these work with nil strings, which is why they're not
 // category additions.
+BOOL FLStringIsEmpty(NSString* string);
+BOOL FLStringIsNotEmpty(NSString* string);
+BOOL FLStringsAreEqual(NSString* lhs, NSString* rhs);
+BOOL FLStringsAreEqualCaseInsensitive(NSString* lhs, NSString* rhs);
+
 extern BOOL FLStringIsEmpty(NSString* string);
 extern BOOL FLStringIsNotEmpty(NSString* string);
 extern BOOL FLStringsAreEqual(NSString* lhs, NSString* rhs);

@@ -130,4 +130,6 @@
 #pragma GCC diagnostic ignored "-Wunused-variable"
 #endif
 
+#pragma GCC diagnostic error "-Wimplicit-function-declaration"
+
 #endif

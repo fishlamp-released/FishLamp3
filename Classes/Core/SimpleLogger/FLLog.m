@@ -14,6 +14,7 @@
 #import <libkern/OSAtomic.h>
 
 #import "FLConsoleLogSink.h"
+#import "FLExceptionThrowing.h"
 
 NSException* FLWillThrowExceptionHandlerForLogger(NSException *exception);
 

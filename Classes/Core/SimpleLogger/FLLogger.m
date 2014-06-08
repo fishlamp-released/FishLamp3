@@ -138,7 +138,7 @@
            logType:(NSString*) logType
         stackTrace:(FLStackTrace*) stackTrace {
 
-    if(FLStringIsEmpty(string)) {
+    if(!string || string.length == 0) {
         return;
     }
 

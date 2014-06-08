@@ -12,35 +12,13 @@
 #import "FLAssertionFailureErrorDomain.h"
 #import "FLAssertionHandler.h"
 
-#if !defined(ASSERTIONS) && (defined(DEBUG) || defined(TEST))
-#define ASSERTIONS 1
+#ifndef FL_ASSERTIONS
+    #if DEBUG
+    #define FL_ASSERTIONS 1
+    #endif
 #endif
 
-//#if __clang
-//    #if ASSERTIONS
-//        #undef ASSERTIONS
-//    #endif
-//#endif
-
-#if ASSERTIONS
-
-//#if 0 
-//// __clang__
-//
-//    #define TURNOFF_CLANG_WARNING \
-//        _Pragma("clang diagnostic push") \
-//        _Pragma("clang diagnostic ignored \"-Wnonnull\"")
-//        _Pragma("clang diagnostic ignored \"-Wall\"")
-////
-//
-//    #define TURNON_CLANG_WARNINGS \
-//        _Pragma("clang diagnostic pop")
-//#else
-//    #define TURNOFF_CLANG_WARNING
-//    #define TURNON_CLANG_WARNINGS
-//
-//#endif
-
+#if FL_ASSERTIONS
     #define FLHandleAssertionFailure(CODE, NAME, DESCRIPTION, CONTEXT) \
                 do { \
                     NSException* __EX = [[FLAssertionHandler sharedHandler] assertionFailed:FLAssertionFailureErrorDomain \
@@ -294,26 +272,43 @@
     #define FLAssertConformsToProtocol(__OBJ__, __PROTOCOL__, DESCRIPTION...) \
                 FLAssert([__OBJ__ conformsToProtocol:@protocol(__PROTOCOL__)], @"" DESCRIPTION)
 
+
+#define FLAssertionFailed \
+            FLAssertFailed
+
 #else
     #define FLAssert(...) 
-    #define FLAssertFailed()
+    #define FLAssertFailed(...)
     #define FLAssertNil(...)
     #define FLAssertNotNil(...)
     #define FLAssertStringIsNotEmpty(...)
     #define FLAssertStringIsEmpty(...)
     #define FLAssertIsKindOfClass(...)
-    #define FLAssertNonZeroNumber(NUMBER, DESCRIPTION...)
-    #define FLAssertZeroNumber(NUMBER, DESCRIPTION...)
-    #define FLAssertNonNilPointer(POINTER, DESCRIPTION...)
-    #define FLAssertNilPointer(POINTER, DESCRIPTION...)
+    #define FLAssertNonZeroNumber(...)
+    #define FLAssertZeroNumber(...)
+    #define FLAssertNonNilPointer(...)
+    #define FLAssertNilPointer(...)
+    #define FLAssertionFailed(...)
+    #define FLAssertStringsAreEqual(...)
+    #define FLAssertStringsNotEqual(...)
+    #define FLAssertIsKindOfClass(...)
+    #define FLAssertConformsToProtocol(...)
 
-    #define FLIsNotNil(THING) (THING) != nil
+    #define FLCAssert(...)
+    #define FLCAssertFailed(...)
+    #define FLCAssertNil(REFERENCE, DESCRIPTION...)
+    #define FLCAssertNotNil(REFERENCE, DESCRIPTION...)
+    #define FLCAssertNonZeroNumber(NUMBER, DESCRIPTION...)
+    #define FLCAssertZeroNumber(NUMBER, DESCRIPTION...)
+    #define FLCAssertNonNilPointer(POINTER, DESCRIPTION...)
+    #define FLCAssertNilPointer(POINTER, DESCRIPTION...)
+    #define FLCAssertStringIsNotEmpty(STRING, DESCRIPTION...)
+    #define FLCAssertStringIsEmpty(STRING, DESCRIPTION...)
+
 
 #endif
 
 
-#define FLAssertionFailed \
-            FLAssertFailed
 
 
 

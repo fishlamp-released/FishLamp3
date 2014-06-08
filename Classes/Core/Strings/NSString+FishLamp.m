@@ -8,6 +8,7 @@
 //
 
 #import "NSString+FishLamp.h"
+#import "FLStringUtilities.h"
 
 @implementation NSString (FishLamp)
 

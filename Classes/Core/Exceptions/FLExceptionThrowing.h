@@ -17,11 +17,17 @@
 #define INCLUDE_STACK_TRACE YES
 #endif
 
-typedef NSException* FLWillThrowExceptionHandler(NSException *exception);
+typedef NSException* FLWillThrowExceptionHandlerFunction(NSException *exception);
 
-extern void FLSetWillThrowExceptionHandler(FLWillThrowExceptionHandler* handler);
+//extern void FLSetWillThrowExceptionHandler(FLWillThrowExceptionHandlerFunction* handler);
+//
+//extern FLWillThrowExceptionHandlerFunction* FLGetWillThrowExceptionHandler(void);
 
-extern FLWillThrowExceptionHandler* FLGetWillThrowExceptionHandler(void);
+FLWillThrowExceptionHandlerFunction* FLGetWillThrowExceptionHandler(void);
+void FLSetWillThrowExceptionHandler(FLWillThrowExceptionHandlerFunction* handler);
+
+NSException* FLDefaultWillThrowExceptionHandler(NSException *exception);
+
 
 #define FL_THROW_ERROR(ERROR, THROWER) \
             do {  \
