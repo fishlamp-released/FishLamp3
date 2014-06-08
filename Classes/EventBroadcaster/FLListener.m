@@ -20,6 +20,7 @@
 	if(self) {
         _listener = listener;
         _dispatcher = dispatcher;
+        _hash = [listener hash];
 	}
 	return self;
 }
@@ -60,7 +61,6 @@
           withObject:(id) object4 {
 
     _dispatcher.performSelector4(_listener, messageSelector, object1, object2, object3, object4);
-
 }
 
 - (BOOL) isEqual:(id)object {
@@ -68,7 +68,7 @@
 }
 
 - (NSUInteger)hash {
-    return [_listener hash];
+    return _hash;
 }
 
 - (NSString*) description {

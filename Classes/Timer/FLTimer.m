@@ -32,7 +32,6 @@ NSString* const FLTimedOutNotification = @"FLTimedOutNotification";
 @synthesize endTime = _endTime;
 @synthesize timing = _timing;
 
-@synthesize delegate = _delegate;
 @synthesize timerDidTimeout = _timerDidTimeout;
 @synthesize timerWasUpdated = _timerWasUpdated;
 
@@ -73,7 +72,21 @@ NSString* const FLTimedOutNotification = @"FLTimedOutNotification";
     self.timedOut = YES;
     [self stopTimer];
             
-    [self.delegate timerDidTimeout:self];
+    @synchronized(_delegate) {
+        [_delegate timerDidTimeout:self];
+    }
+}
+
+- (id) delegate {
+    @synchronized(self) {
+        return _delegate;
+    }
+}
+
+- (void) setDelegate:(id) delegate {
+    @synchronized(_delegate) {
+        _delegate = delegate;
+    }
 }
 
 - (void) checkForTimeout {
@@ -83,8 +96,10 @@ NSString* const FLTimedOutNotification = @"FLTimedOutNotification";
     FLDebugLog(@"checked for timeout: %d, elapsed time: %f", _updateCount, self.idleDuration);
 #endif
     ++_updateCount;
-    
-    FLPerformSelector1(_delegate, _timerWasUpdated, self);
+
+    @synchronized(_delegate) {
+        FLPerformSelector1(_delegate, _timerWasUpdated, self);
+    }
 
     if(self.isLate) {
         [self didTimeout];

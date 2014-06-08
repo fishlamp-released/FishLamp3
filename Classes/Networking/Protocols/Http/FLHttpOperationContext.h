@@ -30,7 +30,7 @@
 
     NSError* _authenticationError;
 
-    __unsafe_unretained id<FLAuthenticateHttpRequestOperationDelegate> _authenticationDelegate;
+    FL_WEAK id<FLAuthenticateHttpRequestOperationDelegate> _authenticationDelegate;
 }
 
 @property (readonly, strong) id<FLCredentialsStorage> credentialsStorage;

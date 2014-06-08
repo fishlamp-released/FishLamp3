@@ -22,7 +22,7 @@
     FLParsedXmlElement* _siblingElement;
     NSString* _prefix;
 
-    __unsafe_unretained FLParsedXmlElement* _parentElement;
+    FL_WEAK FLParsedXmlElement* _parentElement;
 }
 - (id) initWithName:(NSString*) name elementValue:(NSString*) elementValue;
 

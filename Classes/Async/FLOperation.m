@@ -27,7 +27,7 @@
 
 @interface FLOperationFinisher : FLFinisher {
 @private
-    __unsafe_unretained FLOperation* _operation;
+    FL_WEAK FLOperation* _operation;
 }
 @property (readwrite, assign, nonatomic) FLOperation* operation;
 

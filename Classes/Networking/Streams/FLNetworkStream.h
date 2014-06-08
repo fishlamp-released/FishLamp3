@@ -36,7 +36,7 @@ typedef enum {
     FLNetworkStreamSecurity _streamSecurity;
     id<FLNetworkStreamEventHandler> _eventHandler;
     NSTimeInterval _idleDuration;
-    __unsafe_unretained id<FLNetworkStreamDelegate> _delegate;
+    FL_WEAK id<FLNetworkStreamDelegate> _delegate;
 }
 
 // ctors

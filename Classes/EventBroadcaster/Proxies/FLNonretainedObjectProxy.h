@@ -12,7 +12,7 @@
 
 @interface FLNonretainedObjectProxy : FLAbstractObjectProxy {
 @private
-    __unsafe_unretained id _containedObject;
+    FL_WEAK id _containedObject;
 }
 @property (readonly, assign) id containedObject;
 

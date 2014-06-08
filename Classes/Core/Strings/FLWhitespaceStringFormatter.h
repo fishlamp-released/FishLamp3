@@ -15,7 +15,7 @@
     BOOL _editingLine;
     FLWhitespace* _whitespace;
 
-    __unsafe_unretained id _whitespaceStringFormatterDelegate;
+    FL_WEAK id _whitespaceStringFormatterDelegate;
 }
 @property (readwrite, assign, nonatomic) id whitespaceStringFormatterDelegate;
 

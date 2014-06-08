@@ -19,8 +19,8 @@ typedef enum {
 } FLParserStackErrorCode;
 
 typedef struct {	
-	__unsafe_unretained NSString* key;
-	__unsafe_unretained id object;
+	FL_WEAK NSString* key;
+	FL_WEAK id object;
 } FLParserStackNode;
 
 typedef struct {

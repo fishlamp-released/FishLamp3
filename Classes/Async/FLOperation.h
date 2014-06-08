@@ -40,8 +40,8 @@
 @interface FLOperation : FLBroadcaster<FLQueueableAsyncOperation, FLFinisherDelegate> {
 @private
     BOOL _cancelled;
-    __unsafe_unretained id _context;
-    __unsafe_unretained id<FLOperationStarter> _operationStarter;
+    FL_WEAK id _context;
+    FL_WEAK id<FLOperationStarter> _operationStarter;
 
 #if EXPERIMENTAL
     NSMutableArray* _prerequisites;

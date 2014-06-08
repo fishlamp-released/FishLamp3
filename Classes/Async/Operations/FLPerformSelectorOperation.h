@@ -12,7 +12,7 @@
 
 @interface FLPerformSelectorOperation : FLOperation {
 @private
-	__unsafe_unretained id _target;
+	FL_WEAK id _target;
     SEL _action;
 }
 

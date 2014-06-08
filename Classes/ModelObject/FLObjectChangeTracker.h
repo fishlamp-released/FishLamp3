@@ -15,7 +15,7 @@
     NSMutableArray* _changes;
     BOOL _dirty;
     BOOL _disabled;
-    __unsafe_unretained id _modelObject;
+    FL_WEAK id _modelObject;
 }
 
 - (id) initWithModelObject:(id) modelObject;

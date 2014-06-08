@@ -21,8 +21,8 @@
     BOOL _needsLine;
     BOOL _lineOpen;
 
-    __unsafe_unretained id _parentSection;
-    __unsafe_unretained id _stringDocument;
+    FL_WEAK id _parentSection;
+    FL_WEAK id _stringDocument;
 }
 @property (readonly, strong, nonatomic) NSArray* lines;
 @property (readonly, assign, nonatomic) id parentSection;

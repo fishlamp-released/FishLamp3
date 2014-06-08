@@ -33,8 +33,8 @@ typedef void (^FLTestCaseBlock)();
 
     NSString* _disabledReason;
 
-    __unsafe_unretained id _target;
-    __unsafe_unretained id<FLTestable> _unitTest;
+    FL_WEAK id _target;
+    FL_WEAK id<FLTestable> _unitTest;
     BOOL _disabled;
 
     FLAsyncTestCaseBlock _asyncStartTest;

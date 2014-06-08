@@ -23,7 +23,7 @@
 #if DEBUG
     NSTimeInterval _birth;
 #endif
-    __unsafe_unretained id<FLFinisherDelegate> _delegate;
+    FL_WEAK id<FLFinisherDelegate> _delegate;
 }
 
 @property (readwrite, assign) id<FLFinisherDelegate> delegate;

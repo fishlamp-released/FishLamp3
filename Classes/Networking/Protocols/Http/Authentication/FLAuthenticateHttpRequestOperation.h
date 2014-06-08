@@ -17,7 +17,7 @@
 @interface FLAuthenticateHttpRequestOperation : FLOperation {
 @private
     FLHttpRequest* _httpRequest;
-    __unsafe_unretained id<FLAuthenticateHttpRequestOperationDelegate> _authenticationDelegate;
+    FL_WEAK id<FLAuthenticateHttpRequestOperationDelegate> _authenticationDelegate;
 }
 
 @property (readwrite, assign) id<FLAuthenticateHttpRequestOperationDelegate> authenticationDelegate;

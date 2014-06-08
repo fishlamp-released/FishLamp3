@@ -100,7 +100,7 @@ typedef void (^FLStringFormatterIndentedBlock)();
  */
 @interface FLStringFormatter : NSObject<FLStringFormatter> {
 @private
-    __unsafe_unretained id _stringFormatterDelegate;
+    FL_WEAK id _stringFormatterDelegate;
     id<FLStringPreprocessor> _preprocessor;
     NSInteger _indentLevel;
     FLIndentIntegrity* _indentIntegrity;

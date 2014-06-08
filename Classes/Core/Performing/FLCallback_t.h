@@ -84,7 +84,7 @@ BOOL FLCallbackPerform3(FLCallback_t callback, id withObject1, id withObject2, i
 
 @interface FLCallbackWithUnretainedTarget : FLCallback {
 @private
-    __unsafe_unretained id _target;
+    FL_WEAK id _target;
     SEL _action;
 }
 

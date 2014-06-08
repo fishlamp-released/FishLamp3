@@ -132,3 +132,7 @@ extern id FLCopyOrRetainObjectWithAutorelease(id src);
             dispatch_release(__ITEM__)
 #endif
 
+
+#define FL_WEAK __weak
+
+
