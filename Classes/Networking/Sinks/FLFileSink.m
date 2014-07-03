@@ -40,6 +40,25 @@
     self.filePath = nil;
 }
 
++ (void) createFolderAtPath:(NSString*) path {
+    @synchronized(self) {
+        NSError* error = nil;
+        [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+
+        if( error &&
+            [[error domain] isEqualToString:NSCocoaErrorDomain] &&
+            error.code == NSFileWriteFileExistsError ) {
+
+            // we should not get this error - maybe there's a race condition
+            // so try again to make sure.
+
+            [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+        }
+
+        FLThrowIfError(error);
+    }
+}
+
 - (void) appendBytes:(const void *)bytes length:(NSUInteger)length {
     
     FLAssertNotNil(self.outputPath);
@@ -48,11 +67,9 @@
     // don't create the file until we actually get bytes. This prevents
     // an empty file on error or redirect or whatever.
     if(!self.outputStream) {
-    
-        NSError* error = nil;
-        [[NSFileManager defaultManager] createDirectoryAtPath:[self.outputPath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&error];
-        FLThrowIfError(error);
-    
+
+        [FLFileSink createFolderAtPath:[self.outputPath stringByDeletingLastPathComponent]];
+
         self.outputStream = [NSOutputStream outputStreamWithURL:[NSURL fileURLWithPath:self.outputPath] append:NO];
         [self.outputStream open];
         
