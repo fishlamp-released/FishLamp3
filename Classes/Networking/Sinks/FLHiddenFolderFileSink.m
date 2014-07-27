@@ -23,8 +23,11 @@
 @synthesize tempFilePath = _tempFilePath;
 
 - (id) initWithFilePath:(NSString*) filePath folderPath:(NSString*) folderPath {
-    
-    NSString* tempFilePath = [folderPath stringByAppendingPathComponent:[filePath lastPathComponent]];
+
+    static unsigned long s_counter = 0;
+
+    NSString* tempFilePath = [folderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"temp-%ld",
+        FLAtomicIncrementInt64(s_counter)]];
 
     self = [super initWithFilePath:tempFilePath];
     if(self) {
