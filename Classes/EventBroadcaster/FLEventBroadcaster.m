@@ -45,7 +45,6 @@
 
 @synthesize logEvents = _logEvents;
 
-
 - (id) init {
 	self = [super init];
 	if(self) {

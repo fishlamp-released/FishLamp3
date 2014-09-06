@@ -45,6 +45,7 @@ extern const FLDispatcher_t FLDispatchOnCurrentThread;
 @private
     NSMutableSet* _listeners;
     NSArray* _iteratableListeners;
+    BOOL _logEvents;
 }
 
 + (id) eventBroadcaster;

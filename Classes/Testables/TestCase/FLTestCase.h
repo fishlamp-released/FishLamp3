@@ -40,6 +40,8 @@ typedef void (^FLTestCaseBlock)();
     FLAsyncTestCaseBlock _asyncStartTest;
     FLTestCaseBlock _asyncFinishTest;
     FLAsyncTestCaseBlock _asyncTimeout;
+
+    FLAsyncTest* _asyncTest;
 }
 
 - (id) initWithName:(NSString*) name
