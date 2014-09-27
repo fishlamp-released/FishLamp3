@@ -9,6 +9,7 @@
 
 #import "FishLampRequired.h"
 #import "FLStringFormatter.h"
+#import <libkern/OSAtomic.h>
 
 #define FLLogTypeNone       nil
 #define FLLogTypeLog        @"com.fishlamp.log"
