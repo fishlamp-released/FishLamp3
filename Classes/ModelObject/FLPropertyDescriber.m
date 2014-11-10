@@ -167,7 +167,7 @@ LazySelectorGetter(selector, _selector, FLPropertyAttributesGetSelector)
         }
     }
 
-    FLAssertFailed(@"No property describer created for property: \"%@\"", propertyName );
+//    FLAssertFailed(@"No property describer created for property: \"%@\"", propertyName );
 
     return nil;
 }

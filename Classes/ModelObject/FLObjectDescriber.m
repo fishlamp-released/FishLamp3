@@ -200,19 +200,19 @@ static NSMutableDictionary* s_registry = nil;
 - (void) addPropertiesForClass:(Class) aClass {
 // do all the properties
     unsigned int propertyCount = 0;
-    objc_property_t* propertys = class_copyPropertyList(aClass, &propertyCount);
+    objc_property_t* properties = class_copyPropertyList(aClass, &propertyCount);
 
     FLTrace(@"found %d properties for %@", propertyCount, NSStringFromClass(aClass));
 
     for(unsigned int i = 0; i < propertyCount; i++) {
-    
-        FLPropertyDescriber* propertyDescriber = [FLPropertyDescriber propertyDescriberWithProperty_t:propertys[i]];
+
+        FLPropertyDescriber* propertyDescriber = [FLPropertyDescriber propertyDescriberWithProperty_t:properties[i]];
         if(propertyDescriber && [self shouldAddProperty:propertyDescriber]) {
             [self addProperty:propertyDescriber];
         }
     }
 
-    free(propertys);
+    free(properties);
 }
 
 - (void) addPropertiesForParentClasses:(Class) aClass {
