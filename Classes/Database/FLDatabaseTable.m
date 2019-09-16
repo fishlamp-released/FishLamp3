@@ -491,7 +491,7 @@
 - (id) storageRepresentation {
     if([self.objectClass isModelObject]) {
         dispatch_once(&_storageRepPred, ^{
-            _storageRepresentation = [[FLDatabaseTable alloc] initWithClass:self.objectClass];
+            self->_storageRepresentation = [[FLDatabaseTable alloc] initWithClass:self.objectClass];
         }); 
     }
     return _storageRepresentation;

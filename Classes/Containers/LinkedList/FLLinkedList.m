@@ -57,7 +57,7 @@ void FLMergeSort(
 @property (readwrite, retain, nonatomic) id firstObject;
 @property (readwrite, retain, nonatomic) id lastObject;
 @property (readwrite, assign, nonatomic) NSUInteger count;
-@property (readwrite, assign, nonatomic) FLLinkedListMutableEnumerator* mutableEnumerator;
+@property (readwrite, weak, nonatomic) FLLinkedListMutableEnumerator* mutableEnumerator;
 @end
 
 @implementation FLLinkedList

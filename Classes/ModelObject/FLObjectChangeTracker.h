@@ -15,13 +15,13 @@
     NSMutableArray* _changes;
     BOOL _dirty;
     BOOL _disabled;
-    FL_WEAK id _modelObject;
+    __weak id _modelObject;
 }
 
 - (id) initWithModelObject:(id) modelObject;
 + (id) objectChangeTracker:(id) modelObject;
 
-@property (readwrite, assign, nonatomic) id modelObject;
+@property (readwrite, weak, nonatomic) id modelObject;
 @property (readwrite, assign, nonatomic, getter=isDisabled) BOOL disabled;
 
 @property (readonly, strong, nonatomic) NSArray* changes;

@@ -23,7 +23,7 @@
 
 #if DEBUG
 extern void FLDebugCompareStrings(NSString* lhs, NSString* rhs);
-extern void TestEncoding();
+extern void TestEncoding(void);
 extern void FLDebugCompareHeaders(NSString* lhs, NSString* rhs);
 #endif
 
@@ -79,7 +79,7 @@ extern void FLDebugCompareHeaders(NSString* lhs, NSString* rhs);
     
     // if dupe param sort by param's value.
         if(result == NSOrderedSame) {
-            result = [[_parameters objectForKey:lhs] compare:[_parameters objectForKey:rhs]];
+            result = [[self->_parameters objectForKey:lhs] compare:[self->_parameters objectForKey:rhs]];
         }
 
         return result;

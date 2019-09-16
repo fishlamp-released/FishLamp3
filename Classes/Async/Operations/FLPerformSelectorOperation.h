@@ -10,11 +10,10 @@
 #import "FishLampCore.h"
 #import "FLOperation.h"
 
-@interface FLPerformSelectorOperation : FLOperation {
-@private
-	FL_WEAK id _target;
-    SEL _action;
-}
+@interface FLPerformSelectorOperation : FLOperation
+
+@property (readonly, weak, nonatomic) id target;
+@property (readonly, assign, nonatomic) SEL action;
 
 - (void) setCallback:(id) target action:(SEL) action; // target is NOT retained
 

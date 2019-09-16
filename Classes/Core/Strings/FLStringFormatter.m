@@ -144,7 +144,7 @@
 
         FLStringPreprocessorResultBlock block = ^(NSRange range) {
             [self openLine];
-            [string stringFormatter:self appendToDelegate:_stringFormatterDelegate withRange:range];
+            [string stringFormatter:self appendToDelegate:self->_stringFormatterDelegate withRange:range];
             [self closeLine];
         };
 

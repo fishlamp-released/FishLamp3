@@ -22,7 +22,7 @@
     FLParsedXmlElement* _siblingElement;
     NSString* _prefix;
 
-    FL_WEAK FLParsedXmlElement* _parentElement;
+    __weak FLParsedXmlElement* _parentElement;
 }
 - (id) initWithName:(NSString*) name elementValue:(NSString*) elementValue;
 
@@ -42,7 +42,7 @@
 - (void) appendStringToValue:(NSString*) string;
 
 // parentElement
-@property (readonly, assign, nonatomic) FLParsedXmlElement* parentElement;
+@property (readonly, weak, nonatomic) FLParsedXmlElement* parentElement;
 
 // siblings
 @property (readwrite, strong, nonatomic) FLParsedXmlElement* siblingElement;

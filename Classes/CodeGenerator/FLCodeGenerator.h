@@ -13,7 +13,7 @@
 @protocol FLCodeGeneratorFile;
 @protocol FLCodeGeneratorProjectProvider;
 
-@protocol FLCodeGenerator <FLBroadcaster, NSObject>
+@protocol FLCodeGenerator <FLEventBroadcaster , NSObject>
 - (void) generateCode;
 @end
 

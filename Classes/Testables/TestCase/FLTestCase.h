@@ -18,7 +18,7 @@
 @class FLAsyncTest;
 
 typedef void (^FLAsyncTestCaseBlock)(FLAsyncTestFinisher* testFinisher);
-typedef void (^FLTestCaseBlock)();
+typedef void (^FLTestCaseBlock)(void);
 
 @interface FLTestCase : NSObject {
 @private
@@ -33,8 +33,8 @@ typedef void (^FLTestCaseBlock)();
 
     NSString* _disabledReason;
 
-    FL_WEAK id _target;
-    FL_WEAK id<FLTestable> _unitTest;
+    __weak id _target;
+    __weak id<FLTestable> _unitTest;
     BOOL _disabled;
 
     FLAsyncTestCaseBlock _asyncStartTest;

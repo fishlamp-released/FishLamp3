@@ -13,7 +13,7 @@
 + (id) objcValueType:(FLObjcName*) typeName 
        importFileName:(NSString*) importFileName {
 
-    return FLAutorelease([[[self class] alloc] initWithTypeName:typeName importFileName:importFileName]);
+    return [[[self class] alloc] initWithTypeName:typeName importFileName:importFileName];
 }
 
 - (BOOL) isObject {

@@ -7,7 +7,9 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#if FL_ARC
+#import <Foundation/Foundation.h>
+
+#if __has_feature(objc_arc)
 
 #define FLRetain(__OBJ__) __OBJ__
 

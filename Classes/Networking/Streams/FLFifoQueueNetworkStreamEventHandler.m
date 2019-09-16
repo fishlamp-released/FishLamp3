@@ -111,7 +111,7 @@
     }
 }
 
-- (void) streamWillOpen:(void (^)()) completion {
+- (void) streamWillOpen:(void (^)(void)) completion {
     if(completion) completion();
 }
 

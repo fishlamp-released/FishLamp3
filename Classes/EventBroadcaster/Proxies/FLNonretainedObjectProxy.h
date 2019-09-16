@@ -10,11 +10,9 @@
 #import "FishLampCore.h"
 #import "FLAbstractObjectProxy.h"
 
-@interface FLNonretainedObjectProxy : FLAbstractObjectProxy {
-@private
-    FL_WEAK id _containedObject;
-}
-@property (readonly, assign) id containedObject;
+@interface FLNonretainedObjectProxy : FLAbstractObjectProxy 
+    
+@property (readonly, weak) id containedObject;
 
 + (id) nonretainedObjectProxy:(id) object;
 @end

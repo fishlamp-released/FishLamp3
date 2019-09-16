@@ -108,7 +108,7 @@
     [string appendLineWithFormat:@"enumType = %@", self.enumType];
     [string appendLine:@"values {" ];
     [string indentLinesInBlock:^{
-        for(id obj in _enumValues) {
+        for(id obj in self->_enumValues) {
             [string appendLine:[obj description]];
         }
     }];
@@ -128,8 +128,8 @@
 
 // define typedefs    
     [codeBuilder appendLine:@"typedef enum {"];
-    [codeBuilder indent:^{
-        for(FLObjcEnumValueType* value in _enumValues) {
+    [codeBuilder indentLinesInBlock:^{
+        for(FLObjcEnumValueType* value in self->_enumValues) {
             [codeBuilder appendLineWithFormat:@"%@ = %ld,", value.generatedName, (unsigned long) value.enumValue];
          
         } 
@@ -166,9 +166,9 @@
                
 // string from enum function               
     [codeBuilder appendLineWithFormat:@"%@ {", self.stringFromEnumFunctionPrototype];
-    [codeBuilder indent: ^{
+    [codeBuilder indentLinesInBlock:^{
         [codeBuilder appendSwitchBlock:@"theEnum" caseStatements:^{
-            for(NSString* define in _defines) {
+            for(NSString* define in self->_defines) {
                 [codeBuilder appendCaseStatement:define statement:^{
                     [codeBuilder appendReturnValue:[NSString stringWithFormat:@"k%@", define]];
                 }];
@@ -182,12 +182,12 @@
 
 // enum from string function
     [codeBuilder appendLineWithFormat:@"%@ {", self.enumFromStringFunctionPrototype];
-    [codeBuilder indent: ^{
+    [codeBuilder indentLinesInBlock: ^{
         [codeBuilder appendStaticVariable:@"NSDictionary*" name:@"s_enumLookup" initialValue:@"nil"];
         [codeBuilder appendRunOnceBlock:@"s_lookupPredicate" block:^{
             [codeBuilder appendLineWithFormat:@"s_enumLookup = [[NSDictionary alloc] initWithObjectsAndKeys:"];
-            [codeBuilder indent:^{
-                for(NSString* define in _defines) {
+            [codeBuilder indentLinesInBlock:^{
+                for(NSString* define in self->_defines) {
                     [codeBuilder appendLineWithFormat:@"[NSNumber numberWithInteger:%@], [k%@ lowercaseString],", define, define]; 
                 }
                 

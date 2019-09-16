@@ -25,7 +25,7 @@
     BOOL _timing;
     dispatch_source_t _timer;
     
-    FL_WEAK id _delegate;
+    __weak id _delegate;
     SEL _timerDidTimeout;
     SEL _timerWasUpdated;
     

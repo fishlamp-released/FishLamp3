@@ -219,20 +219,20 @@
     [string appendLineWithFormat:@"classType: %@, superclass:%@",  [self.objectName description], [self.superclassType description]];
     
     [string appendLine:@"properties:"];
-    [string indent: ^{
-        for(FLObjcProperty* prop in [_properties objectEnumerator]) {
+    [string indentLinesInBlock: ^{
+        for(FLObjcProperty* prop in [self->_properties objectEnumerator]) {
             [string appendLine:[prop description]];
         }
     }];
     [string appendLine:@"ivars:"];
-    [string indent: ^{
-        for(FLObjcIvar* ivar in [_ivars objectEnumerator]) {
+    [string indentLinesInBlock: ^{
+        for(FLObjcIvar* ivar in [self->_ivars objectEnumerator]) {
             [string appendLine:[ivar description]];
         }
     }];
     [string appendLine:@"dependencies:"];
-    [string indent: ^{
-        for(NSString* type in _dependencies) {
+    [string indentLinesInBlock: ^{
+        for(NSString* type in self->_dependencies) {
             [string appendLine:type];
         }
     }];
@@ -290,7 +290,7 @@
                                   protocols:protocols 
                    appendMemberDeclarations:^{
     
-        for(FLObjcIvar* ivar in [_ivars objectEnumerator]) {
+        for(FLObjcIvar* ivar in [self->_ivars objectEnumerator]) {
             [ivar writeCodeToHeaderFile:file withCodeBuilder:codeBuilder];
         }
     }];

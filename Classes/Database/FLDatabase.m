@@ -411,12 +411,12 @@ static NSString* s_version = nil;
         }
 
         if(statement.finished) {
-            statement.finished(nil);
+            statement.finished();
         }
     }
     @catch(NSException* ex) {
         if(statement.finished) {
-            statement.finished(ex.error);
+            statement.finished();
         }
         
         @throw;

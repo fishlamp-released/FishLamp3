@@ -61,9 +61,7 @@ BOOL FLCallbackPerform3(FLCallback_t callback, id withObject1, id withObject2, i
 // callback objects
 //
 
-@interface FLCallback : NSObject {
-@private
-}
+@interface FLCallback : NSObject
 
 - (id) initWithTarget:(id) target action:(SEL) action;
 
@@ -82,13 +80,9 @@ BOOL FLCallbackPerform3(FLCallback_t callback, id withObject1, id withObject2, i
 @end
 
 
-@interface FLCallbackWithUnretainedTarget : FLCallback {
-@private
-    FL_WEAK id _target;
-    SEL _action;
-}
+@interface FLCallbackWithUnretainedTarget : FLCallback
 
-@property (readwrite, assign) id target;
+@property (readwrite, weak) id target;
 @property (readwrite, assign) SEL action;
 
 @end

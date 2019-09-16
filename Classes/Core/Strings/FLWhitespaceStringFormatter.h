@@ -15,9 +15,9 @@
     BOOL _editingLine;
     FLWhitespace* _whitespace;
 
-    FL_WEAK id _whitespaceStringFormatterDelegate;
+    __weak id _whitespaceStringFormatterDelegate;
 }
-@property (readwrite, assign, nonatomic) id whitespaceStringFormatterDelegate;
+@property (readwrite, weak, nonatomic) id whitespaceStringFormatterDelegate;
 
 @property (readonly, assign, nonatomic) BOOL lineIsOpen;
 @property (readonly, strong, nonatomic) FLWhitespace* whitespace;

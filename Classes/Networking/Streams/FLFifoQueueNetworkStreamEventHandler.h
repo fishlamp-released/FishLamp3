@@ -13,7 +13,7 @@
 @interface FLFifoQueueNetworkStreamEventHandler : NSObject<FLNetworkStreamEventHandler> {
 @private
     FLFifoDispatchQueue* _asyncQueue;
-    FL_WEAK FLNetworkStream* _stream;
+    __weak FLNetworkStream* _stream;
 }
 
 @property (readonly, strong, nonatomic) FLFifoDispatchQueue* asyncQueue;

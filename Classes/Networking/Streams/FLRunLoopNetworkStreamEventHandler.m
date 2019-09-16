@@ -11,8 +11,8 @@
 #import "FLNetworkStream_Internal.h"
 
 @interface FLRunLoopNetworkStreamEventHandler ()
-@property (readwrite, assign) NSRunLoop* runLoop;
-@property (readwrite, assign) NSThread* thread;
+@property (readwrite, weak) NSRunLoop* runLoop;
+@property (readwrite, weak) NSThread* thread;
 @end
 
 @implementation FLRunLoopNetworkStreamEventHandler
@@ -28,14 +28,8 @@
 	return self;
 }
 
-- (void) dealloc {
-#if FL_MRC
-    [super dealloc];
-#endif
-}
-
 + (id) networkStreamEventHandler {
-    return FLAutorelease([[[self class] alloc] init]);
+    return [[[self class] alloc] init];
 }
 
 #pragma GCC diagnostic push
@@ -103,7 +97,7 @@
     }
 }
 
-- (void) streamWillOpen:(void (^)()) completion{
+- (void) streamWillOpen:(void (^)(void)) completion{
              
     completion = FLCopyWithAutorelease(completion);
     

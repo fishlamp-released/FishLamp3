@@ -20,9 +20,9 @@
     NSMutableDictionary* _subcommands;
     NSMutableDictionary* _options;
     NSString* _help;
-    FL_WEAK id _parent; 
+    __weak id _parent;
 }
-@property (readonly, assign, nonatomic) id parent;
+@property (readonly, weak, nonatomic) id parent;
 @property (readonly, strong, nonatomic) FLLogger* output;
 @property (readonly, strong, nonatomic) NSString* commandName;
 @property (readonly, strong, nonatomic) NSDictionary* options;

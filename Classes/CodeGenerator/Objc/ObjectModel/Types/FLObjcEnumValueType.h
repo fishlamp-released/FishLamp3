@@ -8,11 +8,10 @@
 
 #import "FLObjcValueType.h"
 
-@interface FLObjcEnumValueType : FLObjcValueType {
-@private
-    NSUInteger _enumValue;
-}
+@interface FLObjcEnumValueType : FLObjcValueType
+
 @property (readwrite, assign, nonatomic) NSUInteger enumValue;
 
 + (id) objcEnumValue:(FLObjcName*) name value:(NSUInteger) value;
+- (id) initWithTypeName:(FLObjcName*) name value:(NSUInteger) value;
 @end

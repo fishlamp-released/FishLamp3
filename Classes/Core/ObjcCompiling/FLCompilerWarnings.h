@@ -84,7 +84,7 @@
 // turn off warnings we know break fishlamp compiling.
 
 // this prevents adding a private readwrite synthesize for readonly properties
-#pragma GCC diagnostic ignored "-Wreadonly-setter-attrs"
+//#pragma GCC diagnostic ignored "-Wreadonly-setter-attrs"
 
 // this warning causes use of MIN/MAX to not compile. Tried all the different GNU types. No luck.
 #pragma GCC diagnostic ignored "-Wgnu"

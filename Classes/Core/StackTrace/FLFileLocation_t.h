@@ -35,7 +35,7 @@ FLFileLocation_t FLFileLocationMake(const char* filePath, const char* function, 
 /*!
  *  Sets the file name pointer in the struct if it hasn't been set yet.
  *  
- *  @param the file location
+ *  @param loc is the file location
  *
  */
 extern const char* FLFileLocationGetFileName(FLFileLocation_t* loc);

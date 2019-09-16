@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, FLErrorDomainError) {
 	FLActionErrorCodeInvalidContext,
     FLErrorResultFailed,
     FLUnhandledServiceRequestErrorCode
-} FLErrorCode;
+};
 
 //@interface FLFrameworkErrorDomainInfo : NSObject<FLErrorDomainInfo>
 //+ (id) frameworkErrorDomainInfo;

@@ -22,14 +22,14 @@
 }
 
 + (id) objcBlockStatement {
-    return FLAutorelease([[[self class] alloc] init]);
+    return [[[self class] alloc] init];
 }
 
 - (void) writeCodeToSourceFile:(FLObjcFile*) file withCodeBuilder:(FLObjcCodeBuilder*) codeBuilder {
 
     [codeBuilder appendLine:@"{"];
-    [codeBuilder indent:^{
-        for(FLObjcStatement* statement in _statements) {
+    [codeBuilder indentLinesInBlock:^{
+        for(FLObjcStatement* statement in self->_statements) {
             [statement writeCodeToSourceFile:file withCodeBuilder:codeBuilder];
         }
     }];
@@ -39,13 +39,6 @@
 - (void) addStatement:(FLObjcStatement*) statement {
     [_statements addObject:statement];
 }
-
-#if FL_MRC
-- (void) dealloc {
-	[_statements release];
-	[super dealloc];
-}
-#endif
 
 - (BOOL) hasCode {
 

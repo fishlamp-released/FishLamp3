@@ -18,7 +18,7 @@
 
 @interface FLOperationQueue : NSObject {
 @private
-    FL_WEAK id<FLOperationQueueDelegate> _delegate;
+    __weak id<FLOperationQueueDelegate> _delegate;
     FLFifoDispatchQueue* _schedulingQueue;
     NSMutableArray* _objectQueue;
     NSMutableArray* _activeQueue;

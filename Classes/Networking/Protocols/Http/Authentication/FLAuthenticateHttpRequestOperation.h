@@ -17,10 +17,10 @@
 @interface FLAuthenticateHttpRequestOperation : FLOperation {
 @private
     FLHttpRequest* _httpRequest;
-    FL_WEAK id<FLAuthenticateHttpRequestOperationDelegate> _authenticationDelegate;
+    __weak id<FLAuthenticateHttpRequestOperationDelegate> _authenticationDelegate;
 }
 
-@property (readwrite, assign) id<FLAuthenticateHttpRequestOperationDelegate> authenticationDelegate;
+@property (readwrite, weak) id<FLAuthenticateHttpRequestOperationDelegate> authenticationDelegate;
 
 - (id) initWithHttpRequest:(FLHttpRequest*) request;
 

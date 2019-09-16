@@ -21,12 +21,12 @@
     BOOL _needsLine;
     BOOL _lineOpen;
 
-    FL_WEAK id _parentSection;
-    FL_WEAK id _stringDocument;
+    __weak id _parentSection;
+    __weak id _stringDocument;
 }
 @property (readonly, strong, nonatomic) NSArray* lines;
-@property (readonly, assign, nonatomic) id parentSection;
-@property (readonly, assign, nonatomic) id stringDocument;
+@property (readonly, weak, nonatomic) id parentSection;
+@property (readonly, weak, nonatomic) id stringDocument;
 
 + (id) stringBuilderSection;
 

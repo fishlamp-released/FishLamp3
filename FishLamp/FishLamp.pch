@@ -1,0 +1,22 @@
+//
+//  FishLamp.pch
+//  FishLamp
+//
+//  Created by Mike Fullerton on 9/16/19.
+//  Copyright © 2019 Fiesty Bytes. All rights reserved.
+//
+
+#ifndef FishLamp_pch
+#define FishLamp_pch
+
+
+#if TARGET_OS_OSX
+#import <Cocoa/Cocoa.h>
+#import <AppKit/AppKit.h>
+#endif
+
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* FishLamp_pch */

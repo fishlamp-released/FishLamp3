@@ -11,7 +11,7 @@
 #import "FLPrettyDescription.h"
 
 @interface FLParsedXmlElement ()
-@property (readwrite, assign, nonatomic) FLParsedXmlElement* parentElement;
+@property (readwrite, weak, nonatomic) FLParsedXmlElement* parentElement;
 @property (readwrite, strong, nonatomic) NSString* prefix;
 
 @end

@@ -36,7 +36,7 @@ typedef enum {
     FLNetworkStreamSecurity _streamSecurity;
     id<FLNetworkStreamEventHandler> _eventHandler;
     NSTimeInterval _idleDuration;
-    FL_WEAK id<FLNetworkStreamDelegate> _delegate;
+    __weak id<FLNetworkStreamDelegate> _delegate;
 }
 
 // ctors
@@ -47,7 +47,7 @@ typedef enum {
 @property (readonly, strong) NSString* identifier;
 
 // delegate
-@property (readwrite, assign) id<FLNetworkStreamDelegate> delegate;
+@property (readwrite, weak) id<FLNetworkStreamDelegate> delegate;
 
 // state
 @property (readonly, assign, getter=isOpen) BOOL open;
@@ -99,7 +99,7 @@ typedef enum {
 @protocol FLNetworkStreamEventHandler <NSObject>
 
 // treat this like a delegate - set it to nil in dealloc
-@property (readwrite, assign) FLNetworkStream* stream;
+@property (readwrite, weak) FLNetworkStream* stream;
 
 + (id) networkStreamEventHandler;
 
@@ -107,7 +107,7 @@ typedef enum {
 - (void) queueSelector:(SEL) selector;
 - (void) queueSelector:(SEL) selector withObject:(id) object;
 
-- (void) streamWillOpen:(void (^)()) completion;
+- (void) streamWillOpen:(void (^)(void)) completion;
 - (void) streamDidCloseWithResult:(FLPromisedResult) result;
 
 - (NSRunLoop*) runLoop;

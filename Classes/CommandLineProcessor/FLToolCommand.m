@@ -9,7 +9,7 @@
 
 #import "FLToolCommand.h"
 @interface FLToolCommand ()
-@property (readwrite, assign, nonatomic) id parent;
+@property (readwrite, weak, nonatomic) id parent;
 @end
 
 @implementation FLToolCommand
@@ -23,24 +23,14 @@
 - (id) initWithCommandName:(NSString*) commandName {
     self = [super init];
     if(self) {
-        _commandName = FLRetain(commandName);
+        _commandName = commandName;
     }
     return self;
 }
 
 + (id) toolCommand {
-    return FLAutorelease([[[self class] alloc] init]);
+    return [[[self class] alloc] init];
 }
-
-#if FL_MRC
-- (void) dealloc {
-    [_subcommands release];
-    [_help release];
-    [_commandName release];
-    [_options release];
-    [super dealloc];
-}
-#endif
 
 - (FLLogger*) output {
     return (id) [self.parent output];
@@ -126,7 +116,7 @@
     [output closeLine];
     
     [output indentLinesInBlock:^{
-        for(FLToolCommand* subcommand in _subcommands) {
+        for(FLToolCommand* subcommand in self->_subcommands) {
             [subcommand printUsage:output];
         }
     }];

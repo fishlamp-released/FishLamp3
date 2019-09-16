@@ -23,12 +23,12 @@
 #if DEBUG
     NSTimeInterval _birth;
 #endif
-    FL_WEAK id<FLFinisherDelegate> _delegate;
+    __weak id<FLFinisherDelegate> _delegate;
     fl_block_t _asyncQueueBlock;
     fl_finisher_block_t _asyncQueueFinisherBlock;
 }
 
-@property (readwrite, assign) id<FLFinisherDelegate> delegate;
+@property (readwrite, weak) id<FLFinisherDelegate> delegate;
 
 + (id) finisher;
 + (id) finisherWithBlock:(fl_completion_block_t) completion;

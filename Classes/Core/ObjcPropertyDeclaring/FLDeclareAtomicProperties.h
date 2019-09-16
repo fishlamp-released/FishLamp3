@@ -36,7 +36,7 @@ extern void FLAtomicPropertyCopy(id __strong * addr, id newValue, dispatch_block
 //    FLAtomicSetPropertyValue(&_name, name, NO);
 //}
 
-typedef id (^FLAtomicCreateBlock)();
+typedef id (^FLAtomicCreateBlock)(void);
 
 extern void FLAtomicCreateIfNil(id __strong* addr, Class type);
 extern void FLAtomicCreateIfNilWithBlock(id __strong* addr, FLAtomicCreateBlock block);

@@ -61,7 +61,7 @@
     if(appendMembers) {
         [self appendLine:@" {"];
         [self appendString:@"@private"];
-        [self indent:^{
+        [self indentLinesInBlock:^{
             if(appendMembers) {
                 appendMembers();
             }
@@ -200,14 +200,14 @@
 
 - (void) appendCaseStatement:(NSString*) var statement:(dispatch_block_t) statement {
     [self appendLineWithFormat:@"case %@:{", var];
-    [self indent:statement];
+    [self indentLinesInBlock:statement];
     [self appendLine:@"}"];
     [self appendLine:@"break;"];
 }
 
 - (void) appendSwitchBlock:(NSString*) variable caseStatements:(dispatch_block_t) caseStatements {
     [self appendLineWithFormat:@"switch(%@) {", variable];
-    [self indent:caseStatements];
+    [self indentLinesInBlock:caseStatements];
     [self appendLine:@"}"];
 }
 
@@ -218,7 +218,7 @@
 - (void) appendRunOnceBlock:(NSString*) predicateName block:(dispatch_block_t) block {
     [self appendLineWithFormat:@"static dispatch_once_t %@ = 0;", predicateName];
     [self appendLineWithFormat:@"dispatch_once(&%@, ^{", predicateName];
-    [self indent:block];
+    [self indentLinesInBlock:block];
     [self appendLine:@"});"];
 }
 
@@ -228,7 +228,7 @@
 
 - (void) scope:(dispatch_block_t) block {
     [self appendLine:@"{"];
-    [self indent:block];
+    [self indentLinesInBlock:block];
     [self appendLine:@"}"];
 }
 
@@ -239,7 +239,7 @@
     else {
         [self appendLine:@"{"];
     }
-    [self indent:block];
+    [self indentLinesInBlock:block];
     [self appendLine:@"}"];
 }
 

@@ -30,10 +30,10 @@
 @private
 	id _nextObjectInLinkedList;
 	id _previousObjectInLinkedList;
-    FL_WEAK FLLinkedList* _linkedList;
+    __weak FLLinkedList* _linkedList;
 }
 @property (readwrite, strong, nonatomic) id nextObjectInLinkedList;
 @property (readwrite, strong, nonatomic) id previousObjectInLinkedList;
-@property (readwrite, assign, nonatomic) FLLinkedList* linkedList;
+@property (readwrite, weak, nonatomic) FLLinkedList* linkedList;
 
 @end

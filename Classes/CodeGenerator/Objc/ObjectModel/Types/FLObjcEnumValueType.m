@@ -10,14 +10,8 @@
 
 @implementation FLObjcEnumValueType
 @synthesize enumValue = _enumValue;
-#if FL_MRC
-- (void) dealloc {
-//	[_enumValue release];
-	[super dealloc];
-}
-#endif
 
-- (id) initWithName:(FLObjcName*) name value:(NSUInteger) value {	
+- (id) initWithTypeName:(FLObjcName*) name value:(NSUInteger) value {
 	self = [super initWithTypeName:name importFileName:nil];
 	if(self) {
 		self.enumValue = value;
@@ -26,7 +20,7 @@
 }
 
 + (id) objcEnumValue:(FLObjcName*) name value:(NSUInteger) value {
-    return FLAutorelease([[[self class] alloc] initWithName:name value:value]);
+    return [[[self class] alloc] initWithTypeName:name value:value];
 }
 
 @end

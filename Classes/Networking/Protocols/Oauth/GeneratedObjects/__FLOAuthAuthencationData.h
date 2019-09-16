@@ -10,12 +10,12 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-
+#import <Foundation/Foundation.h>
 
 // --------------------------------------------------------------------
 // FLOAuthAuthencationData
 // --------------------------------------------------------------------
-@interface FLOAuthAuthencationData : NSObject{ 
+@interface FLOAuthAuthencationData : NSObject { 
 @private
     NSString* __oauth_token_secret;
     NSString* __oauth_callback_confirmed;

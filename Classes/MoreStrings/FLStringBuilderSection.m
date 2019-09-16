@@ -15,8 +15,8 @@
 #import "FLPrettyString.h"
 
 @interface FLStringBuilderSection ()
-@property (readwrite, assign, nonatomic) id parentSection;
-@property (readwrite, assign, nonatomic) id stringDocument;
+@property (readwrite, weak, nonatomic) id parentSection;
+@property (readwrite, weak, nonatomic) id stringDocument;
 
 - (void) appendSection:(FLStringBuilderSection*) section;
 @end

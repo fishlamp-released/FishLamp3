@@ -48,13 +48,13 @@
 	id _lastObject;
     unsigned long _mutationCount;
 	NSUInteger _count;
-    FL_WEAK FLLinkedListMutableEnumerator* _mutableEnumerator;
+    __weak FLLinkedListMutableEnumerator* _mutableEnumerator;
 }
 
 /// Create a new linked list.
 + (FLLinkedList*) linkedList;
 
-- (NSEnumerator*) mutableEnumerator; // you can change the list while enumerating, but the enumeration is a bit slower
+- (__weak NSEnumerator*) mutableEnumerator; // you can change the list while enumerating, but the enumeration is a bit slower
 
 /// Get the number of elements in the list.
 /// @returns The count.

@@ -49,11 +49,6 @@
 
 - (void) dealloc {
     FLDispatchRelease(_fifoQueue);
-#if FL_MRC
-    [_line release];
-    [_sinks release];
-    [super dealloc];
-#endif
 }
 
 - (void) dispatchBlock:(dispatch_block_t) block {
@@ -64,30 +59,29 @@
 //    }
 
     @try {
-        OSSpinLockLock(&_spinLock);
+        OSSpinLockLock(&self->_spinLock);
         block();
     }
     @finally {
-        OSSpinLockUnlock(&_spinLock);
+        OSSpinLockUnlock(&self->_spinLock);
     }
-
 }
 
 - (void) pushLoggerSink:(id<FLLogSink>) sink {
     [self dispatchBlock: ^{
-        [_sinks insertObject:sink atIndex:0];
+        [self->_sinks insertObject:sink atIndex:0];
     }];
 }
 
 - (void) addLoggerSink:(id<FLLogSink>) sink {
     [self dispatchBlock: ^{
-        [_sinks addObject:sink];
+        [self->_sinks addObject:sink];
     }];
 }
 
 - (void) removeLoggerSink:(id<FLLogSink>) sink {
     [self dispatchBlock: ^{
-        [_sinks removeObject:sink];
+        [self->_sinks removeObject:sink];
     }];
 }
 
@@ -104,7 +98,7 @@
 
 - (void) updateLogSinkBehavior:(id<FLLogSinkBehavior>) behavior {
     [self dispatchBlock: ^{
-        for(id<FLLogSink> sink in _sinks) {
+        for(id<FLLogSink> sink in self->_sinks) {
             [sink updateLogSinkBehavior:behavior];
         }
     }];
@@ -199,7 +193,7 @@
 
 - (void) stringFormatterIndent:(FLStringFormatter*) formatter {
     [self dispatchBlock: ^{
-        for(id<FLLogSink> sink in _sinks) {
+        for(id<FLLogSink> sink in self->_sinks) {
             [sink indent:self.indentIntegrity];
         }
     }];
@@ -207,7 +201,7 @@
 
 - (void) stringFormatterOutdent:(FLStringFormatter*) formatter {
     [self dispatchBlock: ^{
-        for(id<FLLogSink> sink in _sinks) {
+        for(id<FLLogSink> sink in self->_sinks) {
             [sink outdent:self.indentIntegrity];
         }
     }];

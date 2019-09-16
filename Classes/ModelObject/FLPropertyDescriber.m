@@ -64,17 +64,17 @@
 @synthesize attributes = _attributes;
 
 FLSynthesizeLazyGetterWithBlock(structName, NSString*, _structName, ^{
-        return FLPropertyAttributesGetStructName(_attributes);
+        return FLPropertyAttributesGetStructName(self->_attributes);
     }
 );
 
 FLSynthesizeLazyGetterWithBlock(unionName, NSString*, _unionName, ^{
-        return FLPropertyAttributesGetUnionName(_attributes);
+        return FLPropertyAttributesGetUnionName(self->_attributes);
     }
 );
 
 FLSynthesizeLazyGetterWithBlock(ivarName, NSString*, _ivarName, ^{
-        return FLPropertyAttributesGetIvarName(_attributes);
+        return FLPropertyAttributesGetIvarName(self->_attributes);
     }
 );
 

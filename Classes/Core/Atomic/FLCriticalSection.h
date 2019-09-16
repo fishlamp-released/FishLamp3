@@ -8,6 +8,6 @@
 
 #import "FishLampRequired.h"
 
-typedef void (^FLCriticalSectionBlock)();
+typedef void (^FLCriticalSectionBlock)(void);
 
 extern void FLCriticalSection(void* shared_addr, FLCriticalSectionBlock block);

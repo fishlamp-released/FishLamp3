@@ -15,7 +15,7 @@
 typedef void (^FLDatabaseStatementPrepareBlock)(BOOL* stop);
 typedef void (^FLDatabaseStatementDidSelectRowBlock)(NSDictionary* row, BOOL* stop);
 typedef void (^FLDatabaseStatementDidSelectObjectBlock)(id object, BOOL* stop);
-typedef void (^FLDatabaseStatementFinishedBlock)();
+typedef void (^FLDatabaseStatementFinishedBlock)(void);
 typedef void (^FLDatabaseStatementFailedBlock)(NSError* error);
 
 @interface FLDatabaseStatement : FLSqlBuilder {

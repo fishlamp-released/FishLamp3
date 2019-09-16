@@ -26,7 +26,7 @@ typedef void (^FLOperationQueueBlock)(FLOperationQueue* operationQueue);
 @property (readonly, strong, nonatomic) NSMutableArray* activeQueue;
 @property (readonly, strong, nonatomic) NSMutableArray* objectQueue;
 @property (readonly, strong, nonatomic) FLFifoDispatchQueue* schedulingQueue;
-@property (readonly, assign, nonatomic) id<FLOperationQueueDelegate> delegate;
+@property (readonly, weak, nonatomic) id<FLOperationQueueDelegate> delegate;
 
 @property (readwrite, strong) id result;
 @property (readwrite, assign) BOOL isFinished;

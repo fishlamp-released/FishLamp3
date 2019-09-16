@@ -27,9 +27,9 @@
 
 @interface FLOperationFinisher : FLFinisher {
 @private
-    FL_WEAK FLOperation* _operation;
+    __weak FLOperation* _operation;
 }
-@property (readwrite, assign, nonatomic) FLOperation* operation;
+@property (readwrite, weak, nonatomic) FLOperation* operation;
 
 - (id) initWithOperation:(FLOperation*) operation completion:(fl_completion_block_t) completion;
 

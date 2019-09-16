@@ -46,7 +46,7 @@
         inputProject = [_projectProvider readProjectForCodeGenerator:self];
         FLAssertNotNil(inputProject);
 
-        [self sendMessageToListeners:@selector(codeGenerator:generationWillBeginForProject:)
+        [self sendEvent:@selector(codeGenerator:generationWillBeginForProject:)
                     withObject:self
                     withObject:inputProject];
 
@@ -54,12 +54,12 @@
         [project configureWithProjectInput:inputProject];
         [project.fileManager writeFilesToDisk:self];
 
-        [self sendMessageToListeners:@selector(codeGenerator:generationDidFinishForProject:)
+        [self sendEvent:@selector(codeGenerator:generationDidFinishForProject:)
                     withObject:self
                     withObject:inputProject];
     }
     @catch(NSException* ex) {
-        [self sendMessageToListeners:@selector(codeGenerator:generationDidFailForProject:withError:)
+        [self sendEvent:@selector(codeGenerator:generationDidFailForProject:withError:)
                     withObject:self
                     withObject:inputProject
                     withObject:ex.error];

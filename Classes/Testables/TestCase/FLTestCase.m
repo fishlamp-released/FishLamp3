@@ -157,7 +157,7 @@
             [asyncTest waitUntilFinished];
 
             if(self.asyncFinishTest) {
-                self.asyncFinishTest(asyncTest);
+                self.asyncFinishTest();
             }
 
             if(self.asyncTest.error) {

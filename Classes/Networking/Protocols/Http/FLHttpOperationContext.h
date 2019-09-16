@@ -30,12 +30,12 @@
 
     NSError* _authenticationError;
 
-    FL_WEAK id<FLAuthenticateHttpRequestOperationDelegate> _authenticationDelegate;
+    __weak id<FLAuthenticateHttpRequestOperationDelegate> _authenticationDelegate;
 }
 
 @property (readonly, strong) id<FLCredentialsStorage> credentialsStorage;
 
-@property (readwrite, assign) id<FLAuthenticateHttpRequestOperationDelegate> authenticationDelegate;
+@property (readwrite, weak) id<FLAuthenticateHttpRequestOperationDelegate> authenticationDelegate;
 
 @property (readwrite, strong, nonatomic) id<FLAuthenticationCredentials> authenticationCredentials;
 

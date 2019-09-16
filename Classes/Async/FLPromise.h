@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, FLPromiseState) {
     FLPromisedResult _result;
     fl_completion_block_t _completion;
     FLPromise* _nextPromise;
-    FL_WEAK id _target;
+    __weak id _target;
     SEL _action;
     BOOL _isFinished;
 }

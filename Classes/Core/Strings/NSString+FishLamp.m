@@ -157,9 +157,9 @@
         for(int j = 0; (j < subLen && i < len); j++) {
             if([self characterAtIndex:i] != [substring characterAtIndex:j]) {
                 goto skip;
-                
-                ++i;
             }
+
+            ++i;
         }
         
         ++count;

@@ -51,10 +51,10 @@
  *  Sleep the current queue
  *  note this allows the main run loop to continue processing events.
  *
- *  @param sleep for how many seconds
+ *  @param sleepMilliseconds for how many seconds
  *  
  */
-+ (void) sleepForTimeInterval:(NSTimeInterval) milliseconds;
++ (void) sleepForTimeInterval:(NSTimeInterval) sleepMilliseconds;
 
 // same as GCD functions, just here for convienience so you don't have to get the dispatch_block_t
 // for those.

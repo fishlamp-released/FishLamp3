@@ -10,12 +10,12 @@
 
 @interface FLListener : NSObject {
 @private
-    FL_WEAK id _listener;
+    __weak id _listener;
     FLDispatcher_t _dispatcher;
     NSUInteger _hash;
 }
 
-@property (readonly, nonatomic, assign) id listener;
+@property (readonly, nonatomic, weak) id listener;
 
 + (id) listener:(id) listener dispatcher:(FLDispatcher_t) dispatcher;
 

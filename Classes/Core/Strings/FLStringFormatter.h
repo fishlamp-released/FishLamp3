@@ -10,7 +10,7 @@
 #import "FishLampRequired.h"
 #import "FLStringFormatterDelegate.h"
 
-typedef void (^FLStringFormatterIndentedBlock)();
+typedef void (^FLStringFormatterIndentedBlock)(void);
 
 @class FLIndentIntegrity;
 
@@ -37,7 +37,7 @@ typedef void (^FLStringFormatterIndentedBlock)();
 /**
  *  Append a string
  *  
- *  @param string either a NSString or a NSAttributedString
+ *  @param anyStringOrStringFormatter is a string either a NSString or a NSAttributedString
  */
 - (void) appendString:(id) anyStringOrStringFormatter;
 
@@ -54,7 +54,7 @@ typedef void (^FLStringFormatterIndentedBlock)();
 /**
  *  Append a string with a LF appended
  *  
- *  @param line either a NSString or a NSAttributedString
+ *  @param anyStringOrStringFormatter is a line either a NSString or a NSAttributedString
  */
 - (void) appendLine:(id) anyStringOrStringFormatter;
 
@@ -97,20 +97,21 @@ typedef void (^FLStringFormatterIndentedBlock)();
 
 /**
  *  Concrete base class for a string formatter.
+ *  The delegate implements the guts of the string formatter. By default the delegate is set to self because most of the time we will be subclass FLStringFormatter.
+ *  @interface MyStringFormatter : FLStringFormatter<FLStringFormatterDelegate>
  */
 @interface FLStringFormatter : NSObject<FLStringFormatter> {
 @private
-    FL_WEAK id _stringFormatterDelegate;
+    __weak id _stringFormatterDelegate;
     id<FLStringPreprocessor> _preprocessor;
     NSInteger _indentLevel;
     FLIndentIntegrity* _indentIntegrity;
 }
 
 /**
- *  The delegate implements the guts of the string formatter. By default the delegate is set to self because most of the time we will be subclass FLStringFormatter.
- *  @interface MyStringFormatter : FLStringFormatter<FLStringFormatterDelegate>
+    by default, stringFormatter is set to self
  */
-@property (readwrite, assign, nonatomic) id stringFormatterDelegate;
+@property (readwrite, weak, nonatomic) id stringFormatterDelegate;
 
 @property (readwrite, strong, nonatomic) id<FLStringPreprocessor> preprocessor;
 

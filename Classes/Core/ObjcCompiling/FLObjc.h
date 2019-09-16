@@ -126,13 +126,11 @@ extern id FLCopyOrRetainObjectWithAutorelease(id src);
 #endif
 
 #if OS_OBJECT_USE_OBJC
-#define FLDispatchRelease(__ITEM__)
+    #define FLDispatchRelease(__ITEM__)
 #else
-#define FLDispatchRelease(__ITEM__) \
-            dispatch_release(__ITEM__)
+    #define FLDispatchRelease(__ITEM__) \
+                dispatch_release(__ITEM__)
 #endif
 
-
-#define FL_WEAK __weak
 
 

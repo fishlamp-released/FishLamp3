@@ -44,16 +44,10 @@
    return FLAutorelease([[[self class] alloc] initWithTestable:testableObject]);
 }
 
-#if FL_MRC
-- (void)dealloc {
-    [_queue release];
-	[_testableObject release];
-	[super dealloc];
-}
-#endif
 
 - (NSString*) testName {
-    return [_testableObject testName];
+    return nil;
+//    return [_testableObject testName];
 }
 
 - (void) willRunTestCases:(FLTestCaseList*) testCases {

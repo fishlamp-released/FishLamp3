@@ -40,18 +40,18 @@
 @interface FLOperation : FLBroadcaster<FLQueueableAsyncOperation, FLFinisherDelegate> {
 @private
     BOOL _cancelled;
-    FL_WEAK id _context;
-    FL_WEAK id<FLOperationStarter> _operationStarter;
+    __weak id _context;
+    __weak id<FLOperationStarter> _operationStarter;
 
 #if EXPERIMENTAL
     NSMutableArray* _prerequisites;
 #endif
 }
 
-@property (readwrite, assign) id<FLOperationStarter> operationStarter;
+@property (readwrite, weak) id<FLOperationStarter> operationStarter;
 
 /// Operations must run in a context. See FLOpertionContext.
-@property (readonly, assign, nonatomic) id context;
+@property (readonly, weak, nonatomic) id context;
 
 
 /// return YES is was cancelled

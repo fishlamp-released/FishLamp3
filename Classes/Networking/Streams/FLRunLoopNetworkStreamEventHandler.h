@@ -11,9 +11,9 @@
 
 @interface FLRunLoopNetworkStreamEventHandler : NSObject<FLNetworkStreamEventHandler> {
 @private
-    FL_WEAK NSRunLoop* _runLoop;
-    FL_WEAK FLNetworkStream* _stream;
-    FL_WEAK NSThread* _thread;
+    __weak NSRunLoop* _runLoop;
+    __weak FLNetworkStream* _stream;
+    __weak NSThread* _thread;
 }
 - (NSString*) runLoopMode;
 @end

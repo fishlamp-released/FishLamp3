@@ -61,8 +61,8 @@
 
 - (void) changeBusyState:(BOOL) busy {
     dispatch_async(dispatch_get_main_queue(), ^{
-        _busyCount += (busy ? 1 : -1);
-        _lastChange = [NSDate timeIntervalSinceReferenceDate];
+        self->_busyCount += (busy ? 1 : -1);
+        self->_lastChange = [NSDate timeIntervalSinceReferenceDate];
         FLTrace(@"busy count: %d", self.busyCount);
         [self updateListeners];
     });

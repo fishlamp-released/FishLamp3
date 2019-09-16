@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^FLAsyncTestFinisherBlock)();
+typedef void (^FLAsyncTestFinisherBlock)(void);
 
 @interface FLAsyncTestFinisher : NSObject 
 
