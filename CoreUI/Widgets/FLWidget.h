@@ -26,7 +26,8 @@
 #import "FLGridCellAware.h"
 #endif
 
-@interface FLWidget : NSObject /*<FLGridCellAware>*/ {
+///FLGridCellAware
+@interface FLWidget : NSObject  {
 @private
     __weak id _parent;
     NSMutableArray* _subWidgets;

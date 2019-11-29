@@ -112,10 +112,10 @@
                 [_logoutButton.animator setAlphaValue:0.0];
                 [_welcomeText.animator setAlphaValue: 0.0];
             } completionHandler: ^{
-                _logoutButton.hidden = YES;
-                _welcomeText.hidden = YES;
-                _logoutButton.alphaValue = 1.0;
-                _welcomeText.alphaValue = 1.0;
+                self->_logoutButton.hidden = YES;
+                self->_welcomeText.hidden = YES;
+                self->_logoutButton.alphaValue = 1.0;
+                self->_welcomeText.alphaValue = 1.0;
             }];
         }
     }

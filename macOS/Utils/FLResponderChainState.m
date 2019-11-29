@@ -60,18 +60,20 @@
     }
 
 return;
+#if 0
     [self performBlockOnMainThread_fl:^{
         if([window firstResponder] != responder) {
 
-            if([NSDate timeIntervalSinceReferenceDate] < (_start + _timeout)) {
+            if([NSDate timeIntervalSinceReferenceDate] < (self->_start + self->_timeout)) {
                 [self restoreResponder:responder withWindow:window];
             }
             else {
-                FLDebugLog(@"Unable to set first responder %@ in %@", [responder description], [_window description])
+                FLDebugLog(@"Unable to set first responder %@ in %@", [responder description], [self->_window description])
             }
         }
 
     }];
+#endif
 }
 
 - (void) restore {

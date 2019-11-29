@@ -8,7 +8,7 @@
 //
 #import "FishLampOSX.h"
 
-typedef void (^FLSheetHandlerBlock)();
+typedef void (^FLSheetHandlerBlock)(void);
 
 @interface FLSheetHandler : NSResponder {
 @private

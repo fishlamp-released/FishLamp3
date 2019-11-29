@@ -93,7 +93,7 @@
 
 @implementation NSViewController (FLErrorWindowController)
 
-- (void) showErrorAlert:(NSString*) title caption:(NSString*) caption error:(NSError*) error {
+- (void) showErrorAlertWithTitle:(NSString*) title caption:(NSString*) caption error:(NSError*) error {
     if(![error isCancelError]) {
    
 // TODO (MWF): double dispatch this back into the error?
@@ -122,7 +122,7 @@
 
 @implementation NSWindowController (FLErrorWindowController)
 
-- (void) showErrorAlert:(NSString*) title caption:(NSString*) caption error:(NSError*) error {
+- (void) showErrorAlertWithTitle:(NSString*) title caption:(NSString*) caption error:(NSError*) error {
     if(![error isCancelError]) {
    
 // TODO (MWF): double dispatch this back into the error?

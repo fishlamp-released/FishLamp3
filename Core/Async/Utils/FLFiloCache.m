@@ -19,7 +19,6 @@
 - (id) init {	
 	self = [super init];
 	if(self) {
-		_spinLock = OS_SPINLOCK_INIT;
 	}
 	return self;
 }
@@ -27,26 +26,26 @@
 - (id) popObject {
 
     id outObject = nil;
-    OSSpinLockLock(&_spinLock);
+    os_unfair_lock_lock(&_spinLock);
 
     if(_head) {
         outObject = _head;
         _head = _head.cacheData;
     }
 
-    OSSpinLockUnlock(&_spinLock);
+    os_unfair_lock_unlock(&_spinLock);
 
     return FLAutorelease(outObject);
 }
 
 - (void) addObject:(id<FLCacheableObject>) object {
 
-    OSSpinLockLock(&_spinLock);
+    os_unfair_lock_lock(&_spinLock);
 
     object.cacheData = _head;
     _head = FLRetain(object);
 
-    OSSpinLockUnlock(&_spinLock);
+    os_unfair_lock_unlock(&_spinLock);
 }
 
 

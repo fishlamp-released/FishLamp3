@@ -7,7 +7,7 @@
 //
 
 #import "FishLampCore.h"
-
+#import <os/lock.h>
 @protocol FLCacheableObject <NSObject>
 @property (readwrite, strong, nonatomic) id cacheData;
 @end
@@ -15,7 +15,7 @@
 @interface FLFiloCache : NSObject {
 @private
     id<FLCacheableObject> _head;
-    int32_t _spinLock;
+    os_unfair_lock _spinLock;
 }
 
 - (id) popObject;

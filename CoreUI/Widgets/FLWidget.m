@@ -15,7 +15,7 @@
 
 @interface FLWidget ()
 @property (readwrite, assign, nonatomic, getter=isParentHidden) BOOL parentHidden;
-@property (readwrite, assign, nonatomic) id parent;
+@property (readwrite, weak, nonatomic) id parent;
 
 @end
 

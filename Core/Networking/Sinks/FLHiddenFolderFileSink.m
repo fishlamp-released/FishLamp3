@@ -8,6 +8,7 @@
 //
 
 #import "FLHiddenFolderFileSink.h"
+#import <stdatomic.h>
 
 @interface FLHiddenFolderFileSink ()
 @property (readwrite, strong, nonatomic) NSString* folderPath;

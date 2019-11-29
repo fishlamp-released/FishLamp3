@@ -79,9 +79,9 @@
     [super awakeFromNib];
     [self setIndeterminate:YES];
     [self setDisplayedWhenStopped:NO];
-    [self setStyle:NSProgressIndicatorSpinningStyle];
+    [self setStyle:NSProgressIndicatorStyleSpinning];
     [self setBezeled: NO];
-    [self setControlSize:NSSmallControlSize];
+    [self setControlSize:NSControlSizeSmall];
     [self setControlTint:NSDefaultControlTint];
     [self sizeToFit];
 //    self.wantsLayer = YES;

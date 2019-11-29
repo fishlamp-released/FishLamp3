@@ -119,7 +119,7 @@
         [_animation startAnimating:_animationLayer completion:^{
             [self didStopAnimating];
             
-            if(_animate) {
+            if(self->_animate) {
                 [self startAnimating];
             }
             else {

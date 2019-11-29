@@ -11,7 +11,7 @@
 
 #import <execinfo.h>
 #import <stdio.h>
-#import <libkern/OSAtomic.h>
+#import <os/lock.h>
 
 #import "FLConsoleLogSink.h"
 #import "FLExceptionThrowing.h"

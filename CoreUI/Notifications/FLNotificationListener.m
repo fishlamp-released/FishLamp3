@@ -11,11 +11,11 @@
 #import "FLSelectorPerforming.h"
 
 @interface FLNotificationListener ()
-@property (readwrite, assign, nonatomic) id sender;
+@property (readwrite, weak, nonatomic) id sender;
 @property (readwrite, strong, nonatomic) NSString* parameterKey;
 @property (readwrite, strong, nonatomic) NSString* eventName;
 @property (readwrite, assign, nonatomic) SEL action;
-@property (readwrite, assign, nonatomic) id target;
+@property (readwrite, weak, nonatomic) id target;
 @end
 
 @implementation FLNotificationListener

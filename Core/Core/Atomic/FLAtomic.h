@@ -7,6 +7,7 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 #import <Foundation/Foundation.h>
+#import <os/lock.h>
 #import <libkern/OSAtomic.h>
 
 extern void FLAtomicSet64Ptr(int64_t *target, int64_t new_value);

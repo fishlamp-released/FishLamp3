@@ -9,7 +9,7 @@
 
 #import "FishLampRequired.h"
 #import "FLStringFormatter.h"
-#import <libkern/OSAtomic.h>
+#import <os/lock.h>
 
 #define FLLogTypeNone       nil
 #define FLLogTypeLog        @"com.fishlamp.log"
@@ -28,7 +28,7 @@
     NSMutableArray* _sinks;
     dispatch_queue_t _fifoQueue;
     NSMutableString* _line;
-    OSSpinLock _spinLock;
+    os_unfair_lock _spinLock;
 }
 
 + (id) logger;

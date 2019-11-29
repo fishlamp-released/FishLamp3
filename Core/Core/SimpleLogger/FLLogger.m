@@ -35,8 +35,6 @@
 
 #endif        
         _sinks = [[NSMutableArray alloc] init];
-
-        _spinLock = OS_SPINLOCK_INIT;
     }
     
     return self;
@@ -59,11 +57,11 @@
 //    }
 
     @try {
-        OSSpinLockLock(&self->_spinLock);
+        os_unfair_lock_lock(&self->_spinLock);
         block();
     }
     @finally {
-        OSSpinLockUnlock(&self->_spinLock);
+        os_unfair_lock_unlock(&self->_spinLock);
     }
 }
 

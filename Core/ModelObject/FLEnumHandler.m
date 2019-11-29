@@ -110,7 +110,7 @@
     
     NSMutableString* string = [NSMutableString string];
     if(enums) {
-        NSUInteger count = sizeof(enums) / sizeof(NSInteger);
+        NSUInteger count = sizeof(*enums) / sizeof(NSInteger);
     
         for(int i = 0; i < count; i++) {
             NSInteger enumValue = enums[i];

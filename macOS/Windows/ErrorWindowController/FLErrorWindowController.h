@@ -26,9 +26,9 @@
 @end
 
 @interface NSViewController (FLErrorWindowController)
-- (void) showErrorAlert:(NSString*) title caption:(NSString*) caption error:(NSError*) error;
+- (void) showErrorAlertWithTitle:(NSString*) title caption:(NSString*) caption error:(NSError*) error;
 @end
 
 @interface NSWindowController (FLErrorWindowController)
-- (void) showErrorAlert:(NSString*) title caption:(NSString*) caption error:(NSError*) error;
+- (void) showErrorAlertWithTitle:(NSString*) title caption:(NSString*) caption error:(NSError*) error;
 @end
