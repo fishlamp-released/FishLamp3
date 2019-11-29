@@ -480,6 +480,365 @@
 		B21C0784234A5B7200444ADB /* FLWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = B21C05F1234A5B7100444ADB /* FLWidget.h */; };
 		B21C0785234A5B7200444ADB /* FLWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = B21C05F1234A5B7100444ADB /* FLWidget.h */; };
 		B21C0786234A5B7200444ADB /* FLWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = B21C05F1234A5B7100444ADB /* FLWidget.h */; };
+		B2CAB4732357972200EF1144 /* FishLampLib.h in Headers */ = {isa = PBXBuildFile; fileRef = B2CAB4722357972200EF1144 /* FishLampLib.h */; };
+		B2CAB4752357972200EF1144 /* FishLampLib.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CAB4742357972200EF1144 /* FishLampLib.m */; };
+		B2CAB479235797B700EF1144 /* NSString+MiscUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64348232FE9EA00405EE9 /* NSString+MiscUtils.m */; };
+		B2CAB47A235797B700EF1144 /* FLParserStack.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64349232FE9EA00405EE9 /* FLParserStack.m */; };
+		B2CAB47B235797B700EF1144 /* FLStringParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6434C232FE9EA00405EE9 /* FLStringParser.m */; };
+		B2CAB47C235797B700EF1144 /* FLStringBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6434F232FE9EA00405EE9 /* FLStringBuilder.m */; };
+		B2CAB47D235797B700EF1144 /* FLStringTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64352232FE9EA00405EE9 /* FLStringTokenizer.m */; };
+		B2CAB47E235797B700EF1144 /* FLStringBuilderSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64353232FE9EA00405EE9 /* FLStringBuilderSection.m */; };
+		B2CAB47F235797B700EF1144 /* NSString+Lists.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64354232FE9EA00405EE9 /* NSString+Lists.m */; };
+		B2CAB480235797B700EF1144 /* FLByteBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64359232FE9EA00405EE9 /* FLByteBuffer.m */; };
+		B2CAB481235797B700EF1144 /* FLStackTrace+FLPrettyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6435C232FE9EA00405EE9 /* FLStackTrace+FLPrettyDescription.m */; };
+		B2CAB482235797B700EF1144 /* FLPrettyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6435E232FE9EA00405EE9 /* FLPrettyDescription.m */; };
+		B2CAB483235797B700EF1144 /* FLCStringFragment.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64361232FE9EA00405EE9 /* FLCStringFragment.m */; };
+		B2CAB484235797B700EF1144 /* NSString+FishLamp.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64364232FE9EA00405EE9 /* NSString+FishLamp.m */; };
+		B2CAB485235797B700EF1144 /* NSString+FLPathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64369232FE9EA00405EE9 /* NSString+FLPathUtilities.m */; };
+		B2CAB486235797B700EF1144 /* FLPrettyString.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6436B232FE9EA00405EE9 /* FLPrettyString.m */; };
+		B2CAB487235797B700EF1144 /* FLStringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6436C232FE9EA00405EE9 /* FLStringUtilities.m */; };
+		B2CAB488235797B700EF1144 /* FLStringFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6436E232FE9EA00405EE9 /* FLStringFormatter.m */; };
+		B2CAB489235797B700EF1144 /* FLStringPreprocessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64371232FE9EA00405EE9 /* FLStringPreprocessor.m */; };
+		B2CAB48A235797B700EF1144 /* NSMutableString+FishLamp.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64373232FE9EA00405EE9 /* NSMutableString+FishLamp.m */; };
+		B2CAB48B235797B700EF1144 /* NSString+GUID.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64374232FE9EA00405EE9 /* NSString+GUID.m */; };
+		B2CAB48C235797B700EF1144 /* FLPrettyAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64376232FE9EA00405EE9 /* FLPrettyAttributedString.m */; };
+		B2CAB48D235797B700EF1144 /* FLWhitespace.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64378232FE9EA00405EE9 /* FLWhitespace.m */; };
+		B2CAB48E235797B700EF1144 /* FLWhitespaceStringFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64379232FE9EA00405EE9 /* FLWhitespaceStringFormatter.m */; };
+		B2CAB48F235797B700EF1144 /* NSObject+FLSelectorPerforming.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6437E232FE9EA00405EE9 /* NSObject+FLSelectorPerforming.m */; };
+		B2CAB490235797B700EF1144 /* NSObject+FLBlockPerforming.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64381232FE9EA00405EE9 /* NSObject+FLBlockPerforming.m */; };
+		B2CAB491235797B700EF1144 /* FLSelectorPerforming.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64382232FE9EA00405EE9 /* FLSelectorPerforming.m */; };
+		B2CAB492235797B700EF1144 /* FLCallback_t.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64383232FE9EA00405EE9 /* FLCallback_t.m */; };
+		B2CAB493235797B700EF1144 /* FLLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64386232FE9EA00405EE9 /* FLLog.m */; };
+		B2CAB494235797B700EF1144 /* FLBitFlags.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6438A232FE9EA00405EE9 /* FLBitFlags.m */; };
+		B2CAB495235797B700EF1144 /* FLAssertionFailedError.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64390232FE9EA00405EE9 /* FLAssertionFailedError.m */; };
+		B2CAB496235797B700EF1144 /* FLAssertionFailureErrorDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64392232FE9EA00405EE9 /* FLAssertionFailureErrorDomain.m */; };
+		B2CAB497235797B700EF1144 /* FLAssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64393232FE9EA00405EE9 /* FLAssertionHandler.m */; };
+		B2CAB498235797B700EF1144 /* FLConfirm.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64394232FE9EA00405EE9 /* FLConfirm.m */; };
+		B2CAB499235797B700EF1144 /* FLAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64396232FE9EA00405EE9 /* FLAssert.m */; };
+		B2CAB49A235797B700EF1144 /* FLExceptionThrowing.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6439C232FE9EA00405EE9 /* FLExceptionThrowing.m */; };
+		B2CAB49B235797B700EF1144 /* NSError+FLException.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6439D232FE9EA00405EE9 /* NSError+FLException.m */; };
+		B2CAB49C235797B700EF1144 /* NSException+FLError.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6439E232FE9EA00405EE9 /* NSException+FLError.m */; };
+		B2CAB49D235797B700EF1144 /* FLExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6439F232FE9EA00405EE9 /* FLExceptionHandler.m */; };
+		B2CAB49E235797B700EF1144 /* FLCriticalSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643A7232FE9EA00405EE9 /* FLCriticalSection.m */; };
+		B2CAB49F235797B700EF1144 /* FLAtomic.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643A8232FE9EA00405EE9 /* FLAtomic.m */; };
+		B2CAB4A0235797B700EF1144 /* FLObjc.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643B2232FE9EA00405EE9 /* FLObjc.m */; };
+		B2CAB4A1235797B700EF1144 /* NSError+FishLampCore.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643B8232FE9EA00405EE9 /* NSError+FishLampCore.m */; };
+		B2CAB4A2235797B700EF1144 /* FishLampCoreErrorDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643B9232FE9EA00405EE9 /* FishLampCoreErrorDomain.m */; };
+		B2CAB4A3235797B700EF1144 /* NSError+FLCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643BA232FE9EA00405EE9 /* NSError+FLCancel.m */; };
+		B2CAB4A4235797B700EF1144 /* FLErrorDomainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643BB232FE9EA00405EE9 /* FLErrorDomainInfo.m */; };
+		B2CAB4A5235797B700EF1144 /* NSError+FLStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643C1232FE9EA00405EE9 /* NSError+FLStackTrace.m */; };
+		B2CAB4A6235797B700EF1144 /* FLStackTrace_t.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643C2232FE9EA00405EE9 /* FLStackTrace_t.m */; };
+		B2CAB4A7235797B700EF1144 /* FLStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643C3232FE9EA00405EE9 /* FLStackTrace.m */; };
+		B2CAB4A8235797B700EF1144 /* FLFileLocation_t.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643C4232FE9EA00405EE9 /* FLFileLocation_t.m */; };
+		B2CAB4A9235797B700EF1144 /* FLOSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643CA232FE9EA00405EE9 /* FLOSVersion.m */; };
+		B2CAB4AA235797B700EF1144 /* FLVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643CB232FE9EA00405EE9 /* FLVersion.m */; };
+		B2CAB4AB235797B700EF1144 /* FLDeclareAssociatedProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643CF232FE9EA00405EE9 /* FLDeclareAssociatedProperty.m */; };
+		B2CAB4AC235797B700EF1144 /* FLDeclareAtomicProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643D8232FE9EA00405EE9 /* FLDeclareAtomicProperties.m */; };
+		B2CAB4AD235797B700EF1144 /* FLLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643DB232FE9EA00405EE9 /* FLLogEntry.m */; };
+		B2CAB4AE235797B700EF1144 /* FLLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643DC232FE9EA00405EE9 /* FLLog.m */; };
+		B2CAB4AF235797B700EF1144 /* FLTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643DD232FE9EA00405EE9 /* FLTrace.m */; };
+		B2CAB4B0235797B700EF1144 /* FLLogSink.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643DE232FE9EA00405EE9 /* FLLogSink.m */; };
+		B2CAB4B1235797B700EF1144 /* FLConsoleLogSink.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643E1232FE9EA00405EE9 /* FLConsoleLogSink.m */; };
+		B2CAB4B2235797B700EF1144 /* FLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643E5232FE9EA00405EE9 /* FLLogger.m */; };
+		B2CAB4B3235797B700EF1144 /* FLLogSinkBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643E7232FE9EA00405EE9 /* FLLogSinkBehavior.m */; };
+		B2CAB4B4235797B700EF1144 /* FLBufferedLogSink.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643EB232FE9EA00405EE9 /* FLBufferedLogSink.m */; };
+		B2CAB4B5235797B700EF1144 /* printf_fl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643EC232FE9EA00405EE9 /* printf_fl.m */; };
+		B2CAB4B6235797B700EF1144 /* FLObjcRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643EE232FE9EA00405EE9 /* FLObjcRuntime.m */; };
+		B2CAB4B7235797B700EF1144 /* FLPropertyAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643F0232FE9EA00405EE9 /* FLPropertyAttributes.m */; };
+		B2CAB4B8235797B700EF1144 /* FLSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643F1232FE9EA00405EE9 /* FLSelector.m */; };
+		B2CAB4B9235797B700EF1144 /* FLRuntimeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E643F4232FE9EA00405EE9 /* FLRuntimeInfo.m */; };
+		B2CAB4BA235797B700EF1144 /* FLTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6448A232FE9EA00405EE9 /* FLTimer.m */; };
+		B2CAB4BB235797B700EF1144 /* FLTimeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6448C232FE9EA00405EE9 /* FLTimeUtilities.m */; };
+		B2CAB4BC235797B700EF1144 /* FLTimedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6448D232FE9EA00405EE9 /* FLTimedObject.m */; };
+		B2CAB4BD235797B700EF1144 /* NSError+FLTimeout.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6448F232FE9EA00405EE9 /* NSError+FLTimeout.m */; };
+		B2CAB4BE235797B700EF1144 /* FLBatchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64494232FE9EA00405EE9 /* FLBatchOperation.m */; };
+		B2CAB4BF235797B700EF1144 /* FLPrerequisite.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64495232FE9EA00405EE9 /* FLPrerequisite.m */; };
+		B2CAB4C0235797B700EF1144 /* FLOperationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64499232FE9EA00405EE9 /* FLOperationContext.m */; };
+		B2CAB4C1235797B700EF1144 /* FLFinisher.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6449A232FE9EA00405EE9 /* FLFinisher.m */; };
+		B2CAB4C2235797B700EF1144 /* FLPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6449C232FE9EA00405EE9 /* FLPromise.m */; };
+		B2CAB4C3235797B700EF1144 /* FLDecoratedAsyncQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644A0232FE9EA00405EE9 /* FLDecoratedAsyncQueue.m */; };
+		B2CAB4C4235797B700EF1144 /* FLFiloCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644A3232FE9EA00405EE9 /* FLFiloCache.m */; };
+		B2CAB4C5235797B700EF1144 /* FLAsyncQueueDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644A4232FE9EA00405EE9 /* FLAsyncQueueDecorator.m */; };
+		B2CAB4C6235797B700EF1144 /* FLCount.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644A7232FE9EB00405EE9 /* FLCount.m */; };
+		B2CAB4C7235797B700EF1144 /* FLAbstractAsyncQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644A9232FE9EB00405EE9 /* FLAbstractAsyncQueue.m */; };
+		B2CAB4C8235797B700EF1144 /* FLFifoDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644B1232FE9EB00405EE9 /* FLFifoDispatchQueue.m */; };
+		B2CAB4C9235797B700EF1144 /* FLDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644B2232FE9EB00405EE9 /* FLDispatchQueue.m */; };
+		B2CAB4CA235797B700EF1144 /* FLConcurrentDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644B3232FE9EB00405EE9 /* FLConcurrentDispatchQueue.m */; };
+		B2CAB4CB235797B700EF1144 /* FLMainThreadDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644B4232FE9EB00405EE9 /* FLMainThreadDispatchQueue.m */; };
+		B2CAB4CC235797B700EF1144 /* FLDispatchQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644B5232FE9EB00405EE9 /* FLDispatchQueues.m */; };
+		B2CAB4CD235797B700EF1144 /* FLBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644B7232FE9EB00405EE9 /* FLBlockOperation.m */; };
+		B2CAB4CE235797B700EF1144 /* FLFinisherBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644BA232FE9EB00405EE9 /* FLFinisherBlockOperation.m */; };
+		B2CAB4CF235797B700EF1144 /* FLLengthyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644BC232FE9EB00405EE9 /* FLLengthyOperation.m */; };
+		B2CAB4D0235797B700EF1144 /* FLPerformSelectorOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644BE232FE9EB00405EE9 /* FLPerformSelectorOperation.m */; };
+		B2CAB4D1235797B700EF1144 /* FLPromisedResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644C4232FE9EB00405EE9 /* FLPromisedResult.m */; };
+		B2CAB4D2235797B700EF1144 /* NSError+FLFailedResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644C5232FE9EB00405EE9 /* NSError+FLFailedResult.m */; };
+		B2CAB4D3235797B700EF1144 /* FLSuccessfulResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644C6232FE9EB00405EE9 /* FLSuccessfulResult.m */; };
+		B2CAB4D4235797B700EF1144 /* FLOperationQueueMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644CE232FE9EB00405EE9 /* FLOperationQueueMonitor.m */; };
+		B2CAB4D5235797B700EF1144 /* FLOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644D0232FE9EB00405EE9 /* FLOperationQueue.m */; };
+		B2CAB4D6235797B700EF1144 /* FLOperationQueueState.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644D7232FE9EB00405EE9 /* FLOperationQueueState.m */; };
+		B2CAB4D7235797B700EF1144 /* FLOperationQueueOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644D8232FE9EB00405EE9 /* FLOperationQueueOperation.m */; };
+		B2CAB4D8235797B700EF1144 /* FLCCodeBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644DD232FE9EB00405EE9 /* FLCCodeBuilder.m */; };
+		B2CAB4D9235797B700EF1144 /* FLBracketedStringBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644E0232FE9EB00405EE9 /* FLBracketedStringBuilder.m */; };
+		B2CAB4DA235797B700EF1144 /* FLCStyleCodeBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644E2232FE9EB00405EE9 /* FLCStyleCodeBuilder.m */; };
+		B2CAB4DB235797B700EF1144 /* FLCodeBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644E3232FE9EB00405EE9 /* FLCodeBuilder.m */; };
+		B2CAB4DC235797B700EF1144 /* FLCodeChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644E5232FE9EB00405EE9 /* FLCodeChunk.m */; };
+		B2CAB4DD235797B700EF1144 /* FLCommandLineArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644E8232FE9EB00405EE9 /* FLCommandLineArgument.m */; };
+		B2CAB4DE235797B700EF1144 /* FLUsageToolTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644EA232FE9EB00405EE9 /* FLUsageToolTask.m */; };
+		B2CAB4DF235797B700EF1144 /* FLHelpToolTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644EC232FE9EB00405EE9 /* FLHelpToolTask.m */; };
+		B2CAB4E0235797B700EF1144 /* FLToolTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644ED232FE9EB00405EE9 /* FLToolTask.m */; };
+		B2CAB4E1235797B700EF1144 /* FLCommandLineTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644EF232FE9EB00405EE9 /* FLCommandLineTask.m */; };
+		B2CAB4E2235797B700EF1144 /* FLToolCommandOption.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644F3232FE9EB00405EE9 /* FLToolCommandOption.m */; };
+		B2CAB4E3235797B700EF1144 /* FLCommandLineProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644F6232FE9EB00405EE9 /* FLCommandLineProcessor.m */; };
+		B2CAB4E4235797B700EF1144 /* FLToolCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644F7232FE9EB00405EE9 /* FLToolCommand.m */; };
+		B2CAB4E5235797B700EF1144 /* FLCommandLineParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E644F9232FE9EB00405EE9 /* FLCommandLineParser.m */; };
+		B2CAB4E62357981000EF1144 /* NSString+XML.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64518232FE9EB00405EE9 /* NSString+XML.m */; };
+		B2CAB4E72357981000EF1144 /* NSArray+FLXmlObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6451A232FE9EB00405EE9 /* NSArray+FLXmlObjectBuilder.m */; };
+		B2CAB4E82357981000EF1144 /* FLObjectDescriber+FLXmlObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6451C232FE9EB00405EE9 /* FLObjectDescriber+FLXmlObjectBuilder.m */; };
+		B2CAB4E92357981000EF1144 /* FLPropertyDescriber+XmlObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6451F232FE9EB00405EE9 /* FLPropertyDescriber+XmlObjectBuilder.m */; };
+		B2CAB4EA2357981000EF1144 /* FLXmlObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64522232FE9EB00405EE9 /* FLXmlObjectBuilder.m */; };
+		B2CAB4EB2357981000EF1144 /* NSObject+FLXmlObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64523232FE9EB00405EE9 /* NSObject+FLXmlObjectBuilder.m */; };
+		B2CAB4EC2357981000EF1144 /* FLXmlStringEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64524232FE9EB00405EE9 /* FLXmlStringEncoding.m */; };
+		B2CAB4ED2357981000EF1144 /* FLXmlStringBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64528232FE9EB00405EE9 /* FLXmlStringBuilder.m */; };
+		B2CAB4EE2357981000EF1144 /* FLXmlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6452A232FE9EB00405EE9 /* FLXmlElement.m */; };
+		B2CAB4EF2357981000EF1144 /* FLObjectXmlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6452B232FE9EB00405EE9 /* FLObjectXmlElement.m */; };
+		B2CAB4F02357981000EF1144 /* NSObject+FLXmlSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6452C232FE9EB00405EE9 /* NSObject+FLXmlSerialization.m */; };
+		B2CAB4F12357981000EF1144 /* FLXmlComment.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6452D232FE9EB00405EE9 /* FLXmlComment.m */; };
+		B2CAB4F22357981000EF1144 /* FLXmlDataEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64530232FE9EB00405EE9 /* FLXmlDataEncoder.m */; };
+		B2CAB4F32357981000EF1144 /* FLXmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64537232FE9EB00405EE9 /* FLXmlParser.m */; };
+		B2CAB4F42357981000EF1144 /* FLXmlParserErrorCode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64538232FE9EB00405EE9 /* FLXmlParserErrorCode.m */; };
+		B2CAB4F52357981000EF1144 /* FLParsedXmlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64539232FE9EB00405EE9 /* FLParsedXmlElement.m */; };
+		B2CAB4F62357981000EF1144 /* NSObject+JsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6453E232FE9EB00405EE9 /* NSObject+JsonParser.m */; };
+		B2CAB4F72357981000EF1144 /* FLJsonObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64540232FE9EB00405EE9 /* FLJsonObjectBuilder.m */; };
+		B2CAB4F82357981000EF1144 /* FLJsonStringBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64542232FE9EB00405EE9 /* FLJsonStringBuilder.m */; };
+		B2CAB4F92357981000EF1144 /* FLJsonDataEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64544232FE9EB00405EE9 /* FLJsonDataEncoder.m */; };
+		B2CAB4FA2357981000EF1144 /* FLJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64545232FE9EB00405EE9 /* FLJsonParser.m */; };
+		B2CAB4FB2357981000EF1144 /* FLTwoObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64549232FE9EB00405EE9 /* FLTwoObjects.m */; };
+		B2CAB4FC2357981000EF1144 /* FLPathProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64552232FE9EB00405EE9 /* FLPathProvider.m */; };
+		B2CAB4FD2357981000EF1144 /* NSDate+FLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64554232FE9EB00405EE9 /* NSDate+FLAdditions.m */; };
+		B2CAB4FE2357981000EF1144 /* NSDictionary+FishLampCore.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64555232FE9EB00405EE9 /* NSDictionary+FishLampCore.m */; };
+		B2CAB4FF2357981000EF1144 /* FLGuid.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64556232FE9EB00405EE9 /* FLGuid.m */; };
+		B2CAB5002357981000EF1144 /* NSArray+FishLampCore.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64557232FE9EB00405EE9 /* NSArray+FishLampCore.m */; };
+		B2CAB5012357981000EF1144 /* FLUserPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64559232FE9EB00405EE9 /* FLUserPreferences.m */; };
+		B2CAB5022357981000EF1144 /* FLKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645BC232FE9EB00405EE9 /* FLKeychain.m */; };
+		B2CAB5032357981000EF1144 /* FLTempFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645C2232FE9EB00405EE9 /* FLTempFolder.m */; };
+		B2CAB5042357981000EF1144 /* FLFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645C4232FE9EB00405EE9 /* FLFolder.m */; };
+		B2CAB5052357981000EF1144 /* NSFileManager+FishLamp.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645C5232FE9EB00405EE9 /* NSFileManager+FishLamp.m */; };
+		B2CAB5062357981000EF1144 /* FLFolderFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645C6232FE9EB00405EE9 /* FLFolderFile.m */; };
+		B2CAB5072357981000EF1144 /* FLAbstractFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645C8232FE9EB00405EE9 /* FLAbstractFile.m */; };
+		B2CAB5082357981000EF1144 /* FLKeyValuePair.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645CA232FE9EB00405EE9 /* FLKeyValuePair.m */; };
+		B2CAB5092357981000EF1144 /* FLLinkedListElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645CE232FE9EB00405EE9 /* FLLinkedListElement.m */; };
+		B2CAB50A2357981000EF1144 /* FLLinkedListObjectContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645D0232FE9EB00405EE9 /* FLLinkedListObjectContainer.m */; };
+		B2CAB50B2357981000EF1144 /* FLBlockLinkedListElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645D2232FE9EB00405EE9 /* FLBlockLinkedListElement.m */; };
+		B2CAB50C2357981000EF1144 /* FLLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645D3232FE9EB00405EE9 /* FLLinkedList.m */; };
+		B2CAB50D2357981000EF1144 /* FLBatchDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645D5232FE9EB00405EE9 /* FLBatchDictionary.m */; };
+		B2CAB50E2357981000EF1144 /* FLCollectionIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645D6232FE9EB00405EE9 /* FLCollectionIterator.m */; };
+		B2CAB50F2357981000EF1144 /* FLObjectCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645DA232FE9EB00405EE9 /* FLObjectCache.m */; };
+		B2CAB5102357981000EF1144 /* FLInMemoryDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645DC232FE9EB00405EE9 /* FLInMemoryDataCache.m */; };
+		B2CAB5112357981000EF1144 /* FLOrderedCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645DD232FE9EB00405EE9 /* FLOrderedCollection.m */; };
+		B2CAB5122357981000EF1144 /* FLNonretainedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645E1232FE9EB00405EE9 /* FLNonretainedArray.m */; };
+		B2CAB5132357981000EF1144 /* FLCarefulDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E645E2232FE9EB00405EE9 /* FLCarefulDictionary.m */; };
+		B2CAB5142357985400EF1144 /* FLBroadcaster.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64603232FE9EB00405EE9 /* FLBroadcaster.m */; };
+		B2CAB5152357985400EF1144 /* FLEventBroadcaster.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64604232FE9EB00405EE9 /* FLEventBroadcaster.m */; };
+		B2CAB5162357985400EF1144 /* FLListener.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64605232FE9EB00405EE9 /* FLListener.m */; };
+		B2CAB5172357985400EF1144 /* FLNonretainedObjectProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6460D232FE9EB00405EE9 /* FLNonretainedObjectProxy.m */; };
+		B2CAB5182357985400EF1144 /* FLBroadcasterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6460E232FE9EB00405EE9 /* FLBroadcasterProxy.m */; };
+		B2CAB5192357985400EF1144 /* FLMainThreadObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6460F232FE9EB00405EE9 /* FLMainThreadObject.m */; };
+		B2CAB51A2357985400EF1144 /* FLArrayProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64610232FE9EB00405EE9 /* FLArrayProxy.m */; };
+		B2CAB51B2357985400EF1144 /* FLAbstractObjectProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64612232FE9EB00405EE9 /* FLAbstractObjectProxy.m */; };
+		B2CAB51C2357985400EF1144 /* FLRetainedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64616232FE9EB00405EE9 /* FLRetainedObject.m */; };
+		B2CAB51D2357985400EF1144 /* FLCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6461C232FE9EB00405EE9 /* FLCodeGenerator.m */; };
+		B2CAB51E2357985400EF1144 /* FLJsonCodeProjectReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6461E232FE9EB00405EE9 /* FLJsonCodeProjectReader.m */; };
+		B2CAB51F2357985400EF1144 /* FLXmlCodeProjectReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64622232FE9EB00405EE9 /* FLXmlCodeProjectReader.m */; };
+		B2CAB5202357985400EF1144 /* FLCodeGeneratorProjectProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64677232FE9EB00405EE9 /* FLCodeGeneratorProjectProvider.m */; };
+		B2CAB5212357985400EF1144 /* FLCodeGeneratorFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6467B232FE9EB00405EE9 /* FLCodeGeneratorFile.m */; };
+		B2CAB5222357985400EF1144 /* FLCodeGeneratorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6467E232FE9EB00405EE9 /* FLCodeGeneratorResult.m */; };
+		B2CAB5232357985400EF1144 /* FLCodeGeneratorErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6467F232FE9EB00405EE9 /* FLCodeGeneratorErrors.m */; };
+		B2CAB5242357985400EF1144 /* FLCodeDataTypeCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64681232FE9EB00405EE9 /* FLCodeDataTypeCollection.m */; };
+		B2CAB5252357985400EF1144 /* FLCodePropertyName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6468E232FE9EB00405EE9 /* FLCodePropertyName.m */; };
+		B2CAB5262357985400EF1144 /* FLCodeClassNameBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64690232FE9EB00405EE9 /* FLCodeClassNameBaseClass.m */; };
+		B2CAB5272357985400EF1144 /* FLCodeKeyValuePairBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64691232FE9EB00405EE9 /* FLCodeKeyValuePairBaseClass.m */; };
+		B2CAB5282357985400EF1144 /* FLCodeEnumBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64692232FE9EB00405EE9 /* FLCodeEnumBaseClass.m */; };
+		B2CAB5292357985400EF1144 /* FLCodeCompanyBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64693232FE9EB00405EE9 /* FLCodeCompanyBaseClass.m */; };
+		B2CAB52A2357985A00EF1144 /* FLCodeImport.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64694232FE9EB00405EE9 /* FLCodeImport.m */; };
+		B2CAB52B2357985A00EF1144 /* FLCodeObjectMemberTypeBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64695232FE9EB00405EE9 /* FLCodeObjectMemberTypeBaseClass.m */; };
+		B2CAB52C2357985A00EF1144 /* FLCodeStorageOptionsBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64698232FE9EB00405EE9 /* FLCodeStorageOptionsBaseClass.m */; };
+		B2CAB52D2357985A00EF1144 /* FLCodeTypeDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6469A232FE9EB00405EE9 /* FLCodeTypeDefinition.m */; };
+		B2CAB52E2357985A00EF1144 /* FLCodeGeneratorOptionsBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6469B232FE9EB00405EE9 /* FLCodeGeneratorOptionsBaseClass.m */; };
+		B2CAB52F2357985A00EF1144 /* FLCodeConstructorParameterBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6469E232FE9EB00405EE9 /* FLCodeConstructorParameterBaseClass.m */; };
+		B2CAB5302357985A00EF1144 /* FLCodeVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646A1232FE9EB00405EE9 /* FLCodeVariable.m */; };
+		B2CAB5312357985A00EF1144 /* FLCodeArrayTypeBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646A3232FE9EB00405EE9 /* FLCodeArrayTypeBaseClass.m */; };
+		B2CAB5322357985A00EF1144 /* FLCodeInputType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646A4232FE9EB00405EE9 /* FLCodeInputType.m */; };
+		B2CAB5332357985A00EF1144 /* FLCodeObjectCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646A6232FE9EB00405EE9 /* FLCodeObjectCategory.m */; };
+		B2CAB5342357985A00EF1144 /* FLCodeGetPropertyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646A7232FE9EB00405EE9 /* FLCodeGetPropertyValue.m */; };
+		B2CAB5352357985A00EF1144 /* FLCodeClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646A9232FE9EB00405EE9 /* FLCodeClassName.m */; };
+		B2CAB5362357985A00EF1144 /* FLCodeDefineBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646AB232FE9EB00405EE9 /* FLCodeDefineBaseClass.m */; };
+		B2CAB5372357985A00EF1144 /* FLCodeCreateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646AC232FE9EB00405EE9 /* FLCodeCreateObject.m */; };
+		B2CAB5382357985A00EF1144 /* FLCodeObjectReferenceBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646AE232FE9EB00405EE9 /* FLCodeObjectReferenceBaseClass.m */; };
+		B2CAB5392357985A00EF1144 /* FLCodeString.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646B0232FE9EB00405EE9 /* FLCodeString.m */; };
+		B2CAB53A2357985A00EF1144 /* FLDataType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646B1232FE9EB00405EE9 /* FLDataType.m */; };
+		B2CAB53B2357985A00EF1144 /* FLCodeProjectInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646B3232FE9EB00405EE9 /* FLCodeProjectInfo.m */; };
+		B2CAB53C2357985A00EF1144 /* FLCodeStorageOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646B4232FE9EB00405EE9 /* FLCodeStorageOptions.m */; };
+		B2CAB53D2357985A00EF1144 /* FLCodeComment.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646B7232FE9EB00405EE9 /* FLCodeComment.m */; };
+		B2CAB53E2357985A00EF1144 /* FLCodeTypeDefinitionBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646BB232FE9EB00405EE9 /* FLCodeTypeDefinitionBaseClass.m */; };
+		B2CAB53F2357985A00EF1144 /* FLCodeConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646C1232FE9EB00405EE9 /* FLCodeConstructor.m */; };
+		B2CAB5402357985A00EF1144 /* FLCodeStorageMask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646C2232FE9EB00405EE9 /* FLCodeStorageMask.m */; };
+		B2CAB5412357985A00EF1144 /* FLCodeObjectSelfReference.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646C3232FE9EB00405EE9 /* FLCodeObjectSelfReference.m */; };
+		B2CAB5422357985A00EF1144 /* FLCodeCommentBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646C5232FE9EB00405EE9 /* FLCodeCommentBaseClass.m */; };
+		B2CAB5432357985A00EF1144 /* FLCodeArrayBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646C7232FE9EB00405EE9 /* FLCodeArrayBaseClass.m */; };
+		B2CAB5442357985A00EF1144 /* FLCodeElementBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646C8232FE9EB00405EE9 /* FLCodeElementBaseClass.m */; };
+		B2CAB5452357985A00EF1144 /* FLCodeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646CA232FE9EB00405EE9 /* FLCodeObject.m */; };
+		B2CAB5462357985A00EF1144 /* FLCodeCreateObjectBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646CC232FE9EB00405EE9 /* FLCodeCreateObjectBaseClass.m */; };
+		B2CAB5472357985A00EF1144 /* FLCodeConstructorBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646CD232FE9EB00405EE9 /* FLCodeConstructorBaseClass.m */; };
+		B2CAB5482357985A00EF1144 /* FLCodeObjectSelfReferenceBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646CF232FE9EB00405EE9 /* FLCodeObjectSelfReferenceBaseClass.m */; };
+		B2CAB5492357985A00EF1144 /* FLCodeProjectBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646D0232FE9EB00405EE9 /* FLCodeProjectBaseClass.m */; };
+		B2CAB54A2357985A00EF1144 /* FLCodeMethodBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646D1232FE9EB00405EE9 /* FLCodeMethodBaseClass.m */; };
+		B2CAB54B2357985A00EF1144 /* FLCodeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646D2232FE9EB00405EE9 /* FLCodeArray.m */; };
+		B2CAB54C2357985A00EF1144 /* FLCodeTypeBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646D3232FE9EB00405EE9 /* FLCodeTypeBaseClass.m */; };
+		B2CAB54D2357985A00EF1144 /* FLCodeObjectBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646D6232FE9EB00405EE9 /* FLCodeObjectBaseClass.m */; };
+		B2CAB54E2357985A00EF1144 /* FLCodeElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646D7232FE9EB00405EE9 /* FLCodeElement.m */; };
+		B2CAB54F2357985A00EF1144 /* FLCodeStatementBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646D8232FE9EB00405EE9 /* FLCodeStatementBaseClass.m */; };
+		B2CAB5502357985A00EF1144 /* FLCodeObjectMemberType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646DC232FE9EB00405EE9 /* FLCodeObjectMemberType.m */; };
+		B2CAB5512357985A00EF1144 /* FLCodeSequenceBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646DD232FE9EB00405EE9 /* FLCodeSequenceBaseClass.m */; };
+		B2CAB5522357985A00EF1144 /* FLCodeType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646DE232FE9EB00405EE9 /* FLCodeType.m */; };
+		B2CAB5532357985A00EF1144 /* FLCodeArrayType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646E6232FE9EB00405EE9 /* FLCodeArrayType.m */; };
+		B2CAB5542357985A00EF1144 /* FLCodeProjectInfoBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646E7232FE9EB00405EE9 /* FLCodeProjectInfoBaseClass.m */; };
+		B2CAB5552357985A00EF1144 /* FLCodeObjectReference.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646E8232FE9EB00405EE9 /* FLCodeObjectReference.m */; };
+		B2CAB5562357985A00EF1144 /* FLCodeMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646E9232FE9EB00405EE9 /* FLCodeMethod.m */; };
+		B2CAB5572357985A00EF1144 /* FLCodeConstructorParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646EA232FE9EB00405EE9 /* FLCodeConstructorParameter.m */; };
+		B2CAB5582357985A00EF1144 /* FLCodeKeyValuePair.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646EC232FE9EB00405EE9 /* FLCodeKeyValuePair.m */; };
+		B2CAB5592357985A00EF1144 /* FLCodeReturn.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646EE232FE9EB00405EE9 /* FLCodeReturn.m */; };
+		B2CAB55A2357985A00EF1144 /* FLCodeCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646F1232FE9EB00405EE9 /* FLCodeCompany.m */; };
+		B2CAB55B2357985A00EF1144 /* FLCodeEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646F3232FE9EB00405EE9 /* FLCodeEnum.m */; };
+		B2CAB55C2357985A00EF1144 /* FLCodeStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646F6232FE9EB00405EE9 /* FLCodeStatement.m */; };
+		B2CAB55D2357985A00EF1144 /* FLCodeProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646FA232FE9EB00405EE9 /* FLCodeProperty.m */; };
+		B2CAB55E2357985A00EF1144 /* FLCodeCodeSnippet.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646FC232FE9EB00405EE9 /* FLCodeCodeSnippet.m */; };
+		B2CAB55F2357985A00EF1144 /* FLCodeEnumTypeBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646FD232FE9EB00405EE9 /* FLCodeEnumTypeBaseClass.m */; };
+		B2CAB5602357985A00EF1144 /* FLCodeGetPropertyValueBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646FE232FE9EB00405EE9 /* FLCodeGetPropertyValueBaseClass.m */; };
+		B2CAB5612357985A00EF1144 /* FLCodeStringBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E646FF232FE9EB00405EE9 /* FLCodeStringBaseClass.m */; };
+		B2CAB5622357985A00EF1144 /* FLCodeGeneratorOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64700232FE9EB00405EE9 /* FLCodeGeneratorOptions.m */; };
+		B2CAB5632357985A00EF1144 /* FLCodeReturnBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64701232FE9EB00405EE9 /* FLCodeReturnBaseClass.m */; };
+		B2CAB5642357985A00EF1144 /* FLCodeSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64703232FE9EB00405EE9 /* FLCodeSequence.m */; };
+		B2CAB5652357985A00EF1144 /* FLCodeImportBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64704232FE9EB00405EE9 /* FLCodeImportBaseClass.m */; };
+		B2CAB5662357985A00EF1144 /* FLCodeProject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64705232FE9EB00405EE9 /* FLCodeProject.m */; };
+		B2CAB5672357985A00EF1144 /* FLCodeCodeSnippetBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64708232FE9EB00405EE9 /* FLCodeCodeSnippetBaseClass.m */; };
+		B2CAB5682357985A00EF1144 /* FLCodePropertyNameBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64709232FE9EB00405EE9 /* FLCodePropertyNameBaseClass.m */; };
+		B2CAB5692357985A00EF1144 /* FLCodePropertyBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6470E232FE9EB00405EE9 /* FLCodePropertyBaseClass.m */; };
+		B2CAB56A2357985A00EF1144 /* FLCodeObjectCategoryBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64712232FE9EB00405EE9 /* FLCodeObjectCategoryBaseClass.m */; };
+		B2CAB56B2357985A00EF1144 /* FLCodeEnumType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64714232FE9EB00405EE9 /* FLCodeEnumType.m */; };
+		B2CAB56C2357985A00EF1144 /* FLCodeVariableBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64717232FE9EB00405EE9 /* FLCodeVariableBaseClass.m */; };
+		B2CAB56D2357985A00EF1144 /* FLCodeDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64718232FE9EB00405EE9 /* FLCodeDefine.m */; };
+		B2CAB56E2357985A00EF1144 /* FLCodeProjectLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6471D232FE9EB00405EE9 /* FLCodeProjectLocation.m */; };
+		B2CAB56F2357985A00EF1144 /* FLCodeIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64720232FE9EB00405EE9 /* FLCodeIdentifier.m */; };
+		B2CAB5702357985A00EF1144 /* FLCodeProjectReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64721232FE9EB00405EE9 /* FLCodeProjectReader.m */; };
+		B2CAB571235798B600EF1144 /* FLObjcCodeGenerator+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64727232FE9EB00405EE9 /* FLObjcCodeGenerator+Setup.m */; };
+		B2CAB572235798B600EF1144 /* FLObjcCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64728232FE9EB00405EE9 /* FLObjcCodeGenerator.m */; };
+		B2CAB573235798B600EF1144 /* FLObjcEnumRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6472D232FE9EB00405EE9 /* FLObjcEnumRegistry.m */; };
+		B2CAB574235798B600EF1144 /* FLObjcCodeBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6472F232FE9EB00405EE9 /* FLObjcCodeBuilder.m */; };
+		B2CAB575235798B600EF1144 /* FLObjcTypeRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64730232FE9EB00405EE9 /* FLObjcTypeRegistry.m */; };
+		B2CAB576235798B600EF1144 /* FLObjcFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64731232FE9EB00405EE9 /* FLObjcFileManager.m */; };
+		B2CAB577235798B600EF1144 /* FLObjcKnownTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64734232FE9EB00405EE9 /* FLObjcKnownTypes.m */; };
+		B2CAB578235798B600EF1144 /* FLObjcUserHeaderFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64738232FE9EB00405EE9 /* FLObjcUserHeaderFile.m */; };
+		B2CAB579235798B600EF1144 /* FLObjcSourceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6473A232FE9EB00405EE9 /* FLObjcSourceFile.m */; };
+		B2CAB57A235798B600EF1144 /* FLObjcAllIncludesHeaderFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6473B232FE9EB00405EE9 /* FLObjcAllIncludesHeaderFile.m */; };
+		B2CAB57B235798B600EF1144 /* FLObjcGeneratedSourceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6473C232FE9EB00405EE9 /* FLObjcGeneratedSourceFile.m */; };
+		B2CAB57C235798B600EF1144 /* FLObjcFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6473E232FE9EB00405EE9 /* FLObjcFile.m */; };
+		B2CAB57D235798B600EF1144 /* FLObjcHeaderFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64740232FE9EB00405EE9 /* FLObjcHeaderFile.m */; };
+		B2CAB57E235798B600EF1144 /* FLObjcUserSourceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64742232FE9EB00405EE9 /* FLObjcUserSourceFile.m */; };
+		B2CAB57F235798B600EF1144 /* FLObjcGeneratedHeaderFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64744232FE9EB00405EE9 /* FLObjcGeneratedHeaderFile.m */; };
+		B2CAB580235798B600EF1144 /* FLObjcName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64748232FE9EB00405EE9 /* FLObjcName.m */; };
+		B2CAB581235798B600EF1144 /* FLObjcNumberObjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6474E232FE9EB00405EE9 /* FLObjcNumberObjectType.m */; };
+		B2CAB582235798B600EF1144 /* FLObjcEnumValueType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64752232FE9EB00405EE9 /* FLObjcEnumValueType.m */; };
+		B2CAB583235798B600EF1144 /* FLObjcMutableObjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64753232FE9EB00405EE9 /* FLObjcMutableObjectType.m */; };
+		B2CAB584235798B600EF1144 /* FLObjcVoidType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64756232FE9EB00405EE9 /* FLObjcVoidType.m */; };
+		B2CAB585235798B600EF1144 /* FLObjcArrayType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64758232FE9EB00405EE9 /* FLObjcArrayType.m */; };
+		B2CAB586235798B600EF1144 /* FLObjcContainerType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6475B232FE9EB00405EE9 /* FLObjcContainerType.m */; };
+		B2CAB587235798B600EF1144 /* FLObjcObjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6475C232FE9EB00405EE9 /* FLObjcObjectType.m */; };
+		B2CAB588235798B600EF1144 /* FLObjcValueType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6475E232FE9EB00405EE9 /* FLObjcValueType.m */; };
+		B2CAB589235798B600EF1144 /* FLObjcAbstractObjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6475F232FE9EB00405EE9 /* FLObjcAbstractObjectType.m */; };
+		B2CAB58A235798B600EF1144 /* FLObjcProtocolType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64760232FE9EB00405EE9 /* FLObjcProtocolType.m */; };
+		B2CAB58B235798B600EF1144 /* FLObjcImmutableObjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64761232FE9EB00405EE9 /* FLObjcImmutableObjectType.m */; };
+		B2CAB58C235798B600EF1144 /* FLObjcBoolType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64764232FE9EB00405EE9 /* FLObjcBoolType.m */; };
+		B2CAB58D235798B600EF1144 /* FLObjcNumberValueType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64765232FE9EB00405EE9 /* FLObjcNumberValueType.m */; };
+		B2CAB58E235798B600EF1144 /* FLObjcGeometryType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64766232FE9EB00405EE9 /* FLObjcGeometryType.m */; };
+		B2CAB58F235798B600EF1144 /* FLObjcStringType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64767232FE9EB00405EE9 /* FLObjcStringType.m */; };
+		B2CAB590235798B600EF1144 /* FLObjcContainerSubType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64768232FE9EB00405EE9 /* FLObjcContainerSubType.m */; };
+		B2CAB591235798B600EF1144 /* FLObjcEnumType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6476A232FE9EB00405EE9 /* FLObjcEnumType.m */; };
+		B2CAB592235798B600EF1144 /* FLObjcDidRegisterObjectDescriberMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6476E232FE9EB00405EE9 /* FLObjcDidRegisterObjectDescriberMethod.m */; };
+		B2CAB593235798B600EF1144 /* FLObjcClassConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64770232FE9EB00405EE9 /* FLObjcClassConstructor.m */; };
+		B2CAB594235798B600EF1144 /* FLObjcDeallocMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64771232FE9EB00405EE9 /* FLObjcDeallocMethod.m */; };
+		B2CAB595235798B600EF1144 /* FLObjcClassInitializerMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64773232FE9EB00405EE9 /* FLObjcClassInitializerMethod.m */; };
+		B2CAB596235798B600EF1144 /* FLObjcConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64775232FE9EB00405EE9 /* FLObjcConstructor.m */; };
+		B2CAB597235798B600EF1144 /* FLObjcIvarName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6477C232FE9EB00405EE9 /* FLObjcIvarName.m */; };
+		B2CAB598235798B600EF1144 /* FLObjcEnumValueName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6477F232FE9EB00405EE9 /* FLObjcEnumValueName.m */; };
+		B2CAB599235798B600EF1144 /* FLObjectPropertyName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64781232FE9EB00405EE9 /* FLObjectPropertyName.m */; };
+		B2CAB59A235798B600EF1144 /* FLObjcClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64782232FE9EB00405EE9 /* FLObjcClassName.m */; };
+		B2CAB59B235798B600EF1144 /* FLObjcEnumName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64784232FE9EB00405EE9 /* FLObjcEnumName.m */; };
+		B2CAB59C235798B600EF1144 /* FLObjcImportedName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64785232FE9EB00405EE9 /* FLObjcImportedName.m */; };
+		B2CAB59D235798B600EF1144 /* FLObjcGeneratedBaseClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64786232FE9EB00405EE9 /* FLObjcGeneratedBaseClassName.m */; };
+		B2CAB59E235798B600EF1144 /* FLObjcMethodName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64788232FE9EB00405EE9 /* FLObjcMethodName.m */; };
+		B2CAB59F235798B600EF1144 /* FLObjcParameterName.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6478A232FE9EB00405EE9 /* FLObjcParameterName.m */; };
+		B2CAB5A0235798B600EF1144 /* FLObjcType.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6478C232FE9EB00405EE9 /* FLObjcType.m */; };
+		B2CAB5A1235798B600EF1144 /* FLObjcStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6478E232FE9EB00405EE9 /* FLObjcStatement.m */; };
+		B2CAB5A2235798B600EF1144 /* FLObjcProject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6478F232FE9EB00405EE9 /* FLObjcProject.m */; };
+		B2CAB5A3235798B600EF1144 /* FLObjcNamedObjectCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64790232FE9EB00405EE9 /* FLObjcNamedObjectCollection.m */; };
+		B2CAB5A4235798B600EF1144 /* FLObjcReturnStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64795232FE9EB00405EE9 /* FLObjcReturnStatement.m */; };
+		B2CAB5A5235798B600EF1144 /* FLObjcStringStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64796232FE9EB00405EE9 /* FLObjcStringStatement.m */; };
+		B2CAB5A6235798B600EF1144 /* FLObjcDeallocStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64798232FE9EB00405EE9 /* FLObjcDeallocStatement.m */; };
+		B2CAB5A7235798B600EF1144 /* FLObjcBlockStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E64799232FE9EB00405EE9 /* FLObjcBlockStatement.m */; };
+		B2CAB5A8235798B600EF1144 /* FLObjcParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E6479E232FE9EB00405EE9 /* FLObjcParameter.m */; };
+		B2CAB5A9235798B600EF1144 /* FLObjcIvar.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647A0232FE9EB00405EE9 /* FLObjcIvar.m */; };
+		B2CAB5AA235798B600EF1144 /* FLObjcLocalVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647A2232FE9EB00405EE9 /* FLObjcLocalVariable.m */; };
+		B2CAB5AB235798B600EF1144 /* FLObjcVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647A6232FE9EB00405EE9 /* FLObjcVariable.m */; };
+		B2CAB5AC235798B600EF1144 /* FLObjcCodeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647A7232FE9EB00405EE9 /* FLObjcCodeBlock.m */; };
+		B2CAB5AD235798B600EF1144 /* FLObjcMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647AC232FE9EB00405EE9 /* FLObjcMethod.m */; };
+		B2CAB5AE235798B600EF1144 /* FLObjcProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647AD232FE9EB00405EE9 /* FLObjcProtocol.m */; };
+		B2CAB5AF235798B600EF1144 /* FLObjcRuntimeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647B2232FE9EB00405EE9 /* FLObjcRuntimeValue.m */; };
+		B2CAB5B0235798B600EF1144 /* FLObjcProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647B3232FE9EB00405EE9 /* FLObjcProperty.m */; };
+		B2CAB5B1235798B600EF1144 /* FLObjcObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647B4232FE9EB00405EE9 /* FLObjcObject.m */; };
+		B2CAB5B2235798B600EF1144 /* FLObjcFileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647B6232FE9EB00405EE9 /* FLObjcFileHeader.m */; };
+		B2CAB5B3235798B600EF1144 /* FLObjcCustomProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647B7232FE9EB00405EE9 /* FLObjcCustomProperty.m */; };
+		B2CAB5B4235798B600EF1144 /* FLObjcEnumCodeWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647B8232FE9EB00405EE9 /* FLObjcEnumCodeWriter.m */; };
+		B2CAB5B5235798B600EF1144 /* FLObjcObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647BA232FE9EB00405EE9 /* FLObjcObjectBuilder.m */; };
+		B2CAB5B6235798B600EF1144 /* FLObjcCodeBuilder+FLCodeElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647BB232FE9EB00405EE9 /* FLObjcCodeBuilder+FLCodeElement.m */; };
+		B2CAB5B7235798B600EF1144 /* FLObjcCodeWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647BE232FE9EB00405EE9 /* FLObjcCodeWriter.m */; };
+		B2CAB5B8235798B600EF1144 /* FLObjcReference.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647BF232FE9EB00405EE9 /* FLObjcReference.m */; };
+		B2CAB5B9235798B600EF1144 /* FLCodeGeneratorError.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647C1232FE9EB00405EE9 /* FLCodeGeneratorError.m */; };
+		B2CAB5BA235798B600EF1144 /* NSBundle+FLCurrentBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647C7232FE9EB00405EE9 /* NSBundle+FLCurrentBundle.m */; };
+		B2CAB5BB235798B600EF1144 /* NSBundle+FLVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647C8232FE9EB00405EE9 /* NSBundle+FLVersion.m */; };
+		B2CAB5BC235798B600EF1144 /* NSBundle+FLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647C9232FE9EB00405EE9 /* NSBundle+FLAdditions.m */; };
+		B2CAB5BD235798B600EF1144 /* FLApplicationSession.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647CD232FE9EB00405EE9 /* FLApplicationSession.m */; };
+		B2CAB5BE235798B600EF1144 /* FLApplicationDataVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647D1232FE9EB00405EE9 /* FLApplicationDataVersion.m */; };
+		B2CAB5BF235798B600EF1144 /* FLLastUpdateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647D2232FE9EB00405EE9 /* FLLastUpdateTime.m */; };
+		B2CAB5C0235798B600EF1144 /* FLServiceList.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647D6232FE9EB00405EE9 /* FLServiceList.m */; };
+		B2CAB5C1235798B600EF1144 /* FLUserDataStorageService.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647D7232FE9EB00405EE9 /* FLUserDataStorageService.m */; };
+		B2CAB5C2235798B600EF1144 /* FLService.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E647D8232FE9EB00405EE9 /* FLService.m */; };
+		B2CAB5C3235798B600EF1144 /* NSValue+FLCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0561234A5B7100444ADB /* NSValue+FLCompatibility.m */; };
+		B2CAB5C4235798B600EF1144 /* NSViewController+FLCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0563234A5B7100444ADB /* NSViewController+FLCompatibility.m */; };
+		B2CAB5C5235798B600EF1144 /* NSControl+FLCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0564234A5B7100444ADB /* NSControl+FLCompatibility.m */; };
+		B2CAB5C6235798B600EF1144 /* FLCompatibleView+OSX.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0565234A5B7100444ADB /* FLCompatibleView+OSX.m */; };
+		B2CAB5C7235798B600EF1144 /* FLCompatibleViewController+OSX.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0567234A5B7100444ADB /* FLCompatibleViewController+OSX.m */; };
+		B2CAB5C8235798B600EF1144 /* NSImage+FLCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C056D234A5B7100444ADB /* NSImage+FLCompatibility.m */; };
+		B2CAB5C9235798B600EF1144 /* NSView+FLCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0571234A5B7100444ADB /* NSView+FLCompatibility.m */; };
+		B2CAB5CA235798B600EF1144 /* NSTextField+FLCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0574234A5B7100444ADB /* NSTextField+FLCompatibility.m */; };
+		B2CAB5CB235798B600EF1144 /* NSDevice+FLCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0575234A5B7100444ADB /* NSDevice+FLCompatibility.m */; };
+		B2CAB5CC235798B600EF1144 /* NSColor+FLCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0576234A5B7100444ADB /* NSColor+FLCompatibility.m */; };
+		B2CAB5CD235798B600EF1144 /* FLCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C0578234A5B7100444ADB /* FLCompatibility.m */; };
+		B2CAB5CE235798B600EF1144 /* FLAttributedStringController.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C057C234A5B7100444ADB /* FLAttributedStringController.m */; };
+		B2CAB5CF235798B600EF1144 /* FLAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C057D234A5B7100444ADB /* FLAttributedString.m */; };
+		B2CAB5D0235798B600EF1144 /* FLActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05C8234A5B7100444ADB /* FLActivityLog.m */; };
+		B2CAB5D1235798B600EF1144 /* CGSizeGeometry+FLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05CC234A5B7100444ADB /* CGSizeGeometry+FLAdditions.m */; };
+		B2CAB5D2235798B600EF1144 /* NSSizeGeometry+FLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05D1234A5B7100444ADB /* NSSizeGeometry+FLAdditions.m */; };
+		B2CAB5D3235798B600EF1144 /* UIEdgeInsets+FLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05D4234A5B7100444ADB /* UIEdgeInsets+FLAdditions.m */; };
+		B2CAB5D4235798B600EF1144 /* FLRectGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05D8234A5B7100444ADB /* FLRectGeometry.m */; };
+		B2CAB5D5235798B600EF1144 /* FLEdgeInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05D9234A5B7100444ADB /* FLEdgeInsets.m */; };
+		B2CAB5D6235798B600EF1144 /* CGRectGeometry+FLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05DA234A5B7100444ADB /* CGRectGeometry+FLAdditions.m */; };
+		B2CAB5D7235798B600EF1144 /* FLRectLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05DC234A5B7100444ADB /* FLRectLayout.m */; };
+		B2CAB5D8235798B600EF1144 /* NSRectGeometry+FLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05DF234A5B7100444ADB /* NSRectGeometry+FLAdditions.m */; };
+		B2CAB5D9235798B600EF1144 /* FLCoreText.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05E2234A5B7100444ADB /* FLCoreText.m */; };
+		B2CAB5DA235798B600EF1144 /* FLLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05E6234A5B7100444ADB /* FLLocalNotification.m */; };
+		B2CAB5DB235798B600EF1144 /* NSNotification+FishLamp.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05EA234A5B7100444ADB /* NSNotification+FishLamp.m */; };
+		B2CAB5DC235798B600EF1144 /* FLMutableNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05EB234A5B7100444ADB /* FLMutableNotification.m */; };
+		B2CAB5DD235798B600EF1144 /* FLNotificationListener.m in Sources */ = {isa = PBXBuildFile; fileRef = B21C05ED234A5B7100444ADB /* FLNotificationListener.m */; };
 		B2E647D9232FE9EB00405EE9 /* FLDatabase_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = B2E6432C232FE9EA00405EE9 /* FLDatabase_Internal.h */; };
 		B2E647DA232FE9EB00405EE9 /* FLDatabase_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = B2E6432C232FE9EA00405EE9 /* FLDatabase_Internal.h */; };
 		B2E647DB232FE9EB00405EE9 /* FLDatabase_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = B2E6432C232FE9EA00405EE9 /* FLDatabase_Internal.h */; };
@@ -3763,6 +4122,9 @@
 		B21C05EF234A5B7100444ADB /* FLWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLWidget.m; sourceTree = "<group>"; };
 		B21C05F1234A5B7100444ADB /* FLWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLWidget.h; sourceTree = "<group>"; };
 		B21C078F234A626900444ADB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2CAB4702357972200EF1144 /* libFishLampLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFishLampLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2CAB4722357972200EF1144 /* FishLampLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FishLampLib.h; sourceTree = "<group>"; };
+		B2CAB4742357972200EF1144 /* FishLampLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishLampLib.m; sourceTree = "<group>"; };
 		B2E642F7232FE92300405EE9 /* FishLampTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishLampTests.m; sourceTree = "<group>"; };
 		B2E642F9232FE92300405EE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2E64308232FE97600405EE9 /* FishLamp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FishLamp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4792,6 +5154,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B2CAB46E2357972200EF1144 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2E64305232FE97600405EE9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -5282,6 +5651,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B2CAB4712357972200EF1144 /* FishLampLib */ = {
+			isa = PBXGroup;
+			children = (
+				B2CAB4722357972200EF1144 /* FishLampLib.h */,
+				B2CAB4742357972200EF1144 /* FishLampLib.m */,
+			);
+			path = FishLampLib;
+			sourceTree = "<group>";
+		};
 		B2E642DF232FE92300405EE9 = {
 			isa = PBXGroup;
 			children = (
@@ -5290,6 +5668,7 @@
 				B21C0488234A59B500444ADB /* macOS */,
 				B21C078A234A5FA900444ADB /* Supporting Files */,
 				B2E642F6232FE92300405EE9 /* FishLampTests */,
+				B2CAB4712357972200EF1144 /* FishLampLib */,
 				B2E642EA232FE92300405EE9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -5300,6 +5679,7 @@
 				B2E64308232FE97600405EE9 /* FishLamp.framework */,
 				B2E64315232FE9AB00405EE9 /* FishLamp.framework */,
 				B2E64322232FE9C000405EE9 /* FishLamp.framework */,
+				B2CAB4702357972200EF1144 /* libFishLampLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -7087,6 +7467,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		B2CAB46C2357972200EF1144 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2CAB4732357972200EF1144 /* FishLampLib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2E64303232FE97600405EE9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -8955,6 +9343,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		B2CAB46F2357972200EF1144 /* FishLampLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2CAB4762357972200EF1144 /* Build configuration list for PBXNativeTarget "FishLampLib" */;
+			buildPhases = (
+				B2CAB46C2357972200EF1144 /* Headers */,
+				B2CAB46D2357972200EF1144 /* Sources */,
+				B2CAB46E2357972200EF1144 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FishLampLib;
+			productName = FishLampLib;
+			productReference = B2CAB4702357972200EF1144 /* libFishLampLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		B2E64307232FE97600405EE9 /* FishLamp-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2E6430D232FE97600405EE9 /* Build configuration list for PBXNativeTarget "FishLamp-iOS" */;
@@ -9018,6 +9423,9 @@
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Fiesty Bytes";
 				TargetAttributes = {
+					B2CAB46F2357972200EF1144 = {
+						CreatedOnToolsVersion = 11.1;
+					};
 					B2E64307232FE97600405EE9 = {
 						CreatedOnToolsVersion = 10.3;
 					};
@@ -9035,6 +9443,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = B2E642DF232FE92300405EE9;
 			productRefGroup = B2E642EA232FE92300405EE9 /* Products */;
@@ -9044,6 +9453,7 @@
 				B2E64307232FE97600405EE9 /* FishLamp-iOS */,
 				B2E64314232FE9AB00405EE9 /* FishLamp-macOS */,
 				B2E64321232FE9C000405EE9 /* FishLamp-watchOS */,
+				B2CAB46F2357972200EF1144 /* FishLampLib */,
 			);
 		};
 /* End PBXProject section */
@@ -9124,6 +9534,371 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B2CAB46D2357972200EF1144 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2CAB4B5235797B700EF1144 /* printf_fl.m in Sources */,
+				B2CAB53C2357985A00EF1144 /* FLCodeStorageOptions.m in Sources */,
+				B2CAB5192357985400EF1144 /* FLMainThreadObject.m in Sources */,
+				B2CAB5A0235798B600EF1144 /* FLObjcType.m in Sources */,
+				B2CAB54C2357985A00EF1144 /* FLCodeTypeBaseClass.m in Sources */,
+				B2CAB5BF235798B600EF1144 /* FLLastUpdateTime.m in Sources */,
+				B2CAB5542357985A00EF1144 /* FLCodeProjectInfoBaseClass.m in Sources */,
+				B2CAB56F2357985A00EF1144 /* FLCodeIdentifier.m in Sources */,
+				B2CAB57F235798B600EF1144 /* FLObjcGeneratedHeaderFile.m in Sources */,
+				B2CAB4CE235797B700EF1144 /* FLFinisherBlockOperation.m in Sources */,
+				B2CAB5232357985400EF1144 /* FLCodeGeneratorErrors.m in Sources */,
+				B2CAB4DB235797B700EF1144 /* FLCodeBuilder.m in Sources */,
+				B2CAB4A7235797B700EF1144 /* FLStackTrace.m in Sources */,
+				B2CAB579235798B600EF1144 /* FLObjcSourceFile.m in Sources */,
+				B2CAB4E3235797B700EF1144 /* FLCommandLineProcessor.m in Sources */,
+				B2CAB56C2357985A00EF1144 /* FLCodeVariableBaseClass.m in Sources */,
+				B2CAB596235798B600EF1144 /* FLObjcConstructor.m in Sources */,
+				B2CAB5B6235798B600EF1144 /* FLObjcCodeBuilder+FLCodeElement.m in Sources */,
+				B2CAB5022357981000EF1144 /* FLKeychain.m in Sources */,
+				B2CAB5A9235798B600EF1144 /* FLObjcIvar.m in Sources */,
+				B2CAB4DC235797B700EF1144 /* FLCodeChunk.m in Sources */,
+				B2CAB4AE235797B700EF1144 /* FLLog.m in Sources */,
+				B2CAB47C235797B700EF1144 /* FLStringBuilder.m in Sources */,
+				B2CAB4DE235797B700EF1144 /* FLUsageToolTask.m in Sources */,
+				B2CAB4A8235797B700EF1144 /* FLFileLocation_t.m in Sources */,
+				B2CAB4D2235797B700EF1144 /* NSError+FLFailedResult.m in Sources */,
+				B2CAB5162357985400EF1144 /* FLListener.m in Sources */,
+				B2CAB4FA2357981000EF1144 /* FLJsonParser.m in Sources */,
+				B2CAB4CD235797B700EF1144 /* FLBlockOperation.m in Sources */,
+				B2CAB4F32357981000EF1144 /* FLXmlParser.m in Sources */,
+				B2CAB4DD235797B700EF1144 /* FLCommandLineArgument.m in Sources */,
+				B2CAB5492357985A00EF1144 /* FLCodeProjectBaseClass.m in Sources */,
+				B2CAB59D235798B600EF1144 /* FLObjcGeneratedBaseClassName.m in Sources */,
+				B2CAB5BE235798B600EF1144 /* FLApplicationDataVersion.m in Sources */,
+				B2CAB5B2235798B600EF1144 /* FLObjcFileHeader.m in Sources */,
+				B2CAB4C2235797B700EF1144 /* FLPromise.m in Sources */,
+				B2CAB5442357985A00EF1144 /* FLCodeElementBaseClass.m in Sources */,
+				B2CAB4E5235797B700EF1144 /* FLCommandLineParser.m in Sources */,
+				B2CAB5212357985400EF1144 /* FLCodeGeneratorFile.m in Sources */,
+				B2CAB5642357985A00EF1144 /* FLCodeSequence.m in Sources */,
+				B2CAB53B2357985A00EF1144 /* FLCodeProjectInfo.m in Sources */,
+				B2CAB5182357985400EF1144 /* FLBroadcasterProxy.m in Sources */,
+				B2CAB4E92357981000EF1144 /* FLPropertyDescriber+XmlObjectBuilder.m in Sources */,
+				B2CAB5BC235798B600EF1144 /* NSBundle+FLAdditions.m in Sources */,
+				B2CAB583235798B600EF1144 /* FLObjcMutableObjectType.m in Sources */,
+				B2CAB5252357985400EF1144 /* FLCodePropertyName.m in Sources */,
+				B2CAB5622357985A00EF1144 /* FLCodeGeneratorOptions.m in Sources */,
+				B2CAB4C0235797B700EF1144 /* FLOperationContext.m in Sources */,
+				B2CAB50D2357981000EF1144 /* FLBatchDictionary.m in Sources */,
+				B2CAB4BE235797B700EF1144 /* FLBatchOperation.m in Sources */,
+				B2CAB4D8235797B700EF1144 /* FLCCodeBuilder.m in Sources */,
+				B2CAB574235798B600EF1144 /* FLObjcCodeBuilder.m in Sources */,
+				B2CAB52F2357985A00EF1144 /* FLCodeConstructorParameterBaseClass.m in Sources */,
+				B2CAB50C2357981000EF1144 /* FLLinkedList.m in Sources */,
+				B2CAB5CA235798B600EF1144 /* NSTextField+FLCompatibility.m in Sources */,
+				B2CAB55D2357985A00EF1144 /* FLCodeProperty.m in Sources */,
+				B2CAB4BA235797B700EF1144 /* FLTimer.m in Sources */,
+				B2CAB5C2235798B600EF1144 /* FLService.m in Sources */,
+				B2CAB4D3235797B700EF1144 /* FLSuccessfulResult.m in Sources */,
+				B2CAB5242357985400EF1144 /* FLCodeDataTypeCollection.m in Sources */,
+				B2CAB5612357985A00EF1144 /* FLCodeStringBaseClass.m in Sources */,
+				B2CAB4BF235797B700EF1144 /* FLPrerequisite.m in Sources */,
+				B2CAB4AD235797B700EF1144 /* FLLogEntry.m in Sources */,
+				B2CAB4F22357981000EF1144 /* FLXmlDataEncoder.m in Sources */,
+				B2CAB5692357985A00EF1144 /* FLCodePropertyBaseClass.m in Sources */,
+				B2CAB4D7235797B700EF1144 /* FLOperationQueueOperation.m in Sources */,
+				B2CAB5D3235798B600EF1144 /* UIEdgeInsets+FLAdditions.m in Sources */,
+				B2CAB4ED2357981000EF1144 /* FLXmlStringBuilder.m in Sources */,
+				B2CAB5372357985A00EF1144 /* FLCodeCreateObject.m in Sources */,
+				B2CAB54B2357985A00EF1144 /* FLCodeArray.m in Sources */,
+				B2CAB4C4235797B700EF1144 /* FLFiloCache.m in Sources */,
+				B2CAB5DA235798B600EF1144 /* FLLocalNotification.m in Sources */,
+				B2CAB5C5235798B600EF1144 /* NSControl+FLCompatibility.m in Sources */,
+				B2CAB5BB235798B600EF1144 /* NSBundle+FLVersion.m in Sources */,
+				B2CAB54D2357985A00EF1144 /* FLCodeObjectBaseClass.m in Sources */,
+				B2CAB595235798B600EF1144 /* FLObjcClassInitializerMethod.m in Sources */,
+				B2CAB54F2357985A00EF1144 /* FLCodeStatementBaseClass.m in Sources */,
+				B2CAB5A7235798B600EF1144 /* FLObjcBlockStatement.m in Sources */,
+				B2CAB5352357985A00EF1144 /* FLCodeClassName.m in Sources */,
+				B2CAB4B4235797B700EF1144 /* FLBufferedLogSink.m in Sources */,
+				B2CAB588235798B600EF1144 /* FLObjcValueType.m in Sources */,
+				B2CAB5272357985400EF1144 /* FLCodeKeyValuePairBaseClass.m in Sources */,
+				B2CAB4F82357981000EF1144 /* FLJsonStringBuilder.m in Sources */,
+				B2CAB5582357985A00EF1144 /* FLCodeKeyValuePair.m in Sources */,
+				B2CAB5342357985A00EF1144 /* FLCodeGetPropertyValue.m in Sources */,
+				B2CAB484235797B700EF1144 /* NSString+FishLamp.m in Sources */,
+				B2CAB4A2235797B700EF1144 /* FishLampCoreErrorDomain.m in Sources */,
+				B2CAB58D235798B600EF1144 /* FLObjcNumberValueType.m in Sources */,
+				B2CAB56B2357985A00EF1144 /* FLCodeEnumType.m in Sources */,
+				B2CAB5522357985A00EF1144 /* FLCodeType.m in Sources */,
+				B2CAB4A3235797B700EF1144 /* NSError+FLCancel.m in Sources */,
+				B2CAB5C9235798B600EF1144 /* NSView+FLCompatibility.m in Sources */,
+				B2CAB496235797B700EF1144 /* FLAssertionFailureErrorDomain.m in Sources */,
+				B2CAB5632357985A00EF1144 /* FLCodeReturnBaseClass.m in Sources */,
+				B2CAB5C4235798B600EF1144 /* NSViewController+FLCompatibility.m in Sources */,
+				B2CAB5132357981000EF1144 /* FLCarefulDictionary.m in Sources */,
+				B2CAB5D1235798B600EF1144 /* CGSizeGeometry+FLAdditions.m in Sources */,
+				B2CAB582235798B600EF1144 /* FLObjcEnumValueType.m in Sources */,
+				B2CAB48B235797B700EF1144 /* NSString+GUID.m in Sources */,
+				B2CAB51F2357985400EF1144 /* FLXmlCodeProjectReader.m in Sources */,
+				B2CAB5002357981000EF1144 /* NSArray+FishLampCore.m in Sources */,
+				B2CAB4A0235797B700EF1144 /* FLObjc.m in Sources */,
+				B2CAB5B3235798B600EF1144 /* FLObjcCustomProperty.m in Sources */,
+				B2CAB4A4235797B700EF1144 /* FLErrorDomainInfo.m in Sources */,
+				B2CAB490235797B700EF1144 /* NSObject+FLBlockPerforming.m in Sources */,
+				B2CAB5CC235798B600EF1144 /* NSColor+FLCompatibility.m in Sources */,
+				B2CAB55C2357985A00EF1144 /* FLCodeStatement.m in Sources */,
+				B2CAB5402357985A00EF1144 /* FLCodeStorageMask.m in Sources */,
+				B2CAB5C8235798B600EF1144 /* NSImage+FLCompatibility.m in Sources */,
+				B2CAB52C2357985A00EF1144 /* FLCodeStorageOptionsBaseClass.m in Sources */,
+				B2CAB4B7235797B700EF1144 /* FLPropertyAttributes.m in Sources */,
+				B2CAB4AA235797B700EF1144 /* FLVersion.m in Sources */,
+				B2CAB4E82357981000EF1144 /* FLObjectDescriber+FLXmlObjectBuilder.m in Sources */,
+				B2CAB5012357981000EF1144 /* FLUserPreferences.m in Sources */,
+				B2CAB571235798B600EF1144 /* FLObjcCodeGenerator+Setup.m in Sources */,
+				B2CAB5CF235798B600EF1144 /* FLAttributedString.m in Sources */,
+				B2CAB591235798B600EF1144 /* FLObjcEnumType.m in Sources */,
+				B2CAB57A235798B600EF1144 /* FLObjcAllIncludesHeaderFile.m in Sources */,
+				B2CAB5092357981000EF1144 /* FLLinkedListElement.m in Sources */,
+				B2CAB4A6235797B700EF1144 /* FLStackTrace_t.m in Sources */,
+				B2CAB55A2357985A00EF1144 /* FLCodeCompany.m in Sources */,
+				B2CAB5572357985A00EF1144 /* FLCodeConstructorParameter.m in Sources */,
+				B2CAB5B8235798B600EF1144 /* FLObjcReference.m in Sources */,
+				B2CAB5662357985A00EF1144 /* FLCodeProject.m in Sources */,
+				B2CAB5CD235798B600EF1144 /* FLCompatibility.m in Sources */,
+				B2CAB4D4235797B700EF1144 /* FLOperationQueueMonitor.m in Sources */,
+				B2CAB56E2357985A00EF1144 /* FLCodeProjectLocation.m in Sources */,
+				B2CAB5102357981000EF1144 /* FLInMemoryDataCache.m in Sources */,
+				B2CAB575235798B600EF1144 /* FLObjcTypeRegistry.m in Sources */,
+				B2CAB4EE2357981000EF1144 /* FLXmlElement.m in Sources */,
+				B2CAB4BD235797B700EF1144 /* NSError+FLTimeout.m in Sources */,
+				B2CAB4EB2357981000EF1144 /* NSObject+FLXmlObjectBuilder.m in Sources */,
+				B2CAB5052357981000EF1144 /* NSFileManager+FishLamp.m in Sources */,
+				B2CAB4752357972200EF1144 /* FishLampLib.m in Sources */,
+				B2CAB5B7235798B600EF1144 /* FLObjcCodeWriter.m in Sources */,
+				B2CAB5B4235798B600EF1144 /* FLObjcEnumCodeWriter.m in Sources */,
+				B2CAB5D9235798B600EF1144 /* FLCoreText.m in Sources */,
+				B2CAB4C8235797B700EF1144 /* FLFifoDispatchQueue.m in Sources */,
+				B2CAB5D5235798B600EF1144 /* FLEdgeInsets.m in Sources */,
+				B2CAB5302357985A00EF1144 /* FLCodeVariable.m in Sources */,
+				B2CAB4F52357981000EF1144 /* FLParsedXmlElement.m in Sources */,
+				B2CAB593235798B600EF1144 /* FLObjcClassConstructor.m in Sources */,
+				B2CAB55E2357985A00EF1144 /* FLCodeCodeSnippet.m in Sources */,
+				B2CAB51D2357985400EF1144 /* FLCodeGenerator.m in Sources */,
+				B2CAB5C1235798B600EF1144 /* FLUserDataStorageService.m in Sources */,
+				B2CAB494235797B700EF1144 /* FLBitFlags.m in Sources */,
+				B2CAB53D2357985A00EF1144 /* FLCodeComment.m in Sources */,
+				B2CAB4FC2357981000EF1144 /* FLPathProvider.m in Sources */,
+				B2CAB5B5235798B600EF1144 /* FLObjcObjectBuilder.m in Sources */,
+				B2CAB57B235798B600EF1144 /* FLObjcGeneratedSourceFile.m in Sources */,
+				B2CAB5AA235798B600EF1144 /* FLObjcLocalVariable.m in Sources */,
+				B2CAB5D4235798B600EF1144 /* FLRectGeometry.m in Sources */,
+				B2CAB487235797B700EF1144 /* FLStringUtilities.m in Sources */,
+				B2CAB5CE235798B600EF1144 /* FLAttributedStringController.m in Sources */,
+				B2CAB47E235797B700EF1144 /* FLStringBuilderSection.m in Sources */,
+				B2CAB4A1235797B700EF1144 /* NSError+FishLampCore.m in Sources */,
+				B2CAB48D235797B700EF1144 /* FLWhitespace.m in Sources */,
+				B2CAB50F2357981000EF1144 /* FLObjectCache.m in Sources */,
+				B2CAB5B9235798B600EF1144 /* FLCodeGeneratorError.m in Sources */,
+				B2CAB5C7235798B600EF1144 /* FLCompatibleViewController+OSX.m in Sources */,
+				B2CAB4BB235797B700EF1144 /* FLTimeUtilities.m in Sources */,
+				B2CAB4CC235797B700EF1144 /* FLDispatchQueues.m in Sources */,
+				B2CAB5B0235798B600EF1144 /* FLObjcProperty.m in Sources */,
+				B2CAB4B2235797B700EF1144 /* FLLogger.m in Sources */,
+				B2CAB49E235797B700EF1144 /* FLCriticalSection.m in Sources */,
+				B2CAB59F235798B600EF1144 /* FLObjcParameterName.m in Sources */,
+				B2CAB4DF235797B700EF1144 /* FLHelpToolTask.m in Sources */,
+				B2CAB48A235797B700EF1144 /* NSMutableString+FishLamp.m in Sources */,
+				B2CAB4E72357981000EF1144 /* NSArray+FLXmlObjectBuilder.m in Sources */,
+				B2CAB4F02357981000EF1144 /* NSObject+FLXmlSerialization.m in Sources */,
+				B2CAB59A235798B600EF1144 /* FLObjcClassName.m in Sources */,
+				B2CAB585235798B600EF1144 /* FLObjcArrayType.m in Sources */,
+				B2CAB47B235797B700EF1144 /* FLStringParser.m in Sources */,
+				B2CAB4B6235797B700EF1144 /* FLObjcRuntime.m in Sources */,
+				B2CAB5672357985A00EF1144 /* FLCodeCodeSnippetBaseClass.m in Sources */,
+				B2CAB49D235797B700EF1144 /* FLExceptionHandler.m in Sources */,
+				B2CAB52A2357985A00EF1144 /* FLCodeImport.m in Sources */,
+				B2CAB51C2357985400EF1144 /* FLRetainedObject.m in Sources */,
+				B2CAB5462357985A00EF1144 /* FLCodeCreateObjectBaseClass.m in Sources */,
+				B2CAB48F235797B700EF1144 /* NSObject+FLSelectorPerforming.m in Sources */,
+				B2CAB5422357985A00EF1144 /* FLCodeCommentBaseClass.m in Sources */,
+				B2CAB55B2357985A00EF1144 /* FLCodeEnum.m in Sources */,
+				B2CAB4FB2357981000EF1144 /* FLTwoObjects.m in Sources */,
+				B2CAB592235798B600EF1144 /* FLObjcDidRegisterObjectDescriberMethod.m in Sources */,
+				B2CAB4AC235797B700EF1144 /* FLDeclareAtomicProperties.m in Sources */,
+				B2CAB4C6235797B700EF1144 /* FLCount.m in Sources */,
+				B2CAB5312357985A00EF1144 /* FLCodeArrayTypeBaseClass.m in Sources */,
+				B2CAB5A1235798B600EF1144 /* FLObjcStatement.m in Sources */,
+				B2CAB5D8235798B600EF1144 /* NSRectGeometry+FLAdditions.m in Sources */,
+				B2CAB4CF235797B700EF1144 /* FLLengthyOperation.m in Sources */,
+				B2CAB5AD235798B600EF1144 /* FLObjcMethod.m in Sources */,
+				B2CAB4CB235797B700EF1144 /* FLMainThreadDispatchQueue.m in Sources */,
+				B2CAB4D0235797B700EF1144 /* FLPerformSelectorOperation.m in Sources */,
+				B2CAB4BC235797B700EF1144 /* FLTimedObject.m in Sources */,
+				B2CAB5652357985A00EF1144 /* FLCodeImportBaseClass.m in Sources */,
+				B2CAB4C7235797B700EF1144 /* FLAbstractAsyncQueue.m in Sources */,
+				B2CAB5AE235798B600EF1144 /* FLObjcProtocol.m in Sources */,
+				B2CAB482235797B700EF1144 /* FLPrettyDescription.m in Sources */,
+				B2CAB5082357981000EF1144 /* FLKeyValuePair.m in Sources */,
+				B2CAB5A8235798B600EF1144 /* FLObjcParameter.m in Sources */,
+				B2CAB587235798B600EF1144 /* FLObjcObjectType.m in Sources */,
+				B2CAB4F92357981000EF1144 /* FLJsonDataEncoder.m in Sources */,
+				B2CAB4B0235797B700EF1144 /* FLLogSink.m in Sources */,
+				B2CAB53A2357985A00EF1144 /* FLDataType.m in Sources */,
+				B2CAB479235797B700EF1144 /* NSString+MiscUtils.m in Sources */,
+				B2CAB580235798B600EF1144 /* FLObjcName.m in Sources */,
+				B2CAB5262357985400EF1144 /* FLCodeClassNameBaseClass.m in Sources */,
+				B2CAB495235797B700EF1144 /* FLAssertionFailedError.m in Sources */,
+				B2CAB4CA235797B700EF1144 /* FLConcurrentDispatchQueue.m in Sources */,
+				B2CAB4B1235797B700EF1144 /* FLConsoleLogSink.m in Sources */,
+				B2CAB483235797B700EF1144 /* FLCStringFragment.m in Sources */,
+				B2CAB57C235798B600EF1144 /* FLObjcFile.m in Sources */,
+				B2CAB5602357985A00EF1144 /* FLCodeGetPropertyValueBaseClass.m in Sources */,
+				B2CAB5562357985A00EF1144 /* FLCodeMethod.m in Sources */,
+				B2CAB52E2357985A00EF1144 /* FLCodeGeneratorOptionsBaseClass.m in Sources */,
+				B2CAB5322357985A00EF1144 /* FLCodeInputType.m in Sources */,
+				B2CAB5482357985A00EF1144 /* FLCodeObjectSelfReferenceBaseClass.m in Sources */,
+				B2CAB489235797B700EF1144 /* FLStringPreprocessor.m in Sources */,
+				B2CAB4D6235797B700EF1144 /* FLOperationQueueState.m in Sources */,
+				B2CAB5AB235798B600EF1144 /* FLObjcVariable.m in Sources */,
+				B2CAB51A2357985400EF1144 /* FLArrayProxy.m in Sources */,
+				B2CAB51E2357985400EF1144 /* FLJsonCodeProjectReader.m in Sources */,
+				B2CAB55F2357985A00EF1144 /* FLCodeEnumTypeBaseClass.m in Sources */,
+				B2CAB5A2235798B600EF1144 /* FLObjcProject.m in Sources */,
+				B2CAB5042357981000EF1144 /* FLFolder.m in Sources */,
+				B2CAB48E235797B700EF1144 /* FLWhitespaceStringFormatter.m in Sources */,
+				B2CAB4E1235797B700EF1144 /* FLCommandLineTask.m in Sources */,
+				B2CAB586235798B600EF1144 /* FLObjcContainerType.m in Sources */,
+				B2CAB498235797B700EF1144 /* FLConfirm.m in Sources */,
+				B2CAB492235797B700EF1144 /* FLCallback_t.m in Sources */,
+				B2CAB5032357981000EF1144 /* FLTempFolder.m in Sources */,
+				B2CAB5592357985A00EF1144 /* FLCodeReturn.m in Sources */,
+				B2CAB58F235798B600EF1144 /* FLObjcStringType.m in Sources */,
+				B2CAB4C3235797B700EF1144 /* FLDecoratedAsyncQueue.m in Sources */,
+				B2CAB5D7235798B600EF1144 /* FLRectLayout.m in Sources */,
+				B2CAB5282357985400EF1144 /* FLCodeEnumBaseClass.m in Sources */,
+				B2CAB52D2357985A00EF1144 /* FLCodeTypeDefinition.m in Sources */,
+				B2CAB56D2357985A00EF1144 /* FLCodeDefine.m in Sources */,
+				B2CAB5072357981000EF1144 /* FLAbstractFile.m in Sources */,
+				B2CAB5D2235798B600EF1144 /* NSSizeGeometry+FLAdditions.m in Sources */,
+				B2CAB52B2357985A00EF1144 /* FLCodeObjectMemberTypeBaseClass.m in Sources */,
+				B2CAB4EA2357981000EF1144 /* FLXmlObjectBuilder.m in Sources */,
+				B2CAB47F235797B700EF1144 /* NSString+Lists.m in Sources */,
+				B2CAB5292357985400EF1144 /* FLCodeCompanyBaseClass.m in Sources */,
+				B2CAB5C3235798B600EF1144 /* NSValue+FLCompatibility.m in Sources */,
+				B2CAB5502357985A00EF1144 /* FLCodeObjectMemberType.m in Sources */,
+				B2CAB485235797B700EF1144 /* NSString+FLPathUtilities.m in Sources */,
+				B2CAB589235798B600EF1144 /* FLObjcAbstractObjectType.m in Sources */,
+				B2CAB4C1235797B700EF1144 /* FLFinisher.m in Sources */,
+				B2CAB53E2357985A00EF1144 /* FLCodeTypeDefinitionBaseClass.m in Sources */,
+				B2CAB5152357985400EF1144 /* FLEventBroadcaster.m in Sources */,
+				B2CAB58A235798B600EF1144 /* FLObjcProtocolType.m in Sources */,
+				B2CAB5D6235798B600EF1144 /* CGRectGeometry+FLAdditions.m in Sources */,
+				B2CAB486235797B700EF1144 /* FLPrettyString.m in Sources */,
+				B2CAB4A9235797B700EF1144 /* FLOSVersion.m in Sources */,
+				B2CAB5C0235798B600EF1144 /* FLServiceList.m in Sources */,
+				B2CAB4F12357981000EF1144 /* FLXmlComment.m in Sources */,
+				B2CAB5552357985A00EF1144 /* FLCodeObjectReference.m in Sources */,
+				B2CAB497235797B700EF1144 /* FLAssertionHandler.m in Sources */,
+				B2CAB59E235798B600EF1144 /* FLObjcMethodName.m in Sources */,
+				B2CAB5332357985A00EF1144 /* FLCodeObjectCategory.m in Sources */,
+				B2CAB5392357985A00EF1144 /* FLCodeString.m in Sources */,
+				B2CAB5702357985A00EF1144 /* FLCodeProjectReader.m in Sources */,
+				B2CAB4A5235797B700EF1144 /* NSError+FLStackTrace.m in Sources */,
+				B2CAB56A2357985A00EF1144 /* FLCodeObjectCategoryBaseClass.m in Sources */,
+				B2CAB5222357985400EF1144 /* FLCodeGeneratorResult.m in Sources */,
+				B2CAB5DD235798B600EF1144 /* FLNotificationListener.m in Sources */,
+				B2CAB47D235797B700EF1144 /* FLStringTokenizer.m in Sources */,
+				B2CAB4F62357981000EF1144 /* NSObject+JsonParser.m in Sources */,
+				B2CAB4FF2357981000EF1144 /* FLGuid.m in Sources */,
+				B2CAB5412357985A00EF1144 /* FLCodeObjectSelfReference.m in Sources */,
+				B2CAB49F235797B700EF1144 /* FLAtomic.m in Sources */,
+				B2CAB599235798B600EF1144 /* FLObjectPropertyName.m in Sources */,
+				B2CAB50E2357981000EF1144 /* FLCollectionIterator.m in Sources */,
+				B2CAB49C235797B700EF1144 /* NSException+FLError.m in Sources */,
+				B2CAB47A235797B700EF1144 /* FLParserStack.m in Sources */,
+				B2CAB5122357981000EF1144 /* FLNonretainedArray.m in Sources */,
+				B2CAB581235798B600EF1144 /* FLObjcNumberObjectType.m in Sources */,
+				B2CAB5A6235798B600EF1144 /* FLObjcDeallocStatement.m in Sources */,
+				B2CAB57E235798B600EF1144 /* FLObjcUserSourceFile.m in Sources */,
+				B2CAB493235797B700EF1144 /* FLLog.m in Sources */,
+				B2CAB590235798B600EF1144 /* FLObjcContainerSubType.m in Sources */,
+				B2CAB4D5235797B700EF1144 /* FLOperationQueue.m in Sources */,
+				B2CAB4B8235797B700EF1144 /* FLSelector.m in Sources */,
+				B2CAB4F42357981000EF1144 /* FLXmlParserErrorCode.m in Sources */,
+				B2CAB4D1235797B700EF1144 /* FLPromisedResult.m in Sources */,
+				B2CAB598235798B600EF1144 /* FLObjcEnumValueName.m in Sources */,
+				B2CAB491235797B700EF1144 /* FLSelectorPerforming.m in Sources */,
+				B2CAB480235797B700EF1144 /* FLByteBuffer.m in Sources */,
+				B2CAB58C235798B600EF1144 /* FLObjcBoolType.m in Sources */,
+				B2CAB5D0235798B600EF1144 /* FLActivityLog.m in Sources */,
+				B2CAB4FD2357981000EF1144 /* NSDate+FLAdditions.m in Sources */,
+				B2CAB4B9235797B700EF1144 /* FLRuntimeInfo.m in Sources */,
+				B2CAB4C5235797B700EF1144 /* FLAsyncQueueDecorator.m in Sources */,
+				B2CAB5B1235798B600EF1144 /* FLObjcObject.m in Sources */,
+				B2CAB572235798B600EF1144 /* FLObjcCodeGenerator.m in Sources */,
+				B2CAB5512357985A00EF1144 /* FLCodeSequenceBaseClass.m in Sources */,
+				B2CAB4E62357981000EF1144 /* NSString+XML.m in Sources */,
+				B2CAB5112357981000EF1144 /* FLOrderedCollection.m in Sources */,
+				B2CAB5452357985A00EF1144 /* FLCodeObject.m in Sources */,
+				B2CAB481235797B700EF1144 /* FLStackTrace+FLPrettyDescription.m in Sources */,
+				B2CAB573235798B600EF1144 /* FLObjcEnumRegistry.m in Sources */,
+				B2CAB5362357985A00EF1144 /* FLCodeDefineBaseClass.m in Sources */,
+				B2CAB499235797B700EF1144 /* FLAssert.m in Sources */,
+				B2CAB5A4235798B600EF1144 /* FLObjcReturnStatement.m in Sources */,
+				B2CAB5062357981000EF1144 /* FLFolderFile.m in Sources */,
+				B2CAB577235798B600EF1144 /* FLObjcKnownTypes.m in Sources */,
+				B2CAB488235797B700EF1144 /* FLStringFormatter.m in Sources */,
+				B2CAB4E4235797B700EF1144 /* FLToolCommand.m in Sources */,
+				B2CAB4EF2357981000EF1144 /* FLObjectXmlElement.m in Sources */,
+				B2CAB4E0235797B700EF1144 /* FLToolTask.m in Sources */,
+				B2CAB57D235798B600EF1144 /* FLObjcHeaderFile.m in Sources */,
+				B2CAB5AF235798B600EF1144 /* FLObjcRuntimeValue.m in Sources */,
+				B2CAB59B235798B600EF1144 /* FLObjcEnumName.m in Sources */,
+				B2CAB5DC235798B600EF1144 /* FLMutableNotification.m in Sources */,
+				B2CAB5AC235798B600EF1144 /* FLObjcCodeBlock.m in Sources */,
+				B2CAB5532357985A00EF1144 /* FLCodeArrayType.m in Sources */,
+				B2CAB5DB235798B600EF1144 /* NSNotification+FishLamp.m in Sources */,
+				B2CAB5432357985A00EF1144 /* FLCodeArrayBaseClass.m in Sources */,
+				B2CAB5CB235798B600EF1144 /* NSDevice+FLCompatibility.m in Sources */,
+				B2CAB584235798B600EF1144 /* FLObjcVoidType.m in Sources */,
+				B2CAB49A235797B700EF1144 /* FLExceptionThrowing.m in Sources */,
+				B2CAB576235798B600EF1144 /* FLObjcFileManager.m in Sources */,
+				B2CAB5472357985A00EF1144 /* FLCodeConstructorBaseClass.m in Sources */,
+				B2CAB5682357985A00EF1144 /* FLCodePropertyNameBaseClass.m in Sources */,
+				B2CAB48C235797B700EF1144 /* FLPrettyAttributedString.m in Sources */,
+				B2CAB50B2357981000EF1144 /* FLBlockLinkedListElement.m in Sources */,
+				B2CAB5382357985A00EF1144 /* FLCodeObjectReferenceBaseClass.m in Sources */,
+				B2CAB5BD235798B600EF1144 /* FLApplicationSession.m in Sources */,
+				B2CAB59C235798B600EF1144 /* FLObjcImportedName.m in Sources */,
+				B2CAB4C9235797B700EF1144 /* FLDispatchQueue.m in Sources */,
+				B2CAB5A3235798B600EF1144 /* FLObjcNamedObjectCollection.m in Sources */,
+				B2CAB5C6235798B600EF1144 /* FLCompatibleView+OSX.m in Sources */,
+				B2CAB4AF235797B700EF1144 /* FLTrace.m in Sources */,
+				B2CAB53F2357985A00EF1144 /* FLCodeConstructor.m in Sources */,
+				B2CAB49B235797B700EF1144 /* NSError+FLException.m in Sources */,
+				B2CAB58B235798B600EF1144 /* FLObjcImmutableObjectType.m in Sources */,
+				B2CAB4AB235797B700EF1144 /* FLDeclareAssociatedProperty.m in Sources */,
+				B2CAB597235798B600EF1144 /* FLObjcIvarName.m in Sources */,
+				B2CAB594235798B600EF1144 /* FLObjcDeallocMethod.m in Sources */,
+				B2CAB5142357985400EF1144 /* FLBroadcaster.m in Sources */,
+				B2CAB578235798B600EF1144 /* FLObjcUserHeaderFile.m in Sources */,
+				B2CAB5172357985400EF1144 /* FLNonretainedObjectProxy.m in Sources */,
+				B2CAB4F72357981000EF1144 /* FLJsonObjectBuilder.m in Sources */,
+				B2CAB4E2235797B700EF1144 /* FLToolCommandOption.m in Sources */,
+				B2CAB5A5235798B600EF1144 /* FLObjcStringStatement.m in Sources */,
+				B2CAB51B2357985400EF1144 /* FLAbstractObjectProxy.m in Sources */,
+				B2CAB58E235798B600EF1144 /* FLObjcGeometryType.m in Sources */,
+				B2CAB54E2357985A00EF1144 /* FLCodeElement.m in Sources */,
+				B2CAB4DA235797B700EF1144 /* FLCStyleCodeBuilder.m in Sources */,
+				B2CAB4EC2357981000EF1144 /* FLXmlStringEncoding.m in Sources */,
+				B2CAB4D9235797B700EF1144 /* FLBracketedStringBuilder.m in Sources */,
+				B2CAB50A2357981000EF1144 /* FLLinkedListObjectContainer.m in Sources */,
+				B2CAB4B3235797B700EF1144 /* FLLogSinkBehavior.m in Sources */,
+				B2CAB5BA235798B600EF1144 /* NSBundle+FLCurrentBundle.m in Sources */,
+				B2CAB54A2357985A00EF1144 /* FLCodeMethodBaseClass.m in Sources */,
+				B2CAB5202357985400EF1144 /* FLCodeGeneratorProjectProvider.m in Sources */,
+				B2CAB4FE2357981000EF1144 /* NSDictionary+FishLampCore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2E64304232FE97600405EE9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -10786,6 +11561,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		B2CAB4772357972200EF1144 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B2CAB4782357972200EF1144 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		B2E642FB232FE92300405EE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -11062,6 +11857,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B2CAB4762357972200EF1144 /* Build configuration list for PBXNativeTarget "FishLampLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2CAB4772357972200EF1144 /* Debug */,
+				B2CAB4782357972200EF1144 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B2E642E3232FE92300405EE9 /* Build configuration list for PBXProject "FishLamp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
